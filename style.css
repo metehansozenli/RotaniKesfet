@@ -171,11 +171,14 @@ input[type="email"] {
 }
 
 
-h1 {
+.container-h1,
+.kayit-formu-h1 {
     text-align: center;
     margin-bottom: 5px;
 }
-h5 {
+
+.container-h5,
+.modal-title {
     text-align: center;
     margin-bottom: 20px;
     font-weight: lighter;
