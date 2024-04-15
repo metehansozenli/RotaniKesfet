@@ -1,0 +1,42 @@
+/* Genel stiller */
+body {
+    font-family: Arial, sans-serif; /* varsayılan yazı tipi ailesi */
+    background-color: #f8f9fa; /* sayfa arkaplan rengi */
+    color: #333; /* varsayılan metin rengi */
+}
+
+/* Header stiller */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
+.rounded-section .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+
+#navbarNav .navbar-nav .nav-link {
+    color: #000000;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
