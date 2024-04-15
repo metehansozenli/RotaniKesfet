@@ -14,7 +14,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light" >
         <a class="navbar-brand" href="index.html" >
-            <img src="logo.png" alt="Logo"style="height: 96px;">
+            <img src="images/logo.png" alt="Logo"style="height: 96px;">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,34 +22,162 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav" style="font-family: sans-serif,Arial;">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="...">Keşfet</a>
+                    <a class="nav-link" href="kesfet.html">Keşfet</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="...">Giriş Yap</a>
+                <li class="nav-item active" data-toggle="modal" data-target="#loginModal">
+                    <a href="#" class="nav-link" id="loginButton">Giriş Yap</a>
                 </li>
-                <li class="nav-item active">
-                    <a id="kaydolBtn" class="nav-link" href="...">Kaydol</a>
+                <li class="nav-item active" data-toggle="modal" data-target="#registerModal">
+                    <a href="#" class="nav-link" id="loginButton">Kayıt Ol</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div id="kaydolModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="kaydolModalLabel" aria-hidden="true">
-        
-    </div>
-    
+   
 
 </header>
 
 <body>
+
+    <div class="modal fade" id="loginModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Giriş Yap</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- Giriş formu buraya eklenebilir -->
+              <div class="container">
+                <h1>Giriş Yapın</h1>
+                <h5>Giriş yapmak için e-mail hesabınızı girin</h5>
+        
+        
+                <form action="#">
+                    <label for="email">E-posta:</label>
+                    <input type="email" id="email" name="email" placeholder="email@domain.com">
+        
+                    <label for="password">Şifre:</label>
+                    <input type="password" id="password" name="password" placeholder="Şifrenizi girin">
+        
+                    <button type="submit">Giriş Yap</button>
+        
+                    <p>Hesabınız yok mu? <a href="#">Üye Ol</a></p>
+                </form>
+            </div>
+            </div>
+          </div>
+        </div>
+    </div>
+      
+    <div class="modal fade" id="registerModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="registerModal">Kayıt Ol</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h1>Hesap Oluşturun</h1>
+                    <p>Kayıt olmak için email hesabınızı girin</p>
+                    <form action="" method="post" id="kayitFormu">
+                        <input type="email" name="email" placeholder="email@domain.com" required>
+                        <button type="submit" id="continueButton" class="maviButton" data-toggle="modal" data-target="#continueModal">Devam Et</button>
+                    </form>
+            
+                    <p>veya Google hesabınızla devam edin</p>
+            
+                    <button type="button" class="googleButton">
+                        <span class="googleSimgesi"></span>Google
+                    </button>
+                    
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="continueModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="continueModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="continueModal">Kayıt Ol</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="kayit-formu">
+                    <h1>Hesap Oluşturun</h1>
+                    <form action="#">
+                        <div class="ad-soyad">
+                            <label for="ad">Ad:</label>
+                            <input type="text" id="ad" name="ad" required>
+            
+                            <label for="soyad">Soyad:</label>
+                            <input type="text" id="soyad" name="soyad" required>
+                        </div>
+            
+                        <div class="adres">
+                            <label for="adres">Açık Adres:</label>
+                            <textarea id="adres" name="adres" required></textarea>
+            
+                            <label for="ilce">İlçe:</label>
+                            <select id="ilce" name="ilce" required>
+                                <option value="">Lütfen Seçin</option>
+                                </select>
+            
+                            <label for="posta-kodu">Posta Kodu:</label>
+                            <input type="text" id="posta-kodu" name="posta-kodu" required>
+            
+                            <label for="ulke">Ülke:</label>
+                            <select id="ulke" name="ulke" required>
+                                <option value="">Lütfen Seçin</option>
+                                </select>
+                        </div>
+            
+                        <div class="telefon">
+                            <label for="alan-kodu">Alan Kodu:</label>
+                            <input type="text" id="alan-kodu" name="alan-kodu" required>
+            
+                            <label for="telefon-numarasi">Telefon Numarası:</label>
+                            <input type="text" id="telefon-numarasi" name="telefon-numarasi" required>
+                        </div>
+            
+                        <div class="sifre">
+                            <label for="sifre">Şifre:</label>
+                            <input type="password" id="sifre" name="sifre" required>
+            
+                            <label for="sifre-tekrar">Şifre Tekrar:</label>
+                            <input type="password" id="sifre-tekrar" name="sifre-tekrar" required>
+                        </div>
+                              
+                            <button type="submit" class="buton">Hesap Oluştur</button>
+            
+                        
+                    </form>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
 
     <a name="rent"></a>
     <p class="display-3 text-center  mt-3" style="color: #36A1C5; font-family: sans-serif,Arial;">Seyahatinizi Oluşturun</p>
     <div class="container col-5" style="text-align: center; ">
         <button type="submit" class="btn " style="width: 20%; background-color: #36A1C5; color: aliceblue;">Başla</button>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
-    
-    <img src="image 7.png" style="display: block; height: 450px; margin: 60px auto; ">
+    <img src="images/mainpic.png" style="display: block; height: 500px; margin: 60px auto; ">
 
    
         <div style="margin: 0 15%; margin-bottom: 60px;">
@@ -60,16 +188,28 @@
                     <div class="carousel-item active" >
                         <div class="row">
                             <div class="col-sm-3">
-                                <img class="d-block" src="https://via.placeholder.com/250x250" alt="First slide">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/dubai.jpg" alt="First slide">
+                                    <div class="image-text">Dubai, Birleşik Arap Emirlikleri</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <img class="d-block" src="https://via.placeholder.com/250x250" alt="Second slide">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/hurghada.jpg" alt="First slide">
+                                    <div class="image-text">Hurghada, Mısır</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <img class="d-block" src="https://via.placeholder.com/250x250" alt="Third slide">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/istanbul.jpg" alt="First slide">
+                                    <div class="image-text">İstanbul, Türkiye</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <img class="d-block" src="https://via.placeholder.com/250x250" alt="Fourth slide">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/sharm-el-sheikh.jpg" alt="First slide">
+                                    <div class="image-text">Şarm El-Şeyh, Mısır</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -85,6 +225,7 @@
                 </a>
             </div>
         </div>
+
         <div style="margin: 0 15%; margin-bottom: 60px;">
             <h4 style="margin-bottom: 30px;">Bulunduğunuz konuma göre günübirlik gezebileceğiniz şehirler</h4>
             <div id="carouselExample" class="carousel slide " data-ride="carousel" >
@@ -92,16 +233,28 @@
                     <div class="carousel-item active" >
                         <div class="row">
                             <div class="col-sm-3">
-                                <img class="d-block" src="https://via.placeholder.com/250x250" alt="First slide">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/istanbul.jpg" alt="First slide">
+                                    <div class="image-text">İstanbul, Türkiye</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <img class="d-block" src="https://via.placeholder.com/250x250" alt="Second slide">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/ankara.jpg" alt="First slide">
+                                    <div class="image-text">Ankara, Türkiye</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <img class="d-block" src="https://via.placeholder.com/250x250" alt="Third slide">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/ozdere.jpg" alt="First slide">
+                                    <div class="image-text">Özdere, Türkiye</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <img class="d-block" src="https://via.placeholder.com/250x250" alt="Fourth slide">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/selcuk.jpg" alt="First slide">
+                                    <div class="image-text">Şelçuk, Mısır</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -117,6 +270,7 @@
                 </a>
             </div>
         </div>
+
         <div style="margin: 0 15%; margin-bottom: 60px;">
             <h4 style="margin-bottom: 30px;">Paris’in Michelin yıldızlı popüler restoranları</h4>
             <div id="carouselExample" class="carousel slide " data-ride="carousel" >
@@ -124,16 +278,28 @@
                     <div class="carousel-item active" >
                         <div class="row">
                             <div class="col-sm-3">
-                                <img class="d-block" src="https://via.placeholder.com/250x250" alt="First slide">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/Epicure.jpg" alt="First slide">
+                                    <div class="image-text">Epicure</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <img class="d-block" src="https://via.placeholder.com/250x250" alt="Second slide">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/Kei.jpg" alt="First slide">
+                                    <div class="image-text">Kei</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <img class="d-block" src="https://via.placeholder.com/250x250" alt="Third slide">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/L’Arpège.jpg" alt="First slide">
+                                    <div class="image-text">L’Arpège</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <img class="d-block" src="https://via.placeholder.com/250x250" alt="Fourth slide">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/L’Oiseau Blanc.jpg" alt="First slide">
+                                    <div class="image-text">L’Oiseau Blanc</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -149,10 +315,43 @@
                 </a>
             </div>
         </div>
+       
     
     <script src="script.js"></script>
 </body>
 
-<footer>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<footer class="footer">
+    <div class="footer-wrapper">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.png" width="96px" alt="Logo">
+                <div class="footer-social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-menu">
+                <ul>
+                    <li><a href="#">Hakkımızda</a></li>
+                    <li><a href="#">Bize Ulaşın</a></li>
+                    <li><a href="#">Geliştirenler</a></li>
+                    <li><a href="#">Kullanma Klavuzu</a></li>
+                </ul>
+            </div>
+           
+            <div class="footer-copyright">
+                <p>&copy; 2024 Tüm Haklar Saklıdır.</p>
+            </div>
+        </div>
+    </div>
 </footer>
+
+
 </html>
