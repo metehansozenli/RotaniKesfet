@@ -60,6 +60,10 @@ app.get("/kesfet", (req,res) => {
     res.render("kesfet")
 })
 
+app.get("/index", (req,res) => {
+    res.render("index")
+})
+
 
 app.listen(3000, () => {
     console.log('Server started on http://localhost:3000');
