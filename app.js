@@ -49,12 +49,16 @@ app.post("/register", async (req, res) => {
         await client.query('INSERT INTO users (email, ad, soyad, adres, ilce, postaKodu, ulke, alanKodu, telefonNumarasi, sifre) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [formData.email, formData.ad, formData.soyad, formData.adres, formData.ilce, formData.postaKodu, formData.ulke, formData.alanKodu, formData.telefonNumarasi, formData.sifre]);
         
         // Kayıt işlemi başarılı olduğunda
-        res.render('index', { success: 'Kayıt işlemi başarıyla tamamlandı.' });
+        res.render("index")
     } catch (error) {
-        // Kayıt işlemi sırasında bir hata oluştuğunda
-        res.render('', { error: 'Kayıt işlemi başarısız oldu.' });
+        console.log(error)
+        
     }
 });
+
+app.get("/kesfet", (req,res) => {
+    res.render("kesfet")
+})
 
 
 app.listen(3000, () => {
