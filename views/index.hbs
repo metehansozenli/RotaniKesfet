@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotanı Keşfet</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+
+    {{>header}}
+
+    <div class="modal fade" id="registerModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Kayıt Ol</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h1>Hesap Oluşturun</h1>
+                    <form action="/register" method="post" id="kayitFormu">
+                        <input type="email" name="email" placeholder="email@domain.com" >
+                        <input type="text" id="ad" name="ad" placeholder="Ad" >
+                        <input type="text" id="soyad" name="soyad" placeholder="Soyad" >
+                        <textarea id="adres" name="adres" placeholder="Açık Adres" ></textarea>
+                        <input type="text" id="ilce" name="ilce" placeholder="İlçe">
+                        <input type="text" id="posta-kodu" name="postaKodu" placeholder="Posta Kodu">
+                        <input type="text" id="ulke" name="ulke" placeholder="Ülke" >
+                        <input type="text" id="alan-kodu" name="alanKodu" placeholder="Alan Kodu" >
+                        <input type="text" id="telefon-numarasi" name="telefonNumarasi" placeholder="Telefon Numarası" >
+                        <input type="password" id="sifre" name="sifre" placeholder="Şifre" >
+    
+                        <button type="submit" class="buton">Hesap Oluştur</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <a name="rent"></a>
+    <p class="display-3 text-center  mt-3" style="color: #36A1C5; font-family: sans-serif,Arial;">Seyahatinizi Oluşturun</p>
+    <div class="container col-5" style="text-align: center; ">
+        <button type="submit" class="btn " style="width: 20%; background-color: #36A1C5; color: aliceblue;">Başla</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <img src="./images/mainpic.png" style="display: block; height: 500px; margin: 60px auto; ">
+
+   
+        <div style="margin: 0 15%; margin-bottom: 60px;">
+            <h4 style="margin-bottom: 10px;">Bir sonraki tatiliniz için en iyi destinasyonlar</h4>
+            <h5 style="margin-bottom: 30px; font-weight: lighter;">Diğer gezginlerin gittiği yerler</h5> 
+            <div id="carouselExample" class="carousel slide " data-ride="carousel" >
+                <div class="carousel-inner" >
+                    <div class="carousel-item active" >
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="/images/dubai.jpg" alt="First slide">
+                                    <div class="image-text">Dubai, Birleşik Arap Emirlikleri</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/hurghada.jpg" alt="First slide">
+                                    <div class="image-text">Hurghada, Mısır</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/istanbul.jpg" alt="First slide">
+                                    <div class="image-text">İstanbul, Türkiye</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/sharm-el-sheikh.jpg" alt="First slide">
+                                    <div class="image-text">Şarm El-Şeyh, Mısır</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 
+                </div>
+                <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+        <div style="margin: 0 15%; margin-bottom: 60px;">
+            <h4 style="margin-bottom: 30px;">Bulunduğunuz konuma göre günübirlik gezebileceğiniz şehirler</h4>
+            <div id="carouselExample" class="carousel slide " data-ride="carousel" >
+                <div class="carousel-inner" >
+                    <div class="carousel-item active" >
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/istanbul.jpg" alt="First slide">
+                                    <div class="image-text">İstanbul, Türkiye</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/ankara.jpg" alt="First slide">
+                                    <div class="image-text">Ankara, Türkiye</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/ozdere.jpg" alt="First slide">
+                                    <div class="image-text">Özdere, Türkiye</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/selcuk.jpg" alt="First slide">
+                                    <div class="image-text">Selçuk, İzmir</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 
+                </div>
+                <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+        <div style="margin: 0 15%; margin-bottom: 60px;">
+            <h4 style="margin-bottom: 30px;">Paris’in Michelin yıldızlı popüler restoranları</h4>
+            <div id="carouselExample" class="carousel slide " data-ride="carousel" >
+                <div class="carousel-inner" >
+                    <div class="carousel-item active" >
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/Epicure.jpg" alt="First slide">
+                                    <div class="image-text">Epicure</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/Kei.jpg" alt="First slide">
+                                    <div class="image-text">Kei</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/L’Arpège.jpg" alt="First slide">
+                                    <div class="image-text">L’Arpège</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="image-container">
+                                    <img class="d-block" width="250px" src="images/L’Oiseau Blanc.jpg" alt="First slide">
+                                    <div class="image-text">L’Oiseau Blanc</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 
+                </div>
+                <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+       
+    
+    <script src="./js/script.js"></script>
+
+    {{>footer}}
+
+  
+</body>
+</html>
