@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En Popüler Gezilecek Yerler</title>
+    <link rel="stylesheet" href="./css/style.css">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    
+</head>
+
+    {{>header}}
+
+    <body>
+         <div class="container">
+           
+            
+            <section class="baslik mt-4 text-center">
+                <h1 style="margin-top: 20px;">En Popüler Gezilecek Yerler</h1>
+                <p style = "text-align: justify; margin: 20px 40px;">
+                   Paris'in romantizmi, Roma'nın tarihi dokusu, Maldivler'in berrak suları... Dünyanın en popüler destinasyonları, 
+                   sizi unutulmaz deneyimlerle buluşturuyor. Hayalinizdeki tatil için harika bir başlangıç yapmaya hazır mısınız?
+                </p>
+            </section>
+
+           <section class="baslik mt-4 text-center">
+                <img src="images/londra.webp" alt="Keşfet" class="img-fluid my-4">
+            </section>
+
+               
+        </div>
+
+    </body>
+
+    {{>footer}}
+
+    <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #ffffff;
+        padding: 20px;
+    }
+
+    h1, h2 {
+        color: #000000;
+    }
+
+
+
+    section{
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .mt-4{
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+    
+    
+    .image-container:hover {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        transform: scale(1.05);
+    }
+
+</style>
+
+
+</html>
