@@ -82,6 +82,10 @@ app.get("/index", (req,res) => {
     res.render("index")
 })
 
+app.get("/popdest", (req,res) => {
+    res.render("popdest")
+})
+
 
 app.listen(3000, () => {
     console.log('Server started on http://localhost:3000');
