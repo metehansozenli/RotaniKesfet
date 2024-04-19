@@ -54,13 +54,12 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
     const formData = {
         userMail: req.body.email,
-        userPass: req.body.sifre,
+        userPass: req.body.password,
     };
 
     try {
         // Veritabanında kullanıcıyı sorgula
         const result = await client.query('SELECT * FROM users WHERE "userMail" = $1 AND "userPass" = $2', [formData.userMail, formData.userPass]);
-
         // Eğer kullanıcı bulunursa
         if (result.rows.length > 0) {
             res.render("kesfet")
