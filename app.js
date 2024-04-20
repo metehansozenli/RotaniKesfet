@@ -92,8 +92,10 @@ app.get("/changeHeader", async (req, res) => {
   
   if(!userSession){//session yoksa
     res.render("partials/header");  
+  }else {
+    res.render("partials/loginheader");
   }
-  res.render("partials/loginheader");
+ 
 });
 
 app.get("/kesfet", (req,res) => {
@@ -109,6 +111,27 @@ app.get("/popdest", (req,res) => {
 })
 
 
+
 app.listen(3000, () => {
     console.log('Server started on http://localhost:3000');
 });
+
+
+process.on('SIGINT', gracefulShutdown);
+process.on('SIGTERM', gracefulShutdown);
+
+function gracefulShutdown() {
+    console.log('Sunucu kapatılıyor...');
+
+    // Oturumları kapat
+    for (const sessionID in sessions) {
+        delete sessions[sessionID];
+    }
+
+    // Veritabanı bağlantısını kapat
+    client.end(() => {
+        console.log('Veritabanı bağlantısı kapatıldı');
+        
+    });
+
+}

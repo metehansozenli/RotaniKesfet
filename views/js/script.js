@@ -7,11 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    const imgElement = document.getElementById('logoutImg');
+    const imgElement = document.getElementById('dropdownUser1');
+    
     imgElement.addEventListener('click', function() {
-        window.location.href = '../logout';
+        alert("Resme tıklanıldı!");
     });
 });
+
 
        
 
