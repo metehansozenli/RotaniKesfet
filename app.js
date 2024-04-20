@@ -4,6 +4,7 @@ const hbs = require('hbs');
 const client = require("./database.js");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+const { v4: uuidv4 } = require('uuid');
 dotenv.config();
 const app = express();
 app.use(bodyParser.json());
@@ -27,6 +28,8 @@ app.use(express.static("views"));
 app.get('/', (req, res) => {
     res.render('index'); 
 });
+
+const sessions = {}
 
 app.post("/register", async (req, res) => {
   
@@ -52,17 +55,22 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
+    const sessionsID = uuidv4();
     const formData = {
         userMail: req.body.email,
         userPass: req.body.password,
     };
 
-    try {
+    try {   
         // Veritabanında kullanıcıyı sorgula
         const result = await client.query('SELECT * FROM users WHERE "userMail" = $1 AND "userPass" = $2', [formData.userMail, formData.userPass]);
         // Eğer kullanıcı bulunursa
         if (result.rows.length > 0) {
-            res.render("kesfet")
+            const result2 = await client.query('SELECT "userID" FROM users WHERE "userMail" = $1', [formData.userMail]);
+            const userID = result2.rows[0].userID;// userID cekiliyor
+            sessions[sessionsID] = { userMail: formData.userMail, userID };
+            res.set('Set-Cookie',`session=${sessionsID}`);//session baslatiliyor
+            res.render("index")
         } else {
             res.send("Kullanıcı adı veya şifre yanlış!"); // Kullanıcı bulunamazsa hata mesajı gönder
         }
@@ -72,6 +80,21 @@ app.post("/login", async (req, res) => {
     }
 });
 
+app.get("/logout", async (req, res) => {
+    const sessionsID = req.headers.cookie?.split("=")[1];
+    delete sessions[sessionsID];
+    res.set('Set-Cookie',`session=; expires=Thu, 01 Jan 1970 00:00:00 GMT`);
+});
+
+app.get("/changeHeader", async (req, res) => {
+  const sessionsID = req.headers.cookie?.split("=")[1];
+  const userSession = sessions[sessionsID];
+  
+  if(!userSession){//session yoksa
+    res.render("partials/header");  
+  }
+  res.render("partials/loginheader");
+});
 
 app.get("/kesfet", (req,res) => {
     res.render("kesfet")

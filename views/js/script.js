@@ -6,7 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-  
+document.addEventListener('DOMContentLoaded', function() {
+    const imgElement = document.getElementById('logoutImg');
+    imgElement.addEventListener('click', function() {
+        window.location.href = '../logout';
+    });
+});
+
        
 
 
