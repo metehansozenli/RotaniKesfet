@@ -109,11 +109,14 @@ header {
     margin-bottom: 20px;
 }
 
+
 p {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     color: #666;
 }
+
+
 
 form {
     margin-bottom: 35px;
@@ -259,21 +262,13 @@ section.discover.mt-4{
   
 
 /* popdest.vbs */
-.height-100 {
-    height: 100vh;
+
+
+.ppopdests .ratings {
+    margin-right: 20px;
 }
 
-.card {
-    width: 380px;
-    border: none;
-    height: 280px;
-}
-
-.ratings {
-    margin-right: 10px;
-}
-
-.ratings i {
+.ppopdests .ratings i {
     color: #cecece;
     font-size: 32px;
 }
@@ -282,16 +277,120 @@ section.discover.mt-4{
     color: #fbc634 !important;
 }
 
-.review-count {
+.ppopdests .review-count {
     font-weight: 400;
     margin-bottom: 2px;
     font-size: 24px !important;
+    margin-top: -7px;
 }
 
-.point {
+.ppopdests .point {
     font-weight: 500;
     font-size: 32px !important;
+    margin-top: -3px;
+    margin-right: 30px;
 }
+
+
+.ppopdests .point-section{
+
+    
+    margin-right: 10px;
+
+}
+
+
+.popdests .ratings {
+    margin-right: 20px;
+}
+
+.popdests .ratings i {
+    color: #cecece;
+    font-size: 25px;
+}
+
+
+.popdests .review-count {
+    font-weight: 400;
+    margin-bottom: 2px;
+    font-size: 16px !important;
+    margin-top: -7px;
+}
+
+.popdests .point {
+    font-weight: 500;
+    font-size: 25px !important;
+    margin-top: -3px;
+    margin-right: 30px;
+}
+
+.popdests .point-section {
+    
+    margin-right: 20px;
+}
+
+.city-title, .popdest-context h1 {
+    color: #000000;
+}
+
+.dest {
+    color: #828282;;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+ .city-rank {
+    color: #D9D9D9;
+
+}
+
+.write-comment {
+    color: #000000;;
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+.popdest-context {
+    color: #000000;;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+
+.popdest-section {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popdest-section img {
+    
+    border-radius: 8px;
+}
+
+.popdest-context p {
+text-align: justify;
+color: #666;
+margin: 30px 50px; 
+font-size: 20px
+}
+
+.popdests{
+    margin-top: 7.2%;
+}
+
+
+.dest a {
+    color: inherit;         
+    text-decoration: none;  
+}
+
+.dest a:hover {
+    color: inherit; 
+    text-decoration: underline; 
+}
+
 
 
 
