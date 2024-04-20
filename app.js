@@ -54,8 +54,9 @@ app.post("/register", async (req, res) => {
     }
 });
 
+const sessionsID = uuidv4();
+
 app.post("/login", async (req, res) => {
-    const sessionsID = uuidv4();
     const formData = {
         userMail: req.body.email,
         userPass: req.body.password,
@@ -97,6 +98,32 @@ app.get("/changeHeader", async (req, res) => {
   }
  
 });
+
+// Kullanıcı bilgilerini çeken endpoint
+app.get('/user', async(req, res) => {
+    if(!sessions[sessionsID])
+        return;
+    const sessionuserId = sessions[sessionsID].userID; // Örnek olarak oturumdan kullanıcı ID'si alınıyor
+    try {   
+        const result2 = await client.query('SELECT "userNickname", "userName", "userSurname" FROM users WHERE "userID" = $1', [sessionuserId]);
+        if (result2.rows.length > 0) {
+            const userNickname = result2.rows[0].userNickname;// userID cekiliyor
+            const userName = result2.rows[0].userName;
+            const userSurname = result2.rows[0].userSurname;
+            console.log(userName);
+            res.render("/view/partials/loginheader",{
+                userNickname : userNickname,
+                userName : userName,
+                userSurname : userSurname
+            });
+        } else {
+            res.send("Bir hata Oluştu!"); 
+        }
+    } catch (error) {
+    }
+    
+});
+
 
 app.get("/kesfet", (req,res) => {
     res.render("kesfet")

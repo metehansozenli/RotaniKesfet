@@ -15,6 +15,28 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+function menuToggle() {
+  const toggleMenu = document.querySelector(".menu");
+  toggleMenu.classList.toggle("active");
+}
+
+
+fetch('/user')
+
+    .then(data => {
+        console.log("hayir");
+        
+        const fullName = `${data.userName} ${data.userSurname}`;
+        
+        document.getElementById('userName').innerText = `${fullName} (@${data.userNickname})`;
+    })
+    .catch(error => {
+        console.error('Hata oluştu:', error);
+    });
+
+
+
+
        
 
 
