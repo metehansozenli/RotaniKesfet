@@ -34,6 +34,7 @@ const sessions = {}
 app.post("/register", async (req, res) => {
   
     const formData = {
+        userNickname : req.body.nickname,
         userName: req.body.ad,
         userSurname: req.body.soyad,
         userCountry: req.body.ulke,
@@ -44,7 +45,7 @@ app.post("/register", async (req, res) => {
 
     try {
         // Veritabanına kayıt ekle
-        await client.query('INSERT INTO users ("userMail", "userName", "userSurname", "userCountry", "userPhoneNo", "userPass") VALUES ($1, $2, $3, $4, $5, $6)', [formData.userMail, formData.userName, formData.userSurname, formData.userCountry, formData.userPhoneNo, formData.userPass]);
+        await client.query('INSERT INTO users ("userNickname", "userMail", "userName", "userSurname", "userCountry", "userPhoneNo", "userPass") VALUES ($1, $2, $3, $4, $5, $6, $7)', [formData.userNickname,formData.userMail, formData.userName, formData.userSurname, formData.userCountry, formData.userPhoneNo, formData.userPass]);
 
         // Kayıt işlemi başarılı olduğunda
         res.render("index")
@@ -85,42 +86,60 @@ app.get("/logout", async (req, res) => {
     const sessionsID = req.headers.cookie?.split("=")[1];
     delete sessions[sessionsID];
     res.set('Set-Cookie',`session=; expires=Thu, 01 Jan 1970 00:00:00 GMT`);
+    res.render("index");
 });
 
 app.get("/changeHeader", async (req, res) => {
   const sessionsID = req.headers.cookie?.split("=")[1];
   const userSession = sessions[sessionsID];
   
-  if(!userSession){//session yoksa
+  if (!userSession) { // If there's no session
     res.render("partials/header");  
-  }else {
-    res.render("partials/loginheader");
+  } 
+  else {
+    try {
+      const userData = await veriler(userSession.userID);
+      if (userData) {
+        const [userName, userNickname, userSurname] = userData;
+        res.render("partials/loginheader", {
+            userNickname: userNickname,
+            userName: userName,
+            userSurname: userSurname
+        });
+      } else {
+        res.send("Bir hata Oluştu!");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      res.send("Bir hata Oluştu!");
+    }
   }
- 
 });
+
+const veriler = async (sessionuserId) => {
+  try {   
+    const result2 = await client.query('SELECT "userNickname", "userName", "userSurname" FROM users WHERE "userID" = $1', [sessionuserId]);
+    if (result2.rows.length > 0) {
+      const userNickname = result2.rows[0].userNickname;
+      const userName = result2.rows[0].userName;
+      const userSurname = result2.rows[0].userSurname;
+      return [userName, userNickname, userSurname];
+    } else {
+      return null; // Return null if no data found
+    }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error; // Rethrow the error to be caught by the caller
+  }
+    
+}
 
 // Kullanıcı bilgilerini çeken endpoint
 app.get('/user', async(req, res) => {
     if(!sessions[sessionsID])
         return;
     const sessionuserId = sessions[sessionsID].userID; // Örnek olarak oturumdan kullanıcı ID'si alınıyor
-    try {   
-        const result2 = await client.query('SELECT "userNickname", "userName", "userSurname" FROM users WHERE "userID" = $1', [sessionuserId]);
-        if (result2.rows.length > 0) {
-            const userNickname = result2.rows[0].userNickname;// userID cekiliyor
-            const userName = result2.rows[0].userName;
-            const userSurname = result2.rows[0].userSurname;
-            console.log(userName);
-            res.render("partials/loginheader",{
-                userNickname : userNickname,
-                userName : userName,
-                userSurname : userSurname
-            });
-        } else {
-            res.send("Bir hata Oluştu!"); 
-        }
-    } catch (error) {
-    }
+   
     
 });
 
