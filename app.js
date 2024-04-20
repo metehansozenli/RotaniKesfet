@@ -111,7 +111,7 @@ app.get('/user', async(req, res) => {
             const userName = result2.rows[0].userName;
             const userSurname = result2.rows[0].userSurname;
             console.log(userName);
-            res.render("/view/partials/loginheader",{
+            res.render("partials/loginheader",{
                 userNickname : userNickname,
                 userName : userName,
                 userSurname : userSurname
