@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const { v4: uuidv4 } = require('uuid');
 dotenv.config();
 const app = express();
+const sessions = {};
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -28,8 +29,6 @@ app.use(express.static("views"));
 app.get('/', (req, res) => {
     res.render('index'); 
 });
-
-const sessions = {}
 
 app.post("/register", async (req, res) => {
   
@@ -93,12 +92,12 @@ app.get("/changeHeader", async (req, res) => {
   const sessionsID = req.headers.cookie?.split("=")[1];
   const userSession = sessions[sessionsID];
   
-  if (!userSession) { // If there's no session
+  if (!userSession) { //session yoksa
     res.render("partials/header");  
   } 
   else {
     try {
-      const userData = await veriler(userSession.userID);
+      const userData = await getUserData(userSession.userID);
       if (userData) {
         const [userName, userNickname, userSurname] = userData;
         res.render("partials/loginheader", {
@@ -116,7 +115,7 @@ app.get("/changeHeader", async (req, res) => {
   }
 });
 
-const veriler = async (sessionuserId) => {
+const getUserData = async (sessionuserId) => {
   try {   
     const result2 = await client.query('SELECT "userNickname", "userName", "userSurname" FROM users WHERE "userID" = $1', [sessionuserId]);
     if (result2.rows.length > 0) {
@@ -129,6 +128,66 @@ const veriler = async (sessionuserId) => {
     }
   } catch (error) {
     console.error("Error fetching user data:", error);
+    throw error; // Rethrow the error to be caught by the caller
+  } 
+}
+
+const getLocationData = async () => {
+  try {   
+    const result = await client.query('SELECT * FROM locations ORDER BY "locationScore" DESC');
+    if (result.rows.length > 0) {
+      const locationsData = [];
+      for (let i = 0; i < result.rows.length; i++) {
+        const userData = await getUserData(result.rows[i].userID);
+        const userNickname = userData[1];
+
+        locationsData[i] = {
+          userNickname: userNickname, // userNickname
+          commentContents: result.rows[i].commentContents, //yorum
+          commentDate: result.rows[i].commentDate, //yorum tarihi
+          commentScore: result.rows[i].commentScore, //yorum skor
+          commentTitle: result.rows[i].commentTitle, //yorum baslik
+        }
+
+      }
+      return [userName, userNickname, userSurname];
+    } 
+    else {
+      return null; // Return null if no data found
+    }
+  } catch (error) {
+    console.error("Error fetching location data:", error);
+    throw error; // Rethrow the error to be caught by the caller
+  } 
+}
+
+const getCommentData = async (locationId) => {
+  try {   
+    const result = await client.query('SELECT "commentContents", "commentDate", "commentScore", "commentTitle", "userID" FROM comments WHERE "locationID" = $1', [locationId]);
+  
+    if (result.rows.length > 0) {
+      const commentsData = [];
+
+      for (let i = 0; i < result.rows.length; i++) {
+        const userData = await getUserData(result.rows[i].userID);
+        const userNickname = userData[1];
+
+        commentsData[i] = {
+          userNickname: userNickname, // userNickname
+          commentContents: result.rows[i].commentContents, //yorum
+          commentDate: result.rows[i].commentDate, //yorum tarihi
+          commentScore: result.rows[i].commentScore, //yorum skor
+          commentTitle: result.rows[i].commentTitle, //yorum baslik
+        }
+
+      }
+      return commentsData;
+    } 
+    else {
+      return null; // Return null if no data found
+    }
+  } catch (error) {
+    console.error("Error fetching comment data:", error);
     throw error; // Rethrow the error to be caught by the caller
   }
     
