@@ -115,6 +115,7 @@ app.get("/changeHeader", async (req, res) => {
   }
 });
 
+
 const getUserData = async (sessionuserId) => {
   try {   
     const result2 = await client.query('SELECT "userNickname", "userName", "userSurname" FROM users WHERE "userID" = $1', [sessionuserId]);
@@ -132,25 +133,26 @@ const getUserData = async (sessionuserId) => {
   } 
 }
 
-const getLocationData = async () => {
-  try {   
-    const result = await client.query('SELECT * FROM locations ORDER BY "locationScore" DESC');
+const getSpecifiedLocationData = async (locationID) => {
+  try {
+    const result = await client.query('SELECT * FROM locations where "locationID" = $1',locationID);
+
     if (result.rows.length > 0) {
-      const locationsData = [];
-      for (let i = 0; i < result.rows.length; i++) {
-        const userData = await getUserData(result.rows[i].userID);
-        const userNickname = userData[1];
 
-        locationsData[i] = {
-          userNickname: userNickname, // userNickname
-          commentContents: result.rows[i].commentContents, //yorum
-          commentDate: result.rows[i].commentDate, //yorum tarihi
-          commentScore: result.rows[i].commentScore, //yorum skor
-          commentTitle: result.rows[i].commentTitle, //yorum baslik
-        }
-
+      const locationData = {
+        locationCountry: result.rows[0].locationCountry,
+        locationCity: result.rows[0].locationCity,
+        locationCoordinates: result.rows[0].locationCoordinates,
+        locationInfo: result.rows[0].locationInfo,
+        LocationTime: result.rows[0].LocationTime,
+        LocationType: result.rows[0].LocationType,
+        LocationAddress: result.rows[0].LocationAddress, 
+        LocationName: result.rows[0].LocationName, 
+        LocationScore: result.rows[0].LocationScore, 
+        LocationCommentCount: result.rows[0].LocationCommentCount
       }
-      return [userName, userNickname, userSurname];
+
+      return locationData;
     } 
     else {
       return null; // Return null if no data found
@@ -161,23 +163,60 @@ const getLocationData = async () => {
   } 
 }
 
+const getPopularLocationsData = async (locationType,limit) => {
+  try {   
+    const result = await client.query('SELECT * FROM locations  WHERE "locationType" = $1 ORDER BY "locationScore" DESC LIMIT $2',locationType,limit);
+
+    if (result.rows.length > 0) {
+
+      const popularLocationsData = result.rows.map(row => ({
+        locationCountry: row.locationCountry,
+        locationCity: row.locationCity,
+        locationCoordinates: row.locationCoordinates,
+        locationInfo: row.locationInfo,
+        locationTime: row.locationTime,
+        locationType: row.locationType,
+        locationAddress: row.locationAddress, 
+        locationName: row.locationName, 
+        locationScore: row.locationScore, 
+        locationCommentCount: row.locationCommentCount
+      }));
+
+      return popularLocationsData;
+    } 
+    else {
+      return null; // Return null if no data found
+    }
+  } catch (error) {
+    console.error("Error fetching location data:", error);
+    throw error; // Rethrow the error to be caught by the caller
+  } 
+}
+
+
 const getCommentData = async (locationId) => {
+  var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
   try {   
     const result = await client.query('SELECT "commentContents", "commentDate", "commentScore", "commentTitle", "userID" FROM comments WHERE "locationID" = $1', [locationId]);
-  
+    
     if (result.rows.length > 0) {
       const commentsData = [];
-
       for (let i = 0; i < result.rows.length; i++) {
-        const userData = await getUserData(result.rows[i].userID);
-        const userNickname = userData[1];
+        const userData = await getUserData(result.rows[i].userID); //kullanıcı id sine göre kullanıcı verilerini cekiyor
+        const userNickname = userData[1]; //Cekilen verilerden nickname alınıyor
+        
+        var date = result.rows[i].commentDate;
+        date = new Date();
+        var month = date.getMonth();
+        var year = date.getFullYear();
+        result.rows[i].commentDate = months[month]+" "+year;
 
         commentsData[i] = {
-          userNickname: userNickname, // userNickname
-          commentContents: result.rows[i].commentContents, //yorum
-          commentDate: result.rows[i].commentDate, //yorum tarihi
-          commentScore: result.rows[i].commentScore, //yorum skor
-          commentTitle: result.rows[i].commentTitle, //yorum baslik
+          userNickname: userNickname,
+          commentContents: result.rows[i].commentContents,
+          commentDate: result.rows[i].commentDate,
+          commentScore: result.rows[i].commentScore,
+          commentTitle: result.rows[i].commentTitle,
         }
 
       }
@@ -211,10 +250,15 @@ app.get("/index", (req,res) => {
     res.render("index")
 })
 
-app.get("/popdest", (req,res) => {
-    res.render("popdest")
-})
-
+app.get("/popdest", async (req, res) => {
+  try {
+      const commentsData = await getCommentData(2);
+      res.render("popdest", { commentsData: commentsData });
+  } catch (error) {
+      console.error("Popdesti yaparken hata olustu:", error);
+      res.status(500).send("Internal Server Error");
+  }
+});
 app.get("/location", (req,res) => {
   res.render("location")
 })
