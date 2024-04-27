@@ -119,11 +119,8 @@ app.get("/changeHeader", async (req, res) => {
 
 app.get("/loadComments", async (req, res) => {
   try {
-    // getCommentData fonksiyonunu çağırmadan önce tanımla ve locationID ile çağır
     const commentsData = await getCommentData(2);
-    // Şablonu çağırken commentsData'yı geçir
-    var template = Handlebars.compile($("#carousel-script").html());
-    $('#carousel').html(template(commentsData))
+    console.log(commentsData)
 
   } catch (error) {
     console.error("Error fetching comment data:", error);
@@ -213,7 +210,7 @@ const getPopularLocationsData = async (locationType,limit) => {
 const getCommentData = async (locationId) => {
   try {   
     const result = await client.query('SELECT "commentContents", "commentDate", "commentScore", "commentTitle", "userID" FROM comments WHERE "locationID" = $1', [locationId]);
-  
+    console.log(result.rows[0].userID)
     if (result.rows.length > 0) {
       const commentsData = [];
 
@@ -260,10 +257,15 @@ app.get("/index", (req,res) => {
     res.render("index")
 })
 
-app.get("/popdest", (req,res) => {
-    res.render("popdest")
-})
-
+app.get("/popdest", async (req, res) => {
+  try {
+      const commentsData = await getCommentData(2);
+      res.render("popdest", { commentsData: commentsData });
+  } catch (error) {
+      console.error("Popdesti yaparken hata olustu:", error);
+      res.status(500).send("Internal Server Error");
+  }
+});
 app.get("/location", (req,res) => {
   res.render("location")
 })
