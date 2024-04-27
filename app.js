@@ -264,6 +264,10 @@ app.get("/popdest", (req,res) => {
     res.render("popdest")
 })
 
+app.get("/location", (req,res) => {
+  res.render("location")
+})
+
 
 
 app.listen(3000, () => {

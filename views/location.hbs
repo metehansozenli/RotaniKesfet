@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>...</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+
+</head>
+
+
+<body>
+
+    {{>config}}
+
+
+    <div class="container ">
+
+        <section class="location-section mt-4 ">
+
+            <div class="location-context d-flex ">
+                <div class="align-items-center">
+                    <h1 class="text-left">Kolezyum</h1>
+                    <div class="d-flex ">
+                        <p class="mr-3 text-success">Şu anda açık</p>
+                        <p class="mr-3">09.00-19.00</p>
+                        <p class="write-comment text-right">Yorum Yazın</p>
+                    </div>
+                </div>
+
+                <div class="location-info d-flex">
+                    <div>
+                        <div class="d-flex mb-2">
+                            <h5 class="point">4.5</h5>
+                            <div class="ratings">
+                                <i class="fa fa-star rating-color"></i>
+                                <i class="fa fa-star rating-color"></i>
+                                <i class="fa fa-star rating-color"></i>
+                                <i class="fa fa-star rating-color"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <h5 class="review-count ">122 Yorum</h5>
+                        </div>
+                        <div>
+                            <div class="extra-info d-block">
+                                <div class="mb-2 d-flex"><img src="../images/location.png" />
+                                    <p>Piazza del Colosseo, 00184 Roma İtalya</p>
+                                </div>
+                                <div class="mb-2 d-flex"><img src="../images/time.png" />
+                                    <p>3 saatten fazla gezme süresi</p>
+                                </div>
+                                <div class="mb-2 d-flex"><img src="../images/etiket.png" />
+                                    <p>Müze</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="fav ml-4 "><img src="../images/fav.png" /></div>
+                    </div>
+                </div>
+            </div>
+
+            <img src="images/kolezyum.jpg" alt="Keşfet" class="img-fluid  d-block mt-4 mb-4 mx-auto"
+                style="width: 850px; height: 475px;">
+
+
+        </section>
+
+        <section class="location-comments mt-4">
+            <h1 class="pt-4 text-left ml-4">Yorumlar</h1>
+            <div class="rating-card">
+                <div class="row justify-content-left d-flex">
+                    <div class=" d-flex flex-column justify-content-center align-items-center">
+                        <div class="rating-box">
+                            <h1 class="pt-4">4.0</h1>
+                            <p class="text-white">out of 5</p>
+                        </div>
+                        <div class="">
+                            <span class="fa fa-star star-active mx-1"></span>
+                            <span class="fa fa-star star-active mx-1"></span>
+                            <span class="fa fa-star star-active mx-1"></span>
+                            <span class="fa fa-star star-active mx-1"></span>
+                            <span class="fa fa-star star-inactive mx-1"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="rating-bar0 justify-content-center">
+                            <table class="text-left mx-auto">
+                                <tr>
+                                    <td class="rating-label">Excellent</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                            <div class="bar-5"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">123</td>
+                                </tr>
+                                <tr>
+                                    <td class="rating-label">Good</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                            <div class="bar-4"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">23</td>
+                                </tr>
+                                <tr>
+                                    <td class="rating-label">Average</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                            <div class="bar-3"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">10</td>
+                                </tr>
+                                <tr>
+                                    <td class="rating-label">Poor</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                            <div class="bar-2"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">3</td>
+                                </tr>
+                                <tr>
+                                    <td class="rating-label">Terrible</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                            <div class="bar-1"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">0</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment-card">
+                <div class="row d-flex">
+                    <div class="">
+                        <img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg">
+                    </div>
+                    <div class="d-flex flex-column">
+                        <h3 class="mt-2 mb-0">@wassapman</h3>
+                        <div class="d-flex mb-0">
+                            <p class="text-left"><span class="text-muted">4.0</span>
+                                <span class="fa fa-star star-active ml-3"></span>
+                                <span class="fa fa-star star-active"></span>
+                                <span class="fa fa-star star-active"></span>
+                                <span class="fa fa-star star-active"></span>
+                                <span class="fa fa-star star-inactive mr-2"></span>
+                            </p>
+                            <p class="text-right mt-1"><span class="text-muted">44 Yorum</span>
+                        </div>
+                        <div class="text-left d-flex " style="margin-top:-18px;">
+                            <p class="text-muted">Ankara, Türkiye</p>
+                        </div>
+                    </div>
+                    <div class="ml-auto">
+                        <p class="text-muted pt-5 pt-sm-3">10 Sept</p>
+                    </div>
+                </div>
+                <div class="row text-left">
+                    <h4 class="blue-text mt-3">"An awesome activity to experience"</h4>
+                    <p class="content">If you really enjoy spending your vacation 'on water' or would like to try
+                        something new and exciting for the first time.</p>
+                </div>
+                <div class="row text-left mt-4">
+                    <div class="like mr-3 vote">
+                        <img src="https://i.imgur.com/mHSQOaX.png"><span class="blue-text pl-2">20</span>
+                    </div>
+                    <div class="unlike vote">
+                        <img src="https://i.imgur.com/bFBO3J7.png"><span class="text-muted pl-2">4</span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="comment-card">
+                <div class="row d-flex">
+                    <div class="">
+                        <img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg">
+                    </div>
+                    <div class="d-flex flex-column">
+                        <h3 class="mt-2 mb-0">@wassapman</h3>
+                        <div class="d-flex mb-0">
+                            <p class="text-left"><span class="text-muted">4.0</span>
+                                <span class="fa fa-star star-active ml-3"></span>
+                                <span class="fa fa-star star-active"></span>
+                                <span class="fa fa-star star-active"></span>
+                                <span class="fa fa-star star-active"></span>
+                                <span class="fa fa-star star-inactive mr-2"></span>
+                            </p>
+                            <p class="text-right mt-1"><span class="text-muted">44 Yorum</span>
+                        </div>
+                        <div class="text-left d-flex " style="margin-top:-18px;">
+                            <p class="text-muted">Ankara, Türkiye</p>
+                        </div>
+                    </div>
+                    <div class="ml-auto">
+                        <p class="text-muted pt-5 pt-sm-3">10 Sept</p>
+                    </div>
+                </div>
+                <div class="row text-left">
+                    <h4 class="blue-text mt-3">"An awesome activity to experience"</h4>
+                    <p class="content">If you really enjoy spending your vacation 'on water' or would like to try
+                        something new and exciting for the first time.</p>
+                </div>
+                <div class="row text-left mt-4">
+                    <div class="like mr-3 vote">
+                        <img src="https://i.imgur.com/mHSQOaX.png"><span class="blue-text pl-2">20</span>
+                    </div>
+                    <div class="unlike vote">
+                        <img src="https://i.imgur.com/bFBO3J7.png"><span class="text-muted pl-2">4</span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="comment-card">
+                <div class="row d-flex">
+                    <div class="">
+                        <img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg">
+                    </div>
+                    <div class="d-flex flex-column">
+                        <h3 class="mt-2 mb-0">@wassapman</h3>
+                        <div class="d-flex mb-0">
+                            <p class="text-left"><span class="text-muted">4.0</span>
+                                <span class="fa fa-star star-active ml-3"></span>
+                                <span class="fa fa-star star-active"></span>
+                                <span class="fa fa-star star-active"></span>
+                                <span class="fa fa-star star-active"></span>
+                                <span class="fa fa-star star-inactive mr-2"></span>
+                            </p>
+                            <p class="text-right mt-1"><span class="text-muted">44 Yorum</span>
+                        </div>
+                        <div class="text-left d-flex " style="margin-top:-18px;">
+                            <p class="text-muted">Ankara, Türkiye</p>
+                        </div>
+                    </div>
+                    <div class="ml-auto">
+                        <p class="text-muted pt-5 pt-sm-3">10 Sept</p>
+                    </div>
+                </div>
+                <div class="row text-left">
+                    <h4 class="blue-text mt-3">"An awesome activity to experience"</h4>
+                    <p class="content">If you really enjoy spending your vacation 'on water' or would like to try
+                        something new and exciting for the first time.</p>
+                </div>
+                <div class="row text-left mt-4">
+                    <div class="like mr-3 vote">
+                        <img src="https://i.imgur.com/mHSQOaX.png"><span class="blue-text pl-2">20</span>
+                    </div>
+                    <div class="unlike vote">
+                        <img src="https://i.imgur.com/bFBO3J7.png"><span class="text-muted pl-2">4</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </section>
+
+
+
+
+    </div>
+
+    {{>footer}}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+<style>
+    .location-section {
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .location-comments {
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .location-context .ratings {
+        margin-right: 15px;
+    }
+
+    .location-context .ratings i {
+        color: #cecece;
+        font-size: 25px;
+    }
+
+
+    .location-context .review-count {
+        font-weight: 500;
+        margin-bottom: 2px;
+        font-size: 20px !important;
+
+    }
+
+    .location-context .point {
+        font-weight: 500;
+        font-size: 25px !important;
+        margin-top: -3px;
+        margin-right: 10px;
+    }
+
+
+
+    .rating-card {
+        border: hidden;
+        background-color: #fff;
+        padding-left: 50px;
+        padding-right: 50px;
+        margin-top: 10px;
+        padding-top: 10px;
+        padding-bottom: 30px;
+    }
+
+    .location-context {
+        margin: 40px 64px;
+        font-weight: bold;
+        color: black;
+        justify-content: space-between;
+    }
+
+    .location-context h1 {
+        font-size: 48px;
+    }
+
+    .rating-box {
+        width: 130px;
+        height: 130px;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: #FBC02D;
+        color: #fff;
+        text-align: center;
+    }
+
+    .rating-label {
+        font-weight: bold;
+    }
+
+    /* Rating bar width */
+    .rating-bar {
+        width: 300px;
+        padding: 8px;
+        border-radius: 5px;
+    }
+
+    /* The bar container */
+    .bar-container {
+        width: 100%;
+        background-color: #f1f1f1;
+        text-align: center;
+        color: white;
+        border-radius: 20px;
+        cursor: pointer;
+        margin-bottom: 5px;
+    }
+
+    /* Individual bars */
+    .bar-5 {
+        width: 70%;
+        height: 13px;
+        background-color: #FBC02D;
+        border-radius: 20px;
+
+    }
+
+    .bar-4 {
+        width: 30%;
+        height: 13px;
+        background-color: #FBC02D;
+        border-radius: 20px;
+
+    }
+
+    .bar-3 {
+        width: 20%;
+        height: 13px;
+        background-color: #FBC02D;
+        border-radius: 20px;
+
+    }
+
+    .bar-2 {
+        width: 10%;
+        height: 13px;
+        background-color: #FBC02D;
+        border-radius: 20px;
+
+    }
+
+    .bar-1 {
+        width: 0%;
+        height: 13px;
+        background-color: #FBC02D;
+        border-radius: 20px;
+
+    }
+
+    td {
+        padding-bottom: 10px;
+    }
+
+    .star-active {
+        color: #FBC02D;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .star-active:hover {
+        color: #F9A825;
+        cursor: pointer;
+    }
+
+    .star-inactive {
+        color: #CFD8DC;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .blue-text {
+        color: #0091EA;
+    }
+
+    .content {
+        font-size: 18px;
+    }
+
+
+    .comment-card {
+        border: hidden;
+        background-color: #fff;
+        padding-left: 50px;
+        padding-right: 50px;
+        margin-top: 30px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .profile-pic {
+        width: 90px;
+        height: 90px;
+        border-radius: 100%;
+        object-fit: cover;
+        margin-right: 30px;
+    }
+
+
+
+    .vote {
+        cursor: pointer;
+    }
+
+
+    a {
+        text-decoration: none !important;
+        color: inherit;
+    }
+
+    a:hover {
+        color: #455A64;
+    }
+
+    .location-comments hr {
+        border-top: 1px solid #ccc;
+        /* Çizgi rengi ve kalınlığı */
+        margin: 20px 0;
+        /* Çizginin üst ve alt boşlukları */
+    }
+
+    .location-context img {
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+        object-fit: cover;
+    }
+
+
+
+    .location-context .fav img {
+        width: 64px !important;
+        height: 64px !important;
+        object-fit: cover;
+        margin-top: -15px;
+    }
+
+    .location-context .extra-info p {
+        opacity: 0.8;
+        font-weight: normal;
+
+    }
+
+    .location-context .location-info{
+
+        margin: -30px -40px;
+    }
+</style>
+
+</html>
