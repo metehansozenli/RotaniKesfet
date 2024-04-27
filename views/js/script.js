@@ -25,16 +25,28 @@ fetch('/user')
 
     .then(data => {
         console.log("hayir");
-        
+
         const fullName = `${data.userName} ${data.userSurname}`;
-        
+
         document.getElementById('userName').innerText = `${fullName} (@${data.userNickname})`;
     })
     .catch(error => {
         console.error('Hata oluştu:', error);
     });
 
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch('/loadComments'); // /loadComments endpoint'ine GET isteği gönder
+        const data = await response.json(); // Gelen veriyi JSON formatına çevir
+        console.log(data); // Veriyi konsola yazdır veya başka bir şey yap
+    } catch (error) {
+        console.error('Error loading comments:', error);
+    }
+});
 
+
+
+    
 
 
        

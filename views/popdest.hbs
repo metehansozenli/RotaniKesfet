@@ -11,7 +11,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
    
-   
+   <script>
+    sync function loadComments() {
+        const response = await fetch('/loadComments');
+    }
+    window.onload = loadComments();
+   </script>
 </head>
 
 
@@ -72,138 +77,37 @@
         </section>
         
         <section class="popdest-comments mt-4 ">
+            <script></script>
             <div class="wrapper" >
                 <i id="left" class="fa-solid fa-angle-left"></i>
                 <ul class="carousel">
-                    <li class="card">
-                        <div class="comments-upcontent" >
-                            <div class="mt-2">
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star-half-alt active-star"></span>
+                    <script id="carousel-script">
+                        {{#each commentsData}}
+                            <li class="card">
+                            <div class="comments-upcontent" >
+                                <div class="mt-2">
+                                    <span class="fas fa-star active-star"></span>
+                                    <span class="fas fa-star active-star"></span>
+                                    <span class="fas fa-star active-star"></span>
+                                    <span class="fas fa-star active-star"></span>
+                                    <span class="fas fa-star-half-alt active-star"></span>
+                                </div>
+                                <div class="comment-title">{{this.commentTitle}}</div>
+                                <div class="testimonial">{{this.commentContentst}}</div>
                             </div>
-                            <div class="comment-title">Great Service</div>
-                            <div class="testimonial">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa id.Lorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa idLorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa idLorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa id
-                            </div>
-                        </div>
-                        <div class="profile">
-                            <div class="comment-context">
-                                <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                    alt="" class="rounded-circle ">
+                            <div class="profile">
+                                <div class="comment-context">
+                                    <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                                        alt="" class="rounded-circle ">
 
-                                <div class="name">@Megan</div>
-                            </div>
-                            <div class="date">Mart 2024</div>
+                                    <div class="name">{{this.userNickname}}</div>
+                                </div>
+                                <div class="date">{{this.commentDate}}</div>
 
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="comments-upcontent" >
-                            <div class="mt-2">
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star-half-alt active-star"></span>
                             </div>
-                            <div class="comment-title ">Great Service</div>
-                            <div class="testimonial">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa id.Lorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa idLorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa idLorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa id
-                            </div>
-                        </div>
-                        <div class="profile">
-                            <div class="comment-context">
-                                <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                    alt="" class="rounded-circle ">
-
-                                <div class="name">@Megan</div>
-                            </div>
-                            <div class="date">Mart 2024</div>
-
-                        </div>
-                    </li>
-
-                    <li class="card">
-                        <div class="comments-upcontent" style="justify-content:end">
-                            <div class="mt-2">
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star-half-alt active-star"></span>
-                            </div>
-                            <div class="comment-title ">Great Service</div>
-                            <div class="testimonial">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa id.Lorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa idLorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa idLorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa id
-                            </div>
-                        </div>
-                        <div class="profile">
-                            <div class="comment-context">
-                                <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                    alt="" class="rounded-circle ">
-
-                                <div class="name">@Megan</div>
-                            </div>
-                            <div class="date">Mart 2024</div>
-
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="comments-upcontent" style="justify-content:end">
-                            <div class="mt-2">
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star active-star"></span>
-                                <span class="fas fa-star-half-alt active-star"></span>
-                            </div>
-                            <div class="comment-title ">Great Service</div>
-                            <div class="testimonial">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa id.Lorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa idLorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa idLorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Magni dolores molestias veniam
-                                inventore itaque eius iure omnis, temporibus culpa id
-                            </div>
-                        </div>
-                        <div class="profile">
-                            <div class="comment-context">
-                                <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                    alt="" class="rounded-circle ">
-
-                                <div class="name">@Megan</div>
-                            </div>
-                            <div class="date">Mart 2024</div>
-
-                        </div>
-                    </li>   
+                        </li>
+                        {{/each}}
+                    </script>
                 </ul>
                 <i id="right" class="fa-solid fa-angle-right"></i>
             </div>
