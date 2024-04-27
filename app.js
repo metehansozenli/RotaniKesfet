@@ -16,7 +16,7 @@ client.connect((err) => {
         console.error('Veritabanına bağlanırken bir hata oluştu:', err.stack);
         return;
     }
-    console.log('Veritabanına başarıyla bağlandı.f');
+    console.log('Veritabanına başarıyla bağlandı.');
 });
 
 
