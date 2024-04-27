@@ -10,7 +10,6 @@ const app = express();
 const sessions = {};
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const Handlebars = require("handlebars");
 
 client.connect((err) => {
     if (err) {
@@ -116,18 +115,14 @@ app.get("/changeHeader", async (req, res) => {
   }
 });
 
-
 app.get("/loadComments", async (req, res) => {
   try {
-    // getCommentData fonksiyonunu çağırmadan önce tanımla ve locationID ile çağır
     const commentsData = await getCommentData(2);
-    // Şablonu çağırken commentsData'yı geçir
-    var template = Handlebars.compile($("#carousel-script").html());
-    $('#carousel').html(template(commentsData))
-
+    
+    res.render("popdest", { commentsData });
   } catch (error) {
     console.error("Error fetching comment data:", error);
-    res.send("Bir hata Oluştu!");
+    res.status(500).send("Bir hata oluştu!");
   }
 });
 
