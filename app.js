@@ -219,6 +219,9 @@ app.get("/location", (req,res) => {
   res.render("location")
 })
 
+app.get("/mycomment", (req,res) => {
+  res.render("mycomment")
+})
 
 
 app.listen(3000, () => {
