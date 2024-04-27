@@ -115,17 +115,6 @@ app.get("/changeHeader", async (req, res) => {
   }
 });
 
-app.get("/loadComments", async (req, res) => {
-  try {
-    const commentsData = await getCommentData(2);
-    console.log(commentsData)
-
-  } catch (error) {
-    console.error("Error fetching comment data:", error);
-    res.status(500).send("Bir hata oluştu!");
-  }
-});
-
 
 const getUserData = async (sessionuserId) => {
   try {   
@@ -206,15 +195,21 @@ const getPopularLocationsData = async (locationType,limit) => {
 
 
 const getCommentData = async (locationId) => {
+  var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
   try {   
     const result = await client.query('SELECT "commentContents", "commentDate", "commentScore", "commentTitle", "userID" FROM comments WHERE "locationID" = $1', [locationId]);
-    console.log(result.rows[0].userID)
+    
     if (result.rows.length > 0) {
       const commentsData = [];
-
       for (let i = 0; i < result.rows.length; i++) {
         const userData = await getUserData(result.rows[i].userID); //kullanıcı id sine göre kullanıcı verilerini cekiyor
         const userNickname = userData[1]; //Cekilen verilerden nickname alınıyor
+        
+        var date = result.rows[i].commentDate;
+        date = new Date();
+        var month = date.getMonth();
+        var year = date.getFullYear();
+        result.rows[i].commentDate = months[month]+" "+year;
 
         commentsData[i] = {
           userNickname: userNickname,
