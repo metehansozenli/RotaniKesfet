@@ -71,37 +71,38 @@
 
         </section>
         
-        <section class="popdest-comments mt-4 ">
-            <div class="wrapper" >
-                <i id="left" class="fa-solid fa-angle-left"></i>
-                <ul class="carousel">
-                    {{#each commentsData}}
-                        <li class="card">
-                            <div class="comments-upcontent">
-                                <div class="mt-2">
-                                    <span class="fas fa-star active-star"></span>
-                                    <span class="fas fa-star active-star"></span>
-                                    <span class="fas fa-star active-star"></span>
-                                    <span class="fas fa-star active-star"></span>
-                                    <span class="fas fa-star-half-alt active-star"></span>
-                                </div>
-                                <div class="comment-title">{{this.commentTitle}}</div>
-                                <div class="testimonial">{{this.commentContents}}</div>
-                            </div>
-                            <div class="profile">
-                                <div class="comment-context">
-                                    <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                        alt="" class="rounded-circle ">
-                                    <div class="name">{{this.userNickname}}</div>
-                                </div>
-                                <div class="date">{{this.commentDate}}</div>
-                            </div>
-                        </li>
-                    {{/each}}
-                </ul>
-                <i id="right" class="fa-solid fa-angle-right"></i>
-            </div>
-        </section>
+      <section class="popdest-comments mt-4">
+    <div class="wrapper">
+        <i id="left" class="fa-solid fa-angle-left"></i>
+        <ul class="carousel">
+            {{#each commentsData}}
+            <li class="card">
+                <div class="comments-upcontent">
+                    <div class="mt-2">
+                        <span class="fas fa-star active-star"></span>
+                        <span class="fas fa-star active-star"></span>
+                        <span class="fas fa-star active-star"></span>
+                        <span class="fas fa-star active-star"></span>
+                        <span class="fas fa-star-half-alt active-star"></span>
+                    </div>
+                    <div class="comment-title">{{this.commentTitle}}</div>
+                    <div class="testimonial">{{this.commentContents}}</div>
+                </div>
+                <div class="profile">
+                    <div class="comment-context">
+                        <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                            alt="" class="rounded-circle ">
+                        <div class="name">{{this.userNickname}}</div>
+                    </div>
+                    <div class="date">{{this.commentDate}}</div>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+        <i id="right" class="fa-solid fa-angle-right"></i>
+    </div>
+</section>
+
         <section class="popdest-section mt-4  d-flex">
 
             <img src="images/paris.jpg" alt="Keşfet" class="img-fluid mt-5 mb-5 mr-3 ml-3"
