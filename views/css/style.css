@@ -1,8 +1,11 @@
 /* Genel stiller */
 body {
-    font-family: Arial, sans-serif; /* varsayılan yazı tipi ailesi */
-    background-color: #f8f9fa; /* sayfa arkaplan rengi */
-    color: #333; /* varsayılan metin rengi */
+    font-family: Arial, sans-serif;
+    /* varsayılan yazı tipi ailesi */
+    background-color: #f8f9fa;
+    /* sayfa arkaplan rengi */
+    color: #333;
+    /* varsayılan metin rengi */
 }
 
 /* Header stiller */
@@ -45,20 +48,24 @@ header {
     background-color: rgba(0, 0, 0, 0.35);
     color: white;
     padding: 5px;
-    padding-top: 10px; /* Üst boşluk */
-    padding-bottom: 10px; /* Alt boşluk */
+    padding-top: 10px;
+    /* Üst boşluk */
+    padding-bottom: 10px;
+    /* Alt boşluk */
     text-align: center;
     font-family: Arial, sans-serif;
-    font-size: 20px; /* Yazı boyutu */
+    font-size: 20px;
+    /* Yazı boyutu */
 }
 
 .carousel-container {
     background-color: white;
 }
 
-.carousel-control-prev{
+.carousel-control-prev {
     margin-left: -50px;
 }
+
 .carousel-control-next {
     margin-right: -50px;
 }
@@ -67,44 +74,44 @@ header {
     background-color: #f0f0f0;
     padding: 20px 0;
     text-align: center;
-  }
-  
-  .footer-wrapper {
+}
+
+.footer-wrapper {
     width: 90%;
     margin: 0 auto;
-  }
-  
-  .footer-content {
+}
+
+.footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  
-  .footer-logo {
+}
+
+.footer-logo {
     margin-right: 20px;
-  }
-  
-  .footer-menu {
+}
+
+.footer-menu {
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  
-  .footer-menu li {
+}
+
+.footer-menu li {
     display: inline-block;
     margin-right: 20px;
-  }
-  
-  .footer-menu a {
+}
+
+.footer-menu a {
     text-decoration: none;
     color: #333;
-  }
-  
-  .footer-copyright {
-    margin-top: 20px;
-  }
+}
 
-  h1{
+.footer-copyright {
+    margin-top: 20px;
+}
+
+h1 {
     text-align: center;
     margin-bottom: 20px;
 }
@@ -131,7 +138,7 @@ input[type="email"] {
 }
 
 .maviButton {
-     background-color: #67d4f9;
+    background-color: #67d4f9;
     color: #fff;
     padding: 10px auto;
     border: none;
@@ -228,17 +235,17 @@ a {
     color: #000000;
 }
 
-section.discover, 
-div.gezilecek-yerler, 
-div.oteller, 
-div.restoranlar{
+section.discover,
+div.gezilecek-yerler,
+div.oteller,
+div.restoranlar {
 
     margin-bottom: 20px;
     padding: 20px;
     border-radius: 8px;
 }
 
-section.discover.mt-4{
+section.discover.mt-4 {
     margin-bottom: 20px;
     padding: 20px;
     border-radius: 8px;
@@ -292,9 +299,9 @@ section.discover.mt-4{
 }
 
 
-.ppopdests .point-section{
+.ppopdests .point-section {
 
-    
+
     margin-right: 10px;
 
 }
@@ -325,33 +332,37 @@ section.discover.mt-4{
 }
 
 .popdests .point-section {
-    
+
     margin-right: 20px;
 }
 
-.city-title, .popdest-context h1 {
+.city-title,
+.popdest-context h1 {
     color: #000000;
 }
 
 .dest {
-    color: #828282;;
+    color: #828282;
+    ;
     font-size: 20px;
     text-decoration: underline;
 }
 
- .city-rank {
+.city-rank {
     color: #D9D9D9;
 
 }
 
 .write-comment {
-    color: #000000;;
+    color: #000000;
+    ;
     font-size: 16px;
     text-decoration: underline;
 }
 
 .popdest-context {
-    color: #000000;;
+    color: #000000;
+    ;
     font-size: 20px;
     margin-bottom: 30px;
 }
@@ -364,31 +375,42 @@ section.discover.mt-4{
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-img {
+.popdest-comments {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
     
+}
+
+img {
+
     border-radius: 8px;
 }
 
 .popdest-context p {
-text-align: justify;
-color: #666;
-margin: 30px 50px; 
-font-size: 20px
+    text-align: justify;
+    color: #666;
+    margin: 30px 50px;
+    font-size: 20px
 }
 
-.popdests{
+.popdests {
     margin-top: 7.2%;
 }
 
 
 .dest a {
-    color: inherit;         
-    text-decoration: none;  
+    color: inherit;
+    text-decoration: none;
 }
 
 .dest a:hover {
-    color: inherit; 
-    text-decoration: underline; 
+    color: inherit;
+    text-decoration: underline;
 }
 
 /* profile dropdown */
@@ -396,27 +418,27 @@ font-size: 20px
 .action {
     margin-top: -8px;
     margin-left: 10px;
-  }
-  
-  .action .profile {
+}
+
+.action .profile {
     position: relative;
     width: 60px;
     height: 60px;
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
-  }
-  
-  .action .profile img {
+}
+
+.action .profile img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  
-  .action .menu {
+}
+
+.action .menu {
     position: absolute;
     top: 120px;
     right: -10px;
@@ -428,15 +450,15 @@ font-size: 20px
     transition: 0.5s;
     visibility: hidden;
     opacity: 0;
-  }
-  
-  .action .menu.active {
+}
+
+.action .menu.active {
     top: 80px;
     visibility: visible;
     opacity: 1;
-  }
-  
-  .action .menu::before {
+}
+
+.action .menu::before {
     content: "";
     position: absolute;
     top: -5px;
@@ -445,9 +467,9 @@ font-size: 20px
     height: 20px;
     background: #c3c2c2;
     transform: rotate(45deg);
-  }
-  
-  .action .menu h3 {
+}
+
+.action .menu h3 {
     width: 100%;
     text-align: center;
     font-size: 18px;
@@ -455,50 +477,43 @@ font-size: 20px
     font-weight: 500;
     color: #000000;
     line-height: 1.5em;
-  }
-  
-  .action .menu h3 span {
+}
+
+.action .menu h3 span {
     font-size: 14px;
     color: #000000;
     font-weight: 300;
-  }
-  
-  .action .menu ul li {
+}
+
+.action .menu ul li {
     list-style: none;
     padding: 16px 0;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     display: flex;
     align-items: center;
-  }
-  
-  .action .menu ul li img {
+}
+
+.action .menu ul li img {
     max-width: 20px;
     margin-right: 10px;
     opacity: 0.5;
     transition: 0.5s;
-  }
-  
-  .action .menu ul li:hover img {
+}
+
+.action .menu ul li:hover img {
     opacity: 1;
-  }
-  
-  .action .menu ul li a {
+}
+
+.action .menu ul li a {
     display: inline-block;
     justify-content: right;
     text-decoration: none;
     color: #000000;
     font-weight: 500;
     transition: 0.5s;
-  }
+}
 
-  
-  .action .menu ul li:hover a {
+
+.action .menu ul li:hover a {
     color: #6dcbee;
-  }
-
-
-
-
-
-
-
+}
