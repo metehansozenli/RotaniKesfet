@@ -19,6 +19,9 @@ header {
     margin-right: 10%;
 }
 
+.modal-body h1{
+    text-align: center;
+}
 
 .rounded-section .btn {
     background-color: #007bff;
@@ -247,6 +250,7 @@ section.discover.mt-4 {
     overflow: hidden;
 }
 
+
 .discoverplaces:hover {
     max-width: 100%;
     height: auto;
@@ -254,6 +258,10 @@ section.discover.mt-4 {
     cursor: pointer;
     transition: transform 0.3s ease;
     transform: scale(1.05);
+}
+
+.discover p {
+    color:#666
 }
 
 
@@ -285,6 +293,14 @@ section.discover.mt-4 {
     font-size: 32px !important;
     margin-top: -3px;
     margin-right: 30px;
+}
+
+.popdest-context h1{
+    text-align: center;
+}
+
+.popdest-context p {
+    color:#666
 }
 
 
