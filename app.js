@@ -267,6 +267,10 @@ app.get("/mycomment", (req,res) => {
   res.render("mycomment")
 })
 
+app.get("/profile", (req,res) => {
+  res.render("profile")
+})
+
 
 app.listen(3000, () => {
     console.log('Server started on http://localhost:3000');
