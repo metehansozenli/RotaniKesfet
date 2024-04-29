@@ -6,8 +6,13 @@ body {
     /* sayfa arkaplan rengi */
     color: #333;
     /* varsayılan metin rengi */
+   
 }
 
+img {
+
+    border-radius: 8px;
+}
 /* Header stiller */
 header {
     display: flex;
@@ -291,7 +296,7 @@ section.discover.mt-4 {
 .ppopdests .point {
     font-weight: 500;
     font-size: 32px !important;
-    margin-top: -3px;
+    margin-top: -7px;
     margin-right: 30px;
 }
 
@@ -311,12 +316,27 @@ section.discover.mt-4 {
 
 }
 
+.popdest-section img {
+    object-fit: cover;
+    width: 850px; 
+    height: 475px;
+}
+
+.popdest-section .cityImg {
+    object-fit: cover;
+    width: 500px; 
+    height: 350px;
+}
+
+.popdests-context{
+    align-items: right;
+}
 
 .popdests .ratings {
     margin-right: 20px;
 }
 
-.popdests .ratings i {
+.popdest-section .ratings i {
     color: #cecece;
     font-size: 25px;
 }
@@ -338,7 +358,15 @@ section.discover.mt-4 {
 
 .popdests .point-section {
 
-    margin-right: 20px;
+    margin-top: 50px;
+}
+
+.popdests-text{
+    margin: 50px 30px;
+}
+
+.popdests-context{
+    margin: 30px 30px;
 }
 
 .city-title,
@@ -390,10 +418,7 @@ section.discover.mt-4 {
     
 }
 
-img {
 
-    border-radius: 8px;
-}
 
 .popdest-context p {
     text-align: justify;
@@ -402,9 +427,7 @@ img {
     font-size: 20px
 }
 
-.popdests {
-    margin-top: 7.2%;
-}
+
 
 
 .dest a {

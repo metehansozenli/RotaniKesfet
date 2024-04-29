@@ -10,10 +10,11 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <script src="./js/script.js"></script>
-   
-   
+
+
+
 </head>
+
 
 
 <body>
@@ -34,13 +35,12 @@
 
         <section class="popdest-section mt-4 ">
 
-            <img src="images/london.jpg" alt="Keşfet" class="img-fluid  d-block mt-5 mx-auto"
-                style="width: 850px; height: 475px;">
+            <img src="images/london.jpg" alt="Keşfet" class="img-fluid  d-block mt-5 mx-auto">
 
             <div class="ppopdests mt-5 d-flex justify-content-between" style="margin: 2% 11%;">
 
                 <div class="text-left">
-                    <h2 class="city-rank mx-3">01.</h2>
+                    <h2 class="city-rank mx-3">#1</h2>
                     <h2 class="city-title mx-3">Londra</h2>
                     <ol class="dest">
                         <li><a href="url1">Tower of London</a></li>
@@ -56,182 +56,95 @@
                     <div class="d-flex">
                         <h5 class="point">4.5</h5>
                         <div class="ratings">
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star rating-color"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                        <h5 class="review-count">122 Yorum</h5>
                     </div>
-                    <h5 class="write-comment text-right">Yorum Yazın</h5>
 
                 </div>
 
             </div>
 
         </section>
+
+        <section class="popdest-comments mt-4">
+            <div class="wrapper">
+                <i id="left" class="fa-solid fa-angle-left"></i>
+                <ul class="carousel">
+                    {{#each commentsData}}
+                    <li class="card">
+                        <div class="comments-upcontent">
+                            <div class="mt-2">
+                                <span class="fas fa-star active-star"></span>
+                                <span class="fas fa-star active-star"></span>
+                                <span class="fas fa-star active-star"></span>
+                                <span class="fas fa-star active-star"></span>
+                                <span class="fas fa-star-half-alt active-star"></span>
+                            </div>
+                            <div class="comment-title">{{this.commentTitle}}</div>
+                            <div class="testimonial">{{this.commentContents}}</div>
+                        </div>
+                        <div class="profile">
+                            <div class="comment-context">
+                                <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                                    alt="" class="rounded-circle ">
+                                <div class="name">@{{this.userNickname}}</div>
+                            </div>
+                            <div class="date">{{this.commentDate}}</div>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+                <i id="right" class="fa-solid fa-angle-right"></i>
+            </div>
+        </section>
+
+        {{#each popDestData}}
         
-      <section class="popdest-comments mt-4">
-    <div class="wrapper">
-        <i id="left" class="fa-solid fa-angle-left"></i>
-        <ul class="carousel">
-            {{#each commentsData}}
-            <li class="card">
-                <div class="comments-upcontent">
-                    <div class="mt-2">
-                        <span class="fas fa-star active-star"></span>
-                        <span class="fas fa-star active-star"></span>
-                        <span class="fas fa-star active-star"></span>
-                        <span class="fas fa-star active-star"></span>
-                        <span class="fas fa-star-half-alt active-star"></span>
-                    </div>
-                    <div class="comment-title">{{this.commentTitle}}</div>
-                    <div class="testimonial">{{this.commentContents}}</div>
-                </div>
-                <div class="profile">
-                    <div class="comment-context">
-                        <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                            alt="" class="rounded-circle ">
-                        <div class="name">@{{this.userNickname}}</div>
-                    </div>
-                    <div class="date">{{this.commentDate}}</div>
-                </div>
-            </li>
-            {{/each}}
-        </ul>
-        <i id="right" class="fa-solid fa-angle-right"></i>
-    </div>
-</section>
+        <section class="popdest-section mt-4  d-flex justify-content-between">
 
-        <section class="popdest-section mt-4  d-flex">
-
-            <img src="images/paris.jpg" alt="Keşfet" class="img-fluid mt-5 mb-5 mr-3 ml-3"
-                style="width: 500px; height: 350px; ">
-
-            <div class="popdests d-flex justify-content-between ">
-
-                <div class="text-left">
-                    <h2 class="city-rank mx-3">02.</h2>
-                    <h2 class="city-title mx-3">Paris</h2>
-                    <ol class="dest">
-                        <li><a href="url1">Eyfel Kulesi</a></li>
-                        <li><a href="url2">Louvre Müzesi</a></li>
-                        <li><a href="url3">Zafer Takı</a></li>
-                        <li><a href="url4">Rodin Müzesi</a></li>
-                        <li><a href="url5">Shakespeare And Company</a></li>
+            <div class="popdests-context d-flex">
+                <img src={{this.cityImg}} alt="Keşfet" class="cityImg img-fluid" >
+                <div class="popdests-text" >
+                    <h2 class="city-rank mx-3">#{{this.cityRank}}</h2>
+                    <h2 class="city-title mx-3">{{this.cityName}}</h2>
+                    <ol class="dest d-block">
+                        {{#each this.locations}}
+                        <li><a href="{{this.url}}">{{this.name}}</a></li>
+                        {{/each}}
                     </ol>
                 </div>
-
-
-                <div class="point-section justify-content-between d-block">
-                    <div class="d-flex">
-                        <h5 class="point">4.5</h5>
-                        <div class="ratings d-flex">
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <h5 class="review-count d-flex">122 Yorum</h5>
-                    </div>
-                    <h5 class="write-comment text-right">Yorum Yazın</h5>
-
-                </div>
-
             </div>
 
-        </section>
-
-        <section class="popdest-section mt-4  d-flex">
-
-            <img src="images/panama.jpg" alt="Keşfet" class="img-fluid mt-5 mb-5 mr-3 ml-3"
-                style="width: 500px; height: 350px; ">
-
-            <div class="popdests d-flex justify-content-between ">
-
-                <div class="text-left">
-                    <h2 class="city-rank mx-3">03.</h2>
-                    <h2 class="city-title mx-3">Panama</h2>
-                    <ol class="dest">
-                        <li><a href="url1">Panama Kanalı</a></li>
-                        <li><a href="url2">Casco Viejo</a></li>
-                        <li><a href="url3">Miraflores Visitor Center</a></li>
-                        <li><a href="url4">Amador Causeway</a></li>
-                        <li><a href="url5">Avenida Balboa</a></li>
-                    </ol>
-                </div>
-
-
-                <div class="point-section justify-content-between d-block">
+            <div class="popdests">
+                <div class="point-section " >
                     <div class="d-flex">
-                        <h5 class="point">4.5</h5>
+                        <h5 class="point">{{cityScore}}</h5>
                         <div class="ratings d-flex">
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star rating-color"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                        <h5 class="review-count d-flex">122 Yorum</h5>
                     </div>
-                    <h5 class="write-comment text-right">Yorum Yazın</h5>
-
                 </div>
-
             </div>
-
+            
         </section>
-
-        <section class="popdest-section mt-4  mb-5 d-flex">
-
-            <img src="images/nairobi.jpg" alt="Keşfet" class="img-fluid mt-5 mb-5 mr-3 ml-3"
-                style="width: 500px; height: 350px;">
-
-            <div class="popdests d-flex justify-content-between ">
-
-                <div class="text-left">
-                    <h2 class="city-rank mx-3">04.</h2>
-                    <h2 class="city-title mx-3">Nairobi</h2>
-                    <ol class="dest">
-                        <li><a href="url1">Sheldrick Wildlife Trust</a></li>
-                        <li><a href="url2">Giraffe Centre</a></li>
-                        <li><a href="url3">Nairobi National Park</a></li>
-                        <li><a href="url4">Karen Blixen Müzesi</a></li>
-                        <li><a href="url5">Karura Forest</a></li>
-                    </ol>
-                </div>
-
-
-                <div class="point-section justify-content-between d-block">
-                    <div class="d-flex">
-                        <h5 class="point">4.5</h5>
-                        <div class="ratings d-flex">
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star rating-color"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <h5 class="review-count d-flex">122 Yorum</h5>
-                    </div>
-                    <h5 class="write-comment text-right">Yorum Yazın</h5>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
+        {{/each}}
     </div>
 
     {{>footer}}
+    
     <script src="./js/commentsSlider.js"></script>
+    <script src="./js/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-  
+
 
 </html>

@@ -45,6 +45,32 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
+//Score ayarları
+document.addEventListener('DOMContentLoaded', function() {
+    // Tüm .point öğelerini seç
+    const points = document.querySelectorAll('.point');
+    
+    // Her bir .point öğesi için işlem yap
+    points.forEach((pointElement) => {
+        const point = parseFloat(pointElement.textContent);
+        const stars = pointElement.nextElementSibling.querySelectorAll('.ratings i');
+
+        // Yıldızları güncelle
+        stars.forEach((star, index) => {
+            if (index < Math.floor(point)) { // Puanı aşağıya yuvarlayarak yıldızları dolduruyoruz
+                star.classList.add('rating-color', 'fa', 'fa-star');
+            } else if (point - index >= 0.25 && point - index < 0.75) { // 0.25 ile 0.75 arasında ise yarım yıldız ekle
+                star.classList.add('rating-color', 'fa', 'fa-star-half-alt');
+            } else if (point - index >= 0.75 && point - index < 1) { // 0.75 ile 1 arasında ise tam yıldız ekle
+                star.classList.add('rating-color', 'fa', 'fa-star');
+            } else { // Diğer durumlarda boş yıldız ekle
+                star.classList.add('fa', 'fa-star-o');
+            }
+        });
+    });
+});
+
+
 
     
 
