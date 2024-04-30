@@ -1,23 +1,23 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const divElement = document.getElementById('gezilecekYerler');
-    
-    divElement.addEventListener('click', function() {
+
+    divElement.addEventListener('click', function () {
         window.location.href = '../popdest';
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const imgElement = document.getElementById('dropdownUser1');
-    
-    imgElement.addEventListener('click', function() {
+
+    imgElement.addEventListener('click', function () {
         alert("Resme tıklanıldı!");
     });
 });
 
 
 function menuToggle() {
-  const toggleMenu = document.querySelector(".menu");
-  toggleMenu.classList.toggle("active");
+    const toggleMenu = document.querySelector(".menu");
+    toggleMenu.classList.toggle("active");
 }
 
 
@@ -45,11 +45,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-//Score ayarları
-document.addEventListener('DOMContentLoaded', function() {
+
+//Genel yıldızları ayarlama
+document.addEventListener('DOMContentLoaded', function () {
     // Tüm .point öğelerini seç
     const points = document.querySelectorAll('.point');
-    
+
     // Her bir .point öğesi için işlem yap
     points.forEach((pointElement) => {
         const point = parseFloat(pointElement.textContent);
@@ -70,14 +71,37 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-
+//Küçük yorumların yıldızlarının ayarı
+document.addEventListener('DOMContentLoaded', function () {
+    // Tüm .point öğelerini seç
+    const points = document.querySelectorAll('.comment-point h5');
     
+    
+    // Her bir .point öğesi için işlem yap
+    points.forEach((pointElement) => {
+        const point = parseFloat(pointElement.textContent);
+        const stars = pointElement.parentElement.querySelector('.comment-point .comment-stars').querySelectorAll('span');
+        // Yıldızları güncelle
+        stars.forEach((star, index) => {
+            if (index < Math.floor(point)) { // Puanı aşağıya yuvarlayarak yıldızları dolduruyoruz
+                star.classList.add('active-star', 'fa', 'fa-star');
+            } else if (point - index >= 0.25 && point - index < 0.75) { // 0.25 ile 0.75 arasında ise yarım yıldız ekle
+                star.classList.add('active-star', 'fa', 'fa-star-half-alt');
+            } else if (point - index >= 0.75 && point - index < 1) { // 0.75 ile 1 arasında ise tam yıldız ekle
+                star.classList.add('active-star', 'fa', 'fa-star');
+            } else { // Diğer durumlarda boş yıldız ekle
+                star.classList.add('fa', 'fa-star-o');
+            }
+        });
+    });
+});
 
 
-       
 
 
 
-  
+
+
+
+
 

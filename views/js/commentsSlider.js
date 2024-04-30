@@ -84,3 +84,57 @@ document.addEventListener("mouseup", dragStop);
 carousel.addEventListener("scroll", infiniteScroll);
 wrapper.addEventListener("mouseenter", () => clearTimeout(timeoutId));
 wrapper.addEventListener("mouseleave", autoPlay);
+
+
+   // Get the modal
+   var modal = document.getElementById("commentModal");
+
+   // Get the <span> element that closes the modal
+   var span = document.getElementsByClassName("close")[0];
+
+   // When the user clicks on a comment card, open the modal
+   var commentCards = document.querySelectorAll(".carousel .card");
+
+
+   commentCards.forEach(function (card) {
+    var isDragging = false;
+
+    card.addEventListener("mousedown", function () {
+        isDragging = false;
+    });
+
+    card.addEventListener("mousemove", function () {
+        isDragging = true;
+    });
+
+    card.addEventListener("mouseup", function (event) {
+        if (!isDragging) {
+            var commentPoint = this.querySelector(".comment-point").innerHTML;
+            var commentTitle = this.querySelector(".comment-title").innerHTML;
+            var testimonial = this.querySelector(".testimonial").innerHTML;
+            var profile = this.querySelector(".profile").innerHTML;
+            var locationName = this.querySelector(".comment-location-info").innerHTML;
+
+            document.getElementById("modal-stars").innerHTML = commentPoint;
+            document.getElementById("modal-comment-title").innerHTML = commentTitle;
+            document.getElementById("modal-testimonial").innerHTML = testimonial;
+            document.getElementById("modal-profile").innerHTML = profile;
+            document.getElementById("modal-locationName").innerHTML = locationName;
+
+            modal.style.display = "block";
+        }
+    });
+});
+
+
+   // When the user clicks on <span> (x), close the modal
+   span.onclick = function () {
+       modal.style.display = "none";
+   }
+
+   // When the user clicks anywhere outside of the modal, close it
+   window.onclick = function (event) {
+       if (event.target == modal) {
+           modal.style.display = "none";
+       }
+   }

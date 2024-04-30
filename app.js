@@ -217,6 +217,9 @@ const getCommentData = async (locationId) => {
           commentDate: result.rows[i].commentDate,
           commentScore: result.rows[i].commentScore,
           commentTitle: result.rows[i].commentTitle,
+          userProfilePic: "./images/avatar.jpeg",
+          locationName: "Eyfel Kulesi",
+          locationLink: "/location",
         }
 
       }

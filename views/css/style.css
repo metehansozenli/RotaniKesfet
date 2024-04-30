@@ -549,7 +549,7 @@ section.discover.mt-4 {
     margin-right: 5px;
 }
 
-.testimonial {
+.popdest-comments .testimonial {
     font-size: 0.9rem;
     line-height: 1.4rem;
     font-weight: 500;
@@ -557,7 +557,7 @@ section.discover.mt-4 {
       /* Metnin en fazla 5 satır olmasını sağla */
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 4;
     overflow: hidden;
     text-align: justify;
     text-overflow: ellipsis; /* Taşan içeriği üç nokta ile kes */
@@ -578,6 +578,7 @@ section.discover.mt-4 {
     color: #F9A825;
     cursor: pointer;
 }
+
 
 .profile {
     display: flex;
@@ -627,6 +628,136 @@ section.discover.mt-4 {
     }
 }
 
+
+
+
+/* Comment-modal Stilleri */
+.comment-modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.comment-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 450px;
+    height: auto;
+
+    border-radius: 8px;
+
+}
+
+/* Close Button */
+.modal-comment-upcontent .close {
+    color: #aaaaaa;
+    float: inline-end;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: -5px;
+}
+
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.comment-modal .profile img {
+    width: 64px !important;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 7px;
+}
+
+.comment-modal .profile {
+    margin-top: 20px;
+}
+
+.comment-modal .date {
+    font-size: 1.0rem;
+    font-weight: 400;
+    line-height: 2;
+    margin-top: 9px;
+
+}
+
+.comment-modal .name {
+    display: flex;
+    font-weight: 700;
+    margin-top: 15px;
+    margin-left: 4px;
+
+}
+
+.comment-modal .testimonial {
+    font-size: 1.0rem;
+    line-height: 1.4rem;
+    font-weight: 500;
+    overflow: hidden;
+    text-align: justify;
+
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.comment-modal .comment-title {
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+
+
+}
+
+.comment-modal .star {
+    margin-top: 0px;
+    margin-left: 5px;
+}
+
+.comment-location-info {
+    font-size: 1.0rem;
+    line-height: 1.4rem;
+    font-weight: 500;
+    color: #000;
+
+}
+
+.comment-location-info a {
+    color: rgb(171, 171, 171);
+    /* Bağlantı rengi */
+    text-decoration: none;
+    /* Altı çizgiyi kaldır */
+}
+
+.comment-location-info a:hover {
+    text-decoration: underline;
+    /* Fare üzerine gelince altı çizgiyi göster */
+}
 
 /* profile dropdown */
 
