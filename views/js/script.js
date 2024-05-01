@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const popdest = document.getElementById('popdest');
-    const otels = document.getElementById('otels');
+    const otels = document.getElementById('hotels');
     const restaurants = document.getElementById('restaurants');
 
     popdest.addEventListener('click', function () {
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     otels.addEventListener('click', function () {
-        window.location.href = '../otels';
+        window.location.href = '../hotels';
     });
 
     restaurants.addEventListener('click', function () {
