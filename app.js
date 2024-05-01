@@ -238,7 +238,6 @@ const getCommentData = async (locationId) => {
 
 }
 
-
 // Kullanıcı bilgilerini çeken endpoint
 app.get('/user', async (req, res) => {
   if (!sessions[sessionsID])
@@ -247,7 +246,6 @@ app.get('/user', async (req, res) => {
 
 
 });
-
 
 app.get("/kesfet", (req, res) => {
   res.render("kesfet")

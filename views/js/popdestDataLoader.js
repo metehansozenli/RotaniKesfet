@@ -1,6 +1,6 @@
 
     var start_index = 0;
-    var number_of_record = 3;
+    var number_of_record = 5;
     var state = true;
     let finish = false;
     let j = 0;
@@ -9,8 +9,7 @@
         // Kullanıcının sayfanın tam altına geldiğini belirleme
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight && state && !finish) {
             // İlk terimse doğrudan yükleme yap
-            document.getElementById("loading_animation").style.display = "block";
-            setTimeout(load_data, 1000);
+            load_data();
 
         }
     });
@@ -84,12 +83,8 @@
                             '</div>' +
                             "</section>";
                     }
-
                     start_index++;
-                    
-
                 });
-
 
             } else {
                 finish = true;

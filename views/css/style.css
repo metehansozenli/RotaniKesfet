@@ -438,35 +438,6 @@ section.discover.mt-4 {
     text-decoration: underline;
 }
 
-/*  loader-animation   */
-.loader {
-    border: 8px solid #f3f3f3;
-    /* Beyaz kenarlık */
-    border-top: 8px solid #3498db;
-    /* Mavi üst kenarlık */
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-    /* Döndürme animasyonu */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    /* Diğer içeriklerin üzerinde olacak */
-    display: none;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
 .wrapper {
     max-width: 1000px;
