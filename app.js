@@ -10,6 +10,9 @@ const app = express();
 const sessions = {};
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// ******************* KURALLAR ***********************************
+// LÜTFEN BÜTÜN FONKSIYONLARIN NE OLDUĞUNU NE İŞE YARADIĞINI YORUM SATIRLARIYLA BELİRTİN 
+// BİR ŞEY ÇALIŞMIYORSA BURAYA YÜKLEMEYİN ÇALIŞANA KADAR BEKLEYİN DENEMELERİ KENDİNİZE SAKLAYIN KAFA KARIŞTIRMAYIN
 
 client.connect((err) => {
   if (err) {
