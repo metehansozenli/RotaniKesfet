@@ -201,6 +201,66 @@ const getPopularLocationsData = async (locationType, limit) => {
 }
 
 
+const getRestaurantData = async () => {
+  try {
+    const result = await client.query('SELECT * FROM locations  WHERE "locationType" = "Restaurant" ORDER BY "locationScore"');
+    
+    if (result.rows.length > 0) {
+
+      const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1',[row.locationCityID]);
+      locationCityName = result2.rows[0].cityName;
+
+      const RestaurantData = result.rows.map(row => ({
+        locationCountry: row.locationCountry,
+        locationCity: locationCityName,
+        locationName: row.locationName,
+        locationScore: row.locationScore,
+        locationCommentCount: row.locationCommentCount,
+        locationImg: row.locationImg
+
+      }));
+
+      return RestaurantData;
+    }
+    else {
+      return null; // Return null if no data found
+    }
+  } catch (error) {
+    console.error("Error fetching restaurant data:", error);
+    throw error; // Rethrow the error to be caught by the caller
+  }
+}
+
+const getHotelData = async () => {
+  try {
+    const result = await client.query('SELECT * FROM locations  WHERE "locationType" = "Hotel" ORDER BY "locationScore"');
+    
+    if (result.rows.length > 0) {
+
+      const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1',[row.locationCityID]);
+      locationCityName = result2.rows[0].cityName;
+
+      const HotelData = result.rows.map(row => ({
+        locationCountry: row.locationCountry,
+        locationCity: locationCityName,
+        locationName: row.locationName,
+        locationScore: row.locationScore,
+        locationCommentCount: row.locationCommentCount,
+        locationImg: row.locationImg
+
+      }));
+
+      return HotelData;
+    }
+    else {
+      return null; // Return null if no data found
+    }
+  } catch (error) {
+    console.error("Error fetching hotel data:", error);
+    throw error; // Rethrow the error to be caught by the caller
+  }
+}
+
 const getCommentData = async (locationId) => {
   var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
   try {
