@@ -14,14 +14,15 @@ window.addEventListener('scroll', () => {
     }
 });
 
+var results;
 function load_data() {
-
+    
     state = false;
 
     const request = new XMLHttpRequest();
     request.open('GET', `/get_popDestData?start_index=${start_index}&num_record=${number_of_record}`);
     request.onload = () => {
-        const results = JSON.parse(request.responseText);
+        results = JSON.parse(request.responseText);
         let html = '';
         let html2 = '';
 

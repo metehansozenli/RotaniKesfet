@@ -168,34 +168,35 @@ const getSpecifiedLocationData = async (locationID) => {
   }
 }
 
-const getPopularLocationsData = async (locationType, limit) => {
+const getRandomCitiesData = async () => {
   try {
-    const result = await client.query('SELECT * FROM locations  WHERE "locationType" = $1 ORDER BY "locationScore" DESC LIMIT $2', locationType, limit);
+    const result = await client.query(`
+                                      SELECT "cityImg", "cityName","cityID"
+                                      FROM cities 
+                                      WHERE "cityScore" > 3.75 
+                                      ORDER BY RANDOM() 
+                                      LIMIT 8;`);
 
     if (result.rows.length > 0) {
+      const randomCitiesData = {};
+      for (let i = 0; i < result.rows.length; i++) {
+        const result2 = await client.query('SELECT "locationCountry" FROM locations  WHERE "locationCityID" = $1 LIMIT 1',[result.rows[i].cityID]);
+        const cityCountry = result2.rows[0].locationCountry;
 
-      const popularLocationsData = result.rows.map(row => ({
-        locationCountry: row.locationCountry,
-        locationCity: row.locationCity,
-        locationCoordinates: row.locationCoordinates,
-        locationInfo: row.locationInfo,
-        locationTime: row.locationTime,
-        locationType: row.locationType,
-        locationAddress: row.locationAddress,
-        locationName: row.locationName,
-        locationScore: row.locationScore,
-        locationCommentCount: row.locationCommentCount,
-        locationImg: row.locationImg
-
-      }));
-
-      return popularLocationsData;
+        randomCitiesData[i] = {
+          cityCountry: cityCountry,
+          cityName: result.rows[i].cityName,
+          cityImg: result.rows[i].cityImg
+        }
+      }
+      return randomCitiesData;
+      
     }
     else {
       return null; // Return null if no data found
     }
   } catch (error) {
-    console.error("Error fetching location data:", error);
+    console.error("Error fetching cities data:", error);
     throw error; // Rethrow the error to be caught by the caller
   }
 }
@@ -206,21 +207,22 @@ const getRestaurantData = async () => {
     const result = await client.query('SELECT * FROM locations  WHERE "locationType" = "Restaurant" ORDER BY "locationScore"');
     
     if (result.rows.length > 0) {
+      const restaurantData = {};
 
-      const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1',[row.locationCityID]);
-      locationCityName = result2.rows[0].cityName;
+      for (let i = 0; i < result.rows.length; i++) {
+        const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1',[result.rows[i].locationCityID]);
+        locationCityName = result2.rows[0].cityName;
 
-      const RestaurantData = result.rows.map(row => ({
-        locationCountry: row.locationCountry,
-        locationCity: locationCityName,
-        locationName: row.locationName,
-        locationScore: row.locationScore,
-        locationCommentCount: row.locationCommentCount,
-        locationImg: row.locationImg
-
-      }));
-
-      return RestaurantData;
+        restaurantData[i] = {
+          locationCountry: result.rows[i].locationCountry,
+          locationCity: locationCityName,
+          locationName: result.rows[i].locationName,
+          locationScore: result.rows[i].locationScore,
+          locationCommentCount: result.rows[i].locationCommentCount,
+          locationImg: result.rows[i].locationImg
+        }
+      }
+      return restaurantData;
     }
     else {
       return null; // Return null if no data found
@@ -236,21 +238,22 @@ const getHotelData = async () => {
     const result = await client.query('SELECT * FROM locations  WHERE "locationType" = "Hotel" ORDER BY "locationScore"');
     
     if (result.rows.length > 0) {
+      const hotelData = {};
 
-      const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1',[row.locationCityID]);
-      locationCityName = result2.rows[0].cityName;
+      for (let i = 0; i < result.rows.length; i++) {
+        const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1',[result.rows[i].locationCityID]);
+        locationCityName = result2.rows[0].cityName;
 
-      const HotelData = result.rows.map(row => ({
-        locationCountry: row.locationCountry,
-        locationCity: locationCityName,
-        locationName: row.locationName,
-        locationScore: row.locationScore,
-        locationCommentCount: row.locationCommentCount,
-        locationImg: row.locationImg
-
-      }));
-
-      return HotelData;
+        hotelData[i] = {
+          locationCountry: result.rows[i].locationCountry,
+          locationCity: locationCityName,
+          locationName: result.rows[i].locationName,
+          locationScore: result.rows[i].locationScore,
+          locationCommentCount: result.rows[i].locationCommentCount,
+          locationImg: result.rows[i].locationImg
+        }
+      }
+      return hotelData;
     }
     else {
       return null; // Return null if no data found
@@ -315,8 +318,14 @@ app.get("/kesfet", (req, res) => {
   res.render("kesfet")
 })
 
-app.get("/index", (req, res) => {
-  res.render("index")
+app.get("/index", async(req, res) => {
+  try {
+    const randomCitiesData = await getRandomCitiesData();
+    res.render("index", {randomCitiesData : randomCitiesData});
+  } catch (error) {
+    console.error("index acilirken hata olustu:", error);
+    res.status(500).send("Internal Server Error");
+  }
 })
 
 app.get("/popdest", async (req, res) => {
