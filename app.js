@@ -138,21 +138,23 @@ const getUserData = async (sessionuserId) => {
 
 const getSpecifiedLocationData = async (locationID) => {
   try {
-    const result = await client.query('SELECT * FROM locations where "locationID" = $1', locationID);
+    const result = await client.query('SELECT * FROM locations WHERE "locationID" = $1', [locationID]);
+
 
     if (result.rows.length > 0) {
 
       const locationData = {
         locationCountry: result.rows[0].locationCountry,
-        locationCity: result.rows[0].locationCity,
+        locationCityID: result.rows[0].locationCityID,
         locationCoordinates: result.rows[0].locationCoordinates,
         locationInfo: result.rows[0].locationInfo,
-        LocationTime: result.rows[0].LocationTime,
-        LocationType: result.rows[0].LocationType,
-        LocationAddress: result.rows[0].LocationAddress,
-        LocationName: result.rows[0].LocationName,
-        LocationScore: result.rows[0].LocationScore,
-        LocationCommentCount: result.rows[0].LocationCommentCount
+        locationTime: result.rows[0].locationTime,
+        locationType: result.rows[0].locationType,
+        locationAddress: result.rows[0].locationAddress,
+        locationName: result.rows[0].locationName,
+        locationScore: result.rows[0].locationScore,
+        locationCommentCount: result.rows[0].locationCommentCount,
+        locationImg: result.rows[0].locationImg
       }
 
       return locationData;
@@ -182,7 +184,9 @@ const getPopularLocationsData = async (locationType, limit) => {
         locationAddress: row.locationAddress,
         locationName: row.locationName,
         locationScore: row.locationScore,
-        locationCommentCount: row.locationCommentCount
+        locationCommentCount: row.locationCommentCount,
+        locationImg: row.locationImg
+
       }));
 
       return popularLocationsData;
@@ -260,14 +264,31 @@ app.get("/popdest", async (req, res) => {
     const commentsData = await getCommentData(2);
     res.render("popdest", { commentsData: commentsData });
   } catch (error) {
-    console.error("Popdesti yaparken hata olustu:", error);
+    console.error("Popdest acilirken hata olustu:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-app.get("/location", (req, res) => {
-  res.render("location")
-})
+app.get("/restaurants", async (req, res) => {
+  try {
+    res.render("restaurants", {});
+  } catch (error) {
+    console.error("Restauranti acilirken hata olustu:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+app.get("/location", async (req, res) => {
+  try {
+    const locationData = await getSpecifiedLocationData(req.query.id);
+    res.render("location", { locationData:locationData  });
+  } catch (error) {
+    console.error("Location acilirlen hata olustu:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 
 app.get("/mycomment", (req, res) => {
   res.render("mycomment")
@@ -306,20 +327,27 @@ function gracefulShutdown() {
 //Mustafa'nın Gizli Denemeleri
 app.get("/get_popDestData", async (req, res) => {
   try {
-      const start_index = parseInt(req.query.start_index) || 0;
-      const num_record = parseInt(req.query.num_record) || 10;
+    const start_index = parseInt(req.query.start_index) || 0;
+    const num_record = parseInt(req.query.num_record) || 10;
 
-      const query = {
-        text: 'SELECT cities.*, ARRAY_AGG(locations."locationName") AS "locationNames" FROM cities LEFT JOIN locations ON cities."cityID" = locations."locationCityID" GROUP BY cities."cityID" ORDER BY cities."cityScore" DESC OFFSET $1 LIMIT $2',
-        values: [start_index, num_record],
+    const query = {
+      text: `SELECT cities.*, ARRAY_AGG(locations."locationName") AS "locationNames", ARRAY_AGG(locations."locationID") AS "locationIDs"
+               FROM cities 
+               LEFT JOIN locations ON cities."cityID" = locations."locationCityID" 
+               GROUP BY cities."cityID" 
+               ORDER BY cities."cityScore" DESC 
+               OFFSET $1 
+               LIMIT $2`,
+      values: [start_index, num_record],
     };
-    
-      const result = await client.query(query);
 
-      res.json(result.rows); // Sonuçları JSON olarak gönderme
+
+    const result = await client.query(query);
+
+    res.json(result.rows); // Sonuçları JSON olarak gönderme
   } catch (error) {
-      console.error("Error fetching data:", error);
-      res.status(500).send("Internal Server Error");
+    console.error("Error fetching data:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
 

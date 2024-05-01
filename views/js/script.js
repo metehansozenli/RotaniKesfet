@@ -1,18 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const divElement = document.getElementById('gezilecekYerler');
+    const popdest = document.getElementById('popdest');
+    const otels = document.getElementById('otels');
+    const restaurants = document.getElementById('restaurants');
 
-    divElement.addEventListener('click', function () {
+    popdest.addEventListener('click', function () {
         window.location.href = '../popdest';
     });
-});
 
-document.addEventListener('DOMContentLoaded', function () {
-    const imgElement = document.getElementById('dropdownUser1');
+    otels.addEventListener('click', function () {
+        window.location.href = '../otels';
+    });
 
-    imgElement.addEventListener('click', function () {
-        alert("Resme tıklanıldı!");
+    restaurants.addEventListener('click', function () {
+        window.location.href = '../restaurants';
     });
 });
+
 
 
 function menuToggle() {
@@ -24,7 +27,6 @@ function menuToggle() {
 fetch('/user')
 
     .then(data => {
-        console.log("hayir");
 
         const fullName = `${data.userName} ${data.userSurname}`;
 

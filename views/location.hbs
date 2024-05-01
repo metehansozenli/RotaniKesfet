@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>...</title>
+    {{#if locationData}}
+    <title>{{locationData.locationName}}</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -20,14 +21,13 @@
 
     {{>config}}
 
-
+    <script></script> 
     <div class="container ">
-
         <section class="location-section mt-4 ">
-
+           
             <div class="location-context d-flex ">
                 <div class="align-items-center">
-                    <h1 class="text-left">Kolezyum</h1>
+                    <h1 class="text-left">{{locationData.locationName}}</h1>
                     <div class="d-flex ">
                         <p class="mr-3 text-success">Şu anda açık</p>
                         <p class="mr-3">09.00-19.00</p>
@@ -38,7 +38,7 @@
                 <div class="location-info d-flex">
                     <div>
                         <div class="d-flex mb-2">
-                            <h5 class="point">4.5</h5>
+                            <h5 class="point">{{locationData.locationScore}}</h5>
                             <div class="ratings">
                                 <i class="fa fa-star rating-color"></i>
                                 <i class="fa fa-star rating-color"></i>
@@ -46,18 +46,18 @@
                                 <i class="fa fa-star rating-color"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <h5 class="review-count ">122 Yorum</h5>
+                            <h5 class="review-count ">{{locationData.locationCommentCount}} Yorum</h5>
                         </div>
                         <div>
                             <div class="extra-info d-block">
                                 <div class="mb-2 d-flex"><img src="../images/location.png" />
-                                    <p>Piazza del Colosseo, 00184 Roma İtalya</p>
+                                    <p>{{locationData.locationCoordinates}}</p>
                                 </div>
                                 <div class="mb-2 d-flex"><img src="../images/time.png" />
                                     <p>3 saatten fazla gezme süresi</p>
                                 </div>
                                 <div class="mb-2 d-flex"><img src="../images/etiket.png" />
-                                    <p>Müze</p>
+                                    <p>{{locationData.locationType}}</p>
                                 </div>
                             </div>
                         </div>
@@ -68,12 +68,10 @@
                 </div>
             </div>
 
-            <img src="images/kolezyum.jpg" alt="Keşfet" class="img-fluid  d-block mt-4 mb-4 mx-auto"
-                style="width: 850px; height: 475px;">
-
-
+            <img src={{locationData.locationImg}} alt="Keşfet" class="img-fluid  d-block mt-4 mb-4 mx-auto"
+                style="width: 850px; height: 475px; object-fit: cover;">
         </section>
-
+        {{/if}}
         <section class="location-comments mt-4">
             <h1 class="pt-4 text-left ml-4">Yorumlar</h1>
             <div class="location-rating-card">
