@@ -401,14 +401,26 @@ app.get("/get_popDestData", async (req, res) => {
 
     const query = {
       text: `SELECT cities.*, ARRAY_AGG(locations."locationName") AS "locationNames", ARRAY_AGG(locations."locationID") AS "locationIDs"
-               FROM cities 
-               LEFT JOIN locations ON cities."cityID" = locations."locationCityID" 
-               GROUP BY cities."cityID" 
-               ORDER BY cities."cityScore" DESC 
-               OFFSET $1 
-               LIMIT $2`,
+             FROM cities 
+             LEFT JOIN (
+                 SELECT *
+                 FROM locations
+                 WHERE "locationScore" IN (
+                     SELECT DISTINCT "locationScore"
+                     FROM locations
+                     ORDER BY "locationScore" DESC
+                     LIMIT 5
+                 )
+             ) AS locations ON cities."cityID" = locations."locationCityID" 
+             GROUP BY cities."cityID" 
+             ORDER BY cities."cityScore" DESC 
+             OFFSET $1 
+             LIMIT $2`,
       values: [start_index, num_record],
     };
+    
+    
+    
 
 
     const result = await client.query(query);

@@ -32,7 +32,7 @@ function load_data() {
 
                 let locationHTML = ""; // Lokasyonlar için HTML dizisi
                 if (result.locationNames && result.locationNames.length > 0 && result.locationIDs && result.locationIDs.length > 0) {
-                    for (let i = 0; i < result.locationNames.length; i++) {
+                    for (let i = 0; i < 5; i++) {
                         locationHTML += "<li><a href='/location?id=" + result.locationIDs[i] + "'>" + result.locationNames[i] + "</a></li>";
                     }
                 }
