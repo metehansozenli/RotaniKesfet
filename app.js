@@ -257,8 +257,7 @@ app.get("/index", (req, res) => {
 app.get("/popdest", async (req, res) => {
   try {
     const commentsData = await getCommentData(2);
-    const popDestData = await getPopDest();
-    res.render("popdest", { commentsData: commentsData, popDestData: popDestData });
+    res.render("popdest", { commentsData: commentsData });
   } catch (error) {
     console.error("Popdesti yaparken hata olustu:", error);
     res.status(500).send("Internal Server Error");
@@ -303,58 +302,23 @@ function gracefulShutdown() {
 }
 
 
-
-
 //Mustafa'nın Gizli Denemeleri
-const getPopDest = async () => {
-
+app.get("/get_popDestData", async (req, res) => {
   try {
+      const start_index = parseInt(req.query.start_index) || 0;
+      const num_record = parseInt(req.query.num_record) || 10;
 
-    if (1 > 0) {
-      const popDestData = [];
-
-
+      const query = {
+        text: 'SELECT cities.*, ARRAY_AGG(locations."locationName") AS "locationNames" FROM cities LEFT JOIN locations ON cities."cityID" = locations."locationCityID" GROUP BY cities."cityID" ORDER BY cities."cityScore" DESC OFFSET $1 LIMIT $2',
+        values: [start_index, num_record],
+    };
     
-      let locations = [];
+      const result = await client.query(query);
 
-      
-      for (let i = 0; i < 5; i++) {
-        locations.push({
-            name: "Eyfel Kulesi",
-            url: "/location"
-        });
-    }
-
-
-      cityName = "Paris";
-      cityScore = 3.5;
-      cityImg = "./images/paris.jpg"
-      cityRanks = [];
-      for (let i = 0; i < 10; i++) {
-        cityRanks.push(i + 1);
-      }
-
-      for (let i = 0; i < 10; i++) {
-        popDestData[i] = {
-          cityName: cityName,
-          cityScore: cityScore,
-          cityRank: cityRanks[i],
-          cityImg: cityImg,
-          locations: locations,
-        }
-      }
-
-      return popDestData;
-    }
-    else {
-      return null; // Return null if no data found
-    }
+      res.json(result.rows); // Sonuçları JSON olarak gönderme
   } catch (error) {
-    console.error("Error fetching comment data:", error);
-    throw error; // Rethrow the error to be caught by the caller
+      console.error("Error fetching data:", error);
+      res.status(500).send("Internal Server Error");
   }
-
-}
-
-
+});
 

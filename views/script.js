@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 //Genel yıldızları ayarlama
-document.addEventListener('customLoadEvent', function () {
+document.addEventListener('DOMContentLoaded', function () {
     // Tüm .point öğelerini seç
     const points = document.querySelectorAll('.point');
 
@@ -70,16 +70,11 @@ document.addEventListener('customLoadEvent', function () {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.dispatchEvent(new CustomEvent('customLoadEvent'));
-    load_data();
-});
-
 //Küçük yorumların yıldızlarının ayarı
 document.addEventListener('DOMContentLoaded', function () {
     // Tüm .point öğelerini seç
     const points = document.querySelectorAll('.comment-point h5');
-    
+
 
     // Her bir .point öğesi için işlem yap
     points.forEach((pointElement) => {
