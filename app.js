@@ -273,7 +273,7 @@ const getHotelData = async () => {
 const getCommentData = async (locationId) => {
   var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
   try {
-    const result = await client.query('SELECT "commentContents", "commentDate", "commentScore", "commentTitle", "userID" FROM comments WHERE "locationID" = $1', [locationId]);
+    const result = await client.query('SELECT "commentContents", "commentDate", "commentScore", "commentTitle", "userID" FROM comments WHERE "locationID" = $1 LIMIT 12', [locationId]);
 
     if (result.rows.length > 0) {
       const commentsData = [];
