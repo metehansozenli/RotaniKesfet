@@ -218,7 +218,7 @@ const getRandomCitiesData = async () => {
     const result = await client.query(`
                                       SELECT "cityImg", "cityName","cityID"
                                       FROM cities 
-                                      WHERE "cityScore" > 3.75 
+                                      WHERE "cityScore" > 3.75 AND "cityID" < 11 
                                       ORDER BY RANDOM() 
                                       LIMIT 8;`);
 

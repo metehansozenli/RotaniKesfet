@@ -10,7 +10,7 @@ body {
 }
 
 img {
-
+    pointer-events: none;
     border-radius: 8px;
 }
 
@@ -299,12 +299,6 @@ section.discover.mt-4 {
     color: #fbc634 !important;
 }
 
-.ppopdests .review-count {
-    font-weight: 400;
-    margin-bottom: 2px;
-    font-size: 24px !important;
-    margin-top: -7px;
-}
 
 .ppopdests .point {
     font-weight: 500;
@@ -338,17 +332,19 @@ section.discover.mt-4 {
     object-fit: cover;
     width: 850px;
     height: 475px;
+    max-width: 850px;
+    max-height: 475px;
 }
 
 .popdest-section .cityImg {
     object-fit: cover;
     width: 500px;
     height: 350px;
+
+    max-width: 500px;
+    max-height: 350px;
 }
 
-.popdests-context {
-    align-items: right;
-}
 
 .popdests .ratings {
     margin-right: 20px;
@@ -380,23 +376,31 @@ section.discover.mt-4 {
 }
 
 .popdests-text {
-    margin: 50px;
+    margin-left: 50px;
+    margin-top: 50px;
 }
 
 .popdests-context {
-    margin: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
 }
 
-.city-title,
 .popdest-context h1 {
     color: #000000;
+   
+}
+
+.city-title{
+    color: #000000;
+    width: 250px;
 }
 
 .dest {
     color: #828282;
     font-size: 20px;
-    white-space: normal;
-    width: 450px;
+    white-space: nowrap;
+    width: 250px;
 }
 
 .city-rank {
@@ -435,8 +439,6 @@ section.discover.mt-4 {
     box-sizing: border-box;
 
 }
-
-
 
 .popdest-context p {
     text-align: justify;
