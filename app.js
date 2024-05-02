@@ -29,8 +29,14 @@ hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 
 app.use(express.static("views"));
 
-app.get('/', (req, res) => {
-  res.render('index');
+app.get('/', async (req, res) => {
+  try {
+    const randomCitiesData = await getRandomCitiesData();
+    res.render("index", {randomCitiesData : randomCitiesData});
+  } catch (error) {
+    console.error("index acilirken hata olustu:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 app.post("/register", async (req, res) => {
@@ -267,7 +273,7 @@ const getHotelData = async () => {
 const getCommentData = async (locationId) => {
   var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
   try {
-    const result = await client.query('SELECT "commentContents", "commentDate", "commentScore", "commentTitle", "userID" FROM comments WHERE "locationID" = $1 LIMIT 12', [locationId]);
+    const result = await client.query('SELECT "commentContents", "commentDate", "commentScore", "commentTitle", "userID" FROM comments WHERE "locationID" = $1', [locationId]);
 
     if (result.rows.length > 0) {
       const commentsData = [];
@@ -318,15 +324,6 @@ app.get("/kesfet", (req, res) => {
   res.render("kesfet")
 })
 
-app.get("/index", async(req, res) => {
-  try {
-    const randomCitiesData = await getRandomCitiesData();
-    res.render("index", {randomCitiesData : randomCitiesData});
-  } catch (error) {
-    console.error("index acilirken hata olustu:", error);
-    res.status(500).send("Internal Server Error");
-  }
-})
 
 app.get("/popdest", async (req, res) => {
   try {
