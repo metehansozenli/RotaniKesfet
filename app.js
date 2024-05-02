@@ -270,10 +270,10 @@ const getHotelData = async () => {
   }
 }
 
-const getCommentData = async (locationId) => {
+const getCommentData = async () => {
   var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
   try {
-    const result = await client.query('SELECT "commentContents", "commentDate", "commentScore", "commentTitle", "userID" FROM comments WHERE "locationID" = $1', [locationId]);
+    const result = await client.query('SELECT comments.*, locations."locationName" FROM comments JOIN locations ON locations."locationID" = comments."locationID" ORDER BY RANDOM() LIMIT 12');
 
     if (result.rows.length > 0) {
       const commentsData = [];
@@ -294,8 +294,8 @@ const getCommentData = async (locationId) => {
           commentScore: result.rows[i].commentScore,
           commentTitle: result.rows[i].commentTitle,
           userProfilePic: "./images/avatar.jpeg",
-          locationName: "Eyfel Kulesi",
-          locationLink: "/location",
+          locationName: result.rows[i].locationName,
+          locationLink: "/location?id="+result.rows[i].locationID,
         }
 
       }
@@ -327,7 +327,7 @@ app.get("/kesfet", (req, res) => {
 
 app.get("/popdest", async (req, res) => {
   try {
-    const commentsData = await getCommentData(2);
+    const commentsData = await getCommentData();
     res.render("popdest", { commentsData: commentsData });
   } catch (error) {
     console.error("Popdest acilirken hata olustu:", error);

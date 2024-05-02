@@ -85,7 +85,7 @@ carousel.addEventListener("scroll", infiniteScroll);
 wrapper.addEventListener("mouseenter", () => clearTimeout(timeoutId));
 wrapper.addEventListener("mouseleave", autoPlay);
 
-
+var commentLinkID = document.getElementById("comment-link");
 // Get the modal
 var modal = document.getElementById("commentModal");
 
@@ -98,6 +98,9 @@ var commentCards = document.querySelectorAll(".carousel .card");
 
 commentCards.forEach(function (card) {
     var isDragging = false;
+    var isLinkClicked = false;
+
+    var commentLinkID = document.getElementById("comment-link");
 
     card.addEventListener("mousedown", function () {
         isDragging = false;
@@ -107,8 +110,13 @@ commentCards.forEach(function (card) {
         isDragging = true;
     });
 
+    commentLinkID.addEventListener("click", function(event){
+        isLinkClicked = true;
+        alert("mustafaaaaaa");
+     });
+
     card.addEventListener("mouseup", function (event) {
-        if (!isDragging) {
+        if (!isDragging || !isLinkClicked) {
             var commentPoint = this.querySelector(".comment-point").innerHTML;
             var commentTitle = this.querySelector(".comment-title").innerHTML;
             var testimonial = this.querySelector(".testimonial").innerHTML;
@@ -124,6 +132,9 @@ commentCards.forEach(function (card) {
             modal.style.display = "block";
         }
     });
+
+   
+
 });
 
 
