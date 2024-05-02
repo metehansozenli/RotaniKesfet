@@ -174,6 +174,48 @@ const getSpecifiedLocationData = async (locationID) => {
   }
 }
 
+const getPopularCityData = async () =>{
+  try {
+    const start_index = parseInt(req.query.start_index) || 0;
+    const num_record = parseInt(req.query.num_record) || 10;
+
+    const query = {
+      text: `SELECT cities.*, ARRAY_AGG(locations."locationName") AS "locationNames", ARRAY_AGG(locations."locationID") AS "locationIDs"
+             FROM cities 
+             LEFT JOIN (
+                 SELECT *
+                 FROM locations
+                 WHERE "locationScore" IN (
+                     SELECT DISTINCT "locationScore"
+                     FROM locations
+                     ORDER BY "locationScore" DESC
+                     LIMIT 5
+                 )
+             ) AS locations ON cities."cityID" = locations."locationCityID" 
+             GROUP BY cities."cityID" 
+             ORDER BY cities."cityScore" DESC 
+             OFFSET $1 
+             LIMIT $2`,
+      values: [0, 3],
+    };
+    const result = await client.query(query);
+    const cityData = {};
+    for (let i = 0; i < result.rows.length; i++) {
+      cityData[i] = {
+        locationCity: result.rows[i].cityName,
+        locationName: result.rows[i].locationName,
+        locationID: result.rows[i].locationID,
+        locationScore: result.rows[i].locationScore,
+        locationImg: result.rows[i].locationImg
+    }  
+    
+    }
+    return  cityData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
 const getRandomCitiesData = async () => {
   try {
     const result = await client.query(`
@@ -328,7 +370,8 @@ app.get("/kesfet", (req, res) => {
 app.get("/popdest", async (req, res) => {
   try {
     const commentsData = await getCommentData();
-    res.render("popdest", { commentsData: commentsData });
+    const citiesData = await getPopularCityData();
+    res.render("popdest", { commentsData: commentsData,  citiesData: citiesData});
   } catch (error) {
     console.error("Popdest acilirken hata olustu:", error);
     res.status(500).send("Internal Server Error");
