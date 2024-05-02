@@ -1118,14 +1118,14 @@ section.discover.mt-4 {
 
 }
 
-.wrapperIndex {
+.wrapperIndex, .wrapperIndex2, .wrapperIndex3 {
     max-width: 1080px;
     width: 100%;
     position: relative;
 
 }
 
-.wrapperIndex i {
+.wrapperIndex i, .wrapperIndex2 i, .wrapperIndex3 i {
     color: #fff;
     top: 50%;
     height: 50px;
@@ -1142,24 +1142,24 @@ section.discover.mt-4 {
 
 }
 
-.wrapperIndex i:hover {
+.wrapperIndex i:hover, .wrapperIndex2 i:hover, .wrapperIndex3 i:hover {
     opacity: 1;
     transform: translateY(-50%) scale(1.7); /* Biraz büyütme efekti */
 }
 
-.wrapperIndex i:active {
+.wrapperIndex i:active, .wrapperIndex2 i:active, .wrapperIndex3 i:active {
     transform: translateY(-50%) scale(1.5);
 }
 
-.wrapperIndex i:first-child {
+.wrapperIndex i:first-child, .wrapperIndex2 i:first-child, .wrapperIndex3 i:first-child {
     z-index: 1
 }
 
-.wrapperIndex i:last-child {
+.wrapperIndex i:last-child, .wrapperIndex2 i:last-child, .wrapperIndex3 i:last-child {
     right: -0px;
 }
 
-.wrapperIndex .carouselIndex {
+.wrapperIndex .carouselIndex, .wrapperIndex2 .carouselIndex2, .wrapperIndex3 .carouselIndex3 {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: calc((100% / 4) + 5px);
@@ -1172,25 +1172,25 @@ section.discover.mt-4 {
     justify-content: space-between;
 }
 
-.carouselIndex::-webkit-scrollbar {
+.carouselIndex::-webkit-scrollbar, .carouselIndex2::-webkit-scrollbar, .carouselIndex3::-webkit-scrollbar {
     display: none;
 }
 
-.carouselIndex.no-transition {
+.carouselIndex.no-transition, .carouselIndex2.no-transition, .carouselIndex3.no-transition {
     scroll-behavior: auto;
 }
 
-.carouselIndex.dragging {
+.carouselIndex.dragging,.carouselIndex2.dragging,.carouselIndex3.dragging {
     scroll-snap-type: none;
     scroll-behavior: auto;
 }
 
-.carouselIndex.dragging .cardIndex {
+.carouselIndex.dragging .cardIndex, .carouselIndex2.dragging .cardIndex, .carouselIndex3.dragging .cardIndex {
     cursor: grab;
     user-select: none;
 }
 
-.carouselIndex .cardIndex {
+.carouselIndex .cardIndex, .carouselIndex2 .cardIndex, .carouselIndex3 .cardIndex {
     scroll-snap-align: start;
     scroll-margin-left: 4px;
     height: 250px;
@@ -1212,7 +1212,7 @@ section.discover.mt-4 {
 
 }
 
-.cardIndex img {
+.cardIndex img, .cardIndex2 img, .cardIndex3 img {
     width: 45px !important;
     height: 45px;
     object-fit: cover;
