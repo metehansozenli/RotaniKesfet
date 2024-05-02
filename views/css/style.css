@@ -73,7 +73,7 @@ header {
     left: 0;
     width: 100%;
     height: 30%;
-    border-radius: 0% 0% 6% 6%; /*üst de bombe olmaması için*/
+    border-radius: 0% 0% 2% 2%; /*üst de bombe olmaması için*/
     background-color: rgba(0, 0, 0, 0.35);
     color: white;
     padding: 5px;
