@@ -286,7 +286,7 @@ section.discover.mt-4 {
 }
 
 
-/* popdest.vbs */
+/* popdest.hbs */
 
 
 .ppopdests .ratings {
@@ -450,7 +450,23 @@ section.discover.mt-4 {
     font-size: 20px
 }
 
-
+.loader {
+    border: 4px solid #f3f3f3; /* Beyaz kenarlık */
+    border-top: 4px solid #3498db; /* Mavi yukarı doğru dönen çizgi */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite; /* Dönme animasyonu: 2 saniye boyunca lineer, sonsuz tekrar */
+    position: absolute; /* Mutlak pozisyon */
+    left: 50%; /* Sol kenarı sayfanın ortasına hizala */
+    transform: translate(-50%, -50%); /* Dik ve yatay olarak %50 oranında kaydır */
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
 .dest a {
     color: inherit;
     text-decoration: none;

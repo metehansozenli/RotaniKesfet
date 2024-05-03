@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>En Popüler Restoranlar</title>
+    <title>En Popüler Oteller</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -17,13 +17,14 @@
 
     {{>config}}
 
-    <div class="container" id="restaurant">
+    <div class="container" id="hotel">
         <section class="otherlocation-context mt-4">
-            <h1 style="margin-top: 20px;">En Popüler Restoranlar</h1>
+            <h1 style="margin-top: 20px;">En Popüler Oteller</h1>
             <p>
-                İstanbul'un nefis lezzetleri, Tokyo'nun benzersiz sokak yemekleri, New York'un çeşitliliği...
-                Dünyanın en popüler restoranları, sizi unutulmaz bir yemeğin tadını çıkarmaya davet ediyor.
-                Haydi, lezzet dolu bir yolculuğa çıkın ve dünyanın dört bir yanındaki en iyi restoranları keşfedin!
+                Dünyanın en popüler otellerini keşfedin! 
+                İkonik konaklama seçenekleriyle dolu olan bu 
+                otellerde konforun ve hizmetin tadını çıkarın.
+
             </p>
         </section>
 
@@ -91,11 +92,11 @@
 </html>
 
 <style>
-.ppopdests .ratings {
+.popotherlocations .ratings {
     margin-right: 20px;
 }
 
-.ppopdests .ratings i {
+.popotherlocations .ratings i {
     color: #cecece;
     font-size: 32px;
 }
@@ -105,7 +106,7 @@
 }
 
 
-.ppopdests .point {
+.popotherlocations .point {
     font-weight: 500;
     font-size: 26px !important;
     margin-top: -4px;
@@ -121,19 +122,19 @@
 }
 
 
-.ppopdests .point-section {
+.popotherlocations .point-section {
 
 
     margin-right: 10px;
 
 }
 
-.popdests_all{
+.popotherlocations_all{
     margin-bottom: 100px;
 
 }
 
-.popdest-section img {
+.otherlocation-section img {
     object-fit: cover;
     width: 850px;
     height: 475px;
@@ -141,7 +142,7 @@
     max-height: 475px;
 }
 
-.popdest-section .cityImg {
+.otherlocation-section .cityImg {
     object-fit: cover;
     width: 500px;
     height: 350px;
@@ -151,47 +152,47 @@
 }
 
 
-.popdests .ratings {
+.popotherlocations .ratings {
     margin-right: 20px;
 }
 
-.popdest-section .ratings i {
+.otherlocation-section .ratings i {
     color: #cecece;
     font-size: 25px;
 }
 
 
-.popdests .review-count {
+.otherlocations .review-count {
     font-weight: 400;
     margin-bottom: 2px;
     font-size: 16px !important;
     margin-top: -7px;
 }
 
-.popdests .point {
+.otherlocations .point {
     font-weight: 500;
     font-size: 26px !important;
     margin-top: -3px;
     margin-right: 20px;
 }
 
-.popdests .point-section {
+.otherlocations .point-section {
 
     margin-top: 50px;
 }
 
-.popdests-text {
+.otherlocations-text {
     margin-left: 50px;
     margin-top: 50px;
 }
 
-.popdests-context {
+.otherlocations-context {
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 20px;
 }
 
-.popdest-context h1 {
+.otherlocation-context h1 {
     color: #000000;
    
 }
@@ -220,22 +221,21 @@
     text-decoration: underline;
 }
 
-.popdest-context {
+.otherlocation-context {
     color: #000000;
-    ;
     font-size: 20px;
     margin-bottom: 30px;
 }
 
 
-.popdest-section {
+.otherlocation-section {
     margin-bottom: 20px;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.popdest-comments {
+.otherlocation-comments {
     margin-bottom: 20px;
     border-radius: 8px;
     display: flex;
@@ -245,7 +245,7 @@
 
 }
 
-.popdest-context p {
+.otherlocation-context p {
     text-align: justify;
     color: #666;
     margin: 30px 50px;
@@ -373,7 +373,7 @@
     margin-right: 5px;
 }
 
-.popdest-comments .testimonial {
+.otherlocation-comments .testimonial {
     font-size: 0.9rem;
     line-height: 1.4rem;
     font-weight: 500;

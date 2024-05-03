@@ -54,9 +54,9 @@ app.post("/register", async (req, res) => {
   try {
     // Veritabanına kayıt ekle
     await client.query('INSERT INTO users ("userNickname", "userMail", "userName", "userSurname", "userCountry", "userPhoneNo", "userPass") VALUES ($1, $2, $3, $4, $5, $6, $7)', [formData.userNickname, formData.userMail, formData.userName, formData.userSurname, formData.userCountry, formData.userPhoneNo, formData.userPass]);
-
+    const randomCitiesData = await getRandomCitiesData();
     // Kayıt işlemi başarılı olduğunda
-    res.render("index")
+    res.render("index",{randomCitiesData:randomCitiesData})
   } catch (error) {
     console.log(error)
 
@@ -79,8 +79,9 @@ app.post("/login", async (req, res) => {
       const result2 = await client.query('SELECT "userID" FROM users WHERE "userMail" = $1', [formData.userMail]);
       const userID = result2.rows[0].userID;// userID cekiliyor
       sessions[sessionsID] = { userMail: formData.userMail, userID };
+      const randomCitiesData = await getRandomCitiesData();
       res.set('Set-Cookie', `session=${sessionsID}`);//session baslatiliyor
-      res.render("index")
+      res.render("index",{randomCitiesData:randomCitiesData})
     } else {
       res.send("Kullanıcı adı veya şifre yanlış!"); // Kullanıcı bulunamazsa hata mesajı gönder
     }
@@ -93,8 +94,9 @@ app.post("/login", async (req, res) => {
 app.get("/logout", async (req, res) => {
   const sessionsID = req.headers.cookie?.split("=")[1];
   delete sessions[sessionsID];
+  const randomCitiesData = await getRandomCitiesData();
   res.set('Set-Cookie', `session=; expires=Thu, 01 Jan 1970 00:00:00 GMT`);
-  res.render("index");
+  res.render("index",{randomCitiesData:randomCitiesData});
 });
 
 app.get("/changeHeader", async (req, res) => {
@@ -249,7 +251,7 @@ const getRandomCitiesData = async () => {
 
 const getRestaurantData = async () => {
   try {
-    const result = await client.query('SELECT * FROM locations  WHERE "locationType" = "Restaurant" ORDER BY "locationScore"');
+    const result = await client.query('SELECT * FROM locations  WHERE "locationType" = \'Restoran\' ORDER BY "locationScore" DESC, "locationName" DESC');
 
     if (result.rows.length > 0) {
       const restaurantData = {};
@@ -309,10 +311,20 @@ const getHotelData = async () => {
   }
 }
 
-const getCommentData = async () => {
+const getCommentData = async (commentType) => {
   var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
   try {
-    const result = await client.query('SELECT comments.*, locations."locationName" FROM comments JOIN locations ON locations."locationID" = comments."locationID" ORDER BY RANDOM() LIMIT 12');
+    if(commentType == "restaurant"){
+      var queryCustom = 'SELECT comments.*, locations."locationName" FROM comments JOIN locations ON locations."locationID" = comments."locationID" WHERE locations."locationType" = \'Restoran\' ORDER BY RANDOM() LIMIT 12';
+    }else if(commentType == "hotel"){
+      var queryCustom = 'SELECT comments.*, locations."locationName" FROM comments JOIN locations ON locations."locationID" = comments."locationID" WHERE locations."locationType" = \'Otel\' ORDER BY RANDOM() LIMIT 12';
+    }else if(commentType == "popdest"){
+      var queryCustom = 'SELECT comments.*, locations."locationName" FROM comments JOIN locations ON locations."locationID" = comments."locationID" WHERE locations."locationType" NOT IN (\'Otel\', \'Restoran\') ORDER BY RANDOM() LIMIT 12';
+    }
+    else{
+      console.error("wrong parameter!!!!");
+    }
+    const result = await client.query(queryCustom);
 
     if (result.rows.length > 0) {
       const commentsData = [];
@@ -366,7 +378,7 @@ app.get("/kesfet", (req, res) => {
 
 app.get("/popdest", async (req, res) => {
   try {
-    const commentsData = await getCommentData();
+    const commentsData = await getCommentData("popdest");
     res.render("popdest", { commentsData: commentsData });
   } catch (error) {
     console.error("Popdest acilirken hata olustu:", error);
@@ -376,9 +388,20 @@ app.get("/popdest", async (req, res) => {
 
 app.get("/restaurants", async (req, res) => {
   try {
-    res.render("restaurants", {});
+    const commentsData = await getCommentData("restaurant");
+    res.render("restaurants", {commentsData: commentsData});
   } catch (error) {
     console.error("Restauranti acilirken hata olustu:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get("/hotels", async (req, res) => {
+  try {
+    const commentsData = await getCommentData("hotel");
+    res.render("hotels", {commentsData: commentsData});
+  } catch (error) {
+    console.error("Hotelsi acilirken hata olustu:", error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -461,6 +484,39 @@ app.get("/get_popDestData", async (req, res) => {
                   LIMIT $2;
               `,
                 values: [start_index, num_record],
+            };
+    const result = await client.query(query);
+
+    res.json(result.rows); // Sonuçları JSON olarak gönderme
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get("/get_otherlocationData", async (req, res) => {
+  try {
+    const start_index = parseInt(req.query.start_index) || 0;
+    const num_record = parseInt(req.query.num_record) || 10;
+    const locationType = req.query.locationType;
+
+    const query = {
+              text:  `SELECT 
+                      locations.*,
+                      cities."cityName"
+                  FROM 
+                      locations
+                  INNER JOIN 
+                      cities ON locations."locationCityID" = cities."cityID"
+                  WHERE 
+                      locations."locationType" = $3
+                  ORDER BY 
+                      locations."locationScore" DESC,
+                      locations."locationName" DESC
+                  OFFSET $1 
+                  LIMIT $2;
+              `,
+                values: [start_index, num_record, locationType],
             };
     const result = await client.query(query);
 

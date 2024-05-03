@@ -6,31 +6,44 @@ let j = 0;
 
 document.addEventListener('DOMContentLoaded', function () {
     document.dispatchEvent(new CustomEvent('customLoadEvent'));
-    popdest_load_data();
-
-});
+    
+    var restaurant= document.getElementById("restaurant");
+    var hotel= document.getElementById("hotel");
+    
+    if(restaurant!=null){
+        locationType='Restoran';
+       
+    }else if (hotel != null){ 
+        locationType='Otel';
+        
+    }
+    otherlocation_load_data(locationType);
+});  
 
 window.addEventListener('scroll',  () => {
-    
-    if(finish){
-        document.getElementById("loading_animation").style.display = "none";
-    }
-
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight && state && !finish ) {
 
-        document.getElementById("loading_animation").style.display = "block";
-        setTimeout(1000);
-        popdest_load_data();
+        var restaurant= document.getElementById("restaurant");
+        var hotel= document.getElementById("hotel");
+        
+        if(restaurant!=null){
+            locationType='Restoran';
+        }else if (hotel != null){ 
+            locationType='Otel';
+        }
+    
+        otherlocation_load_data(locationType);
+    
       
     }
 });
 
 
-const popdest_load_data = () => {
+const otherlocation_load_data = (locationType) => {
     return new Promise((resolve, reject) => {
         state = false;
         const request = new XMLHttpRequest();
-        request.open('GET', `/get_popDestData?start_index=${start_index}&num_record=${number_of_record}`);
+        request.open('GET', `/get_otherlocationData?start_index=${start_index}&num_record=${number_of_record}&locationType=${locationType}`);
         request.onload = () => {
             results = JSON.parse(request.responseText);
             let html = '';
@@ -38,26 +51,17 @@ const popdest_load_data = () => {
 
             if (results.length > 0) {
                 results.forEach(result => {
-                    let locationHTML = ""; 
-                    if (result.locationNames && result.locationNames.length > 0 && result.locationIDs && result.locationIDs.length > 0) {
-                        for (let i = 0; i < 5; i++) {
-                            locationHTML += "<li><a href='/location?id=" + result.locationIDs[i] + "'>" + result.locationNames[i] + "</a></li>";
-                        }
-                    }
                     if (start_index == 0) {
-                        html2 += '<section class="popdest-section mt-4 d-block">' +
-                            '<img src="' + result.cityImg + '" alt="Keşfet" class="img-fluid d-block mt-5 mx-auto">' +
-                            '<div class="ppopdests mt-5 d-flex justify-content-between" style="margin: 2% 11%;">' +
+                        html2 += '<section class="otherlocation-section mt-4 d-block">' +
+                            '<img src="' + result.locationImg + '" alt="Keşfet" class="img-fluid d-block mt-5 mx-auto">' +
+                            '<div class="popotherlocations mt-5 d-flex justify-content-between" style="margin: 2% 11%;">' +
                             '<div class="text-left">' +
-                            '<h2 class="city-rank mx-3">#' + ++j + '</h2>' +
-                            '<h2 class="city-title mx-3">' + result.cityName + '</h2>' +
-                            '<ol class="dest">' +
-                            locationHTML + 
-                            '</ol>' +
+                            '<h2 class="otherlocation-rank mx-3">#' + ++j + '</h2>' +
+                            '<h2 class="otherlocation-title mx-3">' + result.locationName + '</h2>' +
                             '</div>' +
                             '<div class="point-section justify-content-between d-block">' +
                             '<div class="d-flex">' +
-                            '<h5 class="point">' + result.cityScore + '</h5>' +
+                            '<h5 class="point">' + result.locationScore + '</h5>' +
                             '<div class="ratings">' +
                             '<i class="fa fa-star"></i>'.repeat(5) +
                             '</div>' +
@@ -66,22 +70,19 @@ const popdest_load_data = () => {
                             '</div>' +
                             '</section>';
 
-                        ppopdest_data.innerHTML = ppopdest_data.innerHTML + html2;
+                            popotherlocation_data.innerHTML = popotherlocation_data.innerHTML + html2;
                     } else {
-                        html += "<section class='popdest-section mt-4  d-flex justify-content-between'><div class='popdests-context d-flex'><img src='" +
-                            result.cityImg + "' alt='Keşfet' class='cityImg img-fluid'>" +
-                            "<div class='popdests-text'>" +
+                        html += "<section class='otherlocation-section mt-4  d-flex justify-content-between'><div class='otherloactions-context d-flex'><img src='" +
+                            result.locationImg + "' alt='Keşfet' class='cityImg img-fluid'>" +
+                            "<div class='otherloactions-text'>" +
                             "<h2 class='city-rank mx-3'>#" + (++j) + "</h2>" +
-                            "<h2 class='city-title mx-3'>" + result.cityName + "</h2>" +
-                            "<ol class='dest'>" +
-                            locationHTML + 
-                            "</ol>" +
+                            "<h2 class='city-title mx-3'>" + result.locationName + "</h2>" +
                             "</div>" +
                             "</div>" +
-                            '<div class="popdests">' +
+                            '<div class="other-locations">' +
                             '<div class="point-section">' +
                             '<div class="d-flex">' +
-                            '<h5 class="point ">' + result.cityScore + '</h5>' +
+                            '<h5 class="point ">' + result.locationScore + '</h5>' +
                             '<div class="ratings d-flex">' +
                             '<i class="fa fa-star"></i>'.repeat(5) +
                             '</div>' +
@@ -91,8 +92,9 @@ const popdest_load_data = () => {
                             "</section>";
                     }
                     start_index++;
+                   
                 });
-                popdests_data.innerHTML = popdests_data.innerHTML + html;
+                otherlocations_data.innerHTML = otherlocations_data.innerHTML + html;
                 document.dispatchEvent(new CustomEvent('customLoadEvent'));
                 document.getElementById("loading_animation").style.display = "none";
                 state = true;
@@ -106,8 +108,6 @@ const popdest_load_data = () => {
             reject('İstek başarısız');
         };
         request.send();
-
-        
     });
 };
 

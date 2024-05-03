@@ -36,15 +36,6 @@ fetch('/user')
         console.error('Hata oluştu:', error);
     });
 
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const response = await fetch('/loadComments'); // /loadComments endpoint'ine GET isteği gönder
-        const data = await response.json(); // Gelen veriyi JSON formatına çevir
-        console.log(data); // Veriyi konsola yazdır veya başka bir şey yap
-    } catch (error) {
-        console.error('Error loading comments:', error);
-    }
-});
 
 
 
@@ -74,8 +65,19 @@ document.addEventListener('customLoadEvent', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     document.dispatchEvent(new CustomEvent('customLoadEvent'));
-    load_data();
-  
+    
+    var restaurant= document.getElementById("restaurant");
+    var hotel= document.getElementById("hotel");
+    
+    if(restaurant!=null){
+        locationType='Restoran';
+    }else if (hotel != null){ 
+        locationType='Otel';
+    }
+    popdest_load_data();
+    otherlocation_load_data(locationType);
+   
+
 });
 
 //Küçük yorumların yıldızlarının ayarı
