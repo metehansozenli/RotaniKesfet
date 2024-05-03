@@ -386,6 +386,16 @@ app.get("/popdest", async (req, res) => {
   }
 });
 
+app.get("/deneme", async (req, res) => {
+  try {
+    const commentsData = await getCommentData("popdest");
+    res.render("deneme", { commentsData: commentsData });
+  } catch (error) {
+    console.error("Popdest acilirken hata olustu:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 app.get("/restaurants", async (req, res) => {
   try {
     const commentsData = await getCommentData("restaurant");
