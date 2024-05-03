@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });  
 
 window.addEventListener('scroll',  () => {
+
+    if(finish){
+        document.getElementById("loading_animation").style.display = "none";
+    }
+    
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight && state && !finish ) {
 
         var restaurant= document.getElementById("restaurant");
@@ -31,7 +36,9 @@ window.addEventListener('scroll',  () => {
         }else if (hotel != null){ 
             locationType='Otel';
         }
-    
+        
+        document.getElementById("loading_animation").style.display = "block";
+        setTimeout(1000);
         otherlocation_load_data(locationType);
     
       

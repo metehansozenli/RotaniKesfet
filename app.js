@@ -70,7 +70,7 @@ app.post("/login", async (req, res) => {
     userMail: req.body.email,
     userPass: req.body.password,
   };
-
+  res.set('Set-Cookie', `session=; expires=Thu, 01 Jan 1970 00:00:00 GMT`);
   try {
     // Veritabanında kullanıcıyı sorgula
     const result = await client.query('SELECT * FROM users WHERE "userMail" = $1 AND "userPass" = $2', [formData.userMail, formData.userPass]);
