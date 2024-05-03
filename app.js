@@ -32,7 +32,7 @@ app.use(express.static("views"));
 app.get('/', async (req, res) => {
   try {
     const randomCitiesData = await getRandomCitiesData();
-    res.render("index", {randomCitiesData : randomCitiesData});
+    res.render("index", { randomCitiesData: randomCitiesData });
   } catch (error) {
     console.error("index acilirken hata olustu:", error);
     res.status(500).send("Internal Server Error");
@@ -174,7 +174,7 @@ const getSpecifiedLocationData = async (locationID) => {
   }
 }
 
-const getPopularCityData = async () =>{
+const getPopularCityData = async () => {
   try {
     const query = {
       text: `SELECT cities.*, ARRAY_AGG(locations."locationName") AS "locationNames", ARRAY_AGG(locations."locationID") AS "locationIDs"
@@ -204,10 +204,10 @@ const getPopularCityData = async () =>{
         locationIDs: result.rows[i].locationIDs,
         cityScore: result.rows[i].cityScore,
         cityImg: result.rows[i].cityImg
-    }  
-    
+      }
+
     }
-    return  cityData;
+    return cityData;
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -225,7 +225,7 @@ const getRandomCitiesData = async () => {
     if (result.rows.length > 0) {
       const randomCitiesData = {};
       for (let i = 0; i < result.rows.length; i++) {
-        const result2 = await client.query('SELECT "locationCountry" FROM locations  WHERE "locationCityID" = $1 LIMIT 1',[result.rows[i].cityID]);
+        const result2 = await client.query('SELECT "locationCountry" FROM locations  WHERE "locationCityID" = $1 LIMIT 1', [result.rows[i].cityID]);
         const cityCountry = result2.rows[0].locationCountry;
 
         randomCitiesData[i] = {
@@ -235,7 +235,7 @@ const getRandomCitiesData = async () => {
         }
       }
       return randomCitiesData;
-      
+
     }
     else {
       return null; // Return null if no data found
@@ -250,12 +250,12 @@ const getRandomCitiesData = async () => {
 const getRestaurantData = async () => {
   try {
     const result = await client.query('SELECT * FROM locations  WHERE "locationType" = "Restaurant" ORDER BY "locationScore"');
-    
+
     if (result.rows.length > 0) {
       const restaurantData = {};
 
       for (let i = 0; i < result.rows.length; i++) {
-        const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1',[result.rows[i].locationCityID]);
+        const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1', [result.rows[i].locationCityID]);
         locationCityName = result2.rows[0].cityName;
 
         restaurantData[i] = {
@@ -281,12 +281,12 @@ const getRestaurantData = async () => {
 const getHotelData = async () => {
   try {
     const result = await client.query('SELECT * FROM locations  WHERE "locationType" = "Hotel" ORDER BY "locationScore"');
-    
+
     if (result.rows.length > 0) {
       const hotelData = {};
 
       for (let i = 0; i < result.rows.length; i++) {
-        const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1',[result.rows[i].locationCityID]);
+        const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1', [result.rows[i].locationCityID]);
         locationCityName = result2.rows[0].cityName;
 
         hotelData[i] = {
@@ -334,7 +334,7 @@ const getCommentData = async () => {
           commentTitle: result.rows[i].commentTitle,
           userProfilePic: "./images/avatar.jpeg",
           locationName: result.rows[i].locationName,
-          locationLink: "/location?id="+result.rows[i].locationID,
+          locationLink: "/location?id=" + result.rows[i].locationID,
         }
 
       }
@@ -367,7 +367,7 @@ app.get("/kesfet", (req, res) => {
 app.get("/popdest", async (req, res) => {
   try {
     const commentsData = await getCommentData();
-    res.render("popdest", { commentsData: commentsData});
+    res.render("popdest", { commentsData: commentsData });
   } catch (error) {
     console.error("Popdest acilirken hata olustu:", error);
     res.status(500).send("Internal Server Error");
@@ -387,7 +387,7 @@ app.get("/restaurants", async (req, res) => {
 app.get("/location", async (req, res) => {
   try {
     const locationData = await getSpecifiedLocationData(req.query.id);
-    res.render("location", { locationData:locationData  });
+    res.render("location", { locationData: locationData });
   } catch (error) {
     console.error("Location acilirlen hata olustu:", error);
     res.status(500).send("Internal Server Error");
@@ -436,29 +436,32 @@ app.get("/get_popDestData", async (req, res) => {
     const num_record = parseInt(req.query.num_record) || 10;
 
     const query = {
-      text: `SELECT cities.*, ARRAY_AGG(locations."locationName") AS "locationNames", ARRAY_AGG(locations."locationID") AS "locationIDs"
-             FROM cities 
-             LEFT JOIN (
-                 SELECT *
-                 FROM locations
-                 WHERE "locationScore" IN (
-                     SELECT DISTINCT "locationScore"
-                     FROM locations
-                     ORDER BY "locationScore" DESC
-                     LIMIT 5
-                 )
-             ) AS locations ON cities."cityID" = locations."locationCityID" 
-             GROUP BY cities."cityID" 
-             ORDER BY cities."cityScore" DESC 
-             OFFSET $1 
-             LIMIT $2`,
-      values: [start_index, num_record],
-    };
-    
-    
-    
-
-
+              text: `SELECT 
+                      cities.*, 
+                      ARRAY_AGG(locations."locationName") AS "locationNames", 
+                      ARRAY_AGG(locations."locationID") AS "locationIDs"
+                  FROM 
+                      cities 
+                  LEFT JOIN (
+                      SELECT *
+                      FROM locations
+                      WHERE "locationScore" IN (
+                          SELECT DISTINCT "locationScore"
+                          FROM locations
+                          ORDER BY "locationScore" DESC
+                          LIMIT 5
+                      )
+                  ) AS locations ON cities."cityID" = locations."locationCityID" 
+                  GROUP BY 
+                      cities."cityID" 
+                  ORDER BY 
+                      cities."cityScore" DESC, 
+                      cities."cityName" DESC 
+                  OFFSET $1 
+                  LIMIT $2;
+              `,
+                values: [start_index, num_record],
+            };
     const result = await client.query(query);
 
     res.json(result.rows); // Sonuçları JSON olarak gönderme

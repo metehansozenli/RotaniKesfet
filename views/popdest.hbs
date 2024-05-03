@@ -39,9 +39,9 @@
                     {{#each commentsData}}
                     <li class="card">
                         <div class="comments-upcontent">
-                            <div class="comment-location-info" id="comment-link">Yer:&nbsp<a
+                            <div class="comment-location-info" >Yer:&nbsp<a id="comment-link"
                                     href="{{this.locationLink}}">{{this.locationName}}</a></div>
-                            <di class="comment-point d-flex">
+                            <div class="comment-point d-flex">
                                 <div class="comment-stars mt-2">
                                     <span class="fas fa-star "></span>
                                     <span class="fas fa-star "></span>
@@ -51,7 +51,7 @@
                                 </div>
                                 <h5 class="comment-score mt-2 ml-2">{{this.commentScore}}.0</h5>
 
-                            </di>
+                            </div>
                             <div class="comment-title">{{this.commentTitle}}</div>
                             <div class="testimonial">{{this.commentContents}}</div>
                         </div>

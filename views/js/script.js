@@ -74,6 +74,7 @@ document.addEventListener('customLoadEvent', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     document.dispatchEvent(new CustomEvent('customLoadEvent'));
+    load_data();
   
 });
 
