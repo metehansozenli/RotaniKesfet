@@ -63,22 +63,7 @@ document.addEventListener('customLoadEvent', function () {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.dispatchEvent(new CustomEvent('customLoadEvent'));
-    
-    var restaurant= document.getElementById("restaurant");
-    var hotel= document.getElementById("hotel");
-    
-    if(restaurant!=null){
-        locationType='Restoran';
-    }else if (hotel != null){ 
-        locationType='Otel';
-    }
-    popdest_load_data();
-    otherlocation_load_data(locationType);
-   
 
-});
 
 //Küçük yorumların yıldızlarının ayarı
 document.addEventListener('DOMContentLoaded', function () {

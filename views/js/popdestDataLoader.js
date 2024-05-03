@@ -11,13 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 window.addEventListener('scroll',  () => {
-    
-    if(finish){
-        document.getElementById("loading_animation").style.display = "none";
-    }
 
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && state && !finish ) {
-
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && state && !finish && start_index>=number_of_record) {
+        
         document.getElementById("loading_animation").style.display = "block";
         setTimeout(1000);
         popdest_load_data();
@@ -99,6 +95,7 @@ const popdest_load_data = () => {
                 resolve(); // İşlem tamamlandığında Promise'i çöz
             } else {
                 finish = true;
+                document.getElementById("loading_animation").style.display = "none";
                 resolve(); // İşlem tamamlandığında Promise'i çöz
             }
         };

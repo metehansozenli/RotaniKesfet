@@ -22,9 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 window.addEventListener('scroll',  () => {
 
-    if(finish){
-        document.getElementById("loading_animation").style.display = "none";
-    }
     
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight && state && !finish ) {
 
@@ -79,22 +76,24 @@ const otherlocation_load_data = (locationType) => {
 
                             popotherlocation_data.innerHTML = popotherlocation_data.innerHTML + html2;
                     } else {
-                        html += "<section class='otherlocation-section mt-4  d-flex justify-content-between'><div class='otherloactions-context d-flex'><img src='" +
+                        html += "<section class='otherlocation-section mt-4  d-flex justify-content-between'><div class='otherlocations-context d-flex'><img src='" +
                             result.locationImg + "' alt='Keşfet' class='cityImg img-fluid'>" +
-                            "<div class='otherloactions-text'>" +
+                            "<div class='otherlocations-text'>" +
                             "<h2 class='city-rank mx-3'>#" + (++j) + "</h2>" +
                             "<h2 class='city-title mx-3'>" + result.locationName + "</h2>" +
-                            "</div>" +
-                            "</div>" +
-                            '<div class="other-locations">' +
                             '<div class="point-section">' +
                             '<div class="d-flex">' +
                             '<h5 class="point ">' + result.locationScore + '</h5>' +
                             '<div class="ratings d-flex">' +
                             '<i class="fa fa-star"></i>'.repeat(5) +
                             '</div>' +
+                            '<h5 class="review-count d-flex">122 Yorum</h5>'+
                             '</div>' +
                             '</div>' +
+                            "</div>" +
+                            "</div>" +
+                            '<div class="other-locations">' +
+                        
                             '</div>' +
                             "</section>";
                     }
@@ -108,6 +107,7 @@ const otherlocation_load_data = (locationType) => {
                 resolve(); // İşlem tamamlandığında Promise'i çöz
             } else {
                 finish = true;
+                document.getElementById("loading_animation").style.display = "none";
                 resolve(); // İşlem tamamlandığında Promise'i çöz
             }
         };
