@@ -421,6 +421,9 @@ app.get("/location", async (req, res) => {
 app.get("/mycomment", (req, res) => {
   res.render("mycomment")
 })
+app.get("/page404", (req, res) => {
+  res.render("page404")
+})
 
 app.get("/profile", (req, res) => {
   res.render("profile")
