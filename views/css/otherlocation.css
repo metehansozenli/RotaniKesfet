@@ -136,7 +136,7 @@
 
 .otherlocations-text {
     margin-left: 20px;
-    margin-top: 50px;
+    margin-top: 10px;
     max-width: 330px;;
 }
 
@@ -146,6 +146,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 20px;
+    align-items: center;
 }
 
 .otherlocations-text img {
@@ -174,7 +175,8 @@
 
 .otherlocation-title {
     color: #000000;
-    max-width: 300px;
+    max-width: 500px;
+   
 }
 
 
@@ -193,7 +195,7 @@
 .otherlocation-context {
     color: #000000;
     font-size: 20px;
-    margin-bottom: 30px;
+    
 }
 
 
