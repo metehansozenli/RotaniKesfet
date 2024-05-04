@@ -73,22 +73,21 @@ const otherlocation_load_data = (locationType) => {
                                     "<div class='large-font'>" +
                                     '<ion-icon name="heart">' +
                                     "</ion - icon >" +
-                                    "</div >" +
+                                    "</div>" +
 
-                                    " </div >" +
+                                    " </div>" +
                                     '<div class="point-section d-block">' +
                                     '<div class="d-flex">' +
                                     '<h5 class="point">' + result.locationScore + '</h5>' +
                                     '<div class="ratings">' +
                                     '<i class="fa fa-star"></i>'.repeat(5) +
-                                    "</div>"
-                                    "<h5 class='review-count d-flex'>" + result.locationCommentCount + " Yorum</h5>" +
-                                        " </div>"
-                                    " </div>"
-                                    " </div >"
-
-                                    "< /div >"
-                                    "</section >";
+                                    "</div>"+
+                                    "<h5 class='review-count d-flex'>" + result.locationCommentCount + " Yorum</h5>" + 
+                                    " </div>"+
+                                    " </div>"+
+                                    " </div>"+
+                                    "</div>"+
+                                    "</section>";
 
                         popotherlocation_data.innerHTML = popotherlocation_data.innerHTML + html2;
                     } else {
@@ -142,6 +141,12 @@ const otherlocation_load_data = (locationType) => {
         request.send();
     });
 };
+
+icons.forEach(function (icon) {
+    icon.onclick = function () {
+        icon.classList.toggle('active');
+    }
+    });
 
 
 

@@ -43,6 +43,14 @@ fetch('/user')
 document.addEventListener('customLoadEvent', function () {
     // Tüm .point öğelerini seç
     const points = document.querySelectorAll('.point');
+    let icons = document.querySelectorAll('ion-icon');
+    
+
+    icons.forEach(function (icon) {
+        icon.onclick = function () {
+            icon.classList.toggle('active');
+        }
+        });
 
     // Her bir .point öğesi için işlem yap
     points.forEach((pointElement) => {
@@ -69,6 +77,8 @@ document.addEventListener('customLoadEvent', function () {
 document.addEventListener('DOMContentLoaded', function () {
     // Tüm .point öğelerini seç
     const points = document.querySelectorAll('.comment-point h5');
+
+    
     
 
     // Her bir .point öğesi için işlem yap
@@ -89,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
 
 
 

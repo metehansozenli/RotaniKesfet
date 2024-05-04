@@ -112,7 +112,6 @@ commentCards.forEach(function (card) {
 
     commentLinkID.addEventListener("click", function(event){
         isLinkClicked = true;
-        alert("mustafaaaaaa");
      });
 
     card.addEventListener("mouseup", function (event) {
