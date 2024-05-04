@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    document.dispatchEvent(new CustomEvent('customLoadEvent'));
     const popdest = document.getElementById('popdest');
     const otels = document.getElementById('hotels');
     const restaurants = document.getElementById('restaurants');
