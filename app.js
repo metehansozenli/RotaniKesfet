@@ -539,3 +539,7 @@ app.get("/get_otherlocationData", async (req, res) => {
   }
 });
 
+app.get("/calendar", (req, res) => {
+  res.render("calendar")
+})
+
