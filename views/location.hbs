@@ -12,7 +12,6 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <script src="./js/script.js"></script>
 
 </head>
 
@@ -31,7 +30,7 @@
                     <div class="d-flex ">
                         <p class="mr-3 text-success">Şu anda açık</p>
                         <p class="mr-3">09.00-19.00</p>
-                        <p class="write-comment text-right">Yorum Yazın</p>
+                        <p class="write-comment text-right ">Yorum Yazın</p>
                     </div>
                 </div>
 
@@ -40,10 +39,10 @@
                         <div class="d-flex mb-2">
                             <h5 class="point">{{locationData.locationScore}}</h5>
                             <div class="ratings">
-                                <i class="fa fa-star rating-color"></i>
-                                <i class="fa fa-star rating-color"></i>
-                                <i class="fa fa-star rating-color"></i>
-                                <i class="fa fa-star rating-color"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
                             <h5 class="review-count ">{{locationData.locationCommentCount}} Yorum</h5>
@@ -274,6 +273,7 @@
 
     {{>footer}}
 
+    <script src="./js/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

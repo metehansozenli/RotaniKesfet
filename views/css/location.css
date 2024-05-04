@@ -103,6 +103,11 @@
     margin: -30px -40px;
 }
 
+.location-context .write-comment {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .location-rating-bar0 .rating-label {
     font-weight: bold;
 }
