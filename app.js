@@ -29,8 +29,14 @@ hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 
 app.use(express.static("views"));
 
-app.get('/', (req, res) => {
-  res.render('index');
+app.get('/', async (req, res) => {
+  try {
+    const randomCitiesData = await getRandomCitiesData();
+    res.render("index", { randomCitiesData: randomCitiesData });
+  } catch (error) {
+    console.error("index acilirken hata olustu:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 app.post("/register", async (req, res) => {
@@ -48,9 +54,9 @@ app.post("/register", async (req, res) => {
   try {
     // Veritabanına kayıt ekle
     await client.query('INSERT INTO users ("userNickname", "userMail", "userName", "userSurname", "userCountry", "userPhoneNo", "userPass") VALUES ($1, $2, $3, $4, $5, $6, $7)', [formData.userNickname, formData.userMail, formData.userName, formData.userSurname, formData.userCountry, formData.userPhoneNo, formData.userPass]);
-
+    const randomCitiesData = await getRandomCitiesData();
     // Kayıt işlemi başarılı olduğunda
-    res.render("index")
+    res.render("index",{randomCitiesData:randomCitiesData})
   } catch (error) {
     console.log(error)
 
@@ -64,7 +70,7 @@ app.post("/login", async (req, res) => {
     userMail: req.body.email,
     userPass: req.body.password,
   };
-
+  res.set('Set-Cookie', `session=; expires=Thu, 01 Jan 1970 00:00:00 GMT`);
   try {
     // Veritabanında kullanıcıyı sorgula
     const result = await client.query('SELECT * FROM users WHERE "userMail" = $1 AND "userPass" = $2', [formData.userMail, formData.userPass]);
@@ -73,8 +79,9 @@ app.post("/login", async (req, res) => {
       const result2 = await client.query('SELECT "userID" FROM users WHERE "userMail" = $1', [formData.userMail]);
       const userID = result2.rows[0].userID;// userID cekiliyor
       sessions[sessionsID] = { userMail: formData.userMail, userID };
+      const randomCitiesData = await getRandomCitiesData();
       res.set('Set-Cookie', `session=${sessionsID}`);//session baslatiliyor
-      res.render("index")
+      res.render("index",{randomCitiesData:randomCitiesData})
     } else {
       res.send("Kullanıcı adı veya şifre yanlış!"); // Kullanıcı bulunamazsa hata mesajı gönder
     }
@@ -87,8 +94,9 @@ app.post("/login", async (req, res) => {
 app.get("/logout", async (req, res) => {
   const sessionsID = req.headers.cookie?.split("=")[1];
   delete sessions[sessionsID];
+  const randomCitiesData = await getRandomCitiesData();
   res.set('Set-Cookie', `session=; expires=Thu, 01 Jan 1970 00:00:00 GMT`);
-  res.render("index");
+  res.render("index",{randomCitiesData:randomCitiesData});
 });
 
 app.get("/changeHeader", async (req, res) => {
@@ -168,19 +176,58 @@ const getSpecifiedLocationData = async (locationID) => {
   }
 }
 
+const getPopularCityData = async () => {
+  try {
+    const query = {
+      text: `SELECT cities.*, ARRAY_AGG(locations."locationName") AS "locationNames", ARRAY_AGG(locations."locationID") AS "locationIDs"
+             FROM cities 
+             LEFT JOIN (
+                 SELECT *
+                 FROM locations
+                 WHERE "locationScore" IN (
+                     SELECT DISTINCT "locationScore"
+                     FROM locations
+                     ORDER BY "locationScore" DESC
+                     LIMIT 5
+                 )
+             ) AS locations ON cities."cityID" = locations."locationCityID" 
+             GROUP BY cities."cityID" 
+             ORDER BY cities."cityScore" DESC 
+             OFFSET $1 
+             LIMIT $2`,
+      values: [0, 3],
+    };
+    const result = await client.query(query);
+    const cityData = {};
+    for (let i = 0; i < result.rows.length; i++) {
+      cityData[i] = {
+        cityName: result.rows[i].cityName,
+        locationNames: result.rows[i].locationNames,
+        locationIDs: result.rows[i].locationIDs,
+        cityScore: result.rows[i].cityScore,
+        cityImg: result.rows[i].cityImg
+      }
+
+    }
+    return cityData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
 const getRandomCitiesData = async () => {
   try {
     const result = await client.query(`
                                       SELECT "cityImg", "cityName","cityID"
                                       FROM cities 
-                                      WHERE "cityScore" > 3.75 
+                                      WHERE "cityScore" > 3.75 AND "cityID" < 11 
                                       ORDER BY RANDOM() 
                                       LIMIT 8;`);
 
     if (result.rows.length > 0) {
       const randomCitiesData = {};
       for (let i = 0; i < result.rows.length; i++) {
-        const result2 = await client.query('SELECT "locationCountry" FROM locations  WHERE "locationCityID" = $1 LIMIT 1',[result.rows[i].cityID]);
+        const result2 = await client.query('SELECT "locationCountry" FROM locations  WHERE "locationCityID" = $1 LIMIT 1', [result.rows[i].cityID]);
         const cityCountry = result2.rows[0].locationCountry;
 
         randomCitiesData[i] = {
@@ -190,7 +237,7 @@ const getRandomCitiesData = async () => {
         }
       }
       return randomCitiesData;
-      
+
     }
     else {
       return null; // Return null if no data found
@@ -204,13 +251,13 @@ const getRandomCitiesData = async () => {
 
 const getRestaurantData = async () => {
   try {
-    const result = await client.query('SELECT * FROM locations  WHERE "locationType" = "Restaurant" ORDER BY "locationScore"');
-    
+    const result = await client.query('SELECT * FROM locations  WHERE "locationType" = \'Restoran\' ORDER BY "locationScore" DESC, "locationName" DESC');
+
     if (result.rows.length > 0) {
       const restaurantData = {};
 
       for (let i = 0; i < result.rows.length; i++) {
-        const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1',[result.rows[i].locationCityID]);
+        const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1', [result.rows[i].locationCityID]);
         locationCityName = result2.rows[0].cityName;
 
         restaurantData[i] = {
@@ -236,12 +283,12 @@ const getRestaurantData = async () => {
 const getHotelData = async () => {
   try {
     const result = await client.query('SELECT * FROM locations  WHERE "locationType" = "Hotel" ORDER BY "locationScore"');
-    
+
     if (result.rows.length > 0) {
       const hotelData = {};
 
       for (let i = 0; i < result.rows.length; i++) {
-        const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1',[result.rows[i].locationCityID]);
+        const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1', [result.rows[i].locationCityID]);
         locationCityName = result2.rows[0].cityName;
 
         hotelData[i] = {
@@ -264,10 +311,20 @@ const getHotelData = async () => {
   }
 }
 
-const getCommentData = async (locationId) => {
+const getCommentData = async (commentType) => {
   var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
   try {
-    const result = await client.query('SELECT "commentContents", "commentDate", "commentScore", "commentTitle", "userID" FROM comments WHERE "locationID" = $1 LIMIT 12', [locationId]);
+    if(commentType == "restaurant"){
+      var queryCustom = 'SELECT comments.*, locations."locationName" FROM comments JOIN locations ON locations."locationID" = comments."locationID" WHERE locations."locationType" = \'Restoran\' ORDER BY RANDOM() LIMIT 12';
+    }else if(commentType == "hotel"){
+      var queryCustom = 'SELECT comments.*, locations."locationName" FROM comments JOIN locations ON locations."locationID" = comments."locationID" WHERE locations."locationType" = \'Otel\' ORDER BY RANDOM() LIMIT 12';
+    }else if(commentType == "popdest"){
+      var queryCustom = 'SELECT comments.*, locations."locationName" FROM comments JOIN locations ON locations."locationID" = comments."locationID" WHERE locations."locationType" NOT IN (\'Otel\', \'Restoran\') ORDER BY RANDOM() LIMIT 12';
+    }
+    else{
+      console.error("wrong parameter!!!!");
+    }
+    const result = await client.query(queryCustom);
 
     if (result.rows.length > 0) {
       const commentsData = [];
@@ -288,8 +345,8 @@ const getCommentData = async (locationId) => {
           commentScore: result.rows[i].commentScore,
           commentTitle: result.rows[i].commentTitle,
           userProfilePic: "./images/avatar.jpeg",
-          locationName: "Eyfel Kulesi",
-          locationLink: "/location",
+          locationName: result.rows[i].locationName,
+          locationLink: "/location?id=" + result.rows[i].locationID,
         }
 
       }
@@ -318,19 +375,13 @@ app.get("/kesfet", (req, res) => {
   res.render("kesfet")
 })
 
-app.get("/index", async(req, res) => {
-  try {
-    const randomCitiesData = await getRandomCitiesData();
-    res.render("index", {randomCitiesData : randomCitiesData});
-  } catch (error) {
-    console.error("index acilirken hata olustu:", error);
-    res.status(500).send("Internal Server Error");
-  }
+app.get("/routePlanner", (req, res) => {
+  res.render("routePlanner")
 })
 
 app.get("/popdest", async (req, res) => {
   try {
-    const commentsData = await getCommentData(2);
+    const commentsData = await getCommentData("popdest");
     res.render("popdest", { commentsData: commentsData });
   } catch (error) {
     console.error("Popdest acilirken hata olustu:", error);
@@ -338,11 +389,25 @@ app.get("/popdest", async (req, res) => {
   }
 });
 
+
 app.get("/restaurants", async (req, res) => {
   try {
-    res.render("restaurants", {});
+    const commentsData = await getCommentData("restaurant");
+    res.render("restaurants", {commentsData: commentsData});
   } catch (error) {
     console.error("Restauranti acilirken hata olustu:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+
+app.get("/hotels", async (req, res) => {
+  try {
+    const commentsData = await getCommentData("hotel");
+    res.render("hotels", {commentsData: commentsData});
+  } catch (error) {
+    console.error("Hotelsi acilirken hata olustu:", error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -351,7 +416,7 @@ app.get("/restaurants", async (req, res) => {
 app.get("/location", async (req, res) => {
   try {
     const locationData = await getSpecifiedLocationData(req.query.id);
-    res.render("location", { locationData:locationData  });
+    res.render("location", { locationData: locationData });
   } catch (error) {
     console.error("Location acilirlen hata olustu:", error);
     res.status(500).send("Internal Server Error");
@@ -361,6 +426,13 @@ app.get("/location", async (req, res) => {
 
 app.get("/mycomment", (req, res) => {
   res.render("mycomment")
+})
+
+app.get("/commentWrite", (req, res) => {
+  res.render("commentWrite")
+})
+app.get("/page404", (req, res) => {
+  res.render("page404")
 })
 
 app.get("/profile", (req, res) => {
@@ -393,36 +465,71 @@ function gracefulShutdown() {
 }
 
 
-//Mustafa'nın Gizli Denemeleri
 app.get("/get_popDestData", async (req, res) => {
   try {
     const start_index = parseInt(req.query.start_index) || 0;
     const num_record = parseInt(req.query.num_record) || 10;
 
     const query = {
-      text: `SELECT cities.*, ARRAY_AGG(locations."locationName") AS "locationNames", ARRAY_AGG(locations."locationID") AS "locationIDs"
-             FROM cities 
-             LEFT JOIN (
-                 SELECT *
-                 FROM locations
-                 WHERE "locationScore" IN (
-                     SELECT DISTINCT "locationScore"
-                     FROM locations
-                     ORDER BY "locationScore" DESC
-                     LIMIT 5
-                 )
-             ) AS locations ON cities."cityID" = locations."locationCityID" 
-             GROUP BY cities."cityID" 
-             ORDER BY cities."cityScore" DESC 
-             OFFSET $1 
-             LIMIT $2`,
-      values: [start_index, num_record],
-    };
-    
-    
-    
+              text: `SELECT 
+                      cities.*, 
+                      ARRAY_AGG(locations."locationName") AS "locationNames", 
+                      ARRAY_AGG(locations."locationID") AS "locationIDs"
+                  FROM 
+                      cities 
+                  LEFT JOIN (
+                      SELECT *
+                      FROM locations
+                      WHERE "locationScore" IN (
+                          SELECT DISTINCT "locationScore"
+                          FROM locations
+                          ORDER BY "locationScore" DESC
+                          LIMIT 5
+                      )
+                  ) AS locations ON cities."cityID" = locations."locationCityID" 
+                  GROUP BY 
+                      cities."cityID" 
+                  ORDER BY 
+                      cities."cityScore" DESC, 
+                      cities."cityName" DESC 
+                  OFFSET $1 
+                  LIMIT $2;
+              `,
+                values: [start_index, num_record],
+            };
+    const result = await client.query(query);
 
+    res.json(result.rows); // Sonuçları JSON olarak gönderme
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
+app.get("/get_otherlocationData", async (req, res) => {
+  try {
+    const start_index = parseInt(req.query.start_index) || 0;
+    const num_record = parseInt(req.query.num_record) || 10;
+    const locationType = req.query.locationType;
+
+    const query = {
+              text:  `SELECT 
+                      locations.*,
+                      cities."cityName"
+                  FROM 
+                      locations
+                  INNER JOIN 
+                      cities ON locations."locationCityID" = cities."cityID"
+                  WHERE 
+                      locations."locationType" = $3
+                  ORDER BY 
+                      locations."locationScore" DESC,
+                      locations."locationName" DESC
+                  OFFSET $1 
+                  LIMIT $2;
+              `,
+                values: [start_index, num_record, locationType],
+            };
     const result = await client.query(query);
 
     res.json(result.rows); // Sonuçları JSON olarak gönderme

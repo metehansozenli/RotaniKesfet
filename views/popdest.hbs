@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" >
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>En Popüler Gezilecek Yerler</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/popdest.css">
+    <link rel="stylesheet" href="./css/carouselComments.css">
+    <link rel="stylesheet" href="./css/commentModal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
@@ -17,7 +20,7 @@
 
     {{>config}}
 
-    <div class="container ">
+    <div class="container">
         <section class="popdest-context mt-4">
             <h1 style="margin-top: 20px;">En Popüler Gezilecek Yerler</h1>
             <p>
@@ -39,9 +42,9 @@
                     {{#each commentsData}}
                     <li class="card">
                         <div class="comments-upcontent">
-                            <div class="comment-location-info">Yer:&nbsp<a
+                            <div class="comment-location-info" >Yer:&nbsp<a id="comment-link"
                                     href="{{this.locationLink}}">{{this.locationName}}</a></div>
-                            <di class="comment-point d-flex">
+                            <div class="comment-point d-flex">
                                 <div class="comment-stars mt-2">
                                     <span class="fas fa-star "></span>
                                     <span class="fas fa-star "></span>
@@ -49,9 +52,9 @@
                                     <span class="fas fa-star "></span>
                                     <span class="fas fa-star"></span>
                                 </div>
-                                <h5 class="comment-score mt-2 ml-2">{{this.commentScore}}.0</h5>
+                                <h5 class="comment-score mt-2 ml-2">{{this.commentScore}}</h5>
 
-                            </di>
+                            </div>
                             <div class="comment-title">{{this.commentTitle}}</div>
                             <div class="testimonial">{{this.commentContents}}</div>
                         </div>

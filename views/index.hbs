@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rotanı Keşfet</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/indexSlider.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
@@ -13,23 +14,21 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="./js/script.js"></script>
-
+     
 </head>
-
+    
 <body>
-    {{>config}}
 
+    {{>config}}
     <a name="rent"></a>
     <p class="display-3 text-center  mt-3" style="color: #36A1C5; font-family: sans-serif,Arial;">Seyahatinizi Oluşturun
     </p>
     <div class="container col-5" style="text-align: center; ">
         <button type="submit" class="btn "
-            style="width: 20%; background-color: #36A1C5; color: aliceblue;">Başla</button>
+            style="width: 20%; background-color: #36A1C5; color: aliceblue; border-radius: 8px;">Başla</button>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
 
     <img src="./images/mainpic.png" style="display: block; height: 500px; margin: 60px auto; ">
 
@@ -50,10 +49,10 @@
     </section>
 
     <h4 style="margin: 0 15%; margin-bottom: 10px;">Bulunduğunuz konuma göre günübirlik gezebileceğiniz şehirler</h4>
-    <section class="popdest-comments mt-4">
-        <div class="wrapperIndex">
+    <section class="index-sliders mt-4">
+        <div class="wrapperIndex2">
             <i id="left" class="fa-solid fa-angle-left"></i>
-            <ul class="carouselIndex">
+            <ul class="carouselIndex2">
                 {{#each randomCitiesData}}
                 <li class="indexImage-container">
                     <img height="250px" width="250px" src={{this.cityImg}} style="object-fit: cover">
@@ -66,10 +65,10 @@
     </section>
     
     <h4 style="margin: 0 15%; margin-bottom: 10px;">Paris’in Michelin yıldızlı popüler restoranları</h4>
-    <section class="popdest-comments mt-4">
-        <div class="wrapperIndex">
+    <section class="index-sliders mt-4">
+        <div class="wrapperIndex3">
             <i id="left" class="fa-solid fa-angle-left"></i>
-            <ul class="carouselIndex">
+            <ul class="carouselIndex3">
                 {{#each randomCitiesData}}
                 <li class="indexImage-container">
                     <img height="250px" width="250px" src={{this.cityImg}} style="object-fit: cover">

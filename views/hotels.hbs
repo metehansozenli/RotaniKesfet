@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr" >
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En Popüler Oteller</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/otherlocation.css">
+    <link rel="stylesheet" href="./css/carouselComments.css">
+    <link rel="stylesheet" href="./css/commentModal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    {{>config}}
+
+    <div class="container" id="hotel">
+        <section class="otherlocation-context mt-4">
+            <h1 style="margin-top: 20px;">En Popüler Oteller</h1>
+            <p>
+                Dünyanın en popüler otellerini keşfedin! 
+                İkonik konaklama seçenekleriyle dolu olan bu 
+                otellerde konforun ve hizmetin tadını çıkarın.
+
+            </p>
+        </section>
+
+        <div id="popotherlocation_data">
+
+        </div>
+
+        <section class="otherlocation-comments mt-4">
+            <div class="wrapper">
+                <i id="left" class="fa-solid fa-angle-left"></i>
+                <ul class="carousel">
+                    {{#each commentsData}}
+                    <li class="card">
+                        <div class="comments-upcontent">
+                            <div class="comment-location-info">Yer:&nbsp<a id="comment-link"
+                                    href="{{this.locationLink}}">{{this.locationName}}</a></div>
+                            <div class="comment-point d-flex">
+                                <div class="comment-stars mt-2">
+                                    <span class="fas fa-star "></span>
+                                    <span class="fas fa-star "></span>
+                                    <span class="fas fa-star "></span>
+                                    <span class="fas fa-star "></span>
+                                    <span class="fas fa-star"></span>
+                                </div>
+                                <h5 class="comment-score mt-2 ml-2">{{this.commentScore}}</h5>
+
+                            </div>
+                            <div class="comment-title">{{this.commentTitle}}</div>
+                            <div class="testimonial">{{this.commentContents}}</div>
+                        </div>
+                        <div class="profile">
+                            <div class="comment-context">
+                                <img src={{this.userProfilePic}} alt="" class="rounded-circle ">
+                                <div class="name">@{{this.userNickname}}</div>
+                            </div>
+                            <div class="date">{{this.commentDate}}</div>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+                <i id="right" class="fa-solid fa-angle-right"></i>
+            </div>
+        </section>
+
+        <div class="otherlocations_all">
+            <section class="" id="otherlocations_data">
+            </section>
+            <div id="loading_animation" class="loader"></div>
+        </div>
+
+    </div>
+
+    {{>footer}}
+
+</body>
+
+{{>commentModal}}
+
+<script src="./js/commentsSlider.js"></script>
+<script src="./js/script.js"></script>
+<script src="./js/otherlocationDataLoader.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
+
+</html>
+

@@ -1,0 +1,271 @@
+
+.popotherlocations .ratings {
+    margin-right: 20px;
+}
+
+.popotherlocations .ratings i {
+    color: #cecece;
+    font-size: 32px;
+}
+
+.popotherlocations .point {
+    font-weight: 500;
+    font-size: 26px !important;
+    margin-top: -4px;
+    margin-right: 20px;
+}
+
+.popotherlocations .ratings {
+    margin-right: 20px;
+}
+
+.popotherlocations .point-section {
+
+
+    margin-right: 0px;
+    margin-top: 8px;
+
+}
+
+.popotherlocations_all {
+    margin-bottom: 100px;
+
+}
+
+.popotherlocation-loc {
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+.popotherlocations img {
+    width: 28px !important;
+    height: 28px !important;
+    object-fit: cover;
+}
+
+.popotherlocation-loc p {
+    font-weight: 400;
+    font-size: 20px !important;
+    margin-left: 15px;
+    margin-top: -3px;
+    color: #000000;
+}
+
+.otherlocation {
+    margin-top: -10px;
+}
+
+.otherlocation-fav{
+    justify-content: end;
+}
+
+.otherlocation .review-count {
+    font-weight: 500;
+    margin-top: 2px;
+    font-size: 18px !important;
+}
+
+.otherlocation .write-comment{
+        color: #000000;
+        font-size: 18px;
+        margin-top: 20px;
+         text-decoration: underline;
+        cursor: pointer;
+}
+
+.otherlocation-section img {
+    object-fit: cover;
+    width: 850px;
+    height: 475px;
+    max-width: 850px;
+    max-height: 475px;
+}
+
+.otherlocation-section .locationImg {
+    object-fit: cover;
+    width: 500px;
+    height: 350px;
+
+    max-width: 500px;
+    max-height: 350px;
+}
+
+
+.otherlocation-context h1 {
+    text-align: center;
+}
+
+.otherlocation-context p {
+    color: #666
+}
+
+.otherlocation-rank, .otherlocation-title{
+    font-size: 42px;
+}
+
+.otherlocation-section .ratings i {
+    color: #cecece;
+    font-size: 25px;
+}
+
+
+.otherlocations-text .review-count {
+    font-weight: 500;
+    margin-bottom: 2px;
+    font-size: 20px !important;
+    white-space: nowrap;
+}
+
+.otherlocations-text .point {
+    font-weight: 500;
+    font-size: 26px !important;
+    margin-top: -3px;
+    margin-right: 18px;
+}
+
+.otherlocations-text .point-section {
+
+    margin-top: 40px;
+    margin-left: 20px;
+
+}
+
+.otherlocations-text .ratings {
+    margin-right: 20px;
+}
+
+.otherlocations-text {
+    margin-left: 20px;
+    margin-top: 50px;
+    max-width: 330px;;
+}
+
+
+
+.otherlocations-context {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.otherlocations-text img {
+    width: 28px !important;
+    height: 28px !important;
+    object-fit: cover;
+}
+
+.otherlocation-context h1 {
+    color: #000000;
+
+}
+
+.otherlocations-loc {
+    margin-top: 10px;
+    margin-left: 25px;
+}
+
+.otherlocations-loc p {
+    font-weight: 400;
+    font-size: 20px !important;
+    margin-left: 25px;
+    margin-top: -3px;
+    color: #000000;
+}
+
+.otherlocation-title {
+    color: #000000;
+    max-width: 300px;
+}
+
+
+.otherlocation-rank {
+    color: #D9D9D9;
+}
+
+.other-locations .write-comment {
+    color: #000000;
+    font-size: 18px;
+    margin-top: 18px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.otherlocation-context {
+    color: #000000;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+
+.otherlocation-section {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.otherlocation-comments {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+}
+
+.otherlocation-context p {
+    text-align: justify;
+    color: #666;
+    margin: 30px 50px;
+    font-size: 20px
+}
+
+.large-font {
+    font-size: xxx-large;
+}
+
+ion-icon {
+    fill: transparent;
+    stroke: rgb(0, 0, 0) !important;
+    stroke-width: 20px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+ion-icon.active {
+    animation: like 0.5s 1;
+    fill: red;
+    stroke-width: 0px;
+
+}
+
+
+@keyframes like {
+    0% {
+        transform: scale(1);
+    }
+
+    90% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@-webkit-keyframes like {
+    0% {
+        -webkit-transform: scale(1);
+    }
+
+    90% {
+        -webkit-transform: scale(1.2);
+    }
+
+    100% {
+        -webkit-transform: scale(1.1);
+    }
+}

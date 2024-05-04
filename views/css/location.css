@@ -1,0 +1,227 @@
+.location-section {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.location-comments {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.location-context .ratings {
+    margin-right: 15px;
+}
+
+.location-context .ratings i {
+    color: #cecece;
+    font-size: 25px;
+}
+
+
+.location-context .review-count {
+    font-weight: 500;
+    margin-bottom: 2px;
+    font-size: 20px !important;
+
+}
+
+.location-context .point {
+    font-weight: 500;
+    font-size: 25px !important;
+    margin-top: -3px;
+    margin-right: 10px;
+}
+
+
+
+.location-rating-card {
+    border: hidden;
+    background-color: #fff;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.location-context {
+    margin: 40px 64px;
+    font-weight: bold;
+    color: black;
+    justify-content: space-between;
+}
+
+.location-context h1 {
+    font-size: 48px;
+}
+
+.location-rating-card .rating-box {
+    width: 130px;
+    height: 130px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #FBC02D;
+    color: #fff;
+    text-align: center;
+}
+
+.location-comments hr {
+    border-top: 1px solid #ccc;
+    /* Çizgi rengi ve kalınlığı */
+    margin: 20px 0;
+    /* Çizginin üst ve alt boşlukları */
+}
+
+.location-context img {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+
+
+.location-context .fav img {
+    width: 64px !important;
+    height: 64px !important;
+    object-fit: cover;
+    margin-top: -15px;
+}
+
+.location-context .extra-info p {
+    opacity: 0.8;
+    font-weight: normal;
+
+}
+
+.location-context .location-info {
+
+    margin: -30px -40px;
+}
+
+.location-context .write-comment {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.location-rating-bar0 .rating-label {
+    font-weight: bold;
+}
+
+/* Rating bar width */
+.location-rating-bar0 .rating-bar {
+    width: 300px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* The bar container */
+.location-rating-bar0 .bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+/* Individual bars */
+.location-rating-bar0 .bar-5 {
+    width: 70%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px;
+
+}
+
+.location-rating-bar0 .bar-4 {
+    width: 30%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px;
+
+}
+
+.location-rating-bar0 .bar-3 {
+    width: 20%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px;
+
+}
+
+.location-rating-bar0 .bar-2 {
+    width: 10%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px;
+
+}
+
+.location-rating-bar0 .bar-1 {
+    width: 0%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px;
+
+}
+
+.location-rating-bar0 td {
+    padding-bottom: 10px;
+}
+
+.location-comments .star-active {
+    color: #FBC02D;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.location-comments .star-active:hover {
+    color: #F9A825;
+    cursor: pointer;
+}
+
+.location-comments .star-inactive {
+    color: #CFD8DC;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.location-comments .blue-text {
+    color: #0091EA;
+}
+
+
+.location-comments .comment-card {
+    font-size: 18px;
+}
+
+
+.location-comments .comment-card {
+    border: hidden;
+    background-color: #fff;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.location-comments .profile-pic {
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-right: 30px;
+}
+
+
+
+.location-comments .vote {
+    cursor: pointer;
+}

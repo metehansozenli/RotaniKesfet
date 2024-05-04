@@ -36,15 +36,6 @@ fetch('/user')
         console.error('Hata oluştu:', error);
     });
 
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const response = await fetch('/loadComments'); // /loadComments endpoint'ine GET isteği gönder
-        const data = await response.json(); // Gelen veriyi JSON formatına çevir
-        console.log(data); // Veriyi konsola yazdır veya başka bir şey yap
-    } catch (error) {
-        console.error('Error loading comments:', error);
-    }
-});
 
 
 
@@ -52,6 +43,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('customLoadEvent', function () {
     // Tüm .point öğelerini seç
     const points = document.querySelectorAll('.point');
+    let icons = document.querySelectorAll('ion-icon');
+    
+
+    icons.forEach(function (icon) {
+        icon.onclick = function () {
+            icon.classList.toggle('active');
+        }
+        });
 
     // Her bir .point öğesi için işlem yap
     points.forEach((pointElement) => {
@@ -72,15 +71,14 @@ document.addEventListener('customLoadEvent', function () {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.dispatchEvent(new CustomEvent('customLoadEvent'));
-    load_data();
-});
+
 
 //Küçük yorumların yıldızlarının ayarı
 document.addEventListener('DOMContentLoaded', function () {
     // Tüm .point öğelerini seç
     const points = document.querySelectorAll('.comment-point h5');
+
+    
     
 
     // Her bir .point öğesi için işlem yap
@@ -101,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
 
 
 

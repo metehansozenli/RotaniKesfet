@@ -6,40 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>En Popüler Restoranlar</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/otherlocation.css">
+    <link rel="stylesheet" href="./css/carouselComments.css">
+    <link rel="stylesheet" href="./css/commentModal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
 </head>
+
 
 <body>
 
     {{>config}}
 
-    <div class="container ">
-        <section class="popdest-context mt-4">
+    <div class="container" id="restaurant">
+        <section class="otherlocation-context mt-4">
             <h1 style="margin-top: 20px;">En Popüler Restoranlar</h1>
             <p>
-                İstanbul'un nefis lezzetleri, Tokyo'nun benzersiz sokak yemekleri, New York'un çeşitliliği... 
+                İstanbul'un nefis lezzetleri, Tokyo'nun benzersiz sokak yemekleri, New York'un çeşitliliği...
                 Dünyanın en popüler restoranları, sizi unutulmaz bir yemeğin tadını çıkarmaya davet ediyor.
-                 Haydi, lezzet dolu bir yolculuğa çıkın ve dünyanın dört bir yanındaki en iyi restoranları keşfedin!
+                Haydi, lezzet dolu bir yolculuğa çıkın ve dünyanın dört bir yanındaki en iyi restoranları keşfedin!
             </p>
         </section>
 
-        <div id="ppopdest_data">
+        <div id="popotherlocation_data">
 
         </div>
 
-        <section class="popdest-comments mt-4">
+        <section class="otherlocation-comments mt-4">
             <div class="wrapper">
                 <i id="left" class="fa-solid fa-angle-left"></i>
                 <ul class="carousel">
                     {{#each commentsData}}
                     <li class="card">
                         <div class="comments-upcontent">
-                            <div class="comment-location-info">Yer:&nbsp<a
+                            <div class="comment-location-info">Yer:&nbsp<a id="comment-link"
                                     href="{{this.locationLink}}">{{this.locationName}}</a></div>
-                            <di class="comment-point d-flex">
+                            <div class="comment-point d-flex">
                                 <div class="comment-stars mt-2">
                                     <span class="fas fa-star "></span>
                                     <span class="fas fa-star "></span>
@@ -47,9 +52,9 @@
                                     <span class="fas fa-star "></span>
                                     <span class="fas fa-star"></span>
                                 </div>
-                                <h5 class="comment-score mt-2 ml-2">{{this.commentScore}}.0</h5>
+                                <h5 class="comment-score mt-2 ml-2">{{this.commentScore}}</h5>
 
-                            </di>
+                            </div>
                             <div class="comment-title">{{this.commentTitle}}</div>
                             <div class="testimonial">{{this.commentContents}}</div>
                         </div>
@@ -67,9 +72,10 @@
             </div>
         </section>
 
-        <div class="popdests_all">
-            <section class="" id="popdests_data">
+        <div class="otherlocations_all">
+            <section class="" id="otherlocations_data">
             </section>
+            <div id="loading_animation" class="loader"></div>
         </div>
 
     </div>
@@ -82,8 +88,10 @@
 
 <script src="./js/commentsSlider.js"></script>
 <script src="./js/script.js"></script>
-<script src="./js/restaurantsDataLoader.js"></script>
+<script src="./js/otherlocationDataLoader.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
 
 </html>

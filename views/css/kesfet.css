@@ -1,0 +1,40 @@
+.title {
+    color: #000000;
+}
+
+section.discover,
+div.gezilecek-yerler,
+div.oteller,
+div.restoranlar {
+
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+section.discover.mt-4 {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.discoverplaces {
+    position: relative;
+    overflow: hidden;
+}
+
+
+.discoverplaces:hover {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    transform: scale(1.05);
+}
+
+.discover p {
+    color: #666
+}
