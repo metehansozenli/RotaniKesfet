@@ -375,6 +375,9 @@ app.get("/kesfet", (req, res) => {
   res.render("kesfet")
 })
 
+app.get("/routePlanner", (req, res) => {
+  res.render("routePlanner")
+})
 
 app.get("/popdest", async (req, res) => {
   try {
