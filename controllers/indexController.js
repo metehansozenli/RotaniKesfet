@@ -147,11 +147,8 @@ const getUserData = async (sessionuserId) => {
           locationCityName = result2.rows[0].cityName;
   
           restaurantData[i] = {
-            locationCountry: result.rows[i].locationCountry,
             locationCity: locationCityName,
             locationName: result.rows[i].locationName,
-            locationScore: result.rows[i].locationScore,
-            locationCommentCount: result.rows[i].locationCommentCount,
             locationImg: result.rows[i].locationImg
           }
         }

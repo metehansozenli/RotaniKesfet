@@ -69,10 +69,10 @@
         <div class="wrapperIndex3">
             <i id="left" class="fa-solid fa-angle-left"></i>
             <ul class="carouselIndex3">
-                {{#each randomCitiesData}}
+                {{#each restaurantData}}
                 <li class="indexImage-container">
-                    <img height="250px" width="250px" src={{this.cityImg}} style="object-fit: cover">
-                    <div class="indexImage-text">{{this.cityName}},{{this.cityCountry}}</div>
+                    <img height="250px" width="250px" src={{this.locationImg}} style="object-fit: cover">
+                    <div class="indexImage-text">{{this.locationName}},{{this.locationCity}}</div>
                 </li>
                 {{/each}}
             </ul>
