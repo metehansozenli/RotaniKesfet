@@ -10,9 +10,11 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/ionicons.min.css" integrity="sha512-ZVn6p2dRyQ9E0kMvXwSNkzBKsLNosx0tFTr6VvN6bFlaUEJ0dQuUVF7Q83G7DZ/aJwcpEKP4B/NvtJftVLKHLw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/ionicons.min.css"
+        integrity="sha512-ZVn6p2dRyQ9E0kMvXwSNkzBKsLNosx0tFTr6VvN6bFlaUEJ0dQuUVF7Q83G7DZ/aJwcpEKP4B/NvtJftVLKHLw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script src="./js/script.js"></script>
+
 
 
 </head>
@@ -35,22 +37,38 @@
         </section>
 
         <section class="otherlocation-section mt-4 d-block">
-            <img src="Thttps://i0.wp.com/hoganholidays.co.uk/wp-content/uploads/2021/05/The-Lumiares-Hotel-and-Spa-2.jpg?fit=1024%2C576&ssl=1"
+            <img src="https://i0.wp.com/hoganholidays.co.uk/wp-content/uploads/2021/05/The-Lumiares-Hotel-and-Spa-2.jpg?fit=1024%2C576&ssl=1"
                 alt="Keşfet" class="img-fluid d-block mt-5 mx-auto">
             <div class="popotherlocations mt-5 d-flex justify-content-between" style="margin: 2% 11%;">
                 <div class="text-left">
-                    <h2 class="otherlocation-rank mx-3">#1</h2>
-                    <h2 class="otherlocation-title mx-3">The Lumiares Hotel & Spa</h2>
+                    <h2 class="otherlocation-rank mx-3" style="">#1</h2>
+                    <h2 class="otherlocation-title mx-3" style="width:400px;">The Lumiares Hotel & Spa</h2>
+                    <div class="popotherlocation-loc mb-2 d-flex"><img src="../images/location.png" />
+                        <p>Bolifushi Island, Maldivler</p>
+                    </div>
                 </div>
-                <div class="point-section justify-content-between d-block">
-                    <div class="d-flex">
-                        <h5 class="point">4.7</h5>
-                        <div class="ratings">
-                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                class="fa fa-star"></i><i class="fa fa-star"></i>
+                <div class='otherlocation d-blok mr-4'>
+                    <div class="otherlocation-fav d-flex ">
+                          <h5 class="write-comment  text-bold" >Yorum Yazın</h5>
+                        <div class='large-font'>
+                            <ion-icon name="heart">
+                            </ion-icon>
+                        </div>
+
+                    </div>
+                    <div class="point-section d-block">
+                        <div class="d-flex">
+                            <h5 class="point">4.7</h5>
+                            <div class="ratings">
+                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                    class="fa fa-star"></i><i class="fa fa-star"></i>
+
+                            </div>
+                            <h5 class='review-count d-flex'>122 Yorum</h5>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -90,10 +108,10 @@
         <section class='otherlocation-section mt-4  d-flex justify-content-between'>
             <div class='otherlocations-context d-flex'>
                 <img src='https://i0.wp.com/hoganholidays.co.uk/wp-content/uploads/2021/05/The-Lumiares-Hotel-and-Spa-2.jpg?fit=1024%2C576&ssl=1'
-                    alt='Keşfet' class='cityImg img-fluid'>
+                    alt='Keşfet' class='locationImg img-fluid'>
                 <div class='otherlocations-text'>
-                    <h2 class='city-rank mx-3'>#2</h2>
-                    <h2 class='city-title mx-3'>The Lumiares Hotel & Spa</h2>
+                    <h2 class='otherlocation-rank mx-3'>#2</h2>
+                    <h2 class='otherlocation-title mx-3'>The Lumiares Hotel & Spa</h2>
                     <div class='point-section'>
                         <div class='d-flex'>
                             <h5 class='point'>4.5</h5>
@@ -109,12 +127,11 @@
                     </div>
                 </div>
             </div>
-            <div class='other-locations d-flex'>
+            <div class='other-locations d-flex mr-4'>
                 <h5 class="write-comment text-right text-bold">Yorum Yazın</h5>
-               <div class='large-font text-center top-20'>
-                <ion-icon name="heart">
-                    <div class='red-bg'></div>
-                </ion-icon>
+                <div class='large-font text-center top-20'>
+                    <ion-icon name="heart">
+                    </ion-icon>
                 </div>
             </div>
     </div>
@@ -124,12 +141,12 @@
 
     {{>footer}}
     <script src="./js/commentsSlider.js"></script>
-    <script src="./js/heartfavbutton.js"></script>
+    <script src="./js/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    
+    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
+
 </body>
 
 
@@ -145,9 +162,6 @@
         font-size: 32px;
     }
 
-    .rating-color {
-        color: #fbc634 !important;
-    }
 
 
     .popotherlocations .point {
@@ -161,18 +175,58 @@
         margin-right: 20px;
     }
 
-
-
     .popotherlocations .point-section {
 
 
         margin-right: 0px;
+        margin-top: 8px;
 
     }
 
     .popotherlocations_all {
         margin-bottom: 100px;
 
+    }
+
+    .popotherlocation-loc {
+        margin-top: 20px;
+        margin-left: 15px;
+    }
+
+    .popotherlocations img {
+        width: 28px !important;
+        height: 28px !important;
+        object-fit: cover;
+    }
+
+    .popotherlocation-loc p {
+        font-weight: 400;
+        font-size: 20px !important;
+        margin-left: 15px;
+        margin-top: -3px;
+        color: #000000;
+    }
+
+    .otherlocation {
+        margin-top: -10px;
+    }
+
+    .otherlocation-fav{
+        justify-content: end;
+    }
+
+    .otherlocation .review-count {
+        font-weight: 500;
+        margin-top: 2px;
+        font-size: 18px !important;
+    }
+
+    .otherlocation .write-comment{
+            color: #000000;
+            font-size: 18px;
+            margin-top: 20px;
+             text-decoration: underline;
+            cursor: pointer;
     }
 
     .otherlocation-section img {
@@ -183,7 +237,7 @@
         max-height: 475px;
     }
 
-    .otherlocation-section .cityImg {
+    .otherlocation-section .locationImg {
         object-fit: cover;
         width: 500px;
         height: 350px;
@@ -201,6 +255,9 @@
         color: #666
     }
 
+    .otherlocation-rank, .otherlocation-title{
+        font-size: 42px;
+    }
 
     .otherlocation-section .ratings i {
         color: #cecece;
@@ -233,9 +290,11 @@
     }
 
     .otherlocations-text {
-        margin-left: 50px;
+        margin-left: 20px;
         margin-top: 50px;
     }
+
+
 
     .otherlocations-context {
         margin-top: 20px;
@@ -263,26 +322,26 @@
         font-weight: 400;
         font-size: 20px !important;
         margin-left: 25px;
-        margin-top: -5px;
+        margin-top: -3px;
         color: #000000;
     }
 
-    .city-title {
+    .otherlocation-title {
         color: #000000;
-        width: 250px;
+        width: 300px;
     }
 
 
-    .city-rank {
+    .otherlocation-rank {
         color: #D9D9D9;
-
     }
 
-    .write-comment {
+    .other-locations .write-comment {
         color: #000000;
-        ;
-        font-size: 16px;
+        font-size: 18px;
+        margin-top: 18px;
         text-decoration: underline;
+        cursor: pointer;
     }
 
     .otherlocation-context {
@@ -316,34 +375,45 @@
         font-size: 20px
     }
 
-.large-font{
-  font-size:xxx-large;
-}
+    .large-font {
+        font-size: xxx-large;
+    }
 
-ion-icon.active{
-  animation:like 0.5s 1;
-  fill:red;
-  stroke:none;
-}
-ion-icon{
-  fill:transparent;
-  stroke:black;
-  stroke-width:30;
-  transition:all 0.5s;
-}
+    ion-icon {
+        fill: transparent;
+        stroke: rgb(0, 0, 0) !important;
+        stroke-width: 20px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin-left: 20px;
+    }
+
+    ion-icon.active {
+        animation: like 0.5s 1;
+        fill: red;
+        stroke-width: 0px;
+
+    }
 
 
-@-webkit-keyframes like {
-  0%   { transform: scale(1); }
-  90%   { transform: scale(1.2); }
-  100% { transform: scale(1.1); }
-}
+    @-webkit-keyframes like {
+        0% {
+            transform: scale(1);
+        }
 
+        90% {
+            transform: scale(1.2);
+        }
+
+        100% {
+            transform: scale(1.1);
+        }
+    }
 </style>
 
 <script>
     let icon = document.querySelector('ion-icon');
-icon.onclick = function(){
-  icon.classList.toggle('active');
-}
+    icon.onclick = function () {
+        icon.classList.toggle('active');
+    }
 </script>
