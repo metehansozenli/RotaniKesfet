@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="tr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>...</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <script src="./js/script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yorumlarım</title>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+<script src="./js/script.js"></script>
 
 
 </head>
@@ -30,10 +29,10 @@
             <div class="mycomments-rating-card d-flex justify-content-center">
 
                 <div class="my-ratings d-flex flex-column justify-content-center align-items-center">
-                    <h3 class="mb-2 text-center text-muted">Ortalama <br>Puanım</h3>
+                    <h3 class="mb-2 text-center text-muted">Ortalama <br>Puanlamam</h3>
                     <div class="rating-box">
                         <h1 class="pt-4">4.0</h1>
-                        <p class="text-white">5 üzerinden</p>
+
                     </div>
                     <div class="">
                         <span class="fa fa-star star-active mx-1"></span>
@@ -46,10 +45,14 @@
                 <div class="justify-content-end">
                     <div class="mycomment-rating-bar0 justify-content-center">
                         <h3 class="mb-4 text-center text-muted">Puan İstatiklerim</h3>
-                        <table class="text-left mx-auto">
+                        <table class="text-left-mx-auto">
                             <tr>
-                                <td class="mycomments-rating-label">Excellent</td>
+                                <td class="mycomments-rating-label">5<span class="fa fa-star star-active mx-1"></span>
+                                </td>
+
+
                                 <td class="rating-bar">
+
                                     <div class="bar-container">
                                         <div class="bar-5"></div>
                                     </div>
@@ -57,7 +60,8 @@
                                 <td class="text-right">123</td>
                             </tr>
                             <tr>
-                                <td class="mycomments-rating-label">Good</td>
+                                <td class="mycomments-rating-label">4<span class="fa fa-star star-active mx-1"></span>
+                                </td>
                                 <td class="rating-bar">
                                     <div class="bar-container">
                                         <div class="bar-4"></div>
@@ -66,7 +70,8 @@
                                 <td class="text-right">23</td>
                             </tr>
                             <tr>
-                                <td class="mycomments-rating-label">Average</td>
+                                <td class="mycomments-rating-label">3<span class="fa fa-star star-active mx-1"></span>
+                                </td>
                                 <td class="rating-bar">
                                     <div class="bar-container">
                                         <div class="bar-3"></div>
@@ -75,7 +80,8 @@
                                 <td class="text-right">10</td>
                             </tr>
                             <tr>
-                                <td class="mycomments-rating-label">Poor</td>
+                                <td class="mycomments-rating-label">2<span class="fa fa-star star-active mx-1"></span>
+                                </td>
                                 <td class="rating-bar">
                                     <div class="bar-container">
                                         <div class="bar-2"></div>
@@ -84,7 +90,8 @@
                                 <td class="text-right">3</td>
                             </tr>
                             <tr>
-                                <td class="mycomments-rating-label">Terrible</td>
+                                <td class="mycomments-rating-label">1<span class="fa fa-star star-active mx-1"></span>
+                                </td>
                                 <td class="rating-bar">
                                     <div class="bar-container">
                                         <div class="bar-1"></div>
@@ -97,7 +104,124 @@
                 </div>
 
             </div>
-            
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="accordion" id="ratingAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <h4 class="text-muted">Filtrele</h4>
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    Puan <i class="fa fa-caret-down"></i>
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                data-bs-parent="#ratingAccordion">
+                                <div class="accordion-body">
+                                    <!-- Default checkbox -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"
+                                            checked>
+                                        <label class="form-check-label" for="flexCheckDefault1">
+                                            <i class="fas fa-star text-warning"></i><i
+                                                class="fas fa-star text-warning"></i><i
+                                                class="fas fa-star text-warning"></i><i
+                                                class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-warning"></i>
+                                        </label>
+                                    </div>
+                                    <!-- Default checkbox -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2"
+                                            checked>
+                                        <label class="form-check-label" for="flexCheckDefault2">
+                                            <i class="fas fa-star text-warning"></i><i
+                                                class="fas fa-star text-warning"></i><i
+                                                class="fas fa-star text-warning"></i><i
+                                                class="fas fa-star text-warning"></i>
+                                            <i class="fas fa-star text-secondary"></i>
+                                        </label>
+                                    </div>
+                                    <!-- Default checkbox -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3"
+                                            checked>
+                                        <label class="form-check-label" for="flexCheckDefault3">
+                                            <i class="fas fa-star text-warning"></i><i
+                                                class="fas fa-star text-warning"></i><i
+                                                class="fas fa-star text-warning"></i><i
+                                                class="fas fa-star text-secondary"></i>
+                                            <i class="fas fa-star text-secondary"></i>
+                                        </label>
+                                    </div>
+                                    <!-- Default checkbox -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4"
+                                            checked>
+                                        <label class="form-check-label" for="flexCheckDefault4">
+                                            <i class="fas fa-star text-warning"></i><i
+                                                class="fas fa-star text-warning"></i><i
+                                                class="fas fa-star text-secondary"></i><i
+                                                class="fas fa-star text-secondary"></i>
+                                            <i class="fas fa-star text-secondary"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="accordion" id="sortingAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <h4 class="text-muted">Sıralama Seçenekleri</h4>
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Sıralama <i class="fa fa-caret-down"></i>
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                data-bs-parent="#sortingAccordion">
+                                <div class="accordion-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sortingOption" id="newToOld"
+                                            checked>
+                                        <label class="form-check-label" for="newToOld">
+                                            Yeniden Eskiye
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sortingOption" id="oldToNew">
+                                        <label class="form-check-label" for="oldToNew">
+                                            Eskiden Yeniye
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sortingOption"
+                                            id="ratingDescending">
+                                        <label class="form-check-label" for="ratingDescending">
+                                            Puana Göre Azalan
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sortingOption"
+                                            id="ratingAscending">
+                                        <label class="form-check-label" for="ratingAscending">
+                                            Puana Göre Artan
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+            </div>
+
             <div class="comment-card">
                 <div class="row d-flex">
                     <div class="">
@@ -108,7 +232,7 @@
                         <div class="text-left d-flex ">
                             <p class="text-muted">Ankara, Türkiye</p>
                         </div>
-                        <div class="mycomment-comment-ranking d-flex mb-0" >
+                        <div class="mycomment-comment-ranking d-flex mb-0">
                             <p class="point text-left "><span class="text-muted">4.0</span>
                                 <span class="fa fa-star star-active ml-3"></span>
                                 <span class="fa fa-star star-active"></span>
@@ -116,9 +240,9 @@
                                 <span class="fa fa-star star-active"></span>
                                 <span class="fa fa-star star-inactive mr-2"></span>
                             </p>
-                            
+
                         </div>
-                        
+
                     </div>
                     <div class="mycomment-date ml-auto">
                         <p class="text-muted pt-5 pt-sm-3">10 Sept</p>
@@ -149,7 +273,7 @@
                         <div class="text-left d-flex ">
                             <p class="text-muted">Ankara, Türkiye</p>
                         </div>
-                        <div class="mycomment-comment-ranking d-flex mb-0" >
+                        <div class="mycomment-comment-ranking d-flex mb-0">
                             <p class="point text-left "><span class="text-muted">4.0</span>
                                 <span class="fa fa-star star-active ml-3"></span>
                                 <span class="fa fa-star star-active"></span>
@@ -157,9 +281,9 @@
                                 <span class="fa fa-star star-active"></span>
                                 <span class="fa fa-star star-inactive mr-2"></span>
                             </p>
-                            
+
                         </div>
-                        
+
                     </div>
                     <div class="mycomment-date ml-auto">
                         <p class="text-muted pt-5 pt-sm-3">10 Sept</p>
@@ -179,21 +303,45 @@
                     </div>
                 </div>
             </div>
-            
 
 
 
 
+        </section>
 
     </div>
 
     {{>footer}}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 <style>
+     h4 {
+   
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.accordion-button {
+    background-color: #ab7e15;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.accordion-button.collapsed {
+    background-color: #FBC02D;
+}
+
+.accordion-button:hover {
+    background-color: #ab7e15;
+}
+
+
     .location-section {
         margin-bottom: 20px;
         padding: 20px;
@@ -241,7 +389,7 @@
         margin-bottom: 50px;
     }
 
-    .mycomment-date{
+    .mycomment-date {
         font-size: 20px;
     }
 
@@ -258,7 +406,7 @@
 
     .rating-box {
         width: 130px;
-        height: 130px;
+        height: 110px;
         margin-right: auto;
         margin-left: auto;
         background-color: #FBC02D;
@@ -267,7 +415,9 @@
     }
 
     .mycomments-rating-label {
+
         font-weight: bold;
+
     }
 
     /* Rating bar width */
@@ -287,7 +437,7 @@
         cursor: pointer;
         margin-bottom: 5px;
     }
-    
+
     /* Individual bars */
     .bar-5 {
         width: 70%;
@@ -329,15 +479,16 @@
 
     }
 
-    td {
+    .text-left-mx-auto td {
         padding-bottom: 10px;
+
     }
 
-       
 
-        .mycomment-info {
-            font-size: 24px;
-        }
+
+    .mycomment-info {
+        font-size: 24px;
+    }
 
     .star-active {
         color: #FBC02D;
@@ -419,10 +570,9 @@
         margin: -30px -40px;
     }
 
-    .mycomments-rating-card .my-ratings{
+    .mycomments-rating-card .my-ratings {
         margin-right: 200px;
     }
-
 </style>
 
 </html>
