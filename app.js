@@ -19,6 +19,10 @@ const popdest = require("./routes/popDest")
 const restaurant = require("./routes/restaurantRoutes");
 const hotels  = require('./routes/hotelsRoutes');
 const locations = require("./routes/locationRoutes")
+const popDestData = require("./routes/get_popDestDataRoutes")
+const otherlocationData = require("./routes/get_otherlocationDataRoutes")
+
+
 client.connect((err) => {
   if (err) {
     console.error('Veritabanına bağlanırken bir hata oluştu:', err.stack);
@@ -146,9 +150,8 @@ app.use("/", popdest)
 app.use("/", restaurant)
 app.use("/",hotels)
 app.use("/", locations)
-
-
-
+app.use("/", popDestData)
+app.use("/", otherlocationData)
 
 
 app.get("/mycomment", (req, res) => {
@@ -188,82 +191,6 @@ function gracefulShutdown() {
 }
 
 
-//Mustafa'nın Gizli Denemeleri
-app.get("/get_popDestData", async (req, res) => {
-  try {
-    const start_index = parseInt(req.query.start_index) || 0;
-    const num_record = parseInt(req.query.num_record) || 10;
-
-    const query = {
-              text: `SELECT 
-                      cities.*, 
-                      ARRAY_AGG(locations."locationName") AS "locationNames", 
-                      ARRAY_AGG(locations."locationID") AS "locationIDs"
-                  FROM 
-                      cities 
-                  LEFT JOIN (
-                      SELECT *
-                      FROM locations
-                      WHERE "locationScore" IN (
-                          SELECT DISTINCT "locationScore"
-                          FROM locations
-                          ORDER BY "locationScore" DESC
-                          LIMIT 5
-                      )
-                  ) AS locations ON cities."cityID" = locations."locationCityID" 
-                  GROUP BY 
-                      cities."cityID" 
-                  ORDER BY 
-                      cities."cityScore" DESC, 
-                      cities."cityName" DESC 
-                  OFFSET $1 
-                  LIMIT $2;
-              `,
-                values: [start_index, num_record],
-            };
-    const result = await client.query(query);
-
-    res.json(result.rows); // Sonuçları JSON olarak gönderme
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-app.get("/get_otherlocationData", async (req, res) => {
-  try {
-    const start_index = parseInt(req.query.start_index) || 0;
-    const num_record = parseInt(req.query.num_record) || 10;
-    const locationType = req.query.locationType;
-
-    const query = {
-              text:  `SELECT 
-                      locations.*,
-                      cities."cityName"
-                  FROM 
-                      locations
-                  INNER JOIN 
-                      cities ON locations."locationCityID" = cities."cityID"
-                  WHERE 
-                      locations."locationType" = $3
-                  ORDER BY 
-                      locations."locationScore" DESC,
-                      locations."locationName" DESC
-                  OFFSET $1 
-                  LIMIT $2;
-              `,
-                values: [start_index, num_record, locationType],
-            };
-    const result = await client.query(query);
-
-    res.json(result.rows); // Sonuçları JSON olarak gönderme
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
 app.get("/calendar", (req, res) => {
   res.render("calendar")
 })
-
