@@ -432,3 +432,7 @@ app.get("/get_popDestData", async (req, res) => {
   }
 });
 
+app.get("/calendar", (req, res) => {
+  res.render("calendar")
+})
+

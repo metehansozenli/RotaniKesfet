@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Takvim</title>
+  <!-- Google Fonts(Poppins) -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- DateRangePicker CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+  <link rel="stylesheet" href="css/calendar.css">
+  <script src="js/calendar.js"></script>
+
+</head>
+
+<body>
+
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <h3 style="position: relative; left: 250px;">Seyahat oluşturun</h3>
+      <div class="form-group" style="position: relative; left: 250px;">
+        <label for="seyahatAdi">Seyahat Adı</label><br>
+        <input class="seyahatadi-input" type="text" id="seyahatAdi" name="seyahatAdi" maxlength="80"
+          placeholder="Örneğin Türkiye'de yaz tatili" style="width: 600px; height: 60px; border-radius: 5px">
+      </div>
+      <div class="form-group-des" style="position: relative; left: 250px;">
+        <label for="destinasyon">Destinasyon</label><br>
+        <p>Birden fazla şehir seçmek için şehir adını yazın ve 'enter' tuşuna basın</p>
+        <div class="content">
+          <ul><input maxlength="20" type="text" spellcheck="false" id="destinasyon-tag" name="destinasyon"
+              placeholder="Nereye? "></ul>
+        </div>
+        <div class="details">
+          <p>*<span>5</span> şehir seçme hakkınız kaldı</p>
+          <button>Hepsini kaldır</button>
+        </div>
+      </div>
+
+      <div class="container px-1 px-sm-5 mx-auto">
+        <form autocomplete="off">
+          <div class="flex-sm-row flex-column d-flex">
+            <div class="col-sm-9 col-12 px-0 mb-2">
+              <div class="input-group input-daterange">
+                <input type="text" class="form-control" placeholder="Başlangıç tarihi " readonly>
+                <input type="text" class="form-control" placeholder="Bitiş tarihi" readonly>
+              </div>
+            </div>
+            <div class="col-sm-3 col-12 px-0">
+              <button type="submit" class="btn btn-black">Seyahat oluştur</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <span class="close">&times;</span>
+      <div class="container">
+        <!-- Sol taraftaki menü -->
+        <div class="menu-container">
+          <div class="btn-select open">
+            <!-- open sınıfı eklenerek varsayılan olarak açık olacak şekilde değiştirildi -->
+            <span class="btn-text">Kategoriler</span>
+            <span class="arrow-down">
+              <i class="fas fa-chevron-down"></i>
+            </span>
+          </div>
+          <ul class="list-items">
+            <li class="item">
+              <span class="checkbox">
+                <i class="fas fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Tarihi Yerler</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fas fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Müzeler</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fas fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Restoranlar</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fas fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Oteller</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fas fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Parklar</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fas fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Manzara Noktaları</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fas fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Alışveriş Noktaları</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fas fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Caddeler Sokaklar</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="myBtn">Aç</button>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- DateRangePicker JS -->
+  <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+
+
+
+</body>
+
+</html>
