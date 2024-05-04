@@ -468,7 +468,6 @@ function gracefulShutdown() {
 }
 
 
-//Mustafa'nın Gizli Denemeleri
 app.get("/get_popDestData", async (req, res) => {
   try {
     const start_index = parseInt(req.query.start_index) || 0;
