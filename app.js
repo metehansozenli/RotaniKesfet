@@ -16,7 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const veritabani = require("./controllers/indexController")
 const icont = require("./routes/indexRoutes")
 const popdest = require("./routes/popDest")
-const deneme = require("./routes/denemeRoutes")
 const restaurant = require("./routes/restaurantRoutes");
 const hotels  = require('./routes/hotelsRoutes');
 const locations = require("./routes/locationRoutes")
@@ -144,7 +143,6 @@ app.get("/routePlanner", (req, res) => {
 })
 
 app.use("/", popdest)
-app.use("/", deneme)
 app.use("/", restaurant)
 app.use("/",hotels)
 app.use("/", locations)
