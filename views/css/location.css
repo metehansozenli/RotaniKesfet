@@ -84,12 +84,52 @@
 }
 
 
+.large-font {
+    font-size: xxx-large;
+}
 
-.location-context .fav img {
-    width: 64px !important;
-    height: 64px !important;
-    object-fit: cover;
-    margin-top: -15px;
+ion-icon {
+    fill: transparent;
+    stroke: rgb(0, 0, 0) !important;
+    stroke-width: 20px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-left:20px;
+}
+
+ion-icon.active {
+    animation: like 0.5s 1;
+    fill: red;
+    stroke-width: 0px;
+
+}
+
+@keyframes like {
+    0% {
+        transform: scale(1);
+    }
+
+    90% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@-webkit-keyframes like {
+    0% {
+        -webkit-transform: scale(1);
+    }
+
+    90% {
+        -webkit-transform: scale(1.2);
+    }
+
+    100% {
+        -webkit-transform: scale(1.1);
+    }
 }
 
 .location-context .extra-info p {

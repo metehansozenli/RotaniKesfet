@@ -20,23 +20,23 @@
 
     {{>config}}
 
-    <script></script> 
+    <script></script>
     <div class="container ">
         <section class="location-section mt-4 ">
-           
+
             <div class="location-context d-flex ">
-                <div class="align-items-center">
+                <div class="align-items-center" style="width: 500px;">
                     <h1 class="text-left">{{locationData.locationName}}</h1>
                     <div class="d-flex ">
-                        <p class="mr-3 text-success">Şu anda açık</p>
-                        <p class="mr-3">09.00-19.00</p>
-                        <p class="write-comment text-right ">Yorum Yazın</p>
+                        <p class="location-status mr-3 "></p>
+                        <p id="openTime" class="mr-3">09:00-19:00</p>
+                        <p class="write-comment text-right">Yorum Yazın</p>
                     </div>
                 </div>
 
-                <div class="location-info d-flex">
-                    <div>
-                        <div class="d-flex mb-2">
+                <div class="location-info mt-1 d-flex">
+                    <div style="margin-left: -30px;">
+                        <div class="d-flex mb-2 ">
                             <h5 class="point">{{locationData.locationScore}}</h5>
                             <div class="ratings">
                                 <i class="fa fa-star"></i>
@@ -49,21 +49,22 @@
                         </div>
                         <div>
                             <div class="extra-info d-block">
-                                <div class="mb-2 d-flex"><img src="../images/location.png" />
-                                    <p>{{locationData.locationCoordinates}}</p>
+                                <div class="mb-2 d-flex" style="width: 350px;"><img src="../images/location.png" />
+                                    <p>{{locationData.locationAddress}}</p>
                                 </div>
-                                <div class="mb-2 d-flex"><img src="../images/time.png" />
-                                    <p>3 saatten fazla gezme süresi</p>
+                                <div class="mb-3 d-flex"><img src="../images/time.png" />
+                                    <p>Ortalama {{locationData.locationTime}} gezme süresi</p>
                                 </div>
                                 <div class="mb-2 d-flex"><img src="../images/etiket.png" />
                                     <p>{{locationData.locationType}}</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="fav ml-4 "><img src="../images/fav.png" /></div>
-                    </div>
+                    </div>    
+                            <div class='large-font' style="margin-top: -20px;">
+                                <ion-icon name='heart'></ion-icon>
+                            </div>
+                    
                 </div>
             </div>
 
@@ -71,14 +72,13 @@
                 style="width: 850px; height: 475px; object-fit: cover;">
         </section>
         {{/if}}
-        <section class="location-comments mt-4">
+        <section class="location-comments mt-4" id="">
             <h1 class="pt-4 text-left ml-4">Yorumlar</h1>
             <div class="location-rating-card">
                 <div class="row justify-content-left d-flex">
                     <div class=" d-flex flex-column justify-content-center align-items-center">
                         <div class="rating-box">
-                            <h1 class="pt-4">4.0</h1>
-                            <p class="text-white">out of 5</p>
+                            <h1 class="">4.0</h1>
                         </div>
                         <div class="">
                             <span class="fa fa-star star-active mx-1"></span>
@@ -142,129 +142,11 @@
                 </div>
             </div>
 
-            <div class="comment-card">
-                <div class="row d-flex">
-                    <div class="">
-                        <img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg">
-                    </div>
-                    <div class="d-flex flex-column">
-                        <h3 class="mt-2 mb-0">@wassapman</h3>
-                        <div class="d-flex mb-0">
-                            <p class="text-left"><span class="text-muted">4.0</span>
-                                <span class="fa fa-star star-active ml-3"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-inactive mr-2"></span>
-                            </p>
-                            <p class="text-right mt-1"><span class="text-muted">44 Yorum</span>
-                        </div>
-                        <div class="text-left d-flex " style="margin-top:-18px;">
-                            <p class="text-muted">Ankara, Türkiye</p>
-                        </div>
-                    </div>
-                    <div class="ml-auto">
-                        <p class="text-muted pt-5 pt-sm-3">10 Sept</p>
-                    </div>
-                </div>
-                <div class="row text-left">
-                    <h4 class="blue-text mt-3">"An awesome activity to experience"</h4>
-                    <p class="content">If you really enjoy spending your vacation 'on water' or would like to try
-                        something new and exciting for the first time.</p>
-                </div>
-                <div class="row text-left mt-4">
-                    <div class="like mr-3 vote">
-                        <img src="https://i.imgur.com/mHSQOaX.png"><span class="blue-text pl-2">20</span>
-                    </div>
-                    <div class="unlike vote">
-                        <img src="https://i.imgur.com/bFBO3J7.png"><span class="text-muted pl-2">4</span>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="comment-card">
-                <div class="row d-flex">
-                    <div class="">
-                        <img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg">
-                    </div>
-                    <div class="d-flex flex-column">
-                        <h3 class="mt-2 mb-0">@wassapman</h3>
-                        <div class="d-flex mb-0">
-                            <p class="text-left"><span class="text-muted">4.0</span>
-                                <span class="fa fa-star star-active ml-3"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-inactive mr-2"></span>
-                            </p>
-                            <p class="text-right mt-1"><span class="text-muted">44 Yorum</span>
-                        </div>
-                        <div class="text-left d-flex " style="margin-top:-18px;">
-                            <p class="text-muted">Ankara, Türkiye</p>
-                        </div>
-                    </div>
-                    <div class="ml-auto">
-                        <p class="text-muted pt-5 pt-sm-3">10 Sept</p>
-                    </div>
-                </div>
-                <div class="row text-left">
-                    <h4 class="blue-text mt-3">"An awesome activity to experience"</h4>
-                    <p class="content">If you really enjoy spending your vacation 'on water' or would like to try
-                        something new and exciting for the first time.</p>
-                </div>
-                <div class="row text-left mt-4">
-                    <div class="like mr-3 vote">
-                        <img src="https://i.imgur.com/mHSQOaX.png"><span class="blue-text pl-2">20</span>
-                    </div>
-                    <div class="unlike vote">
-                        <img src="https://i.imgur.com/bFBO3J7.png"><span class="text-muted pl-2">4</span>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="comment-card">
-                <div class="row d-flex">
-                    <div class="">
-                        <img class="profile-pic" src="https://i.imgur.com/V3ICjlm.jpg">
-                    </div>
-                    <div class="d-flex flex-column">
-                        <h3 class="mt-2 mb-0">@wassapman</h3>
-                        <div class="d-flex mb-0">
-                            <p class="text-left"><span class="text-muted">4.0</span>
-                                <span class="fa fa-star star-active ml-3"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-inactive mr-2"></span>
-                            </p>
-                            <p class="text-right mt-1"><span class="text-muted">44 Yorum</span>
-                        </div>
-                        <div class="text-left d-flex " style="margin-top:-18px;">
-                            <p class="text-muted">Ankara, Türkiye</p>
-                        </div>
-                    </div>
-                    <div class="ml-auto">
-                        <p class="text-muted pt-5 pt-sm-3">10 Sept</p>
-                    </div>
-                </div>
-                <div class="row text-left">
-                    <h4 class="blue-text mt-3">"An awesome activity to experience"</h4>
-                    <p class="content">If you really enjoy spending your vacation 'on water' or would like to try
-                        something new and exciting for the first time.</p>
-                </div>
-                <div class="row text-left mt-4">
-                    <div class="like mr-3 vote">
-                        <img src="https://i.imgur.com/mHSQOaX.png"><span class="blue-text pl-2">20</span>
-                    </div>
-                    <div class="unlike vote">
-                        <img src="https://i.imgur.com/bFBO3J7.png"><span class="text-muted pl-2">4</span>
-                    </div>
-                </div>
-            </div>
+           <di id="locationcomments_data">
 
-
-
+           </di>
         </section>
+            <div id="loading_animation" class="loader"></div>
 
 
 
@@ -274,8 +156,11 @@
     {{>footer}}
 
     <script src="./js/script.js"></script>
+    <script src="./js/locationcommentDataLoader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 
