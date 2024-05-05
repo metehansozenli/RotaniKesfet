@@ -13,6 +13,8 @@ const app = express();
 const sessions = {};
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+
 const getUserData = async (sessionuserId) => {
     try {
       const result2 = await client.query('SELECT "userNickname", "userName", "userSurname" FROM users WHERE "userID" = $1', [sessionuserId]);
@@ -103,27 +105,33 @@ const getUserData = async (sessionuserId) => {
   
   const getRandomCitiesData = async () => {
     try {
-      const result = await client.query(`
-                                        SELECT "cityImg", "cityName","cityID"
-                                        FROM cities 
-                                        WHERE "cityScore" > 3.75 AND "cityID" < 11 
-                                        ORDER BY RANDOM() 
-                                        LIMIT 8;`);
-  
-      if (result.rows.length > 0) {
-        const randomCitiesData = {};
-        for (let i = 0; i < result.rows.length; i++) {
-          const result2 = await client.query('SELECT "locationCountry" FROM locations  WHERE "locationCityID" = $1 LIMIT 1', [result.rows[i].cityID]);
-          const cityCountry = result2.rows[0].locationCountry;
-  
-          randomCitiesData[i] = {
-            cityCountry: cityCountry,
-            cityName: result.rows[i].cityName,
-            cityImg: result.rows[i].cityImg
-          }
-        }
-        return randomCitiesData;
-  
+      const query = `
+                    SELECT 
+                      cities."cityImg", 
+                      cities."cityName",
+                      cities."cityID",
+                      locations."locationCountry"
+                    FROM 
+                      cities 
+                    JOIN 
+                      locations ON cities."cityID" = locations."locationCityID"
+                    WHERE 
+                      cities."cityScore" > 3.75
+                    ORDER BY 
+                      RANDOM() 
+                    LIMIT 8
+                  `;
+
+    const result = await client.query(query);
+
+    if (result.rows.length > 0) {
+      const randomCitiesData = result.rows.map(row => ({
+        cityCountry: row.locationCountry,
+        cityName: row.cityName,
+        cityImg: row.cityImg
+      }));
+
+      return randomCitiesData;
       }
       else {
         return null; // Return null if no data found
@@ -137,52 +145,71 @@ const getUserData = async (sessionuserId) => {
   
   const getRestaurantData = async () => {
     try {
-      const result = await client.query('SELECT * FROM locations  WHERE "locationType" = \'Restoran\' ORDER BY "locationScore" DESC, "locationName" DESC');
-  
+      const query = `
+                    SELECT 
+                      locations.*, 
+                      cities."cityName" AS "locationCity"
+                    FROM 
+                      locations 
+                    JOIN 
+                      cities ON locations."locationCityID" = cities."cityID"
+                    WHERE 
+                      locations."locationType" = 'Restoran'
+                    ORDER BY 
+                      locations."locationScore" DESC, 
+                      locations."locationName" DESC
+                    `;
+
+      const result = await client.query(query);
+
       if (result.rows.length > 0) {
-        const restaurantData = {};
-  
-        for (let i = 0; i < result.rows.length; i++) {
-          const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1', [result.rows[i].locationCityID]);
-          locationCityName = result2.rows[0].cityName;
-  
-          restaurantData[i] = {
-            locationCity: locationCityName,
-            locationName: result.rows[i].locationName,
-            locationImg: result.rows[i].locationImg
-          }
-        }
-        return restaurantData;
+      const restaurantData = result.rows.map(row => ({
+        locationCity: row.locationCity,
+        locationName: row.locationName,
+        locationImg: row.locationImg
+      }));
+
+      return restaurantData;
       }
       else {
-        return null; // Return null if no data found
+        return null;
       }
     } catch (error) {
       console.error("Error fetching restaurant data:", error);
-      throw error; // Rethrow the error to be caught by the caller
+      throw error; 
     }
   }
   
   const getHotelData = async () => {
     try {
-      const result = await client.query('SELECT * FROM locations  WHERE "locationType" = "Hotel" ORDER BY "locationScore"');
-  
+      const query = `
+                    SELECT 
+                      locations.*, 
+                      cities."cityName" AS "locationCity"
+                    FROM 
+                      locations 
+                    JOIN 
+                      cities ON locations."locationCityID" = cities."cityID"
+                    WHERE 
+                      locations."locationType" = 'Otel'
+                    ORDER BY 
+                      locations."locationScore" DESC, 
+                      locations."locationName" DESC
+                    `;
+
+      const result = await client.query(query);
+
       if (result.rows.length > 0) {
-        const hotelData = {};
-  
-        for (let i = 0; i < result.rows.length; i++) {
-          const result2 = await client.query('SELECT "cityName" FROM cities  WHERE "cityID" = $1', [result.rows[i].locationCityID]);
-          locationCityName = result2.rows[0].cityName;
-  
-          hotelData[i] = {
-            locationCountry: result.rows[i].locationCountry,
-            locationCity: locationCityName,
-            locationName: result.rows[i].locationName,
-            locationScore: result.rows[i].locationScore,
-            locationCommentCount: result.rows[i].locationCommentCount,
-            locationImg: result.rows[i].locationImg
-          }
-        }
+        const hotelData = result.rows.map(row => ({
+
+          locationCountry: row.locationCountry,
+          locationCity: row.locationCity,
+          locationName: row.locationName,
+          locationScore: row.locationScore,
+          locationCommentCount: row.locationCommentCount,
+          locationImg: row.locationImg
+      }));
+
         return hotelData;
       }
       else {
@@ -195,44 +222,71 @@ const getUserData = async (sessionuserId) => {
   }
   
   const getCommentData = async (commentType) => {
-    var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
     try {
       if(commentType == "restaurant"){
-        var queryCustom = 'SELECT comments.*, locations."locationName" FROM comments JOIN locations ON locations."locationID" = comments."locationID" WHERE locations."locationType" = \'Restoran\' ORDER BY RANDOM() LIMIT 12';
+        var queryCustom = `
+                          SELECT comments.*, locations."locationName", users."userNickname"
+                          FROM comments 
+                          JOIN locations 
+                          ON locations."locationID" = comments."locationID" 
+                          JOIN users  
+                          ON users."userID" = comments."userID"
+                          WHERE locations."locationType" = 'Restoran'
+                          ORDER BY RANDOM() 
+                          LIMIT 12;
+                          `;
       }else if(commentType == "hotel"){
-        var queryCustom = 'SELECT comments.*, locations."locationName" FROM comments JOIN locations ON locations."locationID" = comments."locationID" WHERE locations."locationType" = \'Otel\' ORDER BY RANDOM() LIMIT 12';
+        var queryCustom = `
+                          SELECT comments.*, locations."locationName", users."userNickname"
+                          FROM comments 
+                          JOIN locations 
+                          ON locations."locationID" = comments."locationID" 
+                          JOIN users  
+                          ON users."userID" = comments."userID"
+                          WHERE locations."locationType" = 'Restoran'
+                          ORDER BY RANDOM() 
+                          LIMIT 12;
+                          `;
+      
       }else if(commentType == "popdest"){
-        var queryCustom = 'SELECT comments.*, locations."locationName" FROM comments JOIN locations ON locations."locationID" = comments."locationID" WHERE locations."locationType" NOT IN (\'Otel\', \'Restoran\') ORDER BY RANDOM() LIMIT 12';
+        var queryCustom = `
+                          SELECT comments.*, locations."locationName", users."userNickname"
+                          FROM comments 
+                          JOIN locations 
+                          ON locations."locationID" = comments."locationID" 
+                          JOIN users  
+                          ON users."userID" = comments."userID"
+                          WHERE locations."locationType" NOT IN ('Otel', 'Restoran')
+                          ORDER BY RANDOM() 
+                          LIMIT 12
+                          `;
       }
       else{
         console.error("wrong parameter!!!!");
       }
       const result = await client.query(queryCustom);
-  
+      
       if (result.rows.length > 0) {
-        const commentsData = [];
-        for (let i = 0; i < result.rows.length; i++) {
-          const userData = await getUserData(result.rows[i].userID); //kullanıcı id sine göre kullanıcı verilerini cekiyor
-          const userNickname = userData[1]; //Cekilen verilerden nickname alınıyor
-  
-          var date = result.rows[i].commentDate;
-          date = new Date();
-          var month = date.getMonth();
-          var year = date.getFullYear();
-          result.rows[i].commentDate = months[month] + " " + year;
-  
-          commentsData[i] = {
-            userNickname: userNickname,
-            commentContents: result.rows[i].commentContents,
-            commentDate: result.rows[i].commentDate,
-            commentScore: result.rows[i].commentScore,
-            commentTitle: result.rows[i].commentTitle,
+        
+        const commentsData = result.rows.map(row => {
+
+          // Tarih verisi ay ve yıl şeklinde güncelleniyor.
+          const commentDate = new Date(row.commentDate); 
+          const month = months[commentDate.getMonth()];
+          const year = commentDate.getFullYear();
+        
+          return {
+            userNickname: row.userNickname,
+            commentContents: row.commentContents,
+            commentDate: `${month} ${year}`, // Ay ve yıl bilgisini kullanarak tarihi oluşturuluyor.
+            commentScore: row.commentScore,
+            commentTitle: row.commentTitle,
             userProfilePic: "./images/avatar.jpeg",
-            locationName: result.rows[i].locationName,
-            locationLink: "/location?id=" + result.rows[i].locationID,
-          }
-  
-        }
+            locationName: row.locationName,
+            locationLink: "/location?id=" + row.locationID,
+          };
+        });
+      
         return commentsData;
       }
       else {

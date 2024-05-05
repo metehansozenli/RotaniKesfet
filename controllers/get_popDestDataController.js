@@ -1,10 +1,5 @@
 
 const client = require("../database.js");
-
-
-
-
-
 exports.get_popDestData = async (req, res) => {
     try {
       const start_index = parseInt(req.query.start_index) || 0;
