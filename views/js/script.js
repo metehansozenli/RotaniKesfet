@@ -76,17 +76,16 @@ document.addEventListener('customLoadEvent', function () {
 
 
 //Küçük yorumların yıldızlarının ayarı
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('customCommentLoadEvent', function () {
     // Tüm .point öğelerini seç
-    const points = document.querySelectorAll('.comment-point h5');
-
+    const points = document.querySelectorAll('.comment-score');
+  
     
-    
-
     // Her bir .point öğesi için işlem yap
     points.forEach((pointElement) => {
         const point = parseFloat(pointElement.textContent);
-        const stars = pointElement.parentElement.querySelector('.comment-point .comment-stars').querySelectorAll('span');
+        const stars = pointElement.parentElement.querySelector('.comment-stars').querySelectorAll('span');
+        
         // Yıldızları güncelle
         stars.forEach((star, index) => {
             if (index < Math.floor(point)) { // Puanı aşağıya yuvarlayarak yıldızları dolduruyoruz

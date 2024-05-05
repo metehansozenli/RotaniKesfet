@@ -5,8 +5,9 @@ let finish = false;
 let j = 0;
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.dispatchEvent(new CustomEvent('customLoadEvent'));
 
+   
+    document.dispatchEvent(new CustomEvent('customCommentLoadEvent'));
     var restaurant = document.getElementById("restaurant");
     var hotel = document.getElementById("hotel");
 
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
 window.addEventListener('scroll', () => {
 
 
-    if (window.innerHeight + window.scrollY + 5 >= document.body.offsetHeight && state && !finish) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && state && !finish) {
 
         var restaurant = document.getElementById("restaurant");
         var hotel = document.getElementById("hotel");
@@ -69,7 +70,7 @@ const otherlocation_load_data = (locationType) => {
                                     '</div>' +
                                     "<div class='otherlocation d-blok mr-4'>" +
                                     '<div class="otherlocation-fav d-flex ">' +
-                                    ' <h5 class="write-comment  text-bold" >Yorum Yazın</h5>' +
+                                    ' <a href="commentWrite" class="write-comment text-bold">Yorum Yazın</a>' +
                                     "<div class='large-font'>" +
                                     '<ion-icon name="heart">' +
                                     "</ion - icon >" +
@@ -113,7 +114,7 @@ const otherlocation_load_data = (locationType) => {
                             " </div>" +
                             "</div>" +
                             "<div class='other-locations d-flex mr-4'>" +
-                            "<h5 class='write-comment text-right text-bold'>Yorum Yazın</h5>" +
+                            "<a href='commentWrite' class='write-comment text-bold'>Yorum Yazın</a>" +
                             "<div class='large-font text-center top-20'>" +
                             "<ion-icon name='heart'></ion-icon>" +
                             "</div>" +
@@ -142,11 +143,6 @@ const otherlocation_load_data = (locationType) => {
     });
 };
 
-icons.forEach(function (icon) {
-    icon.onclick = function () {
-        icon.classList.toggle('active');
-    }
-    });
 
 
 

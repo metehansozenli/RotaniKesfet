@@ -5,7 +5,7 @@ let finish = false;
 let j = 0;
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.dispatchEvent(new CustomEvent('customLoadEvent'));
+    document.dispatchEvent(new CustomEvent('customCommentLoadEvent'));
     popdest_load_data();
 
 });

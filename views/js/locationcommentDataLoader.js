@@ -7,7 +7,7 @@ var locationID;
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.dispatchEvent(new CustomEvent('customLoadEvent'));
+        
     locationID=getIdFromUrl();
     locationcomment_load_data(locationID);
 });
@@ -80,10 +80,10 @@ const locationcomment_load_data = (locationID) => {
                         "<div class='d-flex flex-column'>" +
                         "<h3 class='mt-2 mb-0'>@" + result.userNickname + "</h3>" +
                         "<div class='d-flex mb-0'>" +
-                        "<p class='text-left'><span class='text-muted'>" + result.commentScore + "</span>" +
-                        "<span class='fa fa-star' ></span>".repeat(5) +
+                        "<p class='text-left'><div class='comment-score text-muted mr-2'>" + result.commentScore + "</div>" +
+                        "<div class='comment-stars'>" +"<span class='fa fa-star' ></span>".repeat(5) + "</div>" +
                         "</p>" +
-                        "<p class='text-right mt-1'><span class='text-muted'>" + result.userCommentCount + " Yorum</span>" +
+                        "<p class='text-right ml-2'><span class='text-muted'>" + result.userCommentCount + " Yorum</span>" +
                         "</div>" +
                         "<div class='text-left d-flex'  style='margin-top:-18px;'>" +
                         "<p class='text-muted'>" + result.userCity + ", " + result.userCountry + "</p>" +
@@ -93,7 +93,7 @@ const locationcomment_load_data = (locationID) => {
                         "<p class='text-muted pt-5 pt-sm-3'>" + result.commentDate + "</p>" +
                         "</div>" +
                         "</div>" +
-                        "<div class='row text-left'>" +
+                        "<div class='d-block text-left'>" +
                         "<h4 class='blue-text mt-3'>" + result.commentTitle + "</h4>" +
                         "<p class='content'>" + result.commentContents + "</p>" +
                         "</div>" +
@@ -102,10 +102,11 @@ const locationcomment_load_data = (locationID) => {
                         "<img src='" + "dd" + "'>" + result.commentLikeCount + "</span>" +
                         "</div>" +
                         "<div class='unlike vote'>" +
-                        " <img src='" + "ddd" + "'><span class='text-muted pl-2'>" + result.commentDislikeCount + "</span>" +
+                        " <img src='" + "ddd" + "'><span class='pl-2 '>" + result.commentDislikeCount + "</span>" +
                         "</div>" +
                         "</div>" +
-                        "</div>";
+                        "</div>"+
+                        "<hr>";
 
                     start_index++;
 
@@ -113,7 +114,7 @@ const locationcomment_load_data = (locationID) => {
 
                 locationcomments_data.innerHTML = locationcomments_data.innerHTML + html;
 
-                document.dispatchEvent(new CustomEvent('customLoadEvent'));
+                document.dispatchEvent(new CustomEvent('customCommentLoadEvent'));
                 document.getElementById("loading_animation").style.display = "none";
                 state = true;
                 resolve(); // İşlem tamamlandığında Promise'i çöz
@@ -131,11 +132,6 @@ const locationcomment_load_data = (locationID) => {
     });
 };
 
-icons.forEach(function (icon) {
-    icon.onclick = function () {
-        icon.classList.toggle('active');
-    }
-});
 
 
 

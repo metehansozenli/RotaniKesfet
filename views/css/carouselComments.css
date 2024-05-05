@@ -129,13 +129,17 @@
 
 
 .active-star {
-    color: #FBC02D;
+    color: #FBC02D !important;
     margin-bottom: 8px;
 }
 
 .active-star:hover {
     color: #F9A825;
     cursor: pointer;
+}
+
+.comment-stars span {
+    color: #cecece;
 }
 
 

@@ -71,7 +71,12 @@
         margin-top: 20px;
          text-decoration: underline;
         cursor: pointer;
+        color:inherit;
+        font-weight: 600;
+        
+        
 }
+
 
 .otherlocation-section img {
     object-fit: cover;
@@ -190,6 +195,8 @@
     margin-top: 18px;
     text-decoration: underline;
     cursor: pointer;
+    color:inherit;
+    font-weight: 600;
 }
 
 .otherlocation-context {

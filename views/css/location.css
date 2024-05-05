@@ -81,11 +81,23 @@
     height: 32px;
     margin-right: 10px;
     object-fit: cover;
+    cursor: none;
 }
 
 
 .large-font {
     font-size: xxx-large;
+}
+
+.active-star {
+    color: #FBC02D !important;
+    margin-bottom: 8px;
+}
+
+
+
+.comment-stars span {
+    color: #cecece;
 }
 
 ion-icon {
@@ -146,6 +158,8 @@ ion-icon.active {
 .location-context .write-comment {
     text-decoration: underline;
     cursor: pointer;
+    color: inherit;
+    margin-top: -1px;
 }
 
 .location-rating-bar0 .rating-label {
@@ -239,6 +253,10 @@ ion-icon.active {
 
 .location-comments .comment-card {
     font-size: 18px;
+}
+
+.location-comments .comment-card .content{
+    text-align: justify;
 }
 
 
