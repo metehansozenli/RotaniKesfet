@@ -46,6 +46,7 @@ app.post("/register", async (req, res) => {
     userNickname: req.body.nickname,
     userName: req.body.ad,
     userSurname: req.body.soyad,
+    userCity: req.body.sehir,
     userCountry: req.body.ulke,
     userMail: req.body.email,
     userPhoneNo: req.body.telefonNumarasi,
@@ -54,7 +55,7 @@ app.post("/register", async (req, res) => {
 
   try {
     // Veritabanına kayıt ekle
-    await client.query('INSERT INTO users ("userNickname", "userMail", "userName", "userSurname", "userCountry", "userPhoneNo", "userPass") VALUES ($1, $2, $3, $4, $5, $6, $7)', [formData.userNickname, formData.userMail, formData.userName, formData.userSurname, formData.userCountry, formData.userPhoneNo, formData.userPass]);
+    await client.query('INSERT INTO users ("userNickname", "userMail", "userName", "userSurname", "userCity", "userCountry", "userPhoneNo", "userPass") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [formData.userNickname, formData.userMail, formData.userName, formData.userSurname, formData.userCity, formData.userCountry, formData.userPhoneNo, formData.userPass]);
     const randomCitiesData = await veritabani.getRandomCitiesData();
     // Kayıt işlemi başarılı olduğunda
     res.render("index",{randomCitiesData:randomCitiesData})

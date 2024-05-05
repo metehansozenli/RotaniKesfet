@@ -147,7 +147,32 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// Formu kontrol etme fonksiyonu
+function validateForm() {
+    var email = document.forms["kayitFormu"]["email"].value;
+    var ad = document.forms["kayitFormu"]["ad"].value;
+    var soyad = document.forms["kayitFormu"]["soyad"].value;
+    var nickname = document.forms["kayitFormu"]["nickname"].value;
+    var sehir = document.forms["kayitFormu"]["sehir"].value;
+    var ulke = document.forms["kayitFormu"]["ulke"].value;
+    var telefonNumarasi = document.forms["kayitFormu"]["telefonNumarasi"].value;
+    var sifre = document.forms["kayitFormu"]["sifre"].value;
 
+    if (email == "" || ad == "" || soyad == "" || nickname == "" || sehir == "" || ulke == "" || telefonNumarasi == "" || sifre == "") {
+        alert("Lütfen tüm alanları doldurun");
+        return false;
+    }
+
+    // E-posta doğrulaması
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert("Geçerli bir e-posta adresi girin");
+        return false;
+    }
+
+
+    return true;
+}
 
 
 
