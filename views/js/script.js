@@ -45,15 +45,6 @@ fetch('/user')
 document.addEventListener('customLoadEvent', function () {
     // Tüm .point öğelerini seç
     const points = document.querySelectorAll('.point');
-    let icons = document.querySelectorAll('ion-icon');
-    
-
-    icons.forEach(function (icon) {
-        icon.onclick = function () {
-            icon.classList.toggle('active');
-        }
-        });
-
 
     // Her bir .point öğesi için işlem yap
     points.forEach((pointElement) => {
@@ -103,9 +94,20 @@ document.addEventListener('customCommentLoadEvent', function () {
 });
 
 
+function favControl() {
+    let icons = document.querySelectorAll('ion-icon');
+    
+
+    icons.forEach(function (icon) {
+        icon.onclick = function () {
+            icon.classList.toggle('active');
+        }
+        });
 
 
-document.addEventListener('DOMContentLoaded', function () {
+};
+
+function locationStatus() {
     var openTimeElement = document.getElementById("openTime");
     var locationStatus = document.querySelector(".location-status");
 
@@ -146,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Metnin rengini değiştir
         locationStatus.style.color = statusColor;
     }
-});
+};
 
 // Formu kontrol etme fonksiyonu
 function validateForm() {
@@ -186,7 +188,7 @@ document.addEventListener('customlikeControlEvent', function () {
         // Her bir .vote-section içindeki like ve dislike butonlarını seç
         const likeBtn = voteElement.querySelector('.likeBtn');
         const dislikeBtn = voteElement.querySelector('.dislikeBtn');
-
+         
         // Like butonu için tıklama olayını ekle
         likeBtn.addEventListener('click', function() {
             // Dislike butonu seçiliyse, seçimini kaldır

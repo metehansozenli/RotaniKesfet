@@ -127,6 +127,7 @@ const otherlocation_load_data = (locationType) => {
                 });
                 otherlocations_data.innerHTML = otherlocations_data.innerHTML + html;
                 document.dispatchEvent(new CustomEvent('customLoadEvent'));
+                favControl();
                 document.getElementById("loading_animation").style.display = "none";
                 state = true;
                 resolve(); // İşlem tamamlandığında Promise'i çöz

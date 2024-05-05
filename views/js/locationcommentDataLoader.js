@@ -6,7 +6,9 @@ let j = 0;
 var locationID;
 
 document.addEventListener('DOMContentLoaded', function () {
-
+    locationStatus();
+    favControl();
+    document.dispatchEvent(new CustomEvent('customCommentLoadEvent'));
     calculateStarWidths();
     locationID=getIdFromUrl();
     locationcomment_load_data(locationID);
@@ -49,7 +51,7 @@ function getIdFromUrl() {
     return id;
 }
 
-const locationcomment_load_data = (locationID) => {
+const locationcomment_load_data = (locationID) => { 
     return new Promise((resolve, reject) => {
         
         state = false;

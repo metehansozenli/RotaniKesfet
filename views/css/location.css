@@ -161,6 +161,29 @@ ion-icon.active {
 
 }
 
+.location-description p {
+    opacity: 0.8 !important;
+    font-weight: normal !important;
+    text-align: justify;
+    width: 400px;
+    color:black
+
+}
+
+.location-context .location-description img {
+   width: 32px;
+   height: 32px;
+
+}
+
+.location-context .location-description img {
+    width: 32px;
+    height: 32px;
+ 
+ }
+
+
+
 .location-context .location-info {
 
     margin: -30px -40px;
