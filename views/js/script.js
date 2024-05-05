@@ -54,6 +54,7 @@ document.addEventListener('customLoadEvent', function () {
         }
         });
 
+
     // Her bir .point öğesi için işlem yap
     points.forEach((pointElement) => {
         const point = parseFloat(pointElement.textContent);
@@ -150,6 +151,69 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
+document.addEventListener('customlikeControlEvent', function () {
+    // Tüm .vote-section öğelerini seç
+    const votes = document.querySelectorAll('.vote-section');
+
+    // Her bir .vote-section öğesi için işlem yap
+    votes.forEach((voteElement) => {
+        // Her bir .vote-section içindeki like ve dislike butonlarını seç
+        const likeBtn = voteElement.querySelector('.likeBtn');
+        const dislikeBtn = voteElement.querySelector('.dislikeBtn');
+
+        // Like butonu için tıklama olayını ekle
+        likeBtn.addEventListener('click', function() {
+            // Dislike butonu seçiliyse, seçimini kaldır
+            const dislikeBtnActive = dislikeBtn.classList.contains('voteActive');
+            if (dislikeBtnActive) {
+                dislikeBtn.classList.remove('voteActive');
+            } 
+            // Like butonunun seçimini toggle et
+            this.classList.toggle('voteActive');
+        });
+
+        // Dislike butonu için tıklama olayını ekle
+        dislikeBtn.addEventListener('click', function() {
+            // Like butonu seçiliyse, seçimini kaldır
+            const likeBtnActive = likeBtn.classList.contains('voteActive');
+            if (likeBtnActive) {
+                likeBtn.classList.remove('voteActive');
+            } 
+            // Dislike butonunun seçimini toggle et
+            this.classList.toggle('voteActive');
+        });
+    });
+});
+
+
+
+
+function calculateStarWidths() {
+    // Tüm yıldız öğelerini seçelim
+    const star1 = document.querySelector('.star1');
+    const star2 = document.querySelector('.star2');
+    const star3 = document.querySelector('.star3');
+    const star4 = document.querySelector('.star4');
+    const star5 = document.querySelector('.star5');
+
+    // Yıldızların toplamını hesaplayalım
+    const totalStars = parseInt(star1.textContent) + parseInt(star2.textContent) + parseInt(star3.textContent) + parseInt(star4.textContent) + parseInt(star5.textContent);
+
+    // Her bir yıldızın yüzde genişlik değerini hesaplayalım
+    const percentageOfStar1 = (parseInt(star1.textContent) / totalStars) * 100;
+    const percentageOfStar2 = (parseInt(star2.textContent) / totalStars) * 100;
+    const percentageOfStar3 = (parseInt(star3.textContent) / totalStars) * 100;
+    const percentageOfStar4 = (parseInt(star4.textContent) / totalStars) * 100;
+    const percentageOfStar5 = (parseInt(star5.textContent) / totalStars) * 100;
+
+    // Her bir bar öğesinin genişlik değerlerini ayarlayalım
+    document.querySelector('.bar-5').style.width = percentageOfStar5 + '%';
+    document.querySelector('.bar-4').style.width = percentageOfStar4 + '%';
+    document.querySelector('.bar-3').style.width = percentageOfStar3 + '%';
+    document.querySelector('.bar-2').style.width = percentageOfStar2 + '%';
+    document.querySelector('.bar-1').style.width = percentageOfStar1 + '%';
+}
 
 
 

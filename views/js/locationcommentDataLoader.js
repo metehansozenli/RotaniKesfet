@@ -5,9 +5,9 @@ let finish = false;
 let j = 0;
 var locationID;
 
-
 document.addEventListener('DOMContentLoaded', function () {
-        
+
+    calculateStarWidths();
     locationID=getIdFromUrl();
     locationcomment_load_data(locationID);
 });
@@ -97,12 +97,14 @@ const locationcomment_load_data = (locationID) => {
                         "<h4 class='blue-text mt-3'>" + result.commentTitle + "</h4>" +
                         "<p class='content'>" + result.commentContents + "</p>" +
                         "</div>" +
-                        "<div class='row text-left mt-4'>" +
+                        "<div class='vote-section d-flex text-left mt-4'>" +
                         "<div class='like mr-3 vote'>" +
-                        "<img src='" + "dd" + "'>" + result.commentLikeCount + "</span>" +
+                        "<button class='likeBtn d-flex' ><i class='fa fa-thumbs-up fa-lg' aria-hidden='true'></i>"+
+                        "<span style='margin-left:2px;'>"+result.commentLikeCount+ "</span></button>" +
                         "</div>" +
                         "<div class='unlike vote'>" +
-                        " <img src='" + "ddd" + "'><span class='pl-2 '>" + result.commentDislikeCount + "</span>" +
+                        "<button class='dislikeBtn d-flex'><i class='fa fa-thumbs-down fa-lg' aria-hidden='true'></i>"+
+                        "<span style='margin-left:2px;'>"+result.commentDislikeCount+ "</span></button>" +
                         "</div>" +
                         "</div>" +
                         "</div>"+
@@ -113,7 +115,7 @@ const locationcomment_load_data = (locationID) => {
                 });
 
                 locationcomments_data.innerHTML = locationcomments_data.innerHTML + html;
-
+                document.dispatchEvent(new CustomEvent('customlikeControlEvent'));
                 document.dispatchEvent(new CustomEvent('customCommentLoadEvent'));
                 document.getElementById("loading_animation").style.display = "none";
                 state = true;
@@ -131,6 +133,7 @@ const locationcomment_load_data = (locationID) => {
         request.send();
     });
 };
+
 
 
 

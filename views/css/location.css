@@ -39,13 +39,10 @@
 
 
 .location-rating-card {
-    border: hidden;
-    background-color: #fff;
-    padding-left: 50px;
-    padding-right: 50px;
-    margin-top: 10px;
-    padding-top: 10px;
-    padding-bottom: 30px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: end !important;
+    align-items: center;
 }
 
 .location-context {
@@ -53,19 +50,28 @@
     font-weight: bold;
     color: black;
     justify-content: space-between;
+    
 }
 
-.location-context h1 {
-    font-size: 48px;
-}
 
-.location-rating-card .rating-box {
-    width: 130px;
-    height: 130px;
-    margin-right: auto;
-    margin-left: auto;
+.location-rating-card .comment-score {
+    width: 140px;
+    height: 140px;
     background-color: #FBC02D;
     color: #fff;
+    font-size: 48px;
+    display: flex; /* Flexbox kullanarak içeriği düzenle */
+    align-items: center; /* Dikey hizalama */
+    justify-content: center; /* Yatay hizalama */
+    
+}
+
+
+
+
+
+.location-rating-card .rating-bar {
+    justify-content: center;
     text-align: center;
 }
 
@@ -75,6 +81,11 @@
     margin: 20px 0;
     /* Çizginin üst ve alt boşlukları */
 }
+
+.blue-text {
+    color: #0091EA;
+}
+
 
 .location-context img {
     width: 32px;
@@ -184,46 +195,51 @@ ion-icon.active {
     margin-bottom: 5px;
 }
 
-/* Individual bars */
+/* styles.css */
+
+:root {
+    --percentageOfExcellent: 0%; /* Varsayılan değer */
+    --percentageOfGood: 0%;
+    --percentageOfAverage: 0%;
+    --percentageOfPoor: 0%;
+    --percentageOfTerrible: 0%;
+}
+
 .location-rating-bar0 .bar-5 {
-    width: 70%;
+    width: var(--percentageOfExcellent);
     height: 13px;
     background-color: #FBC02D;
     border-radius: 20px;
-
 }
 
 .location-rating-bar0 .bar-4 {
-    width: 30%;
+    width: var(--percentageOfGood);
     height: 13px;
     background-color: #FBC02D;
     border-radius: 20px;
-
 }
 
 .location-rating-bar0 .bar-3 {
-    width: 20%;
+    width: var(--percentageOfAverage);
     height: 13px;
     background-color: #FBC02D;
     border-radius: 20px;
-
 }
 
 .location-rating-bar0 .bar-2 {
-    width: 10%;
+    width: var(--percentageOfPoor);
     height: 13px;
     background-color: #FBC02D;
     border-radius: 20px;
-
 }
 
 .location-rating-bar0 .bar-1 {
-    width: 0%;
+    width: var(--percentageOfTerrible);
     height: 13px;
     background-color: #FBC02D;
     border-radius: 20px;
-
 }
+
 
 .location-rating-bar0 td {
     padding-bottom: 10px;
@@ -246,9 +262,6 @@ ion-icon.active {
     margin-bottom: 10px;
 }
 
-.location-comments .blue-text {
-    color: #0091EA;
-}
 
 
 .location-comments .comment-card {
@@ -279,7 +292,23 @@ ion-icon.active {
 }
 
 
-
-.location-comments .vote {
+.likeBtn,
+.dislikeBtn {
     cursor: pointer;
+    outline: 0;
+    color: #AAA;
+    background: none;
+    border: none;
 }
+
+.likeBtn:focus,
+.dislikeBtn:focus {
+    outline: none;
+}
+
+  
+ .voteActive{
+    color: #1b9cfc;
+    transform: scale(1.1);
+  }
+  

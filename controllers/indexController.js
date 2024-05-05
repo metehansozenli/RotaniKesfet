@@ -298,6 +298,41 @@ const getUserData = async (sessionuserId) => {
     }
   
   }
+
+  async function getTotalStarCounts(locationID) {
+    try {
+        const result = await client.query(`
+            SELECT 
+                SUM(CASE WHEN "commentScore" >= 0 AND "commentScore" < 1 THEN 1 ELSE 0 END) AS total_star1,
+                SUM(CASE WHEN "commentScore" >= 1 AND "commentScore" < 2 THEN 1 ELSE 0 END) AS total_star2,
+                SUM(CASE WHEN "commentScore" >= 2 AND "commentScore" < 3 THEN 1 ELSE 0 END) AS total_star3,
+                SUM(CASE WHEN "commentScore" >= 3 AND "commentScore" < 4 THEN 1 ELSE 0 END) AS total_star4,
+                SUM(CASE WHEN "commentScore" >= 4 AND "commentScore" <= 5 THEN 1 ELSE 0 END) AS total_star5
+            FROM 
+                comments
+            WHERE 
+                "locationID" = $1;
+        `, [locationID]);
+
+        // Veritabanından gelen sonuçları al
+        const starCounts = {
+            totalStar1: result.rows[0].total_star1,
+            totalStar2: result.rows[0].total_star2,
+            totalStar3: result.rows[0].total_star3,
+            totalStar4: result.rows[0].total_star4,
+            totalStar5: result.rows[0].total_star5
+        };
+
+        // Sonuçları geri döndür
+        return starCounts;
+
+    } catch (err) {
+        console.error('Hata oluştu:', err);
+        // Hata durumunda null döndür
+        return null;
+    }
+}
+
   
   module.exports = {
     getRandomCitiesData,
@@ -306,5 +341,6 @@ const getUserData = async (sessionuserId) => {
     getCommentData,
     getSpecifiedLocationData,
     getPopularCityData,
-    getUserData
+    getUserData,
+    getTotalStarCounts
   };

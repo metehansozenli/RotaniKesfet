@@ -60,94 +60,100 @@
                                 </div>
                             </div>
                         </div>
-                    </div>    
-                            <div class='large-font' style="margin-top: -20px;">
-                                <ion-icon name='heart'></ion-icon>
-                            </div>
-                    
+                    </div>
+                    <div class='large-font' style="margin-top: -20px;">
+                        <ion-icon name='heart'></ion-icon>
+                    </div>
+
                 </div>
             </div>
 
             <img src={{locationData.locationImg}} alt="Keşfet" class="img-fluid  d-block mt-4 mb-4 mx-auto"
                 style="width: 850px; height: 475px; object-fit: cover;">
         </section>
-        {{/if}}
+
         <section class="location-comments mt-4" id="">
-            <h1 class="pt-4 text-left ml-4">Yorumlar</h1>
+            <h1 class="pt-4 text-center ml-4">{{locationData.locationName}} Yorumları</h1>
             <div class="location-rating-card">
-                <div class="row justify-content-left d-flex">
-                    <div class=" d-flex flex-column justify-content-center align-items-center">
-                        <div class="rating-box">
-                            <h1 class="">4.0</h1>
-                        </div>
-                        <div class="">
-                            <span class="fa fa-star star-active mx-1"></span>
-                            <span class="fa fa-star star-active mx-1"></span>
-                            <span class="fa fa-star star-active mx-1"></span>
-                            <span class="fa fa-star star-active mx-1"></span>
-                            <span class="fa fa-star star-inactive mx-1"></span>
+                
+
+                    <div class="rating-box  d-block">
+                        <h1 class="comment-score">{{locationData.locationScore}}</h1>
+
+                        {{/if}}
+                        <div class="comment-stars">
+                            <span class="fa fa-star mx-1"></span>
+                            <span class="fa fa-star mx-1"></span>
+                            <span class="fa fa-star mx-1"></span>
+                            <span class="fa fa-star mx-1"></span>
+                            <span class="fa fa-star mx-1"></span>
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="location-rating-bar0 justify-content-center">
+                        <div class="location-rating-bar0 justify-content-center" style="max-heigth:200px;">
                             <table class="text-left mx-auto">
                                 <tr>
-                                    <td class="rating-label">Excellent</td>
+                                    <td class="rating-label text-right">5<span
+                                            class="fa fa-star star-active mx-1"></span>
                                     <td class="rating-bar">
                                         <div class="bar-container">
                                             <div class="bar-5"></div>
                                         </div>
-                                    </td>
-                                    <td class="text-right">123</td>
+                                    </td>{{#if totalStarCounts}}
+                                    <td class="star5 text-right">{{totalStarCounts.totalStar5}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="rating-label">Good</td>
+                                    <td class="rating-label text-right">4<span
+                                            class="fa fa-star star-active mx-1"></span>
                                     <td class="rating-bar">
                                         <div class="bar-container">
                                             <div class="bar-4"></div>
                                         </div>
                                     </td>
-                                    <td class="text-right">23</td>
+                                    <td class="star4 text-right">{{totalStarCounts.totalStar4}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="rating-label">Average</td>
+                                    <td class="rating-label text-right">3<span
+                                            class="fa fa-star star-active mx-1"></span>
                                     <td class="rating-bar">
                                         <div class="bar-container">
                                             <div class="bar-3"></div>
                                         </div>
                                     </td>
-                                    <td class="text-right">10</td>
+                                    <td class="star3 text-right">{{totalStarCounts.totalStar3}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="rating-label">Poor</td>
+                                    <td class="rating-label text-right">2<span
+                                            class="fa fa-star star-active mx-1"></span>
                                     <td class="rating-bar">
                                         <div class="bar-container">
                                             <div class="bar-2"></div>
                                         </div>
                                     </td>
-                                    <td class="text-right">3</td>
+                                    <td class="star2 text-right">{{totalStarCounts.totalStar2}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="rating-label">Terrible</td>
+                                    <td class="rating-label text-right">1<span
+                                            class="fa fa-star star-active mx-1"></span>
                                     <td class="rating-bar">
                                         <div class="bar-container">
                                             <div class="bar-1"></div>
                                         </div>
                                     </td>
-                                    <td class="text-right">0</td>
+                                    <td class="star1 text-right">{{totalStarCounts.totalStar1}}</td>
                                 </tr>
-                            </table>
+                            </table>{{/if}}
                         </div>
                     </div>
-                </div>
+               
             </div>
 
-           <di id="locationcomments_data">
+            <di id="locationcomments_data">
 
-           </di>
-           <div id="loading_animation" class="loader"></div>
+            </di>
+            <div id="loading_animation" class="loader"></div>
         </section>
-            
+
 
 
 
