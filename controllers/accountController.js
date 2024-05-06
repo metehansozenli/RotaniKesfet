@@ -50,6 +50,7 @@ exports.postLogin =  async (req, res) => {
             
   
             const randomCitiesData = await veritabani.getRandomCitiesData();
+            
             res.render("index", { randomCitiesData: randomCitiesData , userID : req.session.userID});
         } else {
             res.send("Kullanıcı adı veya şifre yanlış!"); // Kullanıcı bulunamazsa hata mesajı gönder

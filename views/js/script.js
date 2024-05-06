@@ -150,7 +150,6 @@ function locationStatus() {
         // Metnin rengini değiştir
         locationStatus.style.color = statusColor;
     }
-<<<<<<< Updated upstream
 };
 
 // Formu kontrol etme fonksiyonu
@@ -214,10 +213,8 @@ document.addEventListener('customlikeControlEvent', function () {
             this.classList.toggle('voteActive');
         });
     });
-=======
     // BU ŞEKİLDE USERID KONSOL ÇIKTISI OLARAK GELİYOR İNDEX.HBS'DEN 
     console.log(window.userID)
->>>>>>> Stashed changes
 });
 
 
