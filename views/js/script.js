@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
+
 function menuToggle() {
     const toggleMenu = document.querySelector(".menu");
     toggleMenu.classList.toggle("active");
@@ -148,6 +150,7 @@ function locationStatus() {
         // Metnin rengini değiştir
         locationStatus.style.color = statusColor;
     }
+<<<<<<< Updated upstream
 };
 
 // Formu kontrol etme fonksiyonu
@@ -211,6 +214,10 @@ document.addEventListener('customlikeControlEvent', function () {
             this.classList.toggle('voteActive');
         });
     });
+=======
+    // BU ŞEKİLDE USERID KONSOL ÇIKTISI OLARAK GELİYOR İNDEX.HBS'DEN 
+    console.log(window.userID)
+>>>>>>> Stashed changes
 });
 
 
@@ -241,7 +248,6 @@ function calculateStarWidths() {
     document.querySelector('.bar-2').style.width = percentageOfStar2 + '%';
     document.querySelector('.bar-1').style.width = percentageOfStar1 + '%';
 }
-
 
 
 
