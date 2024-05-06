@@ -8,13 +8,26 @@ exports.get_locationcommentData = async (req, res) => {
       
   
       const query = {
-        text: `SELECT comments.*, users."userNickname", users."userCountry", users."userCity", users."userCommentCount", users."userImg"
-                FROM comments
-                INNER JOIN users ON comments."userID" = users."userID"
-                WHERE comments."locationID" = $3
-                ORDER BY RANDOM()
-                OFFSET $1
-                LIMIT $2;`,
+        text: `
+              SELECT
+                comments.*,
+                users."userNickname",
+                users."userCountry", 
+                users."userCity", 
+                users."userCommentCount", 
+                users."userImg"
+              FROM 
+                comments
+              INNER JOIN 
+                users 
+              ON 
+                comments."userID" = users."userID"
+              WHERE
+              comments."locationID" = $3
+              ORDER BY RANDOM()
+              OFFSET $1
+              LIMIT $2;
+              `,
         values: [start_index, num_record, locationID]
     };
       

@@ -18,7 +18,7 @@ window.addEventListener('scroll', () => {
 
 
 
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && state && !finish) {
+    if (window.innerHeight + window.scrollY + 5 >= document.body.offsetHeight && state && !finish) {
 
         document.getElementById("loading_animation").style.display = "block";
         setTimeout(1000);

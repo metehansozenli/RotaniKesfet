@@ -109,6 +109,16 @@ function favControl() {
             }else {
                 $('#loginAlert').modal('show');
             }
+
+            // icon.onclick = async function () {
+            //     if (icon.classList.toggle('active')) {
+            //         console.log(c+=1);
+            //         const result = await client.query(`UPDATE users 
+            //                                     SET "userFavLocations" = ARRAY_APPEND("userFavLocations", $1) 
+            //                                     WHERE "userID"=6;`,[2]);
+            //     } else {//Aktiflik kaldırılırsa
+            //         console.log(c-=1);
+            //     }
         };
     });
 }
@@ -271,4 +281,26 @@ function checkSessionForcommentWrite(locationID) {
         }else {
             $('#loginAlert').modal('show');
         }
+}
+
+async function setFavStatus(userID,locationID) {
+    
+    try{
+        const icon = document.getElementById("heart");
+        const result = await client.query(`
+                                            SELECT 
+                                                "userFavLocations"
+                                            FROM
+                                                users 
+                                            WHERE "userID" = $1 AND $2 = ANY ("userFavLocations");
+                                          `, [userID,locationID]);
+
+        if (result.rows.length > 0) {
+            icon.classList.add('active');
+        }
+        else ;
+
+    }catch(error){
+        console.error("Sorgu Hatası:", error);
+    }
 }

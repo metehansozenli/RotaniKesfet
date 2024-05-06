@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
 window.addEventListener('scroll', () => {
 
 
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && state && !finish) {
+    if (window.innerHeight + window.scrollY + 5 >= document.body.offsetHeight && state && !finish) {
 
         var restaurant = document.getElementById("restaurant");
         var hotel = document.getElementById("hotel");
