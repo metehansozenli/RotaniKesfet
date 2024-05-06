@@ -69,6 +69,8 @@ app.use("/", locations)
 app.use("/", popDestData)
 app.use("/", otherlocationData)
 app.use("/", account)
+app.use("/", locationcommentData)
+
 
 
 app.get("/mycomment", (req, res) => {
@@ -86,8 +88,8 @@ app.get("/commentWrite", (req, res) => {
   res.render("commentWrite")
 })
 
-app.get("/kullanmaklavuzu", (req, res) => {
-  res.render("kullanmaklavuzu")
+app.get("/kullanimklavuzu", (req, res) => {
+  res.render("kullanimklavuzu")
 })
 
 app.get("/calendar", (req, res) => {
@@ -107,11 +109,7 @@ process.on('SIGTERM', gracefulShutdown);
 function gracefulShutdown() {
   console.log('Sunucu kapatılıyor...');
 
-  // Oturumları kapat
-  for (const sessionID in sessions) {
-    delete sessions[sessionID];
-  }
-
+ 
   // Veritabanı bağlantısını kapat
   client.end(() => {
     console.log('Veritabanı bağlantısı kapatıldı');

@@ -80,11 +80,13 @@ exports.changeHeader = async (req, res) => {
         try {
             const userData = await veritabani.getUserData(userSession.userID);
             if (userData) {
-                const [userName, userNickname, userSurname] = userData;
+                const [userName, userNickname, userSurname, userImg] = userData;
                 res.render("partials/loginheader", {
                     userNickname: userNickname,
                     userName: userName,
-                    userSurname: userSurname
+                    userSurname: userSurname,
+                    userImg: userImg
+                    
                 });
             } else {
                 res.send("Bir hata Oluştu!");

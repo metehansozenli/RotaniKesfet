@@ -20,11 +20,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
 function menuToggle() {
     const toggleMenu = document.querySelector(".menu");
     toggleMenu.classList.toggle("active");
+    console.log(window.userID);
 }
 
 
@@ -66,7 +65,7 @@ document.addEventListener('customLoadEvent', function () {
         });
     });
     // BU ŞEKİLDE USERID KONSOL ÇIKTISI OLARAK GELİYOR İNDEX.HBS'DEN 
-    console.log(window.userID)
+   
 });
 
 
