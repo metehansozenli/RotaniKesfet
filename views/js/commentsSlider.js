@@ -96,13 +96,19 @@ var span = document.getElementsByClassName("close")[0];
 var commentCards = document.querySelectorAll(".carousel .card");
 
 
+var isLinkClicked = false;
+
+function resetLinkClicked() {
+    isLinkClicked = false;
+}
+
+window.addEventListener("pageshow", resetLinkClicked);
+
 commentCards.forEach(function (card) {
     var isDragging = false;
-    var isLinkClicked = false;
+    var commentLinkID = card.querySelector(".comment-location-info");
 
-    var commentLinkID = document.getElementById("comment-link");
-
-    card.addEventListener("mousedown", function () {
+    window.addEventListener("mousedown", function () {
         isDragging = false;
     });
 
@@ -110,31 +116,43 @@ commentCards.forEach(function (card) {
         isDragging = true;
     });
 
-    commentLinkID.addEventListener("click", function(event){
-        isLinkClicked = true;
-     });
+    if (commentLinkID) {
+        commentLinkID.addEventListener("click", function (event) {
+            isLinkClicked = true;
+        });
+
+        commentLinkID.addEventListener("mouseup", function (event) {
+            if (!isDragging || !isLinkClicked) {
+                isLinkClicked = true;
+            }
+        });
+    }
 
     card.addEventListener("mouseup", function (event) {
-        if (!isDragging || !isLinkClicked) {
-            var commentPoint = this.querySelector(".comment-point").innerHTML;
-            var commentTitle = this.querySelector(".comment-title").innerHTML;
-            var testimonial = this.querySelector(".testimonial").innerHTML;
-            var profile = this.querySelector(".profile").innerHTML;
-            var locationName = this.querySelector(".comment-location-info").innerHTML;
-
-            document.getElementById("modal-stars").innerHTML = commentPoint;
-            document.getElementById("modal-comment-title").innerHTML = commentTitle;
-            document.getElementById("modal-testimonial").innerHTML = testimonial;
-            document.getElementById("modal-profile").innerHTML = profile;
-            document.getElementById("modal-locationName").innerHTML = locationName;
-
-            modal.style.display = "block";
+        if (!isDragging && !isLinkClicked) {
+            openCommentModal(this);
         }
     });
-
-   
-
 });
+
+
+function openCommentModal(card) {
+    var commentPoint = card.querySelector(".comment-point").innerHTML;
+    var commentTitle = card.querySelector(".comment-title").innerHTML;
+    var testimonial = card.querySelector(".testimonial").innerHTML;
+    var profile = card.querySelector(".profile").innerHTML;
+    var locationName = card.querySelector(".comment-location-info").innerHTML;
+
+    document.getElementById("modal-stars").innerHTML = commentPoint;
+    document.getElementById("modal-comment-title").innerHTML = commentTitle;
+    document.getElementById("modal-testimonial").innerHTML = testimonial;
+    document.getElementById("modal-profile").innerHTML = profile;
+    document.getElementById("modal-locationName").innerHTML = locationName;
+
+    modal.style.display = "block";
+}
+
+
 
 
 // When the user clicks on <span> (x), close the modal

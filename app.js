@@ -170,6 +170,10 @@ app.get("/commentWrite", (req, res) => {
   res.render("commentWrite")
 })
 
+app.get("/kullanmaklavuzu", (req, res) => {
+  res.render("kullanmaklavuzu")
+})
+
 
 app.listen(3000, () => {
   console.log('Server started on http://localhost:3000');
@@ -223,8 +227,6 @@ app.get("/get_locationcommentData", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
-
 
 
 

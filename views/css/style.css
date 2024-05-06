@@ -18,6 +18,10 @@ img {
     color: #fbc634 !important;
 }
 
+.comment-location-info a:hover{
+    color:inherit;
+}
+
 
 /* Header stiller */
 header {
@@ -119,6 +123,8 @@ header {
     text-align: center;
 }
 
+
+
 .footer-wrapper {
     width: 90%;
     margin: 0 auto;
@@ -149,6 +155,11 @@ header {
     text-decoration: none;
     color: #333;
 }
+
+.footer-menu a:hover {
+    color: inherit;
+}
+
 
 
 form {

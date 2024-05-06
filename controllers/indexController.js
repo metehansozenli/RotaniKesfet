@@ -303,11 +303,11 @@ const getUserData = async (sessionuserId) => {
     try {
         const result = await client.query(`
             SELECT 
-                SUM(CASE WHEN "commentScore" >= 0 AND "commentScore" < 1 THEN 1 ELSE 0 END) AS total_star1,
-                SUM(CASE WHEN "commentScore" >= 1 AND "commentScore" < 2 THEN 1 ELSE 0 END) AS total_star2,
-                SUM(CASE WHEN "commentScore" >= 2 AND "commentScore" < 3 THEN 1 ELSE 0 END) AS total_star3,
-                SUM(CASE WHEN "commentScore" >= 3 AND "commentScore" < 4 THEN 1 ELSE 0 END) AS total_star4,
-                SUM(CASE WHEN "commentScore" >= 4 AND "commentScore" <= 5 THEN 1 ELSE 0 END) AS total_star5
+                COALESCE(SUM(CASE WHEN "commentScore" = 1 THEN 1 ELSE 0 END), 0) AS total_star1,
+                COALESCE(SUM(CASE WHEN "commentScore" = 2 THEN 1 ELSE 0 END), 0) AS total_star2,
+                COALESCE(SUM(CASE WHEN "commentScore" = 3 THEN 1 ELSE 0 END), 0) AS total_star3,
+                COALESCE(SUM(CASE WHEN "commentScore" = 4 THEN 1 ELSE 0 END), 0) AS total_star4,
+                COALESCE(SUM(CASE WHEN "commentScore" = 5 THEN 1 ELSE 0 END), 0) AS total_star5
             FROM 
                 comments
             WHERE 

@@ -63,7 +63,7 @@ const otherlocation_load_data = (locationType) => {
                             "<div class='popotherlocations mt-5 d-flex justify-content-between' style='margin: 2% 11%;'>" +
                             "<div class='text-left'>" +
                             '<h2 class="otherlocation-rank mx-3" >#' + (++j) + '</h2>' +
-                            ' <h2 class="otherlocation-title mx-3" style="width:400px;">' + result.locationName + '</h2>' +
+                            ' <h2 class="otherlocation-title mx-3" style="width:400px;">' + "<a href='/location?id="+ result.locationID + "'>"+ result.locationName +"</a> </h2>" +
                                 '<div class="popotherlocation-loc mb-2 d-flex"><img src="../images/location.png" />' +
                                 '<p>' + result.cityName + ', ' + result.locationCountry + '</p>' +
                                     '</div>' +
@@ -98,7 +98,7 @@ const otherlocation_load_data = (locationType) => {
                             " <img src='" + result.locationImg + "' alt='Keşfet' class='locationImg img-fluid'>" +
                             "<div class='otherlocations-text'>" +
                             "<h2 class='otherlocation-rank mx-3'>#" + (++j) + "</h2>" +
-                            "<h2 class='otherlocation-title mx-3'>" + result.locationName + "</h2>" +
+                            "<h2 class='otherlocation-title mx-3'>" + "<a href='/location?id="+ result.locationID + "'>"+ result.locationName +"</a></h2>"+
                             "<div class='point-section'>" +
                             "<div class='d-flex'>" +
                             " <h5 class='point'>" + result.locationScore + "</h5>" +
