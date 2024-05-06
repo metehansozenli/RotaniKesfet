@@ -4,11 +4,9 @@ const hbs = require('hbs');
 const client = require("./database.js");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-const { v4: uuidv4 } = require('uuid');
 const session = require("express-session")
 dotenv.config();
 const app = express();
-const sessions = {};
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // ******************* KURALLAR ***********************************
@@ -24,7 +22,6 @@ const popDestData = require("./routes/get_popDestDataRoutes")
 const otherlocationData = require("./routes/get_otherlocationDataRoutes")
 const locationcommentData = require("./routes/get_locationcommentDataRoutes")
 const account = require("./routes/accountRoutes")
-
 
 
 client.connect((err) => {
@@ -65,7 +62,7 @@ app.get("/routePlanner", (req, res) => {
 app.use("/", popdest)
 app.use("/", restaurant)
 app.use("/",hotels)
-app.use("/", locations)
+app.use("/",locations)
 app.use("/", popDestData)
 app.use("/", otherlocationData)
 app.use("/", account)
@@ -120,4 +117,4 @@ function gracefulShutdown() {
 
 
 
-
+module.exports = app

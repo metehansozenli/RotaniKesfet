@@ -100,15 +100,16 @@ document.addEventListener('customCommentLoadEvent', function () {
 function favControl() {
     let icons = document.querySelectorAll('ion-icon');
     
-
     icons.forEach(function (icon) {
         icon.onclick = function () {
             icon.classList.toggle('active');
-        }
-        });
-
-
-};
+            
+            if (window.userID) {
+                console.log(`${window.userID} BEĞENDİ`);
+            }
+        };
+    });
+}
 
 function locationStatus() {
     var openTimeElement = document.getElementById("openTime");
@@ -195,12 +196,19 @@ document.addEventListener('customlikeControlEvent', function () {
         // Like butonu için tıklama olayını ekle
         likeBtn.addEventListener('click', function() {
             // Dislike butonu seçiliyse, seçimini kaldır
+          
             const dislikeBtnActive = dislikeBtn.classList.contains('voteActive');
             if (dislikeBtnActive) {
                 dislikeBtn.classList.remove('voteActive');
+                if (window.userID) {
+                    console.log(`${window.userID} DİSLİKE BUTONUNU BEĞENDİ`);
+                }
             } 
             // Like butonunun seçimini toggle et
             this.classList.toggle('voteActive');
+            if (window.userID) {
+                console.log(`${window.userID} BEĞENME BUTONUNU BEĞENDİ`);
+            }
         });
 
         // Dislike butonu için tıklama olayını ekle
