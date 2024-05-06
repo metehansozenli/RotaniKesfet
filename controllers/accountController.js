@@ -76,7 +76,7 @@ exports.changeHeader = async (req, res) => {
         res.render("partials/header");
     } else {
         try {
-            console.log(userSession.userMail);
+
             const userData = await veritabani.getUserData(userSession.userID);
             if (userData) {
                 const [userName, userNickname, userSurname, userImg] = userData;

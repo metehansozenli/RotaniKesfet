@@ -1,0 +1,114 @@
+.warning-modal {
+    color: #8e8e8e;
+    width: 450px;
+    margin: 30px auto;
+    font-family: 'Varela Round', sans-serif;
+}
+
+.warning-modal .modal-content {
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    
+}
+
+.warning-modal .modal-header {
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.warning-modal .modal-header h4 {
+    color: #545557;
+    text-align: center;
+    font-size: 30px;
+    margin: 0 0 25px;
+}
+
+.warning-modal .form-control,
+.warning-modal .btn {
+    min-height: 40px;
+    border-radius: 3px;
+}
+
+.warning-modal .close {
+    background: #c0c3c8;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    text-shadow: none;
+    opacity: 0.5;
+    width: 22px;
+    height: 22px;
+    border-radius: 20px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.warning-modal .close span {
+    position: relative !important;
+    top: -1px !important;
+}
+
+.warning-modal .close:hover {
+    opacity: 0.8;
+}
+
+.warning-modal .icon-box {
+    color: #f95858 !important;
+    display: inline-block !important;
+    z-index: 9!important;
+    text-align: center !important;
+    position: relative !important;
+    transform: scale(1.5)!important;
+}
+
+.warning-modal .icon-box i:first-child {
+    font-size: 100px;
+}
+
+.warning-modal .icon-box i:nth-child(2) {
+    font-size: 138px;
+    position: absolute;
+    left: -19px;
+    top: -23px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.warning-modal .icon-box i:last-child {
+    font-size: 26px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 44px;
+}
+
+.warning-modal .btn {
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.4s;
+    line-height: normal;
+    border-radius: 3px;
+    margin: 30px 0 20px;
+    padding: 6px 20px;
+    min-width: 150px;
+    border: none;
+}
+
+.warning-modal .btn:hover,
+.warning-modal .btn:focus {
+    outline: none;
+}
+
+.trigger-btn {
+    display: inline-block;
+    margin: 100px auto;
+}

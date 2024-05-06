@@ -1,0 +1,27 @@
+ <div id="loginAlert" class="modal fade">
+        <div class="modal-dialog warning-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE86B;</i>
+                        <i class="material-icons">&#xE86B;</i>
+                        <i class="material-icons">&#xE645;</i>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"><span>&times;</span></button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>Giriş Yapın!</h4>
+                    <p>Bu eylemi gerçekleştirmek için giriş yapmalısınız veya giriş yapmadan sınırlı olarak sitede
+                        gezinebilirsiniz.</p>
+                    <hr>
+                    <p class="mb-0">Hesabınız yoksa <a href="#" onclick="closeAndOpenModal('#loginAlert', '#registerModal')">buradan</a> kayıt olabilirsiniz.</p>
+                    <button class="btn btn-secondary" data-dismiss="modal" >Geri Dön</button>
+                    <button id="girisYapBtn" class="btn btn-primary" onclick="closeAndOpenModal('#loginAlert', '#loginModal')">Giriş Yap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<link rel="stylesheet" href="./css/loginalert.css">
+

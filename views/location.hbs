@@ -12,6 +12,8 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 </head>
 
@@ -33,7 +35,7 @@
                     <div class="d-flex ">
                         <p class="location-status mr-3 "></p>
                         <p id="openTime" class="mr-3">09:00-19:00</p>
-                        <a href="commentWrite" class="write-comment text-right">Yorum Yazın</a>
+                        <div onclick='checkSessionForcommentWrite()' class="write-comment text-right">Yorum Yazın</div>
                     </div>
                     <div class="location-description d-flex">
                         <img src="/images/info.png" alt="locationinfo">
@@ -166,7 +168,7 @@
 
 
     </div>
-
+    
     {{>footer}}
 
     <script src="./js/script.js"></script>
@@ -177,5 +179,6 @@
     <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
 </body>
 
+{{>loginalert}}
 
 </html>

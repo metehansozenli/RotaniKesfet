@@ -107,11 +107,12 @@ const getUserData = async (sessionuserId) => {
   const getRandomCitiesData = async () => {
     try {
       const query = `
-                    SELECT 
+                    SELECT DISTINCT
                       cities."cityImg", 
                       cities."cityName",
                       cities."cityID",
-                      locations."locationCountry"
+                      locations."locationCountry", 
+                      RANDOM() AS random
                     FROM 
                       cities 
                     JOIN 
@@ -119,7 +120,7 @@ const getUserData = async (sessionuserId) => {
                     WHERE 
                       cities."cityScore" > 3.75
                     ORDER BY 
-                      RANDOM() 
+                      random
                     LIMIT 8
                   `;
 

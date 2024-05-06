@@ -7,6 +7,7 @@
     <title>Rotanı Keşfet</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/indexSlider.css">
+    <link rel="stylesheet" href="./css/travelStartModal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
@@ -28,7 +29,7 @@
     <p class="display-3 text-center  mt-3" style="color: #36A1C5; font-family: sans-serif,Arial;">Seyahatinizi Oluşturun
     </p>
     <div class="container col-5" style="text-align: center; ">
-        <button type="submit" class="btn"
+        <button id="travelStartBtn" type="submit" class="btn" onclick="travelStartBtn()"
             style="width: 20%; background-color: #36A1C5; color: aliceblue; border-radius: 25px; transition: background-color 0.3s;"
             onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#36A1C5'">
             Başla
@@ -91,5 +92,8 @@
     {{>footer}}
 </body>
 <script src="./js/indexSlider.js"></script>
+<script src="./js/travelStartModal.js"></script>
+
+{{>travelStartModal}}
 
 </html>

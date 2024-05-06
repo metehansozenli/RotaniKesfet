@@ -102,10 +102,12 @@ function favControl() {
     
     icons.forEach(function (icon) {
         icon.onclick = function () {
+            if(window.userID){
             icon.classList.toggle('active');
+            console.log(`${userID} BEĞENDİ`);
             
-            if (window.userID) {
-                console.log(`${window.userID} BEĞENDİ`);
+            }else {
+                $('#loginAlert').modal('show');
             }
         };
     });
@@ -253,6 +255,30 @@ function calculateStarWidths() {
     document.querySelector('.bar-2').style.width = percentageOfStar2 + '%';
     document.querySelector('.bar-1').style.width = percentageOfStar1 + '%';
 }
+
+
+function closeAndOpenModal(closeModal, openModal) {
+    $(closeModal).modal('hide'); // Mevcut modali kapat
+    $(openModal).modal('show'); // Diğer modalı aç
+    
+}
+
+function checkSessionForcommentWrite(event) {
+    
+    if(window.userID){
+        window.location.href = "/commentWrite?id="+window.userID;
+        
+        }else {
+            $('#loginAlert').modal('show');
+        }
+}
+
+
+
+
+
+
+
 
 
 
