@@ -17,12 +17,13 @@ var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", 
 
 const getUserData = async (sessionuserId) => {
     try {
-      const result2 = await client.query('SELECT "userNickname", "userName", "userSurname" FROM users WHERE "userID" = $1', [sessionuserId]);
+      const result2 = await client.query('SELECT "userNickname", "userName", "userSurname", "userImg" FROM users WHERE "userID" = $1', [sessionuserId]);
       if (result2.rows.length > 0) {
         const userNickname = result2.rows[0].userNickname;
         const userName = result2.rows[0].userName;
         const userSurname = result2.rows[0].userSurname;
-        return [userName, userNickname, userSurname];
+        const userImg = result2.rows[0].userImg;
+        return [userName, userNickname, userSurname, userImg];
       } else {
         return null; // Return null if no data found
       }

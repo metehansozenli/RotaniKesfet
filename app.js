@@ -21,6 +21,7 @@ const hotels  = require('./routes/hotelsRoutes');
 const locations = require("./routes/locationRoutes")
 const popDestData = require("./routes/get_popDestDataRoutes")
 const otherlocationData = require("./routes/get_otherlocationDataRoutes")
+const locationcommentData = require("./routes/get_locationcommentDataRoutes")
 
 
 client.connect((err) => {
@@ -112,11 +113,12 @@ app.get("/changeHeader", async (req, res) => {
     try {
       const userData = await veritabani.getUserData(userSession.userID);
       if (userData) {
-        const [userName, userNickname, userSurname] = userData;
+        const [userName, userNickname, userSurname, userImg] = userData;
         res.render("partials/loginheader", {
           userNickname: userNickname,
           userName: userName,
-          userSurname: userSurname
+          userSurname: userSurname,
+          userImg: userImg
         });
       } else {
         res.send("Bir hata Oluştu!");
@@ -129,7 +131,6 @@ app.get("/changeHeader", async (req, res) => {
 });
 
 
-
 // Kullanıcı bilgilerini çeken endpoint
 app.get('/user', async (req, res) => {
   if (!sessions[sessionsID])
@@ -139,6 +140,15 @@ app.get('/user', async (req, res) => {
 
 });
 
+app.use("/", popdest)
+app.use("/", restaurant)
+app.use("/",hotels)
+app.use("/", locations)
+app.use("/", popDestData)
+app.use("/", otherlocationData)
+app.use("/", locationcommentData)
+
+
 app.get("/kesfet", (req, res) => {
   res.render("kesfet")
 })
@@ -146,14 +156,6 @@ app.get("/kesfet", (req, res) => {
 app.get("/routePlanner", (req, res) => {
   res.render("routePlanner")
 })
-
-app.use("/", popdest)
-app.use("/", restaurant)
-app.use("/",hotels)
-app.use("/", locations)
-app.use("/", popDestData)
-app.use("/", otherlocationData)
-
 
 app.get("/mycomment", (req, res) => {
   res.render("mycomment")
@@ -173,6 +175,11 @@ app.get("/commentWrite", (req, res) => {
 app.get("/kullanmaklavuzu", (req, res) => {
   res.render("kullanmaklavuzu")
 })
+
+app.get("/calendar", (req, res) => {
+  res.render("calendar")
+})
+
 
 
 app.listen(3000, () => {
@@ -200,39 +207,5 @@ function gracefulShutdown() {
 }
 
 
-app.get("/get_locationcommentData", async (req, res) => {
-  try {
-    const start_index = parseInt(req.query.start_index) || 0;
-    const num_record = parseInt(req.query.num_record) || 10;
-    const locationID = req.query.locationID;
-    
 
-    const query = {
-      text: `SELECT comments.*, users."userNickname", users."userCountry", users."userCity", users."userCommentCount", users."userImg"
-              FROM comments
-              INNER JOIN users ON comments."userID" = users."userID"
-              WHERE comments."locationID" = $3
-              ORDER BY RANDOM()
-              OFFSET $1
-              LIMIT $2;`,
-      values: [start_index, num_record, locationID]
-  };
-    
-    const result = await client.query(query);
-  
-
-    res.json(result.rows); // Sonuçları JSON olarak gönderme
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-
-
-
-
-app.get("/calendar", (req, res) => {
-  res.render("calendar")
-})
 
