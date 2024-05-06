@@ -65,6 +65,8 @@ document.addEventListener('customLoadEvent', function () {
             }
         });
     });
+    // BU ŞEKİLDE USERID KONSOL ÇIKTISI OLARAK GELİYOR İNDEX.HBS'DEN 
+    console.log(window.userID)
 });
 
 
@@ -213,8 +215,7 @@ document.addEventListener('customlikeControlEvent', function () {
             this.classList.toggle('voteActive');
         });
     });
-    // BU ŞEKİLDE USERID KONSOL ÇIKTISI OLARAK GELİYOR İNDEX.HBS'DEN 
-    console.log(window.userID)
+    
 });
 
 
