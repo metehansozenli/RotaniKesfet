@@ -263,22 +263,12 @@ function closeAndOpenModal(closeModal, openModal) {
     
 }
 
-function checkSessionForcommentWrite(event) {
+function checkSessionForcommentWrite(locationID) {
     
     if(window.userID){
-        window.location.href = "/commentWrite?id="+window.userID;
+        window.location.href = "/commentWrite?id="+locationID;
         
         }else {
             $('#loginAlert').modal('show');
         }
 }
-
-
-
-
-
-
-
-
-
-

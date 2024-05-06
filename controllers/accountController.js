@@ -20,8 +20,10 @@ exports.postRegister = async (req, res) => {
         await client.query('INSERT INTO users ("userNickname", "userMail", "userName", "userSurname", "userCity" , "userCountry", "userPhoneNo", "userPass") VALUES ($1, $2, $3, $4, $5, $6, $7, $8 )', [formData.userNickname, formData.userMail, formData.userName, formData.userSurname, formData.userCity, formData.userCountry, formData.userPhoneNo, formData.userPass]);
 
         const randomCitiesData = await veritabani.getRandomCitiesData();
+        const randomCitiesData2 = await veritabani.getRandomCitiesData();
+        const restaurantData = await veritabani.getRestaurantData();
         
-        res.render("index", { randomCitiesData: randomCitiesData });
+        res.render("index", { randomCitiesData: randomCitiesData, randomCitiesData2 : randomCitiesData2, restaurantData:restaurantData});
     } catch (error) {
         console.log(error);
     }
@@ -46,10 +48,11 @@ exports.postLogin =  async (req, res) => {
             req.session.userMail = formData.userMail;
             req.session.userID = userID;
             
-  
             const randomCitiesData = await veritabani.getRandomCitiesData();
+            const randomCitiesData2 = await veritabani.getRandomCitiesData();
+            const restaurantData = await veritabani.getRestaurantData();
             
-            res.render("index", { randomCitiesData: randomCitiesData });
+            res.render("index",  { randomCitiesData: randomCitiesData, randomCitiesData2 : randomCitiesData2, restaurantData:restaurantData});
         } else {
             res.send("Kullanıcı adı veya şifre yanlış!"); // Kullanıcı bulunamazsa hata mesajı gönder
         }

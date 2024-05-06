@@ -41,6 +41,7 @@ const getUserData = async (sessionuserId) => {
       if (result.rows.length > 0) {
   
         const locationData = {
+          locationID: result.rows[0].locationID,
           locationCountry: result.rows[0].locationCountry,
           locationCityID: result.rows[0].locationCityID,
           locationCoordinates: result.rows[0].locationCoordinates,
@@ -107,21 +108,22 @@ const getUserData = async (sessionuserId) => {
   const getRandomCitiesData = async () => {
     try {
       const query = `
-                    SELECT DISTINCT
+                    SELECT 
                       cities."cityImg", 
                       cities."cityName",
                       cities."cityID",
-                      locations."locationCountry", 
-                      RANDOM() AS random
+                      MAX(locations."locationCountry") AS "locationCountry"
                     FROM 
                       cities 
                     JOIN 
                       locations ON cities."cityID" = locations."locationCityID"
                     WHERE 
                       cities."cityScore" > 3.75
+                    GROUP BY 
+                      cities."cityID", cities."cityImg", cities."cityName"
                     ORDER BY 
-                      random
-                    LIMIT 8
+                      RANDOM()
+                    LIMIT 8;
                   `;
 
     const result = await client.query(query);

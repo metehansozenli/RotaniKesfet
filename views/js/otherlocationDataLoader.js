@@ -70,7 +70,7 @@ const otherlocation_load_data = (locationType) => {
                                     '</div>' +
                                     "<div class='otherlocation d-blok mr-4'>" +
                                     '<div class="otherlocation-fav d-flex ">' +
-                                    ' <div onclick="checkSessionForcommentWrite()" class="write-comment text-bold">Yorum Yazın</div>' +
+                                    ' <div onclick="checkSessionForcommentWrite(' + result.locationID + ')" class="write-comment text-bold">Yorum Yazın</div>' +
                                     "<div class='large-font'>" +
                                     '<ion-icon name="heart">' +
                                     "</ion - icon >" +
@@ -114,7 +114,7 @@ const otherlocation_load_data = (locationType) => {
                             " </div>" +
                             "</div>" +
                             "<div class='other-locations d-flex mr-4'>" +
-                            "<div onclick='checkSessionForcommentWrite()' class='write-comment text-bold'>Yorum Yazın</div>" +
+                            "<div onclick='checkSessionForcommentWrite(" + result.locationID + ")' class='write-comment text-bold'>Yorum Yazın</div>" +
                             "<div class='large-font text-center top-20'>" +
                             "<ion-icon name='heart'></ion-icon>" +
                             "</div>" +
