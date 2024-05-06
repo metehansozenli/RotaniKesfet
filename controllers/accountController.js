@@ -67,8 +67,11 @@ exports.Logout = async (req, res) => {
     req.session.destroy();
     
     const randomCitiesData = await veritabani.getRandomCitiesData();
+    const randomCitiesData2 = await veritabani.getRandomCitiesData();
+    const restaurantData = await veritabani.getRestaurantData();
+    
     res.set('Set-Cookie', `session=; expires=Thu, 01 Jan 1970 00:00:00 GMT`);
-    res.render("index", { randomCitiesData: randomCitiesData });
+    res.render("index",  { randomCitiesData: randomCitiesData, randomCitiesData2 : randomCitiesData2, restaurantData:restaurantData});
   }
 
 exports.changeHeader = async (req, res) => {
