@@ -206,25 +206,28 @@ document.addEventListener('customlikeControlEvent', function () {
         const dislikeBtn = voteElement.querySelector('.dislikeBtn');
          
         // Like butonu için tıklama olayını ekle
+        
         likeBtn.addEventListener('click', function() {
             // Dislike butonu seçiliyse, seçimini kaldır
-          
+            if (!window.userID) {$('#loginAlert').modal('show');  return;}
+
             const dislikeBtnActive = dislikeBtn.classList.contains('voteActive');
             if (dislikeBtnActive) {
                 dislikeBtn.classList.remove('voteActive');
-                if (window.userID) {
+                
                     console.log(`${window.userID} DİSLİKE BUTONUNU BEĞENDİ`);
-                }
+               
             } 
             // Like butonunun seçimini toggle et
             this.classList.toggle('voteActive');
-            if (window.userID) {
+            
                 console.log(`${window.userID} BEĞENME BUTONUNU BEĞENDİ`);
-            }
         });
 
         // Dislike butonu için tıklama olayını ekle
         dislikeBtn.addEventListener('click', function() {
+
+            if (!window.userID) {$('#loginAlert').modal('show');  return;}
             // Like butonu seçiliyse, seçimini kaldır
             const likeBtnActive = likeBtn.classList.contains('voteActive');
             if (likeBtnActive) {
@@ -233,6 +236,8 @@ document.addEventListener('customlikeControlEvent', function () {
             // Dislike butonunun seçimini toggle et
             this.classList.toggle('voteActive');
         });
+
+        
     });
     
 });
