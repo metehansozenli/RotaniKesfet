@@ -378,9 +378,14 @@
   border-radius: 5px;
   background: #2695ba;
   transition: background 0.3s ease;
-  width: 150px;
-  margin-left: 12px;
+  width: 170px;
+  margin-left: 22px;
   height: 46px;
+}
+
+.takvim{
+  padding: 0px;
+  margin-left: 2px;
 }
 
 

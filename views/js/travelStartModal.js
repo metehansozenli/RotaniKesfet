@@ -2,12 +2,14 @@ var startBtn = document.getElementById("travelStartBtn");
 var selectBtn = document.getElementById("select-btn");
 
 function travelStartBtn() {
-    // Butona tıklandığında yapılacak işlemi belirt
-    startBtn.onclick = function() {
+    // Butona tıklandığında yapılacak işlemi belirt  
         $('#travelStartModal').modal('show');
-        selectBtn.classList.toggle("open");
-    }
+        if (!selectBtn.classList.contains("open")) {
+            selectBtn.classList.toggle("open");
+        }
+    
 }
+
 
 $(document).ready(function(){
 
