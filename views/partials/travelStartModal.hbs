@@ -1,19 +1,115 @@
-<div class="modal fade" id="travelStartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal Başlık</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Modal içeriği buraya gelecek
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-        <button type="button" class="btn btn-primary">Kaydet</button>
+<div class="modal fade custom-modal travelStartModal" id="travelStartModal">
+  <div class="modal-dialog" style="max-width: 55%;">
+    <div class="modal-content travelStartModal-content">
+      <button type="button" class="close" data-dismiss="modal"
+        aria-hidden="true"><span>&times;</span></button>
+      <div class="main-modal" style="display: flex;">
+        <div class="calendar-category-container">
+          <div class="select-btn" id="select-btn">
+            <span class="btn-text">Kategoriler</span>
+            <span class="arrow-dwn">
+              <i class="fa-solid fa-chevron-down"></i>
+            </span>
+          </div>
+          <ul class="list-items categoryItems">
+            <li class="item">
+              <span class="checkbox">
+                <i class="fa-solid fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Tarihi Yerler</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fa-solid fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Müzeler</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fa-solid fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Restoranlar</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fa-solid fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Oteller</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fa-solid fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Parklar</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fa-solid fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Manzara Noktaları</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fa-solid fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Alışveriş Noktaları</span>
+            </li>
+            <li class="item">
+              <span class="checkbox">
+                <i class="fa-solid fa-check check-icon"></i>
+              </span>
+              <span class="item-text">Caddeler&Sokaklar</span>
+            </li>
+          </ul>
+        </div>
+
+
+
+        <div class="seyahatAdiveSehirSecme d-block">
+          <h3>Seyahat oluşturun</h3>
+          <div class="seyahatAdiSec">
+            <label for="seyahatAdi">Seyahat Adı</label><br>
+            <input class="seyahatadi-input" type="text" id="seyahatAdi" name="seyahatAdi" maxlength="80"
+              placeholder="Örneğin Türkiye'de yaz tatili" style="width: 500px; height: 60px; border-radius: 5px">
+            <br><label for="destinasyon">Destinasyon</label>
+            <p>Birden fazla şehir seçmek için şehir adını yazın ve 'enter' tuşuna basın</p>
+            <ul><input maxlength="20" type="text" spellcheck="false" id="destinasyon-tag" name="destinasyon"
+                placeholder="Nereye? " style="width: 500px; height: 60px; border-radius: 5px;   margin-left: -39px">
+            </ul>
+
+          </div>
+          <div class="sehirSecDetaylari">
+            <p>*<span>5</span> şehir seçme hakkınız kaldı</p>
+            <button>Hepsini kaldır</button>
+          </div>
+
+
+          <div class="container takvim ">
+            <form autocomplete="off">
+              <div class="input-group input-daterange d-flex">
+                <div>
+                  <span class="fa fa-calendar" id="fa-1"></span>
+                  <input type="text" id="start" class="form-control text-right mr-2">
+                  <label class="form-control-placeholder text-left" id="start-p" for="start">Başlangıç Tarihi</label>
+                </div>
+
+                <div>
+                  <span class="fa fa-calendar" id="fa-2"></span>
+                  <input type="text" id="end" class="form-control text-right ">
+                  <label class="form-control-placeholder text-left" id="end-p" for="end">Bitiş Tarihi</label>
+                </div>
+                <button>Seyahat Oluştur</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
+<link rel="stylesheet" href="./css/travelStartModal.css">
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
