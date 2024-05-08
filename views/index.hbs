@@ -14,9 +14,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="./js/script.js"></script>
-     <script>
+    <script>
         window.userID = {{ userID }};
-       
+
     </script>
 
 </head>
@@ -39,51 +39,62 @@
 
     <img src="./images/mainpic.png" style="display: block; height: 500px; margin: 60px auto; ">
 
-    <h4 style="margin: 0 15%; margin-bottom: 10px;">Bir sonraki tatiliniz için en iyi destinasyonlar</h4>
+
     <section class="index-sliders mt-4">
-        <div class="wrapperIndex">
-            <i id="left" class="fa-solid fa-angle-left"></i>
-            <ul class="carouselIndex">
-                {{#each randomCitiesData}}
-                <li class="indexImage-container">
-                    <img height="250px" width="250px" src={{this.cityImg}} style="object-fit: cover">
-                    <div class="indexImage-text">{{this.cityName}},{{this.cityCountry}}</div>
-                </li>
-                {{/each}}
-            </ul>
-            <i id="right" class="fa-solid fa-angle-right"></i>
+        <div>
+            <h4 style="margin-bottom: 10px;">Bir sonraki tatiliniz için en iyi destinasyonlar</h4>
+            <div class="wrapperIndex">
+                <i id="left" class="fa-solid fa-angle-left"></i>
+                <ul class="carouselIndex">
+                    {{#each randomCitiesData}}
+                    <li class="indexImage-container">
+                        <img height="250px" width="250px" src={{this.cityImg}} style="object-fit: cover">
+                        <div class="indexImage-text">{{this.cityName}},{{this.cityCountry}}</div>
+                    </li>
+                    {{/each}}
+                </ul>
+                <i id="right" class="fa-solid fa-angle-right"></i>
+            </div>
+
         </div>
     </section>
 
-    <h4 style="margin: 0 15%; margin-bottom: 10px;">Bulunduğunuz konuma göre günübirlik gezebileceğiniz şehirler</h4>
+
     <section class="index-sliders mt-4">
-        <div class="wrapperIndex2">
-            <i id="left" class="fa-solid fa-angle-left"></i>
-            <ul class="carouselIndex2">
-                {{#each randomCitiesData2}}
-                <li class="indexImage-container">
-                    <img height="250px" width="250px" src={{this.cityImg}} style="object-fit: cover">
-                    <div class="indexImage-text">{{this.cityName}},{{this.cityCountry}}</div>
-                </li>
-                {{/each}}
-            </ul>
-            <i id="right" class="fa-solid fa-angle-right"></i>
+        <div>
+            <h4 style="margin-bottom: 20px;">Bulunduğunuz konuma göre günübirlik gezebileceğiniz şehirler</h4>
+            <div class="wrapperIndex2">
+                <i id="left" class="fa-solid fa-angle-left"></i>
+                <ul class="carouselIndex2">
+                    {{#each randomCitiesData2}}
+                    <li class="indexImage-container">
+                        <img height="250px" width="250px" src={{this.cityImg}} style="object-fit: cover">
+                        <div class="indexImage-text">{{this.cityName}},{{this.cityCountry}}</div>
+                    </li>
+                    {{/each}}
+                </ul>
+                <i id="right" class="fa-solid fa-angle-right"></i>
+            </div>
         </div>
+
     </section>
 
-    <h4 style="margin: 0 15%; margin-bottom: 10px;">Paris’in Michelin yıldızlı popüler restoranları</h4>
+
     <section class="index-sliders mt-4">
-        <div class="wrapperIndex3">
-            <i id="left" class="fa-solid fa-angle-left"></i>
-            <ul class="carouselIndex3">
-                {{#each restaurantData}}
-                <li class="indexImage-container">
-                    <img height="250px" width="250px" src={{this.locationImg}} style="object-fit: cover">
-                    <div class="indexImage-text">{{this.locationName}},{{this.locationCity}}</div>
-                </li>
-                {{/each}}
-            </ul>
-            <i id="right" class="fa-solid fa-angle-right"></i>
+        <div>
+            <h4 style="margin-bottom: 20px;">Paris’in Michelin yıldızlı popüler restoranları</h4>
+            <div class="wrapperIndex3">
+                <i id="left" class="fa-solid fa-angle-left"></i>
+                <ul class="carouselIndex3">
+                    {{#each restaurantData}}
+                    <li class="indexImage-container">
+                        <img height="250px" width="250px" src={{this.locationImg}} style="object-fit: cover">
+                        <div class="indexImage-text">{{this.locationName}},{{this.locationCity}}</div>
+                    </li>
+                    {{/each}}
+                </ul>
+                <i id="right" class="fa-solid fa-angle-right"></i>
+            </div>
         </div>
     </section>
 

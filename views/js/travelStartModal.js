@@ -13,11 +13,11 @@ function travelStartBtn() {
 
 $(document).ready(function(){
 
-    $('.input-daterange input').datepicker({
+    $('.input-daterange').datepicker({
         format: 'dd-mm-yyyy',
         autoclose: true,
         calendarWeeks : true,
-        clearBtn: true,
+        clearBtn: true, 
         disableTouchKeyboard: true,
         orientation: 'top'
     });

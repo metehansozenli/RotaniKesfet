@@ -247,7 +247,7 @@ const getUserData = async (sessionuserId) => {
                           ON locations."locationID" = comments."locationID" 
                           JOIN users  
                           ON users."userID" = comments."userID"
-                          WHERE locations."locationType" = 'Restoran'
+                          WHERE locations."locationType" = 'Otel'
                           ORDER BY RANDOM() 
                           LIMIT 12;
                           `;
