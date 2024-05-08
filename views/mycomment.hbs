@@ -12,6 +12,7 @@
 <script src="./js/script.js"></script>
 
 
+
 </head>
 
 
@@ -22,9 +23,27 @@
 
     <div class="container ">
 
+        <section class="my-comments-S0">
+
+            <div class="container h-100">
+                <div class="d-flex justify-content-center h-100">
+                    <div class="search">
+                        <input class="search_input" type="text" name="" placeholder="Burada ara...">
+                        <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+                    </div>
+                </div>
+        
+            </div>
+         &nbsp;
+            <div class="images-container">
+                <img src="./images/mycomments1.png">
+                <img src="./images/mycomments2.png">
+                <img src="./images/mycomments3.png">
+            </div>
+        </section>
 
 
-        <section class="mycomments mt-4">
+        <section class="mycomments-S1">
             <h1 class="pt-4 text-center  mb-4">Yorumlarım</h1>
             <div class="mycomments-rating-card d-flex justify-content-center">
 
@@ -106,91 +125,162 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="accordion" id="ratingAccordion">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <h4 class="text-muted">Filtrele</h4>
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    Puan <i class="fa fa-caret-down"></i>
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                                data-bs-parent="#ratingAccordion">
-                                <div class="accordion-body">
-                                    <!-- Default checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"
-                                            checked>
-                                        <label class="form-check-label" for="flexCheckDefault1">
-                                            <i class="fas fa-star text-warning"></i><i
-                                                class="fas fa-star text-warning"></i><i
-                                                class="fas fa-star text-warning"></i><i
-                                                class="fas fa-star text-warning"></i>
-                                            <i class="fas fa-star text-warning"></i>
-                                        </label>
-                                    </div>
-                                    <!-- Default checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2"
-                                            checked>
-                                        <label class="form-check-label" for="flexCheckDefault2">
-                                            <i class="fas fa-star text-warning"></i><i
-                                                class="fas fa-star text-warning"></i><i
-                                                class="fas fa-star text-warning"></i><i
-                                                class="fas fa-star text-warning"></i>
-                                            <i class="fas fa-star text-secondary"></i>
-                                        </label>
-                                    </div>
-                                    <!-- Default checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3"
-                                            checked>
-                                        <label class="form-check-label" for="flexCheckDefault3">
-                                            <i class="fas fa-star text-warning"></i><i
-                                                class="fas fa-star text-warning"></i><i
-                                                class="fas fa-star text-warning"></i><i
-                                                class="fas fa-star text-secondary"></i>
-                                            <i class="fas fa-star text-secondary"></i>
-                                        </label>
-                                    </div>
-                                    <!-- Default checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4"
-                                            checked>
-                                        <label class="form-check-label" for="flexCheckDefault4">
-                                            <i class="fas fa-star text-warning"></i><i
-                                                class="fas fa-star text-warning"></i><i
-                                                class="fas fa-star text-secondary"></i><i
-                                                class="fas fa-star text-secondary"></i>
-                                            <i class="fas fa-star text-secondary"></i>
-                                        </label>
-                                    </div>
-                                    
-                                    <!-- Default checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5"
-                                            checked>
-                                        <label class="form-check-label" for="flexCheckDefault5">
-                                            <i class="fas fa-star text-warning"></i><i
-                                                class="fas fa-star text-secondary"></i><i
-                                                class="fas fa-star text-secondary"></i><i
-                                                class="fas fa-star text-secondary"></i>
-                                            <i class="fas fa-star text-secondary"></i>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+
+
+                <div class="calendar-category-container">
+                    <div class="select-btn" id="select-btn">
+                        <span class="btn-text">Puan</span>
+                        <span class="arrow-dwn">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
                     </div>
+                    <ul class="list-items categoryItems" style="z index:2;">
+                        <li class="item">
+                            <span class="checkbox">
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <span class="item-text">
+                                <label class="form-check-label" for="flexCheckDefault1">
+                                    <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i
+                                        class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                </label>
+                            </span>
+                        </li>
+                        <li class="item">
+                            <span class="checkbox">
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <span class="item-text">
+                                <label class="form-check-label" for="flexCheckDefault2">
+                                    <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i
+                                        class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                </label>
+                            </span>
+                        </li>
+                        <li class="item">
+                            <span class="checkbox">
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <span class="item-text">
+                                <label class="form-check-label" for="flexCheckDefault3">
+                                    <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i
+                                        class="fas fa-star text-warning"></i><i class="fas fa-star text-secondary"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                </label>
+                            </span>
+                        </li>
+                        <li class="item">
+                            <span class="checkbox">
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <span class="item-text">
+                                <label class="form-check-label" for="flexCheckDefault4">
+                                    <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i
+                                        class="fas fa-star text-secondary"></i><i
+                                        class="fas fa-star text-secondary"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                </label>
+                            </span>
+                        </li>
+                        <li class="item">
+                            <span class="checkbox">
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <span class="item-text">
+                                <label class="form-check-label" for="flexCheckDefault5">
+                                    <i class="fas fa-star text-warning"></i><i class="fas fa-star text-secondary"></i><i
+                                        class="fas fa-star text-secondary"></i><i
+                                        class="fas fa-star text-secondary"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                </label>
+                            </span>
+                        </li>
+
+                    </ul>
+                </div>
+                &nbsp;&nbsp;
+                <div class="calendar-category-container">
+                    <div class="select-btn" id="select-btn">
+                        <span class="btn-text">Puan</span>
+                        <span class="arrow-dwn">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <ul class="list-items categoryItems" style="z index:2;">
+                        <li class="item">
+                            <span class="checkbox">
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <span class="item-text">
+                                <label class="form-check-label" for="flexCheckDefault1">
+                                    <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i
+                                        class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                </label>
+                            </span>
+                        </li>
+                        <li class="item">
+                            <span class="checkbox">
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <span class="item-text">
+                                <label class="form-check-label" for="flexCheckDefault2">
+                                    <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i
+                                        class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                </label>
+                            </span>
+                        </li>
+                        <li class="item">
+                            <span class="checkbox">
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <span class="item-text">
+                                <label class="form-check-label" for="flexCheckDefault3">
+                                    <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i
+                                        class="fas fa-star text-warning"></i><i class="fas fa-star text-secondary"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                </label>
+                            </span>
+                        </li>
+                        <li class="item">
+                            <span class="checkbox">
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <span class="item-text">
+                                <label class="form-check-label" for="flexCheckDefault4">
+                                    <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i
+                                        class="fas fa-star text-secondary"></i><i
+                                        class="fas fa-star text-secondary"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                </label>
+                            </span>
+                        </li>
+                        <li class="item">
+                            <span class="checkbox">
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <span class="item-text">
+                                <label class="form-check-label" for="flexCheckDefault5">
+                                    <i class="fas fa-star text-warning"></i><i class="fas fa-star text-secondary"></i><i
+                                        class="fas fa-star text-secondary"></i><i
+                                        class="fas fa-star text-secondary"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                </label>
+                            </span>
+                        </li>
+
+                    </ul>
                 </div>
 
                 <div class="col-md-6">
                     <div class="accordion" id="sortingAccordion">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
-                                <h4 class="text-muted">Sıralama Seçenekleri</h4>
+
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     Sıralama <i class="fa fa-caret-down"></i>
@@ -233,7 +323,16 @@
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
             </div>
+
+
+
+        </section>
+
+
+        <section class="mycomment-S2">
+
 
             <div class="comment-card">
                 <div class="row d-flex">
@@ -329,40 +428,73 @@
 </body>
 
 <style>
-     h4 {
-   
-    margin-bottom: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-}
 
-.accordion-button {
-    background-color: #ab7e15;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
-}
-
-.accordion-button.collapsed {
-    background-color: #FBC02D;
-}
-
-.accordion-button:hover {
-    background-color: #ab7e15;
-}
-
-
-    .location-section {
-        margin-bottom: 20px;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /* Search Box*/     
+    .search{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 70px;
+    background-color: #36A1C5;
+    border-radius: 40px;
+    padding: 10px;
     }
 
-    .mycomments {
+    .search_input{
+    color: rgb(9, 9, 7);
+    border: 0;
+    outline: 0;
+    background: #fff;
+    width: 0;
+    margin-top:5px;
+    caret-color:transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+    }
+
+    .search .search_input{
+    padding: 0px 5px;
+    width: 550px;
+    caret-color:red;
+    transition: width 0.4s linear;
+    }
+    
+    .search:hover > .search_icon{
+    background: #0056b3;
+    color: #fff;
+    }
+
+    .search_icon{
+    height: 50px;
+    width: 50px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    background-color:black;
+    }
+    
+.search a:link{
+    text-decoration:none;
+}    
+    /*  */
+    .my-comments-S0 {
+
+        margin-bottom: 20px;
+        padding: 30px;
+        border-radius: 8px;
+
+    }
+
+
+    .images-container {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .mycomments-S1 {
         margin-bottom: 20px;
         padding: 20px;
         border-radius: 8px;
@@ -492,6 +624,59 @@
 
     }
 
+    /* Filters */
+
+
+    .form-check-label {
+        display: flex;
+        /* yıldızları boş bırakmadan yan yana sıralıyor*/
+    }
+
+
+    h4 {
+
+        margin-bottom: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+    }
+
+    .accordion-button {
+        background-color: #ab7e15;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .accordion-button.collapsed {
+        background-color: #FBC02D;
+    }
+
+    .accordion-button:hover {
+        background-color: #ab7e15;
+    }
+
+
+
+
+
+
+
+    /* Comments */
+
+
+
+    .mycomment-S2 {
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+
+
     .text-left-mx-auto td {
         padding-bottom: 10px;
 
@@ -586,6 +771,137 @@
     .mycomments-rating-card .my-ratings {
         margin-right: 200px;
     }
+
+    .calendar-category-container {
+        max-width: 170px;
+        width: 100%;
+
+    }
+
+    .calendar-category-container .select-btn {
+        display: flex;
+        height: 50px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        background-color: #FBC02D;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .calendar-category-container .select-btn:hover {
+        background-color: #ab7e15;
+
+    }
+
+    .calendar-category-container .select-btn .btn-text {
+        font-size: 25px;
+        font-weight: 400;
+        color: #fff;
+    }
+
+    .calendar-category-container .select-btn .arrow-dwn {
+        display: flex;
+
+        color: #fff;
+        align-items: center;
+        justify-content: left;
+
+    }
+
+    .calendar-category-container .select-btn.open .arrow-dwn {
+        transform: rotate(-180deg);
+    }
+
+    .list-items {
+        position: relative;
+        margin-top: 10px;
+        border-radius: 8px;
+        padding: 1px;
+        background-color: #fff;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        display: none;
+    }
+
+    .calendar-category-container .select-btn.open~.list-items {
+        display: block;
+    }
+
+    .list-items .item {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        height: 50px;
+        cursor: pointer;
+        transition: 0.3s;
+        padding: 0 15px;
+        border-radius: 8px;
+    }
+
+    .list-items .item:hover {
+        background-color: #e7edfe;
+    }
+
+    .item .item-text {
+        font-size: 16px;
+        font-weight: 400;
+        color: #333;
+    }
+
+    .item .checkbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 16px;
+        width: 16px;
+        border-radius: 4px;
+        margin-right: 12px;
+        border: 1.5px solid #c0c0c0;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .item.checked .checkbox {
+        background-color: #4070f4;
+        border-color: #4070f4;
+    }
+
+    .checkbox .check-icon {
+        color: #fff;
+        font-size: 11px;
+        transform: scale(0);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .item.checked .check-icon {
+        transform: scale(1);
+    }
 </style>
+
+<script>
+    items = document.querySelectorAll(".categoryItems .item");
+    var selectBtn = document.getElementById("select-btn");
+    selectBtn.addEventListener("click", () => {
+        selectBtn.classList.toggle("open");
+    });
+
+    items.forEach(item => {
+        item.addEventListener("click", () => {
+            item.classList.toggle("checked");
+
+            let checked = document.querySelectorAll(".checked"),
+                btnText = document.querySelector(".btn-text");
+
+            if (checked && checked.length > 0) {
+                btnText.innerText = `${checked.length} Seçildi`;
+            } else {
+                btnText.innerText = "Puan Seç";
+            }
+        });
+    })
+
+
+</script>
+
 
 </html>
