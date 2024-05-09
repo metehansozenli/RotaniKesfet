@@ -36,15 +36,20 @@ const getUserData = async (sessionuserId) => {
   const getSpecifiedLocationData = async (locationID) => {
     try {
       const result = await client.query('SELECT * FROM locations WHERE "locationID" = $1', [locationID]);
-  
+      
   
       if (result.rows.length > 0) {
-  
-        const locationData = {
+          const coordinates = result.rows[0].locationCoordinates;
+          const parts = coordinates.split(",");
+          const latitude = parts[0].trim();
+          const longitude = parts[1].trim();
+
+          const locationData = {
           locationID: result.rows[0].locationID,
           locationCountry: result.rows[0].locationCountry,
           locationCityID: result.rows[0].locationCityID,
-          locationCoordinates: result.rows[0].locationCoordinates,
+          locationCoordinates: latitude,
+          locationCoordinates: longitude,
           locationInfo: result.rows[0].locationInfo,
           locationTime: result.rows[0].locationTime,
           locationType: result.rows[0].locationType,
@@ -54,7 +59,6 @@ const getUserData = async (sessionuserId) => {
           locationCommentCount: result.rows[0].locationCommentCount,
           locationImg: result.rows[0].locationImg
         }
-  
         return locationData;
       }
       else {

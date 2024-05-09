@@ -125,9 +125,6 @@
             </div>
 
             <div class="row">
-
-
-
                 <div class="calendar-category-container">
                     <div class="select-btn" id="select-btn">
                         <span class="btn-text">Puan</span>
@@ -202,9 +199,9 @@
                     </ul>
                 </div>
                 &nbsp;&nbsp;
-                <div class="calendar-category-container">
-                    <div class="select-btn" id="select-btn">
-                        <span class="btn-text">Puan</span>
+                <div class="calendar-category-container2">
+                    <div class="select-btn2" id="select-btn2">
+                        <span class="btn-text2">Puan</span>
                         <span class="arrow-dwn">
                             <i class="fa-solid fa-chevron-down"></i>
                         </span>
@@ -772,13 +769,13 @@
         margin-right: 200px;
     }
 
-    .calendar-category-container {
+    .calendar-category-container, .calendar-category-container2 {
         max-width: 170px;
         width: 100%;
 
     }
 
-    .calendar-category-container .select-btn {
+    .calendar-category-container .select-btn,.calendar-category-container2 .select-btn2 {
         display: flex;
         height: 50px;
         align-items: center;
@@ -790,18 +787,18 @@
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .calendar-category-container .select-btn:hover {
+    .calendar-category-container .select-btn:hover, .calendar-category-container2 .select-btn2:hover {
         background-color: #ab7e15;
 
     }
 
-    .calendar-category-container .select-btn .btn-text {
+    .calendar-category-container .select-btn .btn-text, .calendar-category-container2 .select-btn2 .btn-text2 {
         font-size: 25px;
         font-weight: 400;
         color: #fff;
     }
 
-    .calendar-category-container .select-btn .arrow-dwn {
+    .calendar-category-container .select-btn .arrow-dwn, .calendar-category-container2 .select-btn2 .arrow-dwn {
         display: flex;
 
         color: #fff;
@@ -810,7 +807,7 @@
 
     }
 
-    .calendar-category-container .select-btn.open .arrow-dwn {
+    .calendar-category-container .select-btn.open .arrow-dwn, .calendar-category-container2 .select-btn2.open .arrow-dwn {
         transform: rotate(-180deg);
     }
 
@@ -824,11 +821,11 @@
         display: none;
     }
 
-    .calendar-category-container .select-btn.open~.list-items {
+    .calendar-category-container .select-btn.open~.list-items, .calendar-category-container2 .select-btn2.open~.list-items {
         display: block;
     }
 
-    .list-items .item {
+    .calendar-category-container .list-items .item, .calendar-category-container2 .list-items .item {
         display: flex;
         align-items: center;
         list-style: none;
@@ -839,17 +836,17 @@
         border-radius: 8px;
     }
 
-    .list-items .item:hover {
+    .calendar-category-container .list-items .item:hover, .calendar-category-container2 .list-items .item:hover {
         background-color: #e7edfe;
     }
 
-    .item .item-text {
+    .calendar-category-container .item .item-text, .calendar-category-container2 .item .item-text {
         font-size: 16px;
         font-weight: 400;
         color: #333;
     }
 
-    .item .checkbox {
+    .calendar-category-container .item .checkbox, .calendar-category-container2 .item .checkbox {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -861,7 +858,7 @@
         transition: all 0.3s ease-in-out;
     }
 
-    .item.checked .checkbox {
+    .calendar-category-container .item.checked .checkbox, .calendar-category-container2 .item.checked .checkbox {
         background-color: #4070f4;
         border-color: #4070f4;
     }
@@ -873,29 +870,51 @@
         transition: all 0.2s ease-in-out;
     }
 
-    .item.checked .check-icon {
+    .calendar-category-container .item.checked .check-icon, .calendar-category-container2 .item.checked .check-icon {
         transform: scale(1);
     }
 </style>
 
 <script>
-    items = document.querySelectorAll(".categoryItems .item");
+    items = document.querySelectorAll(".calendar-category-container .categoryItems .item");
+    items2 = document.querySelectorAll(".calendar-category-container2 .categoryItems .item");
+
     var selectBtn = document.getElementById("select-btn");
     selectBtn.addEventListener("click", () => {
         selectBtn.classList.toggle("open");
+    });
+
+    var selectBtn2 = document.getElementById("select-btn2");
+    selectBtn2.addEventListener("click", () => {
+        selectBtn2.classList.toggle("open");
     });
 
     items.forEach(item => {
         item.addEventListener("click", () => {
             item.classList.toggle("checked");
 
-            let checked = document.querySelectorAll(".checked"),
+            let checked = document.querySelectorAll(".calendar-category-container .checked"),
                 btnText = document.querySelector(".btn-text");
 
             if (checked && checked.length > 0) {
                 btnText.innerText = `${checked.length} Seçildi`;
             } else {
                 btnText.innerText = "Puan Seç";
+            }
+        });
+    })
+
+    items2.forEach(item => {
+        item.addEventListener("click", () => {
+            item.classList.toggle("checked");
+
+            let checked2 = document.querySelectorAll(".calendar-category-container2 .checked"),
+                btnText2 = document.querySelector(".btn-text2");
+
+            if (checked2 && checked2.length > 0) {
+                btnText2.innerText = `${checked2.length} Seçildi`;
+            } else {
+                btnText2.innerText = "Puan Seç";
             }
         });
     })

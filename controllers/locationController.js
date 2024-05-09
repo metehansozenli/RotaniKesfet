@@ -4,8 +4,7 @@ exports.getLocationController = async (req, res) => {
   try {
     // Oturumdan userID'yi al
     const userID = req.session.userID;
-    
-   
+
     const locationData = await veritabani.getSpecifiedLocationData(req.query.id);
     const totalStarCounts = await veritabani.getTotalStarCounts(req.query.id);
 

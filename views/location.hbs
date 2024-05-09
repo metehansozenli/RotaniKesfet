@@ -86,15 +86,20 @@
                 style="width: 850px; height: 475px; object-fit: cover;">
         </section>
         <section class="routePlanner mt-4 text-center">
-                <div class="routePlanner-map" id="map" style="height: 500px; outline-style: none;"class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom">
+                <div class="routePlanner-map" id="map" dataset-locationCoordinatesLat="{{locationData.locationCoordinatesLat}}" dataset-locationCoordinatesLong="{{locationData.locationCoordinatesLong}}" style="height: 500px; outline-style: none;"class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom">
                     <script>
-                        var map = L.map('map').setView([51.505, -0.09], 13);
+                        const routePlanner = document.querySelector("routePlanner-map");
+                        const locationCoordinatesLat =  routePlanner.dataset.locationCoordinatesLat;
+                        const locationCoordinatesLong =  routePlanner.dataset.locationCoordinatesLong;
+                        alert(locationCoordinatesLat);
+                        
+                        var map = L.map('map').setView([locationCoordinatesLat, locationCoordinatesLong], 13);
                         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                 maxZoom: 19,
                                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                             }).addTo(map);
-                            var marker = L.marker([48.2057, 16.3615]).addTo(map);
-                        </script>
+                        var marker = L.marker([locationCoordinatesLat,locationCoordinatesLong]).addTo(map);
+                    </script>
                 </div>
 
             </section>

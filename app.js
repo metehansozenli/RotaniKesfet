@@ -22,6 +22,11 @@ const popDestData = require("./routes/get_popDestDataRoutes")
 const otherlocationData = require("./routes/get_otherlocationDataRoutes")
 const locationcommentData = require("./routes/get_locationcommentDataRoutes")
 const account = require("./routes/accountRoutes")
+const citylocationData = require("./routes/get_citylocationDataRoutes")
+const typelocationData = require("./routes/get_typelocationDataRoutes")
+
+
+
 
 
 client.connect((err) => {
@@ -59,6 +64,7 @@ app.get("/routePlanner", (req, res) => {
   res.render("routePlanner")
 })
 
+
 app.use("/", popdest)
 app.use("/", restaurant)
 app.use("/",hotels)
@@ -67,7 +73,8 @@ app.use("/", popDestData)
 app.use("/", otherlocationData)
 app.use("/", account)
 app.use("/", locationcommentData)
-
+app.use("/", citylocationData)
+app.use("/", typelocationData)
 
 
 app.get("/mycomment", (req, res) => {
