@@ -6,6 +6,6 @@ exports.PopDestController = async (req, res) => {
       res.render("popdest", { commentsData: commentsData });
     } catch (error) {
       console.error("Popdest acilirken hata olustu:", error);
-      res.status(500).send("Internal Server Error");
+      res.render("page404");
     }
   }

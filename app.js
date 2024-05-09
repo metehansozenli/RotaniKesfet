@@ -16,7 +16,7 @@ const veritabani = require("./controllers/indexController")
 const icont = require("./routes/indexRoutes")
 const popdest = require("./routes/popDest")
 const restaurant = require("./routes/restaurantRoutes");
-const hotels  = require('./routes/hotelsRoutes');
+const hotels = require('./routes/hotelsRoutes');
 const locations = require("./routes/locationRoutes")
 const popDestData = require("./routes/get_popDestDataRoutes")
 const otherlocationData = require("./routes/get_otherlocationDataRoutes")
@@ -44,14 +44,14 @@ hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 
 app.use(express.static("views"));
 
-app.use('/',icont );
+app.use('/', icont);
 
 
 
 app.use(session({
-  secret : "gizli_kelime",
-  resave : false,
-  saveUninitialized : false
+  secret: "gizli_kelime",
+  resave: false,
+  saveUninitialized: false
 }))
 
 
@@ -67,8 +67,8 @@ app.get("/routePlanner", (req, res) => {
 
 app.use("/", popdest)
 app.use("/", restaurant)
-app.use("/",hotels)
-app.use("/",locations)
+app.use("/", hotels)
+app.use("/", locations)
 app.use("/", popDestData)
 app.use("/", otherlocationData)
 app.use("/", account)
@@ -77,12 +77,11 @@ app.use("/", citylocationData)
 app.use("/", typelocationData)
 
 
+
 app.get("/mycomment", (req, res) => {
   res.render("mycomment")
 })
-app.get("/page404", (req, res) => {
-  res.render("page404")
-})
+
 
 app.get("/profile", (req, res) => {
   res.render("profile")
@@ -101,6 +100,9 @@ app.get("/calendar", (req, res) => {
 })
 
 
+app.get("/*", (req, res) => {
+  res.render("page404")
+})
 
 app.listen(3000, () => {
   console.log('Server started on http://localhost:3000');
@@ -113,7 +115,7 @@ process.on('SIGTERM', gracefulShutdown);
 function gracefulShutdown() {
   console.log('Sunucu kapatılıyor...');
 
- 
+
   // Veritabanı bağlantısını kapat
   client.end(() => {
     console.log('Veritabanı bağlantısı kapatıldı');
@@ -125,3 +127,79 @@ function gracefulShutdown() {
 
 
 module.exports = app
+
+
+
+
+app.post('/update-like', (req, res) => {
+  const { commentID, userID, voteType } = req.body;
+
+  new Promise(async (resolve, reject) => {
+    try {
+      const userVoteComment = await client.query(`SELECT "voteType" FROM uservotecomments WHERE "userID" = $1 AND "commentID" = $2;`, [userID, commentID]);
+      let userHasVoted;
+
+      if (userVoteComment.rows.length > 0) {
+        await client.query(`DELETE FROM uservotecomments WHERE "userID" = $1 AND "commentID" = $2;`, [userID, commentID]);
+        userHasVoted = userVoteComment.rows[0].voteType;
+        let sql;
+        if (userHasVoted == "like") {
+          sql = `UPDATE comments SET "commentLikeCount" = "commentLikeCount" - 1 WHERE "commentID" = $1`;
+        } else {
+          sql = `UPDATE comments SET "commentDislikeCount" = "commentDislikeCount" - 1 WHERE "commentID" = $1`;
+        }
+
+        const values = [commentID];
+        await client.query(sql, values);
+      }
+
+      if (userHasVoted != voteType) {
+        await client.query(`INSERT INTO uservotecomments ("userID", "commentID", "voteType") VALUES ($1, $2, $3);`, [userID, commentID, voteType]);
+        let sql;
+        if (voteType == "like") {
+          sql = `UPDATE comments SET "commentLikeCount" = "commentLikeCount" + 1 WHERE "commentID" = $1`;
+        } else {
+          sql = `UPDATE comments SET "commentDislikeCount" = "commentDislikeCount" + 1 WHERE "commentID" = $1`;
+        }
+
+        const values = [commentID];
+        await client.query(sql, values);
+      }
+
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
+  })
+  .then(() => {
+    res.send("Success");
+  })
+  .catch(error => {
+    console.error('Veritabanında like veya dislike sayısı güncellenirken hata oluştu: ' + error.message);
+    res.render("page404");
+  });
+});
+
+
+
+
+app.get('/get-vote-type', async (req, res) => {
+  const { commentID, userID } = req.query;
+
+  try {
+      // Burada commentID ve userID kullanarak uservotecomments tablosundan voteType değerini alın
+
+      // Örneğin, bir veritabanı sorgusu yapabilirsiniz
+      const voteType = await client.query(`SELECT "voteType" FROM uservotecomments WHERE "commentID" = $1 AND "userID" = $2`, [commentID, userID]);
+      
+      // Sorgu sonucundan gelen voteType değerini alın
+      const voteTypeValue = voteType.rows[0] ? voteType.rows[0].voteType : null;
+
+      // VoteType değerini JSON olarak yanıt olarak gönder
+      res.json({ voteType: voteTypeValue });
+  } catch (error) {
+      console.error('Hata:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+

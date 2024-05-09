@@ -26,6 +26,6 @@ exports.hotels = async (req, res) => {
       console.log(userID); // userID'yi kullanabilirsiniz
     } catch (error) {
       console.error("Location açılırken hata oluştu:", error);
-      res.status(500).send("Internal Server Error");
+      res.render("page404");
     }
   };

@@ -58,7 +58,7 @@ exports.postLogin =  async (req, res) => {
         }
     } catch (error) {
         console.error("Giriş işlemi sırasında bir hata oluştu:", error);
-        res.status(500).send("Bir hata oluştu, lütfen daha sonra tekrar deneyin.");
+        res.render("page404");
     }
   }
 
@@ -98,7 +98,7 @@ exports.changeHeader = async (req, res) => {
             }
         } catch (error) {
             console.error("Error fetching user data:", error);
-            res.send("Bir hata Oluştu!");
+            res.render("page404");
         }
     }
   }

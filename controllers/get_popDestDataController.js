@@ -37,6 +37,6 @@ exports.get_popDestData = async (req, res) => {
       res.json(result.rows); // Sonuçları JSON olarak gönderme
     } catch (error) {
       console.error("Error fetching data:", error);
-      res.status(500).send("Internal Server Error");
+      res.render("page404");
     }
   }

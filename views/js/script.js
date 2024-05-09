@@ -204,37 +204,107 @@ document.addEventListener('customlikeControlEvent', function () {
         // Her bir .vote-section içindeki like ve dislike butonlarını seç
         const likeBtn = voteElement.querySelector('.likeBtn');
         const dislikeBtn = voteElement.querySelector('.dislikeBtn');
-         
-        // Like butonu için tıklama olayını ekle
+        const likeCountSpan = likeBtn.querySelector('span');
+        const dislikeCountSpan = dislikeBtn.querySelector('span');
+        const commentID = voteElement.dataset.commentid;
+        let isButtonLocked = false; // Buton kilitleme durumu
+
         
         likeBtn.addEventListener('click', function() {
+
+
+            if (isButtonLocked) return;
+            isButtonLocked = true;
+
+            // 1 saniye sonra butonun kilidini kaldır
+            setTimeout(() => {
+                isButtonLocked = false;
+            }, 1000);
+
             // Dislike butonu seçiliyse, seçimini kaldır
             if (!window.userID) {$('#loginAlert').modal('show');  return;}
 
             const dislikeBtnActive = dislikeBtn.classList.contains('voteActive');
+            const likeBtnActive = likeBtn.classList.contains('voteActive');
+           
+        
             if (dislikeBtnActive) {
                 dislikeBtn.classList.remove('voteActive');
-                
-                    console.log(`${window.userID} DİSLİKE BUTONUNU BEĞENDİ`);
-               
+
+                let dislikeCount = parseInt(dislikeCountSpan.textContent);
+                dislikeCount--;
+                dislikeCountSpan.textContent = dislikeCount;
+
             } 
-            // Like butonunun seçimini toggle et
-            this.classList.toggle('voteActive');
             
-                console.log(`${window.userID} BEĞENME BUTONUNU BEĞENDİ`);
+            if(likeBtnActive){
+                let likeCount = parseInt(likeCountSpan.textContent);
+                likeCount--;
+                likeCountSpan.textContent = likeCount;
+                this.classList.remove('voteActive');
+                
+            }else{
+                let likeCount = parseInt(likeCountSpan.textContent);
+                likeCount++;
+                likeCountSpan.textContent = likeCount;
+                this.classList.toggle('voteActive');
+                
+            }
+           
+
+
+            sendLikeDislikeToServer(commentID, window.userID,"like");
+            
+        
+        
+
         });
 
         // Dislike butonu için tıklama olayını ekle
         dislikeBtn.addEventListener('click', function() {
 
+            if (isButtonLocked) return;
+            isButtonLocked = true;
+
+            // 1 saniye sonra butonun kilidini kaldır
+            setTimeout(() => {
+                isButtonLocked = false;
+            }, 1000);
+
+
             if (!window.userID) {$('#loginAlert').modal('show');  return;}
             // Like butonu seçiliyse, seçimini kaldır
             const likeBtnActive = likeBtn.classList.contains('voteActive');
+            const dislikeBtnActive = dislikeBtn.classList.contains('voteActive');
+
+
+            
             if (likeBtnActive) {
+                let likeCount = parseInt(likeCountSpan.textContent);
+                likeCountSpan.textContent = --likeCount;
                 likeBtn.classList.remove('voteActive');
-            } 
-            // Dislike butonunun seçimini toggle et
-            this.classList.toggle('voteActive');
+
+            }
+             
+            if(dislikeBtnActive){
+                let dislikeCount = parseInt(dislikeCountSpan.textContent);
+                dislikeCount--;
+                dislikeCountSpan.textContent = dislikeCount;
+                this.classList.remove('voteActive');
+                
+            }else{
+                let dislikeCount = parseInt(dislikeCountSpan.textContent);
+                dislikeCount++;
+                dislikeCountSpan.textContent = dislikeCount;
+                this.classList.toggle('voteActive');
+               
+            }
+           
+                
+            sendLikeDislikeToServer(commentID, window.userID,"dislike");
+           
+            
+            
         });
 
         
@@ -243,6 +313,33 @@ document.addEventListener('customlikeControlEvent', function () {
 });
 
 
+function sendLikeDislikeToServer(commentID, userID ,voteType) {
+    return new Promise((resolve, reject) => {
+        // AJAX isteği için gereken veriyi hazırla
+        const requestData = {
+            commentID: commentID,
+            userID: userID,
+            voteType: voteType
+        };
+
+        // AJAX isteği gönder
+        $.ajax({
+            type: 'POST',
+            url: '/update-like', // Sunucu tarafında işlenecek URL
+            data: requestData,
+            success: function(response) {
+                // Sunucudan gelen yanıtı işle
+                console.log('Sunucudan gelen yanıt:', response);
+                resolve(response); // İşlem başarılı olduğunda resolve ile yanıtı döndür
+            },
+            error: function(xhr, status, error) {
+                // Hata durumunda reject ile hatayı döndür
+                console.error('Hata:', error);
+                reject(error);
+            }
+        });
+    });
+}
 
 
 function calculateStarWidths() {

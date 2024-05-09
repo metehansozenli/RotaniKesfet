@@ -16,6 +16,6 @@ exports.getLocationController = async (req, res) => {
 
   } catch (error) {
     console.error("Location açılırken hata oluştu:", error);
-    res.status(500).send("Internal Server Error");
+    res.render("page404");
   }
 };

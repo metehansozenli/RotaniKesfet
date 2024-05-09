@@ -4,6 +4,7 @@ var state = true;
 let finish = false;
 let j = 0;
 var locationID;
+var customlikeControlEvent= new CustomEvent('customlikeControlEvent')
 
 document.addEventListener('DOMContentLoaded', function () {
     locationStatus();
@@ -99,7 +100,7 @@ const locationcomment_load_data = (locationID) => {
                         "<h4 class='blue-text mt-3'>" + result.commentTitle + "</h4>" +
                         "<p class='content'>" + result.commentContents + "</p>" +
                         "</div>" +
-                        "<div class='vote-section d-flex text-left mt-4'>" +
+                        "<div class='vote-section d-flex text-left mt-4' data-commentid='"+ result.commentID +"'>" +
                         "<div class='like mr-3 vote'>" +
                         "<button class='likeBtn d-flex' ><i class='fa fa-thumbs-up fa-lg' aria-hidden='true'></i>"+
                         "<span style='margin-left:2px;'>"+result.commentLikeCount+ "</span></button>" +
@@ -113,11 +114,12 @@ const locationcomment_load_data = (locationID) => {
                         "<hr>";
 
                     start_index++;
-
+            
                 });
 
-                locationcomments_data.innerHTML = locationcomments_data.innerHTML + html;
-                document.dispatchEvent(new CustomEvent('customlikeControlEvent'));
+                locationcomments_data.innerHTML = locationcomments_data.innerHTML + html;  
+
+                document.dispatchEvent(customlikeControlEvent);
                 document.dispatchEvent(new CustomEvent('customCommentLoadEvent'));
                 document.getElementById("loading_animation").style.display = "none";
                 state = true;

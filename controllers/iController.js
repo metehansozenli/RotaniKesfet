@@ -7,6 +7,6 @@ exports.getIndexController = async (req, res) => {
       res.render("index",  { randomCitiesData: randomCitiesData, randomCitiesData2 : randomCitiesData2, restaurantData:restaurantData});
     } catch (error) {
       console.error("index acilirken hata olustu:", error);
-      res.status(500).send("Internal Server Error");
+      res.render("page404");
     }
   }
