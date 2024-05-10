@@ -61,10 +61,16 @@ $(document).ready(function(){
         tagNumb.innerText = maxTags - tags.length;
     }
     
-    function createTag() {
-        input.value = tags.join(", "); // Tagları input alanının value'sine ekliyoruz
-        countTags();
-    }
+    function createTag(){
+    ul.querySelectorAll("li").forEach(li => li.remove());
+    tags.slice().reverse().forEach(tag =>{
+        let liTag = `<li>${tag} <i class="uit uit-multiply" onclick="remove(this, '${tag}')"></i></li>`;
+        ul.insertAdjacentHTML("afterbegin", liTag);
+    });
+    countTags();
+
+    input.placeholder = tags.length > 0 ? "" : "Şehir Ekle";
+}
     
     function remove(element, tag) {
         let index = tags.indexOf(tag);
