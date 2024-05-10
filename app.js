@@ -27,8 +27,6 @@ const typelocationData = require("./routes/get_typelocationDataRoutes")
 
 
 
-
-
 client.connect((err) => {
   if (err) {
     console.error('Veritabanına bağlanırken bir hata oluştu:', err.stack);
@@ -75,6 +73,7 @@ app.use("/", account)
 app.use("/", locationcommentData)
 app.use("/", citylocationData)
 app.use("/", typelocationData)
+
 
 
 
@@ -183,7 +182,7 @@ app.post('/update-like', (req, res) => {
 
 
 
-app.get('/get-vote-type', async (req, res) => {
+app.get('/get_votetype', async (req, res) => {
   const { commentID, userID } = req.query;
 
   try {

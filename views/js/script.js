@@ -65,7 +65,7 @@ document.addEventListener('customLoadEvent', function () {
         });
     });
     // BU ŞEKİLDE USERID KONSOL ÇIKTISI OLARAK GELİYOR İNDEX.HBS'DEN 
-   
+
 });
 
 
@@ -74,13 +74,13 @@ document.addEventListener('customLoadEvent', function () {
 document.addEventListener('customCommentLoadEvent', function () {
     // Tüm .point öğelerini seç
     const points = document.querySelectorAll('.comment-score');
-  
-    
+
+
     // Her bir .point öğesi için işlem yap
     points.forEach((pointElement) => {
         const point = parseFloat(pointElement.textContent);
         const stars = pointElement.parentElement.querySelector('.comment-stars').querySelectorAll('span');
-        
+
         // Yıldızları güncelle
         stars.forEach((star, index) => {
             if (index < Math.floor(point)) { // Puanı aşağıya yuvarlayarak yıldızları dolduruyoruz
@@ -99,14 +99,14 @@ document.addEventListener('customCommentLoadEvent', function () {
 
 function favControl() {
     let icons = document.querySelectorAll('ion-icon');
-    
+
     icons.forEach(function (icon) {
         icon.onclick = function () {
-            if(window.userID){
-            icon.classList.toggle('active');
-            console.log(`${userID} BEĞENDİ`);
-            
-            }else {
+            if (window.userID) {
+                icon.classList.toggle('active');
+                console.log(`${userID} BEĞENDİ`);
+
+            } else {
                 $('#loginAlert').modal('show');
             }
 
@@ -209,8 +209,8 @@ document.addEventListener('customlikeControlEvent', function () {
         const commentID = voteElement.dataset.commentid;
         let isButtonLocked = false; // Buton kilitleme durumu
 
-        
-        likeBtn.addEventListener('click', function() {
+
+        likeBtn.addEventListener('click', function () {
 
 
             if (isButtonLocked) return;
@@ -222,12 +222,12 @@ document.addEventListener('customlikeControlEvent', function () {
             }, 1000);
 
             // Dislike butonu seçiliyse, seçimini kaldır
-            if (!window.userID) {$('#loginAlert').modal('show');  return;}
+            if (!window.userID) { $('#loginAlert').modal('show'); return; }
 
             const dislikeBtnActive = dislikeBtn.classList.contains('voteActive');
             const likeBtnActive = likeBtn.classList.contains('voteActive');
-           
-        
+
+
             if (dislikeBtnActive) {
                 dislikeBtn.classList.remove('voteActive');
 
@@ -235,33 +235,33 @@ document.addEventListener('customlikeControlEvent', function () {
                 dislikeCount--;
                 dislikeCountSpan.textContent = dislikeCount;
 
-            } 
-            
-            if(likeBtnActive){
+            }
+
+            if (likeBtnActive) {
                 let likeCount = parseInt(likeCountSpan.textContent);
                 likeCount--;
                 likeCountSpan.textContent = likeCount;
                 this.classList.remove('voteActive');
-                
-            }else{
+
+            } else {
                 let likeCount = parseInt(likeCountSpan.textContent);
                 likeCount++;
                 likeCountSpan.textContent = likeCount;
                 this.classList.toggle('voteActive');
-                
+
             }
-           
 
 
-            sendLikeDislikeToServer(commentID, window.userID,"like");
-            
-        
-        
+
+            sendLikeDislikeToServer(commentID, window.userID, "like");
+
+
+
 
         });
 
         // Dislike butonu için tıklama olayını ekle
-        dislikeBtn.addEventListener('click', function() {
+        dislikeBtn.addEventListener('click', function () {
 
             if (isButtonLocked) return;
             isButtonLocked = true;
@@ -272,48 +272,48 @@ document.addEventListener('customlikeControlEvent', function () {
             }, 1000);
 
 
-            if (!window.userID) {$('#loginAlert').modal('show');  return;}
+            if (!window.userID) { $('#loginAlert').modal('show'); return; }
             // Like butonu seçiliyse, seçimini kaldır
             const likeBtnActive = likeBtn.classList.contains('voteActive');
             const dislikeBtnActive = dislikeBtn.classList.contains('voteActive');
 
 
-            
+
             if (likeBtnActive) {
                 let likeCount = parseInt(likeCountSpan.textContent);
                 likeCountSpan.textContent = --likeCount;
                 likeBtn.classList.remove('voteActive');
 
             }
-             
-            if(dislikeBtnActive){
+
+            if (dislikeBtnActive) {
                 let dislikeCount = parseInt(dislikeCountSpan.textContent);
                 dislikeCount--;
                 dislikeCountSpan.textContent = dislikeCount;
                 this.classList.remove('voteActive');
-                
-            }else{
+
+            } else {
                 let dislikeCount = parseInt(dislikeCountSpan.textContent);
                 dislikeCount++;
                 dislikeCountSpan.textContent = dislikeCount;
                 this.classList.toggle('voteActive');
-               
+
             }
-           
-                
-            sendLikeDislikeToServer(commentID, window.userID,"dislike");
-           
-            
-            
+
+
+            sendLikeDislikeToServer(commentID, window.userID, "dislike");
+
+
+
         });
 
-        
+
     });
-    
+
 });
 
 
-function sendLikeDislikeToServer(commentID, userID ,voteType) {
+function sendLikeDislikeToServer(commentID, userID, voteType) {
     return new Promise((resolve, reject) => {
         // AJAX isteği için gereken veriyi hazırla
         const requestData = {
@@ -327,12 +327,12 @@ function sendLikeDislikeToServer(commentID, userID ,voteType) {
             type: 'POST',
             url: '/update-like', // Sunucu tarafında işlenecek URL
             data: requestData,
-            success: function(response) {
+            success: function (response) {
                 // Sunucudan gelen yanıtı işle
                 console.log('Sunucudan gelen yanıt:', response);
                 resolve(response); // İşlem başarılı olduğunda resolve ile yanıtı döndür
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 // Hata durumunda reject ile hatayı döndür
                 console.error('Hata:', error);
                 reject(error);
@@ -372,22 +372,22 @@ function calculateStarWidths() {
 function closeAndOpenModal(closeModal, openModal) {
     $(closeModal).modal('hide'); // Mevcut modali kapat
     $(openModal).modal('show'); // Diğer modalı aç
-    
+
 }
 
 function checkSessionForcommentWrite(locationID) {
-    
-    if(window.userID){
-        window.location.href = "/commentWrite?id="+locationID;
-        
-        }else {
-            $('#loginAlert').modal('show');
-        }
+
+    if (window.userID) {
+        window.location.href = "/commentWrite?id=" + locationID;
+
+    } else {
+        $('#loginAlert').modal('show');
+    }
 }
 
-async function setFavStatus(userID,locationID) {
-    
-    try{
+async function setFavStatus(userID, locationID) {
+
+    try {
         const icon = document.getElementById("heart");
         const result = await client.query(`
                                             SELECT 
@@ -395,14 +395,14 @@ async function setFavStatus(userID,locationID) {
                                             FROM
                                                 users 
                                             WHERE "userID" = $1 AND $2 = ANY ("userFavLocations");
-                                          `, [userID,locationID]);
+                                          `, [userID, locationID]);
 
         if (result.rows.length > 0) {
             icon.classList.add('active');
         }
-        else ;
+        else;
 
-    }catch(error){
+    } catch (error) {
         console.error("Sorgu Hatası:", error);
     }
 }
