@@ -339,6 +339,84 @@ const getUserData = async (sessionuserId) => {
         // Hata durumunda null döndür
         return null;
     }
+  }
+
+  const getLocationType = async () => {
+    try {
+
+      const query1 = {
+          text: `
+          SELECT
+              "locationType"
+          FROM
+              locations
+          GROUP BY
+              "locationType"
+          LIMIT 8
+          `
+      };
+      const result1 = await client.query(query1);
+      const locationTypes = result1.rows;
+      return locationTypes
+  } catch (error) {
+    console.error("Error fetching comment data:", error);
+    throw error; 
+    }
+  }
+
+const getTypeLocationData = async (locationtype) => {
+  try {
+    const locationType = locationtype; 
+    const query2 = {
+        text: `
+            SELECT DISTINCT
+                "locationName"  
+            FROM
+                locations
+            WHERE "locationType" = $1
+            ORDER BY 
+                "locationName" DESC
+        `,
+        values: [locationType],
+    };
+    const result = await client.query(query2);
+    const locationNames = result.rows;
+    return locationNames
+} catch (error) {
+    console.error("Error fetching comment data:", error);
+    throw error; 
+  }
+}
+
+const getLocationCoordinates = async (locationName) => {
+  try {
+
+    const result = await client.query(
+      `
+      SELECT 
+          "locationCoordinates"
+      FROM 
+          locations
+      WHERE 
+          "locationName" = $1;
+      `, 
+      [locationName]);
+
+    const coordinates = result.rows[0].locationCoordinates;
+    const parts = coordinates.split(",");
+    const locationCoordinatesLat = parts[0].trim();
+    const locationCoordinatesLong = parts[1].trim();
+    
+    const locationCoordinates = {
+      locationCoordinatesLat : locationCoordinatesLat,
+      locationCoordinatesLong : locationCoordinatesLong
+    }
+    return locationCoordinates
+
+} catch (error) {
+    console.error("Error fetching comment data:", error);
+    throw error; 
+  }
 }
 
   
@@ -350,5 +428,9 @@ const getUserData = async (sessionuserId) => {
     getSpecifiedLocationData,
     getPopularCityData,
     getUserData,
-    getTotalStarCounts
+    getTotalStarCounts,
+    getLocationType,
+    getTypeLocationData,
+    getLocationCoordinates
+    
   };

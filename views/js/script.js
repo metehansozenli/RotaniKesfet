@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
 
     document.dispatchEvent(new CustomEvent('customLoadEvent'));
@@ -25,22 +26,6 @@ function menuToggle() {
     toggleMenu.classList.toggle("active");
     console.log(window.userID);
 }
-
-
-fetch('/user')
-
-    .then(data => {
-
-        const fullName = `${data.userName} ${data.userSurname}`;
-
-        document.getElementById('userName').innerText = `${fullName} (@${data.userNickname})`;
-    })
-    .catch(error => {
-        console.error('Hata oluştu:', error);
-    });
-
-
-
 
 //Genel yıldızları ayarlama
 document.addEventListener('customLoadEvent', function () {

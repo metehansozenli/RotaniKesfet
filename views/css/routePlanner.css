@@ -34,7 +34,7 @@
     color: #fff;
     font-size: 14px;
     border-radius: 50%;
-    background: #6e93f7;
+    background: #36A1C5;
     align-items: center;
     justify-content: center;
     transition: 0.3s;
@@ -50,7 +50,11 @@
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     display: none;
+    max-height: 265px;
+    overflow: hidden;
+    overflow-y: scroll;
 }
+
 .calendar-category-container .select-btn.open ~ .list-items{
     display: block;
 }
@@ -71,6 +75,9 @@
     font-size: 16px;
     font-weight: 400;
     color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .item .checkbox{
     display: flex;
@@ -78,6 +85,8 @@
     justify-content: center;
     height: 16px;
     width: 16px;
+    min-height: 16px;
+    min-width: 16px;
     border-radius: 4px;
     margin-right: 12px;
     border: 1.5px solid #c0c0c0;
@@ -89,6 +98,7 @@
 }
 .checkbox .check-icon{
     color: #fff;
+    margin-top: 2px;
     font-size: 11px;
     transform: scale(0);
     transition: all 0.2s ease-in-out;
