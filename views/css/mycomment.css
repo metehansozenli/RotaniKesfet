@@ -1,0 +1,442 @@
+
+/*---------               Section-1                 ----------*/
+
+.mycomments-S1 {
+
+    margin-bottom: 20px;
+    padding: 30px;
+    border-radius: 8px;
+
+}
+
+/* Search Box*/
+.search {
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 70px;
+    background-color: #36A1C5;
+    border-radius: 40px;
+    padding: 10px;
+}
+
+.search-input {
+    color: rgb(9, 9, 7);
+    border: none ;
+    outline: 0;
+    background: #E0ECFD;
+    width: 0;
+    border-radius: 20px !important;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+}
+
+.search .search-input {
+    padding: 0px 5px;
+    width: 550px;
+    caret-color: #F2772A;
+    transition: width 0.4s linear;
+}
+
+.search-input :focus{
+    outline: none;
+}
+
+.clear-icon {
+   
+    color:#F2772A;
+    font-size: 20px;
+}
+
+
+
+.search-icon:hover {
+    background: #0056b3;
+    color: #fff;
+}
+
+.search-icon {
+    height: 50px;
+    width: 50px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+    background-color: #F2772A;
+}
+
+
+
+.search a:link {
+    text-decoration: none;
+}
+
+
+.images-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/*---------               Section-2                ----------*/
+
+.mycomments-S2 {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+
+/*---------               Section-3                 ----------*/
+
+.mycomments-S3 {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+.mycomments-rating-card {
+    border: hidden;
+    background-color: #fff;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.mycomment-date {
+    font-size: 20px;
+}
+
+
+
+
+.rating-box {
+    width: 130px;
+    height: 110px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #FBC02D;
+    color: #fff;
+    text-align: center;
+}
+
+.mycomments-rating-label {
+
+    font-weight: bold;
+
+}
+
+/* Rating bar width */
+.rating-bar {
+    width: 300px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* The bar container */
+.bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+/* Individual bars */
+.bar-5 {
+    width: 70%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px;
+
+}
+
+.bar-4 {
+    width: 30%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px;
+
+}
+
+.bar-3 {
+    width: 20%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px;
+
+}
+
+.bar-2 {
+    width: 10%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px;
+
+}
+
+.bar-1 {
+    width: 0%;
+    height: 13px;
+    background-color: #FBC02D;
+    border-radius: 20px;
+
+}
+
+
+
+
+/* Listboxs  */
+
+
+.form-check-label {
+    display: flex;
+    /* yıldızları boş bırakmadan yan yana sıralıyor*/
+}
+
+
+.comments-Listboxs {
+    max-width: 170px;
+    width: 100%;
+
+}
+
+.comments-Listboxs2 {
+    max-width: 194px;
+    width: 100%;
+
+}
+
+.comments-Listboxs3 {
+    max-width: 194px;
+    width: 100%;
+
+}
+
+.comments-Listboxs .select-btn,
+.comments-Listboxs2 .select-btn2,
+.comments-Listboxs3 .select-btn3 {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #FBC02D;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comments-Listboxs .select-btn:hover,
+.comments-Listboxs2 .select-btn2:hover,
+.comments-Listboxs3 .select-btn3:hover {
+    background-color: #ab7e15;
+
+}
+
+.comments-Listboxs .select-btn .btn-text,
+.comments-Listboxs2 .select-btn2 .btn-text2,
+.comments-Listboxs3 .select-btn3 .btn-text3 {
+    font-size: 25px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.comments-Listboxs .select-btn .arrow-dwn,
+.comments-Listboxs2 .select-btn2 .arrow-dwn,
+.comments-Listboxs3 .select-btn3 .arrow-dwn {
+    display: flex;
+    color: #fff;
+    align-items: center;
+    justify-content: left;
+
+}
+
+.comments-Listboxs .select-btn.open .arrow-dwn,
+.comments-Listboxs2 .select-btn2.open .arrow-dwn,
+.comments-Listboxs3 .select-btn3.open .arrow-dwn {
+    transform: rotate(-180deg);
+}
+
+.list-items {
+    position: relative;
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 1px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.comments-Listboxs .select-btn.open~.list-items,
+.comments-Listboxs2 .select-btn2.open~.list-items,
+.comments-Listboxs3 .select-btn3.open~.list-items {
+    display: block;
+}
+
+.comments-Listboxs .list-items .item,
+.comments-Listboxs2 .list-items .item,
+.comments-Listboxs3 .list-items .item {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 0 15px;
+    border-radius: 8px;
+}
+
+.comments-Listboxs .list-items .item:hover,
+.comments-Listboxs2 .list-items .item:hover,
+.comments-Listboxs3 .list-items .item:hover {
+    background-color: #e7edfe;
+}
+
+.comments-Listboxs .item .item-text,
+.comments-Listboxs2 .item .item-text,
+.comments-Listboxs3 .item .item-text {
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+}
+
+.comments-Listboxs .item .checkbox,
+.comments-Listboxs2 .item .checkbox,
+.comments-Listboxs3 .item .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+    margin-right: 12px;
+    border: 1.5px solid #c0c0c0;
+    transition: all 0.3s ease-in-out;
+}
+
+.comments-Listboxs .item.checked .checkbox,
+.comments-Listboxs2 .item.checked .checkbox,
+.comments-Listboxs3 .item.checked .checkbox {
+    background-color: #4070f4;
+    border-color: #4070f4;
+}
+
+.checkbox .check-icon {
+    color: #fff;
+    font-size: 11px;
+    transform: scale(0);
+    transition: all 0.2s ease-in-out;
+}
+
+.comments-Listboxs .item.checked .check-icon,
+.comments-Listboxs2 .item.checked .check-icon,
+.comments-Listboxs3 .item.checked .check-icon {
+    transform: scale(1);
+}
+
+
+
+
+
+
+
+/*---------               Section-3                ----------*/
+
+/* Comments */
+
+
+
+.mycomment-S3 {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.text-left-mx-auto td {
+    padding-bottom: 10px;
+
+}
+
+
+
+.mycomment-info {
+    font-size: 24px;
+}
+
+.star-active {
+    color: #FBC02D;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.star-active:hover {
+    color: #F9A825;
+    cursor: pointer;
+}
+
+.star-inactive {
+    color: #CFD8DC;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.blue-text {
+    color: #0091EA;
+}
+
+.content {
+    font-size: 18px;
+}
+
+
+.comment-card {
+    border: hidden;
+    background-color: #fff;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.profile-pic {
+    width: 240px;
+    height: 160px;
+    object-fit: cover;
+    margin-right: 30px;
+}
+
+
+
+
+.mycomments hr {
+    border-top: 1px solid #ccc;
+    /* Çizgi rengi ve kalınlığı */
+    margin: 20px 0;
+    /* Çizginin üst ve alt boşlukları */
+}
+
+
+
+.mycomments-rating-card .my-ratings {
+    margin-right: 200px;
+}
