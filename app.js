@@ -59,6 +59,7 @@ app.get("/kesfet", (req, res) => {
 })
 
 app.get("/routePlanner", (req, res) => {
+  
   res.render("routePlanner")
 })
 
@@ -201,4 +202,62 @@ app.get('/get_votetype', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
+app.post('/getCityIDs', async (req, res) => {
+  try {
+    const tags = req.body.tags;
+    const cityIDs = [];
+
+
+    // Etiketlerle eşleşen şehirleri veritabanından çek
+    for (const tag of tags) {
+      const result = await client.query('SELECT "cityID" FROM cities WHERE "cityName" = $1', [tag]);
+      if (result.rows.length > 0) {
+        cityIDs.push(result.rows[0].cityID);
+      }
+    }
+
+
+    res.json({ cityIDs: cityIDs });
+  } catch (error) {
+    console.error('Error executing query', error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
+
+app.post('/createTravel', async (req, res) => {
+  try {
+    const {
+      routeCreationDate,
+      routeTitle,
+      routeStartDates,
+      routeFinishDates,
+      userID,
+      routeChoices,
+      cityIDs
+    } = req.body;
+
+
+    // routes tablosuna ekleme işlemi
+    const routeInsertQuery = `
+    INSERT INTO routes ("routeCreationDate", "routeTitle", "userID", "routeCities", "routeStartDates", "routeFinishDates","routeChoices")
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    RETURNING "routeID";
+`;
+    const routeValues = [routeCreationDate, routeTitle, userID, cityIDs, routeStartDates, routeFinishDates, routeChoices];
+    const result = await client.query(routeInsertQuery, routeValues);
+    const newRouteID = result.rows[0].routeID;
+
+    
+    console.log(newRouteID);
+    res.status(200).json({ success: true, newRouteID:newRouteID });
+
+  } catch (error) {
+    console.error('Error creating travel:', error);
+    res.status(500).json({ success: false, error: 'An error occurred' });
+  }
+});
+
 

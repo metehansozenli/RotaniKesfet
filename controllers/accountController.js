@@ -52,7 +52,7 @@ exports.postLogin =  async (req, res) => {
             const randomCitiesData2 = await veritabani.getRandomCitiesData();
             const restaurantData = await veritabani.getRestaurantData();
             
-            res.render("index",  { randomCitiesData: randomCitiesData, randomCitiesData2 : randomCitiesData2, restaurantData:restaurantData});
+            res.render("index",  { randomCitiesData: randomCitiesData, randomCitiesData2 : randomCitiesData2, restaurantData:restaurantData, userID:userID});
         } else {
             res.send("Kullanıcı adı veya şifre yanlış!"); // Kullanıcı bulunamazsa hata mesajı gönder
         }
