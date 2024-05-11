@@ -25,6 +25,7 @@ const account = require("./routes/accountRoutes")
 const citylocationData = require("./routes/get_citylocationDataRoutes")
 const typelocationData = require("./routes/get_typelocationDataRoutes")
 const locationCoordinatesData = require("./routes/get_locationCoordinatesRoutes")
+const routePlanner = require("./routes/routePlannerRoutes");
 
 
 client.connect((err) => {
@@ -60,8 +61,6 @@ app.get("/kesfet", (req, res) => {
 
 
 
-
-
 app.use("/", popdest)
 app.use("/", restaurant)
 app.use("/", hotels)
@@ -73,11 +72,7 @@ app.use("/", locationcommentData)
 app.use("/", citylocationData)
 app.use("/", typelocationData)
 app.use("/", locationCoordinatesData)
-
-app.get("/routePlanner", (req, res) => {
-  const routeID = req.session.routeID;
-  res.render("routePlanner", {routeID :routeID})
-})
+app.use("/", routePlanner)
 
 
 app.get("/mycomment", (req, res) => {
@@ -254,9 +249,8 @@ app.post('/createTravel', async (req, res) => {
     
     req.session.routeID = newRouteID;
     
-    console.log(newRouteID);
+
     res.status(200).json({ success: true, newRouteID:newRouteID });
-    
     
     
   } catch (error) {

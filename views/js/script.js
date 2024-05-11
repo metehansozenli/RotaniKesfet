@@ -1,26 +1,3 @@
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    document.dispatchEvent(new CustomEvent('customLoadEvent'));
-    const popdest = document.getElementById('popdest');
-    const otels = document.getElementById('hotels');
-    const restaurants = document.getElementById('restaurants');
-
-    popdest.addEventListener('click', function () {
-        window.location.href = '../popdest';
-    });
-
-    otels.addEventListener('click', function () {
-        window.location.href = '../hotels';
-    });
-
-    restaurants.addEventListener('click', function () {
-        window.location.href = '../restaurants';
-    });
-});
-
-
-
 function menuToggle() {
     const toggleMenu = document.querySelector(".menu");
     toggleMenu.classList.toggle("active");

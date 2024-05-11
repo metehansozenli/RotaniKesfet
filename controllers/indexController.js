@@ -419,6 +419,28 @@ const getLocationCoordinates = async (locationName) => {
   }
 }
 
+const getRoutesData = async (routeID) => {
+  try {
+    const result = await client.query(
+      `
+      SELECT 
+          *
+      FROM 
+          routes
+      WHERE 
+          "routeID" = $1;
+      `, 
+      [routeID]
+    );
+
+    return result.rows[0]; // routes tablosundaki her veriyi döndürür
+
+  } catch (error) {
+    console.error("Error fetching route data:", error);
+    throw error; 
+  }
+}
+
   
   module.exports = {
     getRandomCitiesData,
@@ -431,6 +453,7 @@ const getLocationCoordinates = async (locationName) => {
     getTotalStarCounts,
     getLocationType,
     getTypeLocationData,
-    getLocationCoordinates
+    getLocationCoordinates,
+    getRoutesData
     
   };

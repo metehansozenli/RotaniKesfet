@@ -126,7 +126,7 @@ createTravelBtn.addEventListener("click", async() => {
             const routeChoices = await addRouteChoices(items);
 
            
-            console.log(routeChoices);
+           
             // İşaretli şehirlerin seçimini belirle
             const cityIDs = await getCityIDsFromTags(tags);
 
@@ -148,14 +148,9 @@ createTravelBtn.addEventListener("click", async() => {
             });
 
             // Sunucudan gelen yanıtı al
-            const data = await response.json();
-            console.log(data);
-            routeID = data.newRouteID
-            window.location.href = `/routePlanner`
-            
+            await response.json();
+            window.location.href = `/routePlanner`;
 
-        
-    
 });
 
 
