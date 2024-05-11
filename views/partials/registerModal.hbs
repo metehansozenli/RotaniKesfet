@@ -1,4 +1,4 @@
- <div class="modal fade" id="registerModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+<div class="modal fade" id="registerModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -17,7 +17,15 @@
                         <input type="text" id="nickname" name="nickname" placeholder="Kullanıcı Adı" >
                         <input type="text" id="sehir" name="sehir" placeholder="Şehir" >
                         <input type="text" id="ulke" name="ulke" placeholder="Ülke" >
-                        <input type="text" id="telefon-numarasi" name="telefonNumarasi" placeholder="Telefon Numarası" >
+                        <!-- Telefon Numarası Alanı -->
+                        <div class="phone-number d-flex">
+                            <select id="alan-kodu" name="alanKodu">
+                                <option value="90">+90 (Türkiye)</option>
+                                <!-- Diğer ülkelerin alan kodlarını buraya ekleyebilirsiniz -->
+                            </select>
+                            <input type="text" id="telefon-numarasi" name="telefonNumarasi" maxlength="10" placeholder="Telefon Numarası" >
+                        </div>
+                        <!-- Telefon Numarası Alanı Sonu -->
                         <input type="password" id="sifre" name="sifre" placeholder="Şifre" >
                         <button type="submit" class="buton">Hesap Oluştur</button>
                     </form>
