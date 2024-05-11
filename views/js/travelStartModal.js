@@ -3,9 +3,10 @@ var selectBtn = document.getElementById("select-btn");
 var createTravelBtn = document.getElementById("createTravelBtn");
 
 
+
 function travelStartBtn() {
     // Butona tıklandığında yapılacak işlemi belirt
-    if (1) {
+    if (window.userID) {
         $('#travelStartModal').modal('show');
         if (!selectBtn.classList.contains("open")) {
             selectBtn.classList.toggle("open");
@@ -120,7 +121,7 @@ createTravelBtn.addEventListener("click", async() => {
             const routeTitle = seyahatAdi.value;
             const routeStartDates = [convertDateFormat(start.value)];
             const routeFinishDates = [convertDateFormat(end.value)];
-            const userID = 2;
+            const userID = window.userID
             
             const routeChoices = await addRouteChoices(items);
 
@@ -149,6 +150,10 @@ createTravelBtn.addEventListener("click", async() => {
             // Sunucudan gelen yanıtı al
             const data = await response.json();
             console.log(data);
+            routeID = data.newRouteID
+            window.location.href = `/routePlanner`
+            
+
         
     
 });

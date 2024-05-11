@@ -58,10 +58,8 @@ app.get("/kesfet", (req, res) => {
   res.render("kesfet")
 })
 
-app.get("/routePlanner", (req, res) => {
-  
-  res.render("routePlanner")
-})
+
+
 
 
 app.use("/", popdest)
@@ -76,6 +74,10 @@ app.use("/", citylocationData)
 app.use("/", typelocationData)
 app.use("/", locationCoordinatesData)
 
+app.get("/routePlanner", (req, res) => {
+  const routeID = req.session.routeID;
+  res.render("routePlanner", {routeID :routeID})
+})
 
 
 app.get("/mycomment", (req, res) => {
@@ -114,14 +116,14 @@ process.on('SIGTERM', gracefulShutdown);
 
 function gracefulShutdown() {
   console.log('Sunucu kapatılıyor...');
-
-
+  
+  
   // Veritabanı bağlantısını kapat
   client.end(() => {
     console.log('Veritabanı bağlantısı kapatıldı');
-
+    
   });
-
+  
 }
 
 
@@ -133,12 +135,12 @@ module.exports = app
 
 app.post('/update-like', (req, res) => {
   const { commentID, userID, voteType } = req.body;
-
+  
   new Promise(async (resolve, reject) => {
     try {
       const userVoteComment = await client.query(`SELECT "voteType" FROM uservotecomments WHERE "userID" = $1 AND "commentID" = $2;`, [userID, commentID]);
       let userHasVoted;
-
+      
       if (userVoteComment.rows.length > 0) {
         await client.query(`DELETE FROM uservotecomments WHERE "userID" = $1 AND "commentID" = $2;`, [userID, commentID]);
         userHasVoted = userVoteComment.rows[0].voteType;
@@ -148,11 +150,11 @@ app.post('/update-like', (req, res) => {
         } else {
           sql = `UPDATE comments SET "commentDislikeCount" = "commentDislikeCount" - 1 WHERE "commentID" = $1`;
         }
-
+        
         const values = [commentID];
         await client.query(sql, values);
       }
-
+      
       if (userHasVoted != voteType) {
         await client.query(`INSERT INTO uservotecomments ("userID", "commentID", "voteType") VALUES ($1, $2, $3);`, [userID, commentID, voteType]);
         let sql;
@@ -161,11 +163,11 @@ app.post('/update-like', (req, res) => {
         } else {
           sql = `UPDATE comments SET "commentDislikeCount" = "commentDislikeCount" + 1 WHERE "commentID" = $1`;
         }
-
+        
         const values = [commentID];
         await client.query(sql, values);
       }
-
+      
       resolve();
     } catch (error) {
       reject(error);
@@ -185,21 +187,21 @@ app.post('/update-like', (req, res) => {
 
 app.get('/get_votetype', async (req, res) => {
   const { commentID, userID } = req.query;
-
+  
   try {
-      // Burada commentID ve userID kullanarak uservotecomments tablosundan voteType değerini alın
-
-      // Örneğin, bir veritabanı sorgusu yapabilirsiniz
-      const voteType = await client.query(`SELECT "voteType" FROM uservotecomments WHERE "commentID" = $1 AND "userID" = $2`, [commentID, userID]);
-      
-      // Sorgu sonucundan gelen voteType değerini alın
-      const voteTypeValue = voteType.rows[0] ? voteType.rows[0].voteType : null;
-
-      // VoteType değerini JSON olarak yanıt olarak gönder
-      res.json({ voteType: voteTypeValue });
+    // Burada commentID ve userID kullanarak uservotecomments tablosundan voteType değerini alın
+    
+    // Örneğin, bir veritabanı sorgusu yapabilirsiniz
+    const voteType = await client.query(`SELECT "voteType" FROM uservotecomments WHERE "commentID" = $1 AND "userID" = $2`, [commentID, userID]);
+    
+    // Sorgu sonucundan gelen voteType değerini alın
+    const voteTypeValue = voteType.rows[0] ? voteType.rows[0].voteType : null;
+    
+    // VoteType değerini JSON olarak yanıt olarak gönder
+    res.json({ voteType: voteTypeValue });
   } catch (error) {
-      console.error('Hata:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+    console.error('Hata:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -208,8 +210,8 @@ app.post('/getCityIDs', async (req, res) => {
   try {
     const tags = req.body.tags;
     const cityIDs = [];
-
-
+    
+    
     // Etiketlerle eşleşen şehirleri veritabanından çek
     for (const tag of tags) {
       const result = await client.query('SELECT "cityID" FROM cities WHERE "cityName" = $1', [tag]);
@@ -217,8 +219,8 @@ app.post('/getCityIDs', async (req, res) => {
         cityIDs.push(result.rows[0].cityID);
       }
     }
-
-
+    
+    
     res.json({ cityIDs: cityIDs });
   } catch (error) {
     console.error('Error executing query', error);
@@ -238,26 +240,30 @@ app.post('/createTravel', async (req, res) => {
       routeChoices,
       cityIDs
     } = req.body;
-
-
+    
+     
     // routes tablosuna ekleme işlemi
     const routeInsertQuery = `
     INSERT INTO routes ("routeCreationDate", "routeTitle", "userID", "routeCities", "routeStartDates", "routeFinishDates","routeChoices")
     VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING "routeID";
-`;
+    `;
     const routeValues = [routeCreationDate, routeTitle, userID, cityIDs, routeStartDates, routeFinishDates, routeChoices];
     const result = await client.query(routeInsertQuery, routeValues);
     const newRouteID = result.rows[0].routeID;
-
+    
+    req.session.routeID = newRouteID;
     
     console.log(newRouteID);
     res.status(200).json({ success: true, newRouteID:newRouteID });
-
+    
+    
+    
   } catch (error) {
     console.error('Error creating travel:', error);
     res.status(500).json({ success: false, error: 'An error occurred' });
   }
 });
+
 
 
