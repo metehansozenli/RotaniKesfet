@@ -129,6 +129,7 @@ createTravelBtn.addEventListener("click", async() => {
            
             // İşaretli şehirlerin seçimini belirle
             const cityIDs = await getCityIDsFromTags(tags);
+           
 
             // AJAX isteği yap
             const response = await fetch('/createTravel', {
