@@ -1,5 +1,8 @@
+
+
 var j = 1;
 var i = 1;
+var markers = new Array();
 
 document.addEventListener('DOMContentLoaded', function () {
     citylocation_load_data();
@@ -25,7 +28,7 @@ const citylocation_load_data = () => {
                         request2.onload = () => {
                             const results2 = JSON.parse(request2.responseText);
                             results2.forEach(result2 => {
-                                html2 += `
+                                html2 +=                                                    `
                                     <li class="item">
                                         <span class="checkbox">
                                             <i class="fa-solid fa-check check-icon"></i>
@@ -45,7 +48,7 @@ const citylocation_load_data = () => {
                                                 <i class="fa-solid fa-chevron-down"></i>
                                             </span>
                                         </div>
-                                        <ul class="list-items categoryItems checkboxLocations`+ (j++) +`">${html2}</ul>
+                                        <ul class="list-items categoryItems checkboxLocations`+ (j++) + `">${html2}</ul>
                                     </div>
                                 </div>
                             `;
@@ -93,7 +96,9 @@ document.addEventListener('customDropdownEventListener', function () {
         items.forEach(item => {
             item.addEventListener("click", () => {
                 item.classList.toggle("checked");
-                updateButtonText(selectBtn); // Dropdown düğmesinin metnini güncelle
+                itemText = item.querySelector('.item-text')
+                updateMapPin(itemText.innerHTML,item);
+                
             });
         });
     });
@@ -103,12 +108,63 @@ document.addEventListener('customDropdownEventListener', function () {
         let checkedItems = btn.nextElementSibling.querySelectorAll(".checked");
         let btnText = btn.querySelector(".btn-text");
 
-        if (checkedItems.length > 0) {
-            btnText.innerText = `${checkedItems.length} Seçildi`;
-        } else {
-            btnText.innerText = "Puan Seç";
-        }
+        // if (checkedItems.length > 0) {
+        //     btnText.innerText = `${checkedItems.length} Seçildi`;
+        // } else {
+        //     btnText.innerText = "Puan Seç";
+        // }
     }
+
+    const updateMapPin = (itemText,item) => {
+        return new Promise((resolve, reject) => {
+            const request = new XMLHttpRequest();
+            request.open('GET', `/get_locationCoordinates?locationName=${itemText}`);
+            
+            request.onload = () => {
+                let marker;
+                results = JSON.parse(request.responseText); 
+                const locationCoordinatesLat = parseFloat(results.locationCoordinatesLat);
+                const locationCoordinatesLong = parseFloat(results.locationCoordinatesLong);
+
+                if(item.classList.contains("checked")){
+                    marker = new L.marker([locationCoordinatesLat, locationCoordinatesLong]); 
+                    markers.push(marker); 
+                    marker.addTo(map);
+                    resolve(); // İşlem tamamlandığında Promise'i çöz
+                }
+                else{
+                    let index = markers.findIndex(m => m.getLatLng().lat === locationCoordinatesLat && m.getLatLng().lng === locationCoordinatesLong);
+                    if (index !== -1) {
+                        map.removeLayer(markers[index]); // Bulunan marker'ı kaldır
+                        markers.splice(index, 1); // Diziden marker'ı kaldır
+                    }
+                    resolve(); // İşlem tamamlandığında Promise'i çöz
+                }
+                var control = L.Routing.control(L.extend(window.lrmConfig, {
+                    waypoints: markers,
+                    geocoder: L.Control.Geocoder.nominatim(),
+                    routeWhileDragging: true,
+                    reverseWaypoints: true,
+                    showAlternatives: true,
+                    altLineOptions: {
+                        styles: [
+                            {color: 'black', opacity: 0.15, weight: 9},
+                            {color: 'white', opacity: 0.8, weight: 6},
+                            {color: 'blue', opacity: 0.5, weight: 2}
+                        ]
+                    }
+                })).addTo(map);
+                
+                L.Routing.errorControl(control).addTo(map);
+            };
+    
+            request.onerror = () => {
+                reject('İstek başarısız');
+            };
+            request.send();
+        });
+    }
+
 });
 
 

@@ -1,24 +1,10 @@
 const client = require("../database.js");
+const veritabani = require("./indexController");
 
 exports.get_typeLocationData = async (req, res) => {
     try {
         const locationType = req.query.locationType; // locationType parametresini al
-        console.log(locationType);
-        const query2 = {
-            text: `
-                SELECT DISTINCT
-                    "locationName"
-                FROM
-                    locations
-                WHERE "locationType" = $1
-                ORDER BY 
-                    "locationName" DESC
-            `,
-            values: [locationType],
-        };
-        const result2 = await client.query(query2);
-        const locationNames = result2.rows;
-        console.log(locationNames)
+        const locationNames = await veritabani.getTypeLocationData(locationType);
         res.json(locationNames); // Sonuçları JSON olarak gönder
 
     } catch (error) {

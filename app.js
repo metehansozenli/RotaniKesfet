@@ -24,9 +24,7 @@ const locationcommentData = require("./routes/get_locationcommentDataRoutes")
 const account = require("./routes/accountRoutes")
 const citylocationData = require("./routes/get_citylocationDataRoutes")
 const typelocationData = require("./routes/get_typelocationDataRoutes")
-
-
-
+const locationCoordinatesData = require("./routes/get_locationCoordinatesRoutes")
 
 
 client.connect((err) => {
@@ -75,6 +73,7 @@ app.use("/", account)
 app.use("/", locationcommentData)
 app.use("/", citylocationData)
 app.use("/", typelocationData)
+app.use("/", locationCoordinatesData)
 
 
 
@@ -183,7 +182,7 @@ app.post('/update-like', (req, res) => {
 
 
 
-app.get('/get-vote-type', async (req, res) => {
+app.get('/get_votetype', async (req, res) => {
   const { commentID, userID } = req.query;
 
   try {
