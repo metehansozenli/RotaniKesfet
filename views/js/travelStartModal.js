@@ -46,6 +46,25 @@ $(document).ready(function(){
     })
 
 
+let selectedCategories = [];
+    $(document).ready(function() {
+    
+
+    $('.item').click(function() {
+        var category = $(this).find('.item-text').text();
+        if (!selectedCategories.includes(category)) {
+        selectedCategories.push(category);
+        } else {
+        var index = selectedCategories.indexOf(category);
+        selectedCategories.splice(index, 1);
+        }
+        
+    });
+    });
+    
+
+
+
     const ul = document.querySelector(".seyahatAdiSec ul");
     const input = document.querySelector("#destinasyon-tag");
     const tagNumb = document.querySelector(".sehirSecDetaylari span");
@@ -89,7 +108,8 @@ $(document).ready(function(){
     }
     
     input.addEventListener("keyup", addTag);
-    
+    console.log(tags)
+    console.log(tags.length)
     // Butonun class'ını doğru şekilde değiştirdim
     const removeBtn = document.querySelector(".sehirSecDetaylari button");
     removeBtn.addEventListener("click", () => {
@@ -98,7 +118,6 @@ $(document).ready(function(){
         createTag();
     });
     
-
     
     
 
