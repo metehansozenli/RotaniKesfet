@@ -405,6 +405,15 @@ a {
 }
 
 
-#alan-kodu{
+.phone-number .alanKodu {
     margin-right: 5px;
+    height: 45px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #fff;
+    max-width: 15%;
+    
+    border: 1px solid #ccc;
+
 }
+
