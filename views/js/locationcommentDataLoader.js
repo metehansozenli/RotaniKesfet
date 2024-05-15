@@ -7,6 +7,7 @@ var locationID;
 var customlikeControlEvent= new CustomEvent('customlikeControlEvent')
 
 document.addEventListener('DOMContentLoaded', function () {
+    document.dispatchEvent(new CustomEvent('customLoadEvent'));
     locationStatus();
     favControl();
     document.dispatchEvent(new CustomEvent('customCommentLoadEvent'));
