@@ -10,6 +10,7 @@ function travelStartBtn() {
         $('#travelStartModal').modal('show');
         if (!selectBtn.classList.contains("open")) {
             selectBtn.classList.toggle("open");
+            get_cities();
         }
     } else {
         $('#loginAlert').modal('show');
@@ -207,3 +208,27 @@ function addRouteChoices(items) {
         }
     });
 }
+
+
+
+
+const get_cities = () => {
+    return new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.open('GET', `/get_Cities`);
+        
+        request.onload = () => {
+            results = JSON.parse(request.responseText); 
+            console.log(results)
+            console.log("deneme")
+            resolve(); // İşlem tamamlandığında Promise'i çöz
+
+        };
+
+        request.onerror = () => {
+            reject('İstek başarısız');
+        };
+        request.send();
+    });
+}
+

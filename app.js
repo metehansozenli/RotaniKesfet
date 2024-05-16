@@ -26,7 +26,7 @@ const citylocationData = require("./routes/get_citylocationDataRoutes")
 const typelocationData = require("./routes/get_typelocationDataRoutes")
 const locationCoordinatesData = require("./routes/get_locationCoordinatesRoutes")
 const routePlanner = require("./routes/routePlannerRoutes");
-
+const cities = require("./routes/get_citiesRoutes");
 
 client.connect((err) => {
   if (err) {
@@ -73,6 +73,7 @@ app.use("/", citylocationData)
 app.use("/", typelocationData)
 app.use("/", locationCoordinatesData)
 app.use("/", routePlanner)
+app.use("/", cities)
 
 
 app.get("/mycomment", (req, res) => {

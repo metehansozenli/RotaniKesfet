@@ -441,6 +441,35 @@ const getRoutesData = async (routeID) => {
   }
 }
 
+
+
+const getCities = async () => {
+  try {
+    const query = `
+                  SELECT 
+                    "cityName"
+                    FROM 
+                    cities 
+                `;
+
+  const result = await client.query(query);
+
+  if (result.rows.length > 0) {
+    const cities = result.rows.map(row => ({
+      cityName : row.cityName
+    }));
+
+    return cities;
+    }
+    else {
+      return null; // Return null if no data found
+    }
+  } catch (error) {
+    console.error("Error fetching cities data:", error);
+    throw error; // Rethrow the error to be caught by the caller
+  }
+}
+
   
   module.exports = {
     getRandomCitiesData,
@@ -454,6 +483,7 @@ const getRoutesData = async (routeID) => {
     getLocationType,
     getTypeLocationData,
     getLocationCoordinates,
-    getRoutesData
+    getRoutesData,
+    getCities
     
   };
