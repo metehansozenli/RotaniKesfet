@@ -130,13 +130,7 @@ const getActiveRating = () => {
 };
 
 
-// comment-box clear
-function clearComment() {
-    document.getElementById('comment-input').value = '';
-}
-
-
-// Yorum kutusu karekter sayacı
+// Yorum kutusu karakter sayacı
 document.getElementById('comment-input').addEventListener('input', function() {
     var charCount = this.value.length;
     var minChars = 100; // Alt sınırı 
@@ -156,6 +150,14 @@ document.getElementById('comment-input').addEventListener('input', function() {
         counterElement.style.color = '#999';
     }
 });
+
+// Yorum kutusunu temizle
+function clearComment() {
+    document.getElementById('comment-input').value = '';
+    document.querySelector('.char-counter').textContent = '0/100';
+    document.querySelector('.char-counter').style.color = '#999';
+}
+
 
 
 
