@@ -6,10 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yorum yazın</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/commentWrite.css">
+
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <!-- yildizlarla  ilgili css ler elleme -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -26,8 +32,11 @@
 
 
         <section class="half left-half ">
+
+
             <div class="experience-rating">
-                <h3 class="display-5 text-left text-muted" style=" font-family: sans-serif,Arial;">Deneyiminizi nasıl
+                <h3 class="display-5 text-left text-muted" style=" font-family: sans-serif,Arial;">Deneyiminizi
+                    nasıl
                     değerlendirirsiniz? </h3>
                 <div class="wrapper">
 
@@ -55,24 +64,44 @@
 
                         <p id="message"></p>
 
-
                     </div>
+                </div>
+            </div>
 
-
+            <div class="date-container">
+                <h3 class="display-5 text-left text-muted" style=" font-family: sans-serif,Arial;">Ne zaman gittiniz?
+                </h3>
+                <div class="date-box">
+                    <input type="date" id="date" name="date" class="date-box-input">
                 </div>
 
             </div>
-            <button id="submit" disabled>Submit</button>
-            <div id="submit-section" class="hide">
-                <p id="submit-message">Geri dönşünüz için teşekkürler </p>
+
+            <div class="comment-container">
+                <h3 class="display-5 text-left text-muted" style=" font-family: sans-serif,Arial;">Yorumunuzu yazın
+                </h3>
+                <div class="comment-box">
+                    <textarea id="comment-input" class="comment-input"
+                        placeholder="Manzaralar muhteşemdi. O kadar çok fotoğraf çektik kil."></textarea>
+                    <span class="char-counter">0/100</span>
+                    <span class="close-icon" onclick="clearComment()">×</span>
+                </div>
+
             </div>
-             <script src="./js/commentWrite.js"></script>
+
+
+            <div class="submit-container">
+                <button id="submit" disabled> Yorumu gönder </button>
+                <div id="submit-section" class="hide">
+                    <p id="submit-message">Geri dönüşünüz için teşekkürler</p>
+                </div>
+            </div>
 
 
         </section>
 
 
-
+        <!-- bu section a resmin olduğu yere yorum yapilacak yerle ilgili resimmi ve adi zamazingosu gelecek  -->
         <section class="half right-half">
             <h1 class="display-5 text-center text-muted" style=" font-family: sans-serif,Arial;">Bize deneyiminizden
                 bahsedin</h1>
@@ -82,134 +111,16 @@
             </div>
 
         </section>
+
     </div>
 
-
+    <script src="./js/commentWrite.js"></script>
 
     {{>footer}}
 
-   
+
 
 </body>
- 
- 
-<style>
-    body .comment-write {
-        max-width: none !important;
-        /* Burası sayfa genişliğini kısıtlıyon boostrap css nin özelliğini geçersiz kılıyor*/
-        display: flex;
-        justify-content: space-between;
-    }
-
-
-    /* -------Section 1 --LEFT------*/
-
-    .left-half {
-        position: relative;
-        width: 60%;
-        margin-bottom: 50px !important;
-        margin-top: 50px !important;
-        padding: 30px;
-        border-radius: 8px;
-        margin: 0 20px;
-        margin-left: 150px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-
-    }
-
-
-
-    .wrapper {
-        font-size: 1.1em;
-        width: 20em;
-        position: absolute;
-        margin-left: 10px;
-        margin-top: 15px;
-        background-color: #fff;
-
-    }
-
-    .experience-rating .container {
-        width: 100%;
-        display: flex;
-        padding: 5px;
-
-
-    }
-
-    .fa-star {
-        font-size: 1.7em;
-        color: #FBB948;
-        cursor: pointer;
-
-    }
-
-    .number {
-        display: block;
-        text-align: center;
-    }
-
-    #submit {
-        display: block;
-        position: relative;
-        background: #FBC02D;
-        border: none;
-        margin: 500px auto 0;
-        padding: 0.8em 2em;
-        color: #fff;
-        font-size: 1.2em;
-        border-radius: 25px;
-        cursor: pointer;
-
-    }
-
-    #submit:disabled {
-        cursor: not-allowed;
-    }
-
-    #message {
-        margin-left: 15px;
-    }
-
-    #submit-section {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        background-color: #fff;
-        top: 0;
-        left: 0;
-        place-items: center !important;
-        border-radius: 0.5em;
-
-    }
-
-    .hide {
-        display: none;
-    }
-
-    .show {
-        display: grid;
-    }
-
-
-
-
-
-
-
-
-    /* -------Section 2 --Right------*/
-
-    .right-half {
-        width: 50%;
-        margin-bottom: 100px !important;
-        padding: 30px;
-        border-radius: 8px;
-        margin: 0 20px;
-        margin-right: 150px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-</style>
 
 
 

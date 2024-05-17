@@ -1,0 +1,255 @@
+
+body .comment-write {
+
+    /* Burası sayfa genişliğini kısıtlıyon boostrap css nin özelliğini geçersiz kılıyor elleme*/
+    max-width: none !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* ----------------------Section 1 LEFT ------------------------*/
+
+.left-half {
+    position: relative;
+    width: 60%;
+    margin-bottom: 40px !important;
+    margin-top: 40px !important;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 0 20px;
+    margin-left: 150px;
+
+    /* sectionları görmek istiyosan aç şimdi kapatıyorum */
+    /*  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);  */
+
+}
+
+
+/* -------experience-rating------*/
+
+.wrapper {
+    font-size: 1.1em;
+    width: 20em;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 5px;
+    background-color: #fff;
+
+}
+
+.experience-rating .container {
+    width: 100%;
+    display: flex;
+    padding: 5px;
+
+
+}
+
+.star-container .fa-star {
+    font-size: 1.7em;
+    color: #FBB948;
+    cursor: pointer;
+    padding-right: 3px;
+    transition: color 0.2s;
+
+}
+
+.star-container .fa-star.hover {
+    color: #FBB948;
+}
+
+.number {
+    display: block;
+    text-align: center;
+}
+
+
+
+/* -------date-container------*/
+
+.date-container {
+
+    position: absolute;
+    margin-top: 90px;
+
+}
+
+.date-box {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.date-box-input {
+    margin-top: 5px;
+    margin-left: 10px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 80%;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1.1em;
+    font-family: Arial, sans-serif;
+    color: #36A1C5;
+}
+
+
+.date-box-input:focus {
+    border-color: #F1732B;
+    outline: none;
+}
+
+/* Tarih simgesi */
+.date-box-input::-webkit-calendar-picker-indicator {
+    padding: 5px;
+    border: 2px solid #36A1C5;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+
+/* -------comment-container------*/
+
+.comment-container {
+
+    position: absolute;
+    margin-top: 220px;
+
+}
+
+.comment-box {
+    margin-left: 10px;
+    margin-top: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    padding: 10px;
+    background-color: #fff;
+    width: 650px;
+}
+
+.comment-input {
+    width: 100%;
+    width: calc(100% - 30px);
+    /* Sağdaki simge ve karakter sayacı için genişlik ayarı */
+    height: 115px;
+    /* Yorum alanının istediğiniz yüksekliğini buraya yazın */
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    padding: 5px;
+    margin-bottom: 25px;
+}
+
+
+
+.close-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: #999;
+    font-size: 24px;
+}
+
+.close-icon:hover {
+    color: #333;
+}
+
+.char-counter {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 13px;
+    color: #999;
+}
+
+
+
+/* -------submit-container------*/
+
+.submit-container {
+    position: relative;
+}
+
+#submit {
+    display: block;
+    position: relative;
+    background: #36A1C5;
+    border: none;
+    margin: 465px auto 0;
+    padding: 0.8em 2em;
+    color: #fff;
+    font-size: 1.2em;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+
+#submit:disabled {
+    cursor: not-allowed;
+}
+
+
+#submit:not(:disabled):hover {
+    cursor: pointer;
+    /* Butona tıklandıktan sonra imleci 'pointer' olarak değiştirir */
+    background-color: #0056B3;
+
+}
+
+
+#message {
+    margin-left: 40px;
+    font-size: 1.3em;
+    font-family: sans-serif, Arial;
+    color: #F1732B;
+}
+
+
+#submit-section {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#submit-message {
+    color: red;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+/* submit mesajını sakla göster zamazingosu */
+.hide {
+    display: none;
+}
+
+.show {
+    display: grid;
+}
+
+
+
+
+/* ----------------------Section 2 Right------------------------*/
+
+.right-half {
+    width: 50%;
+    margin-bottom: 100px !important;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 0 20px;
+    margin-right: 150px;
+
+    /* sectionları görmek istiyosan aç şimdi kapatıyorum */
+    /*  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);  */
+
+
+}
