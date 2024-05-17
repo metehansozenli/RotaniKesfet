@@ -1,9 +1,7 @@
-
-
 var j = 1;
 var i = 1;
 var markers = new Array();
-
+var routeID = window.routeID;
 document.addEventListener('DOMContentLoaded', function () {
     citylocation_load_data();
 });
@@ -130,6 +128,8 @@ document.addEventListener('customDropdownEventListener', function () {
                     marker = new L.marker([locationCoordinatesLat, locationCoordinatesLong]); 
                     markers.push(marker); 
                     marker.addTo(map);
+                    var location = L.latLng(locationCoordinatesLat, locationCoordinatesLong);
+                    map.flyTo(location, 13)
                     resolve(); // İşlem tamamlandığında Promise'i çöz
                 }
                 else{
@@ -140,22 +140,6 @@ document.addEventListener('customDropdownEventListener', function () {
                     }
                     resolve(); // İşlem tamamlandığında Promise'i çöz
                 }
-                var control = L.Routing.control(L.extend(window.lrmConfig, {
-                    waypoints: markers,
-                    geocoder: L.Control.Geocoder.nominatim(),
-                    routeWhileDragging: true,
-                    reverseWaypoints: true,
-                    showAlternatives: true,
-                    altLineOptions: {
-                        styles: [
-                            {color: 'black', opacity: 0.15, weight: 9},
-                            {color: 'white', opacity: 0.8, weight: 6},
-                            {color: 'blue', opacity: 0.5, weight: 2}
-                        ]
-                    }
-                })).addTo(map);
-                
-                L.Routing.errorControl(control).addTo(map);
             };
     
             request.onerror = () => {

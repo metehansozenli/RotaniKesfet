@@ -18,7 +18,6 @@ function travelStartBtn() {
 
 }
 
-
 $(document).ready(function () {
 
     $('.input-daterange').datepicker({
@@ -31,6 +30,7 @@ $(document).ready(function () {
     });
 
 });
+
 
 items = document.querySelectorAll(".categoryItems .item");
 
@@ -57,12 +57,12 @@ items.forEach(item => {
 const ul = document.querySelector(".seyahatAdiSec ul");
 const input = document.querySelector("#destinasyon-tag");
 const tagNumb = document.querySelector(".sehirSecDetaylari span");
+const calendar = document.querySelector(".calendar");
 
 let maxTags = 5;
 let tags = [];
-
+let i = 2;
 countTags();
-createTag();
 
 function countTags() {
     input.focus();
@@ -76,8 +76,49 @@ function createTag() {
         ul.insertAdjacentHTML("afterbegin", liTag);
     });
     countTags();
-
+    if(tags.length >= 1){
+        //addDatePicker();
+    }
     input.placeholder = tags.length > 0 ? "" : "Şehir Ekle";
+}
+
+function addDatePicker(){
+    i = tags.length+1;
+    html =
+            `<div>
+                <span class="fa fa-calendar" id="fa-1"></span>
+                <input type="text" id="start`+ i +`" class="form-control text-right mr-2">
+                <label class="form-control-placeholder text-left">Başlangıç Tarihi</label>
+            </div>
+
+            <div class="d-block">
+                <span class="fa fa-calendar" id="fa-2"></span>
+                <input type="text" id="end`+ i +`" class="form-control text-right ">
+                <label class="form-control-placeholder text-left">Bitiş Tarihi</label>
+            </div>
+            `
+    calendar.insertAdjacentHTML("beforeend", html);
+
+    $(document).ready(function() {
+        var startId = "#start"+i;
+        var endId = "#end"+i;
+        $(startId).datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+            calendarWeeks: true,
+            clearBtn: true,
+            disableTouchKeyboard: true,
+            orientation: 'top'
+        });
+        $(endId).datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+            calendarWeeks: true,
+            clearBtn: true,
+            disableTouchKeyboard: true,
+            orientation: 'top'
+        });
+    });
 }
 
 function remove(element, tag) {
@@ -117,7 +158,6 @@ const end = document.getElementById("end");
 const seyahatAdi = document.querySelector("#seyahatAdi");
 
 createTravelBtn.addEventListener("click", async() => {
-   
             const routeCreationDate = new Date();
             const routeTitle = seyahatAdi.value;
             const routeStartDates = [convertDateFormat(start.value)];
@@ -126,11 +166,8 @@ createTravelBtn.addEventListener("click", async() => {
             
             const routeChoices = await addRouteChoices(items);
 
-           
-           
             // İşaretli şehirlerin seçimini belirle
             const cityIDs = await getCityIDsFromTags(tags);
-           
 
             // AJAX isteği yap
             const response = await fetch('/createTravel', {
