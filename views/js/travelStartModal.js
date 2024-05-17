@@ -76,41 +76,36 @@ function createTag() {
         ul.insertAdjacentHTML("afterbegin", liTag);
     });
     countTags();
-    if(tags.length >= 1){
-        //addDatePicker();
+    if (tags.length >= 1) {
+        addDatePicker();
     }
     input.placeholder = tags.length > 0 ? "" : "Şehir Ekle";
 }
 
-function addDatePicker(){
-    i = tags.length+1;
-    html =
-            `<div>
+function addDatePicker() {
+    if (tags.length == 1) {
+        document.getElementById("labelstart").classList.add("visible");
+        document.getElementById("labelend").classList.add("visible");
+    }
+
+    var i = tags.length;
+    var html =
+        `<div class="input-group input-daterange d-flex" id="calendar${i}">
+            <div>
                 <span class="fa fa-calendar" id="fa-1"></span>
-                <input type="text" id="start`+ i +`" class="form-control text-right mr-2">
-                <label class="form-control-placeholder text-left">Başlangıç Tarihi</label>
+                <input type="text" id="start${i}" class="form-control text-right mr-2">
             </div>
 
             <div class="d-block">
                 <span class="fa fa-calendar" id="fa-2"></span>
-                <input type="text" id="end`+ i +`" class="form-control text-right ">
-                <label class="form-control-placeholder text-left">Bitiş Tarihi</label>
+                <input type="text" id="end${i}" class="form-control text-right">
             </div>
-            `
+        </div>`;
+
     calendar.insertAdjacentHTML("beforeend", html);
 
-    $(document).ready(function() {
-        var startId = "#start"+i;
-        var endId = "#end"+i;
-        $(startId).datepicker({
-            format: 'dd-mm-yyyy',
-            autoclose: true,
-            calendarWeeks: true,
-            clearBtn: true,
-            disableTouchKeyboard: true,
-            orientation: 'top'
-        });
-        $(endId).datepicker({
+    $('.input-daterange').each(function () {
+        $(this).datepicker({
             format: 'dd-mm-yyyy',
             autoclose: true,
             calendarWeeks: true,
@@ -121,11 +116,33 @@ function addDatePicker(){
     });
 }
 
+
 function remove(element, tag) {
     let index = tags.indexOf(tag);
     tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
     element.parentElement.remove();
-    createTag(); // Taglar güncellendiğinde input alanını da güncelliyoruz
+
+    if (tags.length == 0) {
+        document.getElementById("labelstart").classList.remove("visible");
+        document.getElementById("labelend").classList.remove("visible");
+    }
+
+
+    var i = index + 1;
+    var calendarId = `#calendar${i}`;
+
+    // İlgili calendar'ı kaldır
+    $(calendarId).remove();
+
+    // Silinen calendar'ın index'inden sonraki tüm calendar'ların id'lerini ve inputların id'lerini güncelle
+    for (var j = i + 1; j <= tags.length + 1; j++) {
+        var updatedCalendarId = `#calendar${j}`;
+        $(updatedCalendarId).attr("id", `calendar${j - 1}`);
+        var updatedStartId = `#start${j}`;
+        var updatedEndId = `#end${j}`;
+        $(updatedStartId).attr("id", `start${j - 1}`);
+        $(updatedEndId).attr("id", `end${j - 1}`);
+    }
 }
 
 function addTag(e) {
@@ -157,38 +174,47 @@ const start = document.getElementById("start");
 const end = document.getElementById("end");
 const seyahatAdi = document.querySelector("#seyahatAdi");
 
-createTravelBtn.addEventListener("click", async() => {
-            const routeCreationDate = new Date();
-            const routeTitle = seyahatAdi.value;
-            const routeStartDates = [convertDateFormat(start.value)];
-            const routeFinishDates = [convertDateFormat(end.value)];
-            const userID = window.userID
-            
-            const routeChoices = await addRouteChoices(items);
+createTravelBtn.addEventListener("click", async () => {
+    const routeCreationDate = new Date();
+    const routeTitle = seyahatAdi.value;
+    const routeStartDates = [];
+    const routeFinishDates = []
+    const userID = window.userID
 
-            // İşaretli şehirlerin seçimini belirle
-            const cityIDs = await getCityIDsFromTags(tags);
+    // Her bir tag için tarih eklemek için döngü kullanma
+    for (let i = 1; i <= tags.length; i++) {
+        // Her bir tarih değerini uygun formata dönüştürerek ekleyin
+        const startId = `start${i}`;
+        const endId = `end${i}`;
+        routeStartDates.push(convertDateFormat(document.getElementById(startId).value));
+        routeFinishDates.push(convertDateFormat(document.getElementById(endId).value));
+    }
 
-            // AJAX isteği yap
-            const response = await fetch('/createTravel', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    routeCreationDate,
-                    routeTitle,
-                    routeStartDates,
-                    routeFinishDates,
-                    userID,
-                    routeChoices,
-                    cityIDs
-                })
-            });
+    const routeChoices = await addRouteChoices(items);
 
-            // Sunucudan gelen yanıtı al
-            await response.json();
-            window.location.href = `/routePlanner`;
+    // İşaretli şehirlerin seçimini belirle
+    const cityIDs = await getCityIDsFromTags(tags);
+
+    // AJAX isteği yap
+    const response = await fetch('/createTravel', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            routeCreationDate,
+            routeTitle,
+            routeStartDates,
+            routeFinishDates,
+            userID,
+            routeChoices,
+            cityIDs
+        })
+    });
+
+    // Sunucudan gelen yanıtı al
+    await response.json();
+    window.location.href = `/routePlanner`;
 
 });
 
@@ -253,9 +279,9 @@ const get_cities = () => {
     return new Promise((resolve, reject) => {
         const request = new XMLHttpRequest();
         request.open('GET', `/get_Cities`);
-        
+
         request.onload = () => {
-            results = JSON.parse(request.responseText); 
+            results = JSON.parse(request.responseText);
             console.log(results)
             console.log("deneme")
             resolve(); // İşlem tamamlandığında Promise'i çöz

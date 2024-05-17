@@ -409,6 +409,7 @@
   }
   
   .takvim button{
+  position: relative;
   border: none;
   outline: none;
   color: #fff;
@@ -421,5 +422,9 @@
   max-width: 170px;
   margin-left: 22px;
   height: 46px;
+  top : 30px
 }
 
+.etiket label {
+  visibility: hidden;
+}
