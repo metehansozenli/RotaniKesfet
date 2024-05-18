@@ -75,12 +75,12 @@
             <br><label for="destinasyon">Destinasyon</label>
             <p>Birden fazla şehir seçmek için şehir adını yazın ve 'enter' tuşuna basın</p>
             <div class="content">
-              <ul><input maxlength="20" type="text" spellcheck="false" id="destinasyon-tag" name="destinasyon"
-                  placeholder="Şehir Ekle">
+              <ul>
+                <div class="autocomplete-container">
+                  <input maxlength="20" type="text" spellcheck="false" id="destinasyon-tag" name="destinasyon" 
+                    placeholder="Şehir Ekle" class="autocomplete-input">
+                </div>
               </ul>
-            </div>
-            <div class="result-box">
-              <ul id="city-suggestions"></ul>
             </div>
 
 

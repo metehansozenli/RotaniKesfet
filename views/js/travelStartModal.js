@@ -1,6 +1,7 @@
 var startBtn = document.getElementById("travelStartBtn");
 var selectBtn = document.getElementById("select-btn");
 var createTravelBtn = document.getElementById("createTravelBtn");
+var city_names = ["Kopenhag", "Cenevre", "Moskova", "Sevilla", "Frankfurt", "Münih", "Kiev", "Valencia", "Bilbao", "Madrid", "Marsilya", "Milano", "Napoli", "Nice", "Palermo", "Amsterdam", "Berlin", "Brüksel", "Budapeşte", "Helsinki", "Venedik", "Vilnius", "Hamburg", "Floransa", "Londra", "Oslo", "Riga", "Viyana", "Zürih", "Dublin", "Barselona", "Stockholm", "St. Petersburg", "Paris", "Roma", "Krakow", "Tallinn", "Prag", "Lizbon"];
 
 
 
@@ -10,7 +11,6 @@ function travelStartBtn() {
         $('#travelStartModal').modal('show');
         if (!selectBtn.classList.contains("open")) {
             selectBtn.classList.toggle("open");
-            get_cities();
         }
     } else {
         $('#loginAlert').modal('show');
@@ -79,6 +79,7 @@ function createTag() {
     if (tags.length >= 1) {
         addDatePicker();
     }
+    
     input.placeholder = tags.length > 0 ? "" : "Şehir Ekle";
 }
 
@@ -148,7 +149,7 @@ function remove(element, tag) {
 function addTag(e) {
     if (e.key == "Enter") {
         let tag = e.target.value.replace(/\s+/g, ' ');
-        if (tag.length > 1 && !tags.includes(tag)) {
+        if (tag.length > 1 && !tags.includes(tag) && city_names.includes(tag)) {
             if (tags.length < 5) {
                 tag.split(',').forEach(tag => {
                     tags.push(tag);
@@ -276,21 +277,97 @@ function addRouteChoices(items) {
 
 
 
-const get_cities = () => {
-    return new Promise((resolve, reject) => {
-        const request = new XMLHttpRequest();
-        request.open('GET', `/get_Cities`);
+// const get_cities = () => {
+//     return new Promise((resolve, reject) => {
+//         const request = new XMLHttpRequest();
+//         request.open('GET', `/get_Cities`);
 
-        request.onload = () => {
-            results = JSON.parse(request.responseText);
-            resolve(results); // İşlem tamamlandığında Promise'i çöz
+//         request.onload = () => {
+//             results = JSON.parse(request.responseText);
+//             city_names =results
 
-        };
+//             resolve(); // İşlem tamamlandığında Promise'i çöz
 
-        request.onerror = () => {
-            reject('İstek başarısız');
-        };
-        request.send();
+//         };
+
+//         request.onerror = () => {
+//             reject('İstek başarısız');
+//         };
+//         request.send();
+//     });
+// }
+// Kullanımı
+
+  function autocomplete(inp, arr) {
+    var currentFocus;
+    inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-list");
+      this.parentNode.appendChild(a);
+      for (i = 0; i < arr.length; i++) {
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          b = document.createElement("DIV");
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          b.addEventListener("click", function(e) {
+            inp.value = this.getElementsByTagName("input")[0].value;
+            closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
     });
-}
 
+    inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        currentFocus++;
+        addActive(x);
+      } else if (e.keyCode == 38) {
+        currentFocus--;
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        e.preventDefault();
+        if (currentFocus > -1) {
+          if (x) x[currentFocus].click();
+        }
+      }
+    });
+
+    function addActive(x) {
+      if (!x) return false;
+      removeActive(x);
+      if (currentFocus >= x.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = (x.length - 1);
+      x[currentFocus].classList.add("autocomplete-active");
+    }
+
+    function removeActive(x) {
+      for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+      }
+    }
+
+    function closeAllLists(elmnt) {
+      var x = document.getElementsByClassName("autocomplete-list");
+      for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+          x[i].parentNode.removeChild(x[i]);
+        }
+      }
+    }
+
+    document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+    });
+  }
+
+  
+  autocomplete(document.getElementById("destinasyon-tag"), city_names);

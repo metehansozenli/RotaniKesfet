@@ -220,6 +220,7 @@
     border: none;
     outline: none;
     font-size: 16px;
+    
   }
 
   
@@ -432,40 +433,38 @@
 
 
 
-
-
-
-.result-box {
+.autocomplete-container {
   position: relative;
-  margin-top: 10px;
+  display: inline-block;
 }
-
-#city-suggestions {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.autocomplete-input {
+  flex: 1;
+  padding: 5px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+    
+}
+.autocomplete-list {
   position: absolute;
-  width: 100%;
-  background: white;
-  border: 1px solid #ccc;
-  max-height: 150px;
-  overflow-y: auto;
-  z-index: 1000;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
 }
-
-.suggestion-item {
+.autocomplete-list div {
   padding: 10px;
   cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
 }
-
-.suggestion-item:hover {
-  background: #f0f0f0;
+.autocomplete-list div:hover {
+  background-color: #e9e9e9;
 }
-
-.selected-city {
-  padding: 5px 10px;
-  background: #e0e0e0;
-  margin: 5px 0;
-  display: inline-block;
-  border-radius: 5px;
+.autocomplete-active {
+  background-color: #2695ba !important;
+  color: #ffffff;
 }
