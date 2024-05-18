@@ -166,8 +166,17 @@ input.addEventListener("keyup", addTag);
 // Butonun class'ını doğru şekilde değiştirdim
 const removeBtn = document.querySelector(".sehirSecDetaylari button");
 removeBtn.addEventListener("click", () => {
-    tags.length = 0;
+    
     ul.querySelectorAll("li").forEach(li => li.remove());
+    for (var j = 1; j <= tags.length ; j++) {
+        var calendarId = `#calendar${j}`;
+        $(calendarId).remove();
+    }
+
+    document.getElementById("labelstart").classList.remove("visible");
+    document.getElementById("labelend").classList.remove("visible");
+    
+    tags.length = 0;
     createTag();
 });
 
