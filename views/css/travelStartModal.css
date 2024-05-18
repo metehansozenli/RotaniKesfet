@@ -428,3 +428,44 @@
 .etiket label {
   visibility: hidden;
 }
+
+
+
+
+
+
+
+.result-box {
+  position: relative;
+  margin-top: 10px;
+}
+
+#city-suggestions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background: #f0f0f0;
+}
+
+.selected-city {
+  padding: 5px 10px;
+  background: #e0e0e0;
+  margin: 5px 0;
+  display: inline-block;
+  border-radius: 5px;
+}

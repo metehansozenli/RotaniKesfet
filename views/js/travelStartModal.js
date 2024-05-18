@@ -283,7 +283,7 @@ const get_cities = () => {
 
         request.onload = () => {
             results = JSON.parse(request.responseText);
-            resolve(); // İşlem tamamlandığında Promise'i çöz
+            resolve(results); // İşlem tamamlandığında Promise'i çöz
 
         };
 
