@@ -213,8 +213,9 @@ createTravelBtn.addEventListener("click", async () => {
     });
 
     // Sunucudan gelen yanıtı al
-    await response.json();
-    window.location.href = `/routePlanner`;
+    result=await response.json();
+    routeID=result.newRouteID;
+    window.location.href = `/routePlanner?routeID=${routeID}`;
 
 });
 

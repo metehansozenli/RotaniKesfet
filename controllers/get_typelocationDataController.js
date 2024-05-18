@@ -4,7 +4,7 @@ const veritabani = require("./indexController");
 exports.get_typeLocationData = async (req, res) => {
     try {
         const locationType = req.query.locationType; // locationType parametresini al
-        const routeID = req.session.routeID;
+        const routeID = req.query.routeID;
         const routeData = await veritabani.getRoutesData(routeID);
         const routeCityIDs = routeData.routeCitiyIDs;
         const userLocationType = routeData.routeChoices;

@@ -518,7 +518,28 @@ const getCities = async () => {
   }
 }
 
-  
+const controlRouteID = async (userID, routeID) => {
+  try {
+    const query = `
+      SELECT 
+        *
+      FROM 
+        routes 
+      WHERE 
+        "userID" = $1
+        AND "routeID" = $2
+    `;
+
+    const result = await client.query(query, [userID, routeID]);
+
+    // Eğer dönen satır varsa, rota bulunmuştur, true döndür
+    return result.rows.length;
+  } catch (error) {
+    console.error("Rotayı kontrol ederken bir hata oluştu:", error);
+    throw error; // Hatanın dışarıya fırlatılması, çağrıcı tarafından yakalanması için
+  }
+};
+
   module.exports = {
     getRandomCitiesData,
     getRestaurantData,
@@ -533,6 +554,7 @@ const getCities = async () => {
     getActiveTypeLocationData,
     getLocationCoordinates,
     getRoutesData,
-    getCities
+    getCities,
+    controlRouteID
     
   };

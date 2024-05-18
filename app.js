@@ -251,8 +251,6 @@ app.post('/createTravel', async (req, res) => {
     const result = await client.query(routeInsertQuery, routeValues);
     const newRouteID = result.rows[0].routeID;
     
-    req.session.routeID = newRouteID;
-    
 
     res.status(200).json({ success: true, newRouteID:newRouteID });
     
@@ -271,6 +269,8 @@ app.post('/updateTravel', async (req, res) => {
       routeChoices,
       routeID
     } = req.body;
+
+    
     
     // routes tablosuna ekleme işlemi
     const query = {
@@ -286,7 +286,7 @@ app.post('/updateTravel', async (req, res) => {
       values: [routeLocations, routeChoices, routeID],
     };
     await client.query(query);
-    
+    res.status(200).json({ success: true });
   } catch (error) {
     console.error('Error updating travel:', error);
     res.status(500).json({ success: false, error: 'An error occurred' });

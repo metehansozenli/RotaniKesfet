@@ -18,7 +18,7 @@ const citylocation_load_data = () => {
             if (results.length > 0) {
                 results.forEach(result => {
                     const request2 = new XMLHttpRequest();
-                    request2.open('GET', `/get_typelocationData?locationType=${result.locationType}`);
+                    request2.open('GET', `/get_typelocationData?locationType=${result.locationType}&routeID=${window.routeID}`);
                     let html2 = ''; // html2'yi içerde tanımla
 
                     // Asenkron işlemi takip et
@@ -238,10 +238,10 @@ btn_update.addEventListener("click", async () => {
             routeChoices[index] = false;
         }
     });
-
+   
     // Tüm getLocationID promise'lerinin sonuçlarını bekleyin
     const routeLocations = await Promise.all(routeLocationsPromises);
-
+    
     // Sunucuya veri gönder
     const response = await fetch('/updateTravel', {
         method: 'POST',
@@ -255,7 +255,8 @@ btn_update.addEventListener("click", async () => {
         })
     });
 
-    // Sunucudan gelen yanıtı al
+
     await response.json();
+    
     window.location.href = `/`;
 });
