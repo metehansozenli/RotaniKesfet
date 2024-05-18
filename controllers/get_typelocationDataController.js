@@ -10,6 +10,7 @@ exports.get_typeLocationData = async (req, res) => {
         const userLocationType = routeData.routeChoices;
         const locationNames = await veritabani.getTypeLocationData(locationType, routeCityIDs);
         const locationNamesActive = await veritabani.getActiveTypeLocationData(userLocationType, routeCityIDs);
+        console.log(routeData);
         res.json({ locationNames: locationNames, locationNamesActive: locationNamesActive }); // Sonuçları JSON olarak gönder
 
     } catch (error) {

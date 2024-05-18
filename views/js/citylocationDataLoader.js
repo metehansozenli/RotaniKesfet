@@ -4,9 +4,11 @@ var markers = new Array();
 var routeID = window.routeID;
 document.addEventListener('DOMContentLoaded', function () {
     citylocation_load_data();
+    
 });
 
 const citylocation_load_data = () => {
+    
     return new Promise((resolve, reject) => {
         const request = new XMLHttpRequest();
         request.open('GET', `/get_citylocationData`);
@@ -209,6 +211,7 @@ const getLocationID = (locationName) => {
     });
 
 }
+
 
 btn_update.addEventListener("click", async () => {
     const selectBtns = document.querySelectorAll(".select-btn");

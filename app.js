@@ -27,6 +27,7 @@ const typelocationData = require("./routes/get_typelocationDataRoutes")
 const locationCoordinatesData = require("./routes/get_locationCoordinatesRoutes")
 const routePlanner = require("./routes/routePlannerRoutes");
 const cities = require("./routes/get_citiesRoutes");
+const init_routeLocations = require("./routes/init_routeLocationDataRoutes");
 
 client.connect((err) => {
   if (err) {
@@ -74,6 +75,7 @@ app.use("/", typelocationData)
 app.use("/", locationCoordinatesData)
 app.use("/", routePlanner)
 app.use("/", cities)
+app.use("/", init_routeLocations)
 
 
 app.get("/mycomment", (req, res) => {

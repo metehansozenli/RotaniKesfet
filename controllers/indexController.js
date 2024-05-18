@@ -426,6 +426,42 @@ const getActiveTypeLocationData = async (userLocationtype,cityIDArray) => {
   }
 }
 
+const getSelectedLocationData = async (userLocationtype,cityIDArray) => {
+  try {
+    const userChoices = [];
+    userLocationtype.forEach((isTrue, index) => {
+      if (isTrue) {
+        userChoices.push(locationTypes[index].locationType);
+      }
+    });
+    const userChoicesString = userChoices.map(userChoice => `'${userChoice}'`).join(', ');
+
+    const cityIDs = cityIDArray;
+    const cityIdString = cityIDs.join(', '); 
+
+    const query2 = {
+        text: `
+          SELECT 
+            * 
+          FROM
+            locations
+          WHERE 
+            "locationType" IN (${userChoicesString}) AND 
+            "locationCityID" IN (${cityIdString})
+          ORDER BY 
+            locations."locationName" DESC
+        `,
+    };
+    const result = await client.query(query2);
+    const selectedLocationsData = result.rows;
+    return selectedLocationsData;
+  
+} catch (error) {
+    console.error("Error fetching comment data:", error);
+    throw error; 
+  }
+}
+
 const getLocationCoordinates = async (locationName) => {
   try {
 
@@ -479,7 +515,8 @@ const getRoutesData = async (routeID) => {
       routeTitle: result.rows[0].routeTitle,
       routeStartDates: result.rows[0].routeStartDates,
       ruteFinishDates: result.rows[0].ruteFinishDates,
-      routeChoices: result.rows[0].routeChoices
+      routeChoices: result.rows[0].routeChoices,
+      routeLocations: result.rows[0].routeLocations
     }
     return routeData; // routes tablosundaki her veriyi döndürür
 
@@ -555,6 +592,7 @@ const controlRouteID = async (userID, routeID) => {
     getLocationCoordinates,
     getRoutesData,
     getCities,
-    controlRouteID
+    controlRouteID,
+    getSelectedLocationData
     
   };
