@@ -239,11 +239,14 @@ app.post('/createTravel', async (req, res) => {
     
      
     // routes tablosuna ekleme işlemi
-    const routeInsertQuery = `
-    INSERT INTO routes ("routeCreationDate", "routeTitle", "userID", "routeCities", "routeStartDates", "routeFinishDates","routeChoices")
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
-    RETURNING "routeID";
-    `;
+    const routeInsertQuery =  `
+                              INSERT INTO 
+                                routes ("routeCreationDate", "routeTitle", "userID", "routeCities", "routeStartDates", "routeFinishDates","routeChoices")
+                              VALUES 
+                                ($1, $2, $3, $4, $5, $6, $7)
+                              RETURNING "routeID";
+                              `;
+
     const routeValues = [routeCreationDate, routeTitle, userID, cityIDs, routeStartDates, routeFinishDates, routeChoices];
     const result = await client.query(routeInsertQuery, routeValues);
     const newRouteID = result.rows[0].routeID;
@@ -256,6 +259,36 @@ app.post('/createTravel', async (req, res) => {
     
   } catch (error) {
     console.error('Error creating travel:', error);
+    res.status(500).json({ success: false, error: 'An error occurred' });
+  }
+});
+
+app.post('/updateTravel', async (req, res) => {
+  try {
+
+    const {
+      routeLocations,
+      routeChoices,
+      routeID
+    } = req.body;
+    
+    // routes tablosuna ekleme işlemi
+    const query = {
+      text: `
+        UPDATE 
+          routes
+        SET 
+          "routeLocations" = $1,
+          "routeChoices" = $2
+        WHERE
+          "routeID" = $3
+      `,
+      values: [routeLocations, routeChoices, routeID],
+    };
+    await client.query(query);
+    
+  } catch (error) {
+    console.error('Error updating travel:', error);
     res.status(500).json({ success: false, error: 'An error occurred' });
   }
 });

@@ -4,8 +4,13 @@ const veritabani = require("./indexController");
 exports.get_typeLocationData = async (req, res) => {
     try {
         const locationType = req.query.locationType; // locationType parametresini al
-        const locationNames = await veritabani.getTypeLocationData(locationType);
-        res.json(locationNames); // Sonuçları JSON olarak gönder
+        const routeID = req.session.routeID;
+        const routeData = await veritabani.getRoutesData(routeID);
+        const routeCityIDs = routeData.routeCitiyIDs;
+        const userLocationType = routeData.routeChoices;
+        const locationNames = await veritabani.getTypeLocationData(locationType, routeCityIDs);
+        const locationNamesActive = await veritabani.getActiveTypeLocationData(userLocationType, routeCityIDs);
+        res.json({ locationNames: locationNames, locationNamesActive: locationNamesActive }); // Sonuçları JSON olarak gönder
 
     } catch (error) {
         console.error("Error fetching data:", error);

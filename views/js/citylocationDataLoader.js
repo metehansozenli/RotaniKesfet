@@ -24,18 +24,29 @@ const citylocation_load_data = () => {
                     // Asenkron işlemi takip et
                     let promise = new Promise((resolve, reject) => {
                         request2.onload = () => {
-                            const results2 = JSON.parse(request2.responseText);
+                            const responseData = JSON.parse(request2.responseText);
+                            const results2 = responseData.locationNames;
+                            const results3 = responseData.locationNamesActive;
+                            const locationNames = results3.map(o => o.locationName)
                             results2.forEach(result2 => {
-                                html2 +=                                                    `
-                                    <li class="item">
-                                        <span class="checkbox">
-                                            <i class="fa-solid fa-check check-icon"></i>
-                                        </span>
-                                        <span class="item-text">${result2.locationName}</span>
-                                    </li>
-                                `;
-                            });
+                                let isChecked = false; // Öğe varsayılan olarak işaretlenmemiş olsun
+                            
+                                if (locationNames.includes(result2.locationName)) {
+                                    isChecked = true;
+                                    initMapPins(result2.locationName);
+                                }
 
+                                html2 +=  
+                                    `
+                                        <li class="item ${isChecked ? 'checked' : ''}">
+                                            <span class="checkbox">
+                                                <i class="fa-solid fa-check check-icon"></i>
+                                            </span>
+                                            <span class="item-text">${result2.locationName}</span>
+                                        </li>
+                                    `;
+                            });
+                            
                             // html2'yi burada oluşturup, html içine ekle
                             html += `
                                 <div class="dropdowns-container">
@@ -50,6 +61,7 @@ const citylocation_load_data = () => {
                                     </div>
                                 </div>
                             `;
+
                             resolve(); // Asenkron işlem tamamlandığında Promise'i çöz
                         };
                         request2.onerror = () => {
@@ -93,7 +105,7 @@ document.addEventListener('customDropdownEventListener', function () {
         var items = selectBtn.nextElementSibling.querySelectorAll(".item"); // Her dropdown için öğeleri seç
         items.forEach(item => {
             item.addEventListener("click", () => {
-                item.classList.toggle("checked");
+                updateStatus(item); 
                 itemText = item.querySelector('.item-text')
                 updateMapPin(itemText.innerHTML,item);
                 
@@ -111,6 +123,10 @@ document.addEventListener('customDropdownEventListener', function () {
         // } else {
         //     btnText.innerText = "Puan Seç";
         // }
+    }
+    
+    const updateStatus = (item) => {
+        item.classList.toggle("checked");
     }
 
     const updateMapPin = (itemText,item) => {
@@ -151,4 +167,95 @@ document.addEventListener('customDropdownEventListener', function () {
 
 });
 
+const initMapPins = (locationName) => {
+    return new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.open('GET', `/get_locationCoordinates?locationName=${locationName}`);
+        //request.open('GET', `/get_locationCoordinates?locationName=${locationName}`);
+        request.onload = () => {
+            let marker;
+            resultsLocation = JSON.parse(request.responseText); 
+            const locationCoordinatesLat = parseFloat(resultsLocation.locationCoordinatesLat);
+            const locationCoordinatesLong = parseFloat(resultsLocation.locationCoordinatesLong);
+            marker = new L.marker([locationCoordinatesLat, locationCoordinatesLong]); 
+            markers.push(marker); 
+            marker.addTo(map);
+            resolve(); // İşlem tamamlandığında Promise'i çöz
+            
+        };
 
+        request.onerror = () => {
+            reject('İstek başarısız');
+        };
+        request.send();
+    });
+
+}
+
+const getLocationID = (locationName) => {
+    return new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.open('GET', `/get_locationCoordinates?locationName=${locationName}`);
+        request.onload = () => {
+            resultsLocation = JSON.parse(request.responseText); 
+            const locationID = resultsLocation.locationID;
+            resolve(locationID); // İşlem tamamlandığında Promise'i çöz   
+        };
+
+        request.onerror = () => {
+            reject('İstek başarısız');
+        };
+        request.send();
+    });
+
+}
+
+btn_update.addEventListener("click", async () => {
+    const selectBtns = document.querySelectorAll(".select-btn");
+    const routeLocationsPromises = []; // Tüm getLocationID promise'lerini saklamak için dizi
+    const routeChoices = []; 
+
+    selectBtns.forEach((selectBtn, index) => {
+        const items = selectBtn.nextElementSibling.querySelectorAll(".item"); // Her dropdown için öğeleri seç
+        items.forEach(item => {
+            if(item.classList.contains("checked")){
+                const itemText = item.querySelector('.item-text').innerHTML;
+                // getLocationID promise'ini diziye ekle NOT: sunucu tarafında görünmeme sorunun 
+                //çözmek için tüm promisler beklenmeli
+                routeLocationsPromises.push(getLocationID(itemText).then((locationID) => {
+                    return locationID; // resolve edilen değeri döndür
+                }).catch((error) => {
+                    console.error('Hata:', error);
+                    return null; // Hata durumunda null döndür
+                }));
+            }
+        });
+        
+        const checkedItems = selectBtn.nextElementSibling.querySelectorAll(".checked");
+        if (checkedItems.length > 0) {
+            routeChoices[index] = true;
+        } else {
+            routeChoices[index] = false;
+        }
+    });
+
+    // Tüm getLocationID promise'lerinin sonuçlarını bekleyin
+    const routeLocations = await Promise.all(routeLocationsPromises);
+
+    // Sunucuya veri gönder
+    const response = await fetch('/updateTravel', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            routeLocations: routeLocations.filter(locationID => locationID !== null), // null olmayanları filtrele
+            routeChoices,
+            routeID: routeID 
+        })
+    });
+
+    // Sunucudan gelen yanıtı al
+    await response.json();
+    window.location.href = `/`;
+});

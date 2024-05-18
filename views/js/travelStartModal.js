@@ -282,8 +282,6 @@ const get_cities = () => {
 
         request.onload = () => {
             results = JSON.parse(request.responseText);
-            console.log(results)
-            console.log("deneme")
             resolve(); // İşlem tamamlandığında Promise'i çöz
 
         };

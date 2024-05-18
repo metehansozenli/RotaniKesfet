@@ -14,7 +14,7 @@ const sessions = {};
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
-
+var locationTypes;
 const getUserData = async (sessionuserId) => {
     try {
       const result2 = await client.query('SELECT "userNickname", "userName", "userSurname", "userImg" FROM users WHERE "userID" = $1', [sessionuserId]);
@@ -356,7 +356,7 @@ const getUserData = async (sessionuserId) => {
           `
       };
       const result1 = await client.query(query1);
-      const locationTypes = result1.rows;
+      locationTypes = result1.rows;
       return locationTypes
   } catch (error) {
     console.error("Error fetching comment data:", error);
@@ -364,18 +364,20 @@ const getUserData = async (sessionuserId) => {
     }
   }
 
-const getTypeLocationData = async (locationtype) => {
+const getTypeLocationData = async (locationtype,cityIDArray) => {
   try {
-    const locationType = locationtype; 
+    const locationType = locationtype;
+    const cityIDs = cityIDArray;
+    const cityIdString = cityIDs.join(', '); 
     const query2 = {
         text: `
             SELECT DISTINCT
-                "locationName"  
+              locations."locationName"  
             FROM
                 locations
-            WHERE "locationType" = $1
+            WHERE "locationType" = $1 AND "locationCityID" IN (${cityIdString})
             ORDER BY 
-                "locationName" DESC
+              locations."locationName" DESC
         `,
         values: [locationType],
     };
@@ -388,13 +390,50 @@ const getTypeLocationData = async (locationtype) => {
   }
 }
 
+const getActiveTypeLocationData = async (userLocationtype,cityIDArray) => {
+  try {
+    const userChoices = [];
+    userLocationtype.forEach((isTrue, index) => {
+      if (isTrue) {
+        userChoices.push(locationTypes[index].locationType);
+      }
+    });
+    const userChoicesString = userChoices.map(userChoice => `'${userChoice}'`).join(', ');
+
+    const cityIDs = cityIDArray;
+    const cityIdString = cityIDs.join(', '); 
+
+    const query2 = {
+        text: `
+          SELECT DISTINCT
+            locations."locationName"  
+          FROM
+            locations
+          WHERE 
+            "locationType" IN (${userChoicesString}) AND 
+            "locationCityID" IN (${cityIdString})
+          ORDER BY 
+            locations."locationName" DESC
+        `,
+    };
+    const result = await client.query(query2);
+    const locationNames = result.rows;
+    return locationNames
+  
+} catch (error) {
+    console.error("Error fetching comment data:", error);
+    throw error; 
+  }
+}
+
 const getLocationCoordinates = async (locationName) => {
   try {
 
     const result = await client.query(
       `
       SELECT 
-          "locationCoordinates"
+          "locationCoordinates",
+          "locationID"
       FROM 
           locations
       WHERE 
@@ -409,7 +448,8 @@ const getLocationCoordinates = async (locationName) => {
     
     const locationCoordinates = {
       locationCoordinatesLat : locationCoordinatesLat,
-      locationCoordinatesLong : locationCoordinatesLong
+      locationCoordinatesLong : locationCoordinatesLong,
+      locationID : result.rows[0].locationID
     }
     return locationCoordinates
 
@@ -432,8 +472,16 @@ const getRoutesData = async (routeID) => {
       `, 
       [routeID]
     );
-
-    return result.rows[0]; // routes tablosundaki her veriyi döndürür
+    const routeData = {
+      routeCreationDate: result.rows[0].routeCreationDate,
+      routeCitiyIDs: result.rows[0].routeCities,
+      userID: result.rows[0].userID,
+      routeTitle: result.rows[0].routeTitle,
+      routeStartDates: result.rows[0].routeStartDates,
+      ruteFinishDates: result.rows[0].ruteFinishDates,
+      routeChoices: result.rows[0].routeChoices
+    }
+    return routeData; // routes tablosundaki her veriyi döndürür
 
   } catch (error) {
     console.error("Error fetching route data:", error);
@@ -482,6 +530,7 @@ const getCities = async () => {
     getTotalStarCounts,
     getLocationType,
     getTypeLocationData,
+    getActiveTypeLocationData,
     getLocationCoordinates,
     getRoutesData,
     getCities
