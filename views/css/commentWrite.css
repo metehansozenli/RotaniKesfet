@@ -11,13 +11,13 @@ body .comment-write {
 
 .left-half {
     position: relative;
-    width: 60%;
+    width: 700px;
     margin-bottom: 40px !important;
     margin-top: 40px !important;
     padding: 10px;
     border-radius: 8px;
-    margin: 0 20px;
-    margin-left: 150px;
+    margin: 0 33px;
+    margin-left: 100px;
 
     /* sectionları görmek istiyosan aç şimdi kapatıyorum */
     /*  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);  */
@@ -128,7 +128,7 @@ body .comment-write {
     border: 2px solid #ddd;
     padding: 10px;
     background-color: #fff;
-    width: 650px;
+    width: 600px;
 }
 
 .comment-input {
@@ -188,6 +188,11 @@ body .comment-write {
     font-size: 1.2em;
     border-radius: 25px;
     cursor: pointer;
+    width: 600px;
+    height: 53px; 
+    line-height: 53px; 
+    padding: 0 2em; 
+    text-align: center; 
 }
 
 
@@ -240,15 +245,26 @@ body .comment-write {
 /* ----------------------Section 2 Right------------------------*/
 
 .right-half {
-    width: 50%;
+    width: 600px;
     margin-bottom: 100px !important;
     padding: 10px;
     border-radius: 8px;
-    margin: 0 20px;
-    margin-right: 150px;
+    margin: 0 33px;
+    margin-right: 100px;
 
     /* sectionları görmek istiyosan aç şimdi kapatıyorum */
     /*  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);  */
 
 
+}
+
+@media (max-width: 1024px) {
+    .left-half, .right-half {
+        width: 100%;
+        margin: 20px 0;
+    }
+    #submit {
+        width: 90%;
+        margin: 20px auto;
+    }
 }
