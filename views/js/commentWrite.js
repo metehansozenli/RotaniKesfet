@@ -132,7 +132,8 @@ const getActiveRating = () => {
 
 // Yorum kutusu karakter sayacı
 document.getElementById('comment-input').addEventListener('input', function() {
-    var charCount = this.value.length;
+    var inputValue = this.value.trim(); // Başta ve sonda boşlukları sil
+    var charCount = inputValue.replace(/\s/g, '').length; // Tüm boşlukları silerek karakter sayısını al
     var minChars = 100; // Alt sınırı 
     var maxChars = 400; // Üst sınırı 
     var remainingChars = maxChars - charCount;
@@ -140,7 +141,7 @@ document.getElementById('comment-input').addEventListener('input', function() {
     
     if (charCount < minChars) {
         counterElement.textContent = (minChars - charCount) + ' karakter daha yazmalısınız!'; 
-        counterElement.style.color = 'red'; // 
+        counterElement.style.color = 'red'; 
     } else if (charCount > maxChars) {
         this.value = this.value.substring(0, maxChars); 
         counterElement.textContent = 'Üst sınırı aştınız'; 
@@ -150,6 +151,7 @@ document.getElementById('comment-input').addEventListener('input', function() {
         counterElement.style.color = '#999';
     }
 });
+
 
 // Yorum kutusunu temizle
 function clearComment() {
