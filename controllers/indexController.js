@@ -576,6 +576,24 @@ const controlRouteID = async (userID, routeID) => {
     throw error; // Hatanın dışarıya fırlatılması, çağrıcı tarafından yakalanması için
   }
 };
+const getProfileInfo = async(sessionuserId) =>{
+  try {
+    const result2 = await client.query('SELECT "userName", "userSurname","userPhoneNo","userMail", "userImg" FROM users WHERE "userID" = $1', [sessionuserId]);
+    if (result2.rows.length > 0) {
+      const userName = result2.rows[0].userName;
+      const userSurname = result2.rows[0].userSurname;
+      const userPhoneNo = result2.rows[0].userPhoneNo;
+      const userMail = result2.rows[0].userMail;
+      const userImg = result2.rows[0].userImg;
+      return [userName, userSurname,userPhoneNo,userMail, userImg];
+    } else {
+      return null; // Return null if no data found
+    }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error; // Rethrow the error to be caught by the caller
+  }
+}
 
   module.exports = {
     getRandomCitiesData,
@@ -593,6 +611,7 @@ const controlRouteID = async (userID, routeID) => {
     getRoutesData,
     getCities,
     controlRouteID,
-    getSelectedLocationData
+    getSelectedLocationData,
+    getProfileInfo
     
   };

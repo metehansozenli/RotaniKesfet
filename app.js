@@ -28,6 +28,7 @@ const locationCoordinatesData = require("./routes/get_locationCoordinatesRoutes"
 const routePlanner = require("./routes/routePlannerRoutes");
 const cities = require("./routes/get_citiesRoutes");
 const init_routeLocations = require("./routes/init_routeLocationDataRoutes");
+const profile = require("./routes/profileRoutes")
 
 client.connect((err) => {
   if (err) {
@@ -76,16 +77,16 @@ app.use("/", locationCoordinatesData)
 app.use("/", routePlanner)
 app.use("/", cities)
 app.use("/", init_routeLocations)
-
+app.use("/", profile )
 
 app.get("/mycomment", (req, res) => {
   res.render("mycomment")
 })
 
 
-app.get("/profile", (req, res) => {
-  res.render("profile")
-})
+// app.get("/profile", (req, res) => {
+//   res.render("profile")
+// })
 
 app.get("/commentWrite", (req, res) => {
   res.render("commentWrite")
