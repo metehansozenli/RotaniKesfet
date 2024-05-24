@@ -1,5 +1,10 @@
 # Rotanı Keşfet
 
+<p align="left">
+  <img src="https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/RotaniKesfetLogo.png" alt="Logo">
+</p>
+
+
 ## Projenin Amacı
 
 Seyahat severler için gerekli olan seyahat rotalarını planlama, yeni yerler keşfetme ve favori mekanlarını oluşturma gibi çeşitli özellikleri sade ve kullanışlı bir arayüzle sunmak. Ayrıca, kullanıcıların başka seyahat severlerin deneyimlerinden faydalanmasını sağlayarak, seyahat planlama sürecini daha keyifli ve verimli hale getirmek.
