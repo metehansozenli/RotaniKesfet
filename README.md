@@ -68,7 +68,7 @@ Seyahat severler için gerekli olan seyahat rotalarını planlama, yeni yerler k
 
 [Rotanı Keşfet Gereksinim Dokümanı](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim14_Gereksinim_Dokumani.pdf)
   
-[Rotanı Keşfet Ürün Kataloğu](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim_14_Rotanı_Keşfet_Ürün_Kataloğu_V2.0.pdf)
+[Rotanı Keşfet Hikaye Kartları](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim_14_Rotanı_Keşfet_Hikaye_Kartları.pdf)
 
 [Rotanı Keşfet Diyagram ve Mimari](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim_14_Diyagram_Mimari.pdf)
   
