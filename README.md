@@ -40,11 +40,20 @@ Seyahat severler için gerekli olan seyahat rotalarını planlama, yeni yerler k
 
 ## Kullanılan Teknolojiler
 
-- **HTML, CSS, Bootstrap:** Web sayfalarının yapısını oluşturmak ve görsel tasarımı kolaylaştırmak için kullanıldı. Bootstrap'in hazır bileşenleri ve kolay kullanımı sayesinde hızlı bir şekilde kullanıcı arayüzü geliştirildi.
-- **JavaScript:** Web sayfalarına dinamizm ve etkileşim kazandırmak için kullanıldı. Kullanıcıların web sayfasında etkileşime girmesi ve dinamik içeriklerle karşılaşması sağlandı.
-- **Node.js (Express.js):** Hızlı ve ölçeklenebilir web uygulamaları geliştirmek için tercih edildi. Express.js ile web sunucuları kolayca oluşturulup yönetildi.
-- **Template Engine (Handlebars.js):** Sunucu tarafında dinamik içerik üretmek ve HTML şablonlarını daha verimli kullanmak için Handlebars.js tercih edildi. Bu sayede kod tekrarı azaltıldı ve HTML dosyaları daha düzenli tutuldu.
-- **Selenium, Python, ChatGPT:** Veri oluşturma ve test süreçlerinde kullanıldı. Selenium ile web tarayıcılarında otomasyon testleri yapılarak uygulamanın doğruluğu kontrol edildi, Python ile veri manipülasyonu ve işleme işlemleri gerçekleştirildi. ChatGPT ise kullanıcılarla doğal dilde etkileşimde bulunarak veri oluşturma sürecini geliştirdi.
-- **PostgreSQL:** Güçlü ve güvenilir bir ilişkisel veritabanı yönetim sistemi olarak tercih edildi. Projenin gereksinimlerine uygun karmaşık veri yapıları ve ilişkileri yönetmek için ideal bir seçenek olarak kullanıldı.
-- **AWS:** Veritabanını buluta taşıma ve yönetme hizmetleri AWS üzerinden sağlandı. Bu sayede veritabanının güvenliği ve erişilebilirliği artırıldı.
-- **Git ve GitHub:** Proje kodlarının sürüm kontrolü ve işbirliği için kullanıldı. Kod değişikliklerini izlemek, kod paylaşımını kolaylaştırmak ve proje ekibi arasındaki işbirliğini artırmak amacıyla tercih edildi.
+- **HTML, CSS, Bootstrap:**
+   Web sayfalarının yapısını oluşturmak ve görsel tasarımı kolaylaştırmak için kullanıldı. Bootstrap'in hazır bileşenleri ve kolay kullanımı sayesinde hızlı bir şekilde kullanıcı arayüzü geliştirildi.
+- **JavaScript:**
+   Web sayfalarına dinamizm ve etkileşim kazandırmak için kullanıldı. Kullanıcıların web sayfasında etkileşime girmesi ve dinamik içeriklerle karşılaşması sağlandı.
+- **Node.js (Express.js):**
+   Hızlı ve ölçeklenebilir web uygulamaları geliştirmek için tercih edildi. Express.js ile web sunucuları kolayca oluşturulup yönetildi.
+- **Template Engine (Handlebars.js):**
+   Sunucu tarafında dinamik içerik üretmek ve HTML şablonlarını daha verimli kullanmak için Handlebars.js tercih edildi. Bu sayede kod tekrarı azaltıldı ve HTML dosyaları daha düzenli tutuldu.
+- **Selenium, Python, ChatGPT:**
+  Veri oluşturma ve test süreçlerinde kullanıldı. Selenium ile web tarayıcılarında otomasyon testleri yapılarak uygulamanın doğruluğu kontrol edildi, Python ile veri manipülasyonu ve işleme işlemleri     
+  gerçekleştirildi. ChatGPT ise kullanıcılarla doğal dilde etkileşimde bulunarak veri oluşturma sürecini geliştirdi.
+- **PostgreSQL:**
+   Güçlü ve güvenilir bir ilişkisel veritabanı yönetim sistemi olarak tercih edildi. Projenin gereksinimlerine uygun karmaşık veri yapıları ve ilişkileri yönetmek için ideal bir seçenek olarak kullanıldı.
+- **AWS:**
+  Veritabanını buluta taşıma ve yönetme hizmetleri AWS üzerinden sağlandı. Bu sayede veritabanının güvenliği ve erişilebilirliği artırıldı.
+- **Git ve GitHub:**
+   Proje kodlarının sürüm kontrolü ve işbirliği için kullanıldı. Kod değişikliklerini izlemek, kod paylaşımını kolaylaştırmak ve proje ekibi arasındaki işbirliğini artırmak amacıyla tercih edildi.
