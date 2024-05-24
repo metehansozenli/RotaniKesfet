@@ -1,7 +1,7 @@
 # Rotanı Keşfet
 
 <p align="left">
-  <img src="https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/RotaniKesfetLogo.png" alt="Logo">
+  <img src="https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/RotaniKesfetLogo.png" alt="Logo" width=200px>
 </p>
 
 
