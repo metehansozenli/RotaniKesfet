@@ -58,8 +58,8 @@ document.addEventListener('customCommentLoadEvent', function () {
     });
 });
 
-
-function favControl() {
+// BURAYI SİLİCEM ALTTA AYNISI VAR
+/* function favControl() {
     let icons = document.querySelectorAll('ion-icon');
 
     icons.forEach(function (icon) {
@@ -83,8 +83,44 @@ function favControl() {
             //     }
         };
     });
+} */
+function getLocationIdFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
 }
 
+function favControl() {
+    let icons = document.querySelectorAll('ion-icon');
+    const locationID = getLocationIdFromUrl();
+    
+    icons.forEach(function (icon) {
+        icon.onclick = async function () {
+            if (window.userID) {
+                icon.classList.toggle('active');
+                console.log(`${window.userID} BEĞENDİ`);
+                
+                try {
+                    const response = await fetch('/api/updatefav', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ userID: window.userID, locationID : locationID })
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error('Favori güncellenirken bir hata oluştu:', errorData.message);
+                    }
+                } catch (error) {
+                    console.error('Favori güncellenirken bir hata oluştu:', error);
+                }
+            } else {
+                $('#loginAlert').modal('show');
+            }
+        };
+    });
+}
 function locationStatus() {
     var openTimeElement = document.getElementById("openTime");
     var locationStatus = document.querySelector(".location-status");

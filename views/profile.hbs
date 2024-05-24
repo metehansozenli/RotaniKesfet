@@ -19,7 +19,7 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body text-center">
-                        <img src={{userImg}} alt="Profile Picture" class="img-fluid rounded-circle mb-3">
+                        <img src={{userImg}} alt="Profile Resmi" class="img-fluid rounded-circle mb-3">
                         <h4> Hoşgeldiniz Sn. {{userName}} {{userSurname}}</h4>
                         <ul class="list-group">
                             <li class="list-group-item"><a href="/profile">Profile</a></li>
@@ -34,7 +34,7 @@
             <div class="col-md-9">
     <div class="card">
         <div class="card-body">
-            <h3>Update Account</h3>
+            <h3>Formu Güncelleyin</h3>
             <form action="/update-profile" method="POST">
                 <div class="form-group">
                     <label for="firstName">İsim</label>
@@ -53,12 +53,12 @@
                     <input type="email" class="form-control" id="email" name="email" value="{{userMail}}" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <label for="password">Şifre</label>
+                    <input type="text" class="form-control" id="password" name="password"  value="{{userPass}}">
                 </div>
                <div class="d-flex justify-content-center">
-                                <button id="submitButton"type="submit" class="btn btn-success w-50 mr-2">Güncelle</button>
-                                <button id="cancelButton" type="button" href="/"class="btn btn-danger w-50 ml-2">Cancel</button>
+                                <button id="submitButton"type="submit"  class="btn btn-success w-50 mr-2">Güncelle</button>
+                                <button id="cancelButton" type="button" href="/"class="btn btn-danger w-50 ml-2">İptal Et</button>
                             </div>
             </form>
         </div>

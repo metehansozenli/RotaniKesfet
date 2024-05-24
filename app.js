@@ -128,6 +128,18 @@ function gracefulShutdown() {
 
 
 module.exports = app
+// ALLAH RIZASI İÇİN APP.JS'i DAĞITMAYIN
+// veri tabanındaki userfavlocationsu güncelliyor
+app.post('/api/updatefav', async (req, res) => {
+  const { userID, locationID } = req.body;
+  try {
+      await veritabani.updateUserFavoriteLocations(userID, locationID);
+      
+  } catch (error) {
+      console.error('Error updating favorites:', error); 
+     
+  }
+});
 
 
 

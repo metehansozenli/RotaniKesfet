@@ -584,14 +584,30 @@ const getProfileInfo = async(sessionuserId) =>{
       const userSurname = result2.rows[0].userSurname;
       const userPhoneNo = result2.rows[0].userPhoneNo;
       const userMail = result2.rows[0].userMail;
+      const userPass = result2.rows[0].userPass;
       const userImg = result2.rows[0].userImg;
-      return [userName, userSurname,userPhoneNo,userMail, userImg];
+      return [userName, userSurname,userPhoneNo,userMail, userPass, userImg];
     } else {
       return null; // Return null if no data found
     }
   } catch (error) {
     console.error("Error fetching user data:", error);
     throw error; // Rethrow the error to be caught by the caller
+  }
+}
+async function updateUserFavoriteLocations(userId, locationId) {
+  const query = `UPDATE users 
+    SET "userFavLocations" = CASE 
+        WHEN $2 = ANY("userFavLocations") THEN array_remove("userFavLocations", $2)
+        ELSE array_append("userFavLocations", $2)
+    END
+    WHERE "userID" = $1;`
+    
+  try {
+    await client.query(query, [userId, locationId]);
+  } catch (error) {
+    console.error('Database query error:', error.message);
+    throw error;
   }
 }
 
@@ -612,6 +628,7 @@ const getProfileInfo = async(sessionuserId) =>{
     getCities,
     controlRouteID,
     getSelectedLocationData,
-    getProfileInfo
+    getProfileInfo,
+    updateUserFavoriteLocations
     
   };

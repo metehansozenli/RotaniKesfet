@@ -12,12 +12,13 @@ exports.changeProfile = async (req, res) => {
 
             const userData = await veritabani.getProfileInfo(userSession.userID);
             if (userData) {
-                const [userName, userSurname, userPhoneNo,userMail,userImg] = userData;
+                const [userName, userSurname, userPhoneNo,userMail,userPass,userImg ] = userData;
                 res.render("profile", {
                     userName: userName,
                     userSurname: userSurname,
                     userMail : userMail,
                     userPhoneNo: userPhoneNo,
+                    userPass : userPass,
                     userImg: userImg,
 
                     
