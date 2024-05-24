@@ -1,7 +1,7 @@
 # Rotanı Keşfet
 
 <p align="left">
-  <img src="https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/RotaniKesfetLogo.png" alt="Logo" width=200px>
+  <img src="https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/RotaniKesfetLogo.png" alt="Logo" width=150px>
 </p>
 
 
@@ -64,12 +64,12 @@ Seyahat severler için gerekli olan seyahat rotalarını planlama, yeni yerler k
    Proje kodlarının sürüm kontrolü ve işbirliği için kullanıldı. Kod değişikliklerini izlemek, kod paylaşımını kolaylaştırmak ve proje ekibi arasındaki işbirliğini artırmak amacıyla tercih edildi.
 
   
-  ![Rotanı Keşfet Ürün Kataloğu](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim_14_Rotanı_Keşfet_Ürün_Kataloğu_V2.0.pdf)
+[Rotanı Keşfet Ürün Kataloğu](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim_14_Rotanı_Keşfet_Ürün_Kataloğu_V2.0.pdf)
 
-  ![Rotanı Keşfet Gereksinim Dokümanı](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim14_Gereksinim_Dokumani.pdf)
+[Rotanı Keşfet Gereksinim Dokümanı](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim14_Gereksinim_Dokumani.pdf)
   
-  ![Rotanı Keşfet Ürün Kataloğu](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim_14_Rotanı_Keşfet_Ürün_Kataloğu_V2.0.pdf)
+[Rotanı Keşfet Ürün Kataloğu](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim_14_Rotanı_Keşfet_Ürün_Kataloğu_V2.0.pdf)
+
+[Rotanı Keşfet Diyagram ve Mimari](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim_14_Diyagram_Mimari.pdf)
   
-  ![Rotanı Keşfet Diyagram ve Mimari](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim_14_Diyagram_Mimari.pdf)
-  
-  ![Rotanı Keşfet Kullanma Kılavuzu](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim_14_Kullanma_Kılavuzu_V2.0.pdf)
+[Rotanı Keşfet Kullanma Kılavuzu](https://github.com/metehansozenli/RotaniKesfet/blob/main/Dokümanlar/Takim_14_Kullanma_Kılavuzu_V2.0.pdf)
