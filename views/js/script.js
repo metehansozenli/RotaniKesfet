@@ -113,7 +113,7 @@ async function favControl() {
     let icons = document.querySelectorAll('ion-icon');
     const locationID = getLocationIdFromUrl();
     console.log(locationID)
-    const favorimekanlar = await getUserFavourites(7)
+    const favorimekanlar = await getUserFavourites(window.userID)
     console.log(favorimekanlar)
     const favorimi = favorimekanlar.some(fav => fav.locationID == locationID);
     console.log(favorimi)
