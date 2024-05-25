@@ -611,6 +611,35 @@ async function updateUserFavoriteLocations(userId, locationId) {
   }
 }
 
+/* async function getUserFavouriteLocations(userId) {
+  const sonuc = await client.query(`SELECT "userFavLocations" from users where "userID"= $1 `, [userId])
+  if(sonuc.rows.length > 0)
+    {
+      const userFavLocation = sonuc.rows[0].userFavLocations
+      return userFavLocation
+    }
+} */
+async function getUserFavouriteLocations(userID) {
+  const query = `
+  SELECT locations.*
+  FROM locations 
+  INNER JOIN users ON locations."locationID" = ANY(users."userFavLocations") 
+  WHERE users."userID" = $1;
+`;
+
+ var result = await client.query(query, [userID]);
+
+if (result.rows.length > 0) {
+
+  return result.rows;
+} else {
+  return [];
+}
+}
+
+
+
+
   module.exports = {
     getRandomCitiesData,
     getRestaurantData,
@@ -629,6 +658,8 @@ async function updateUserFavoriteLocations(userId, locationId) {
     controlRouteID,
     getSelectedLocationData,
     getProfileInfo,
-    updateUserFavoriteLocations
+    updateUserFavoriteLocations,
+    getUserFavouriteLocations,
+    
     
   };
