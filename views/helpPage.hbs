@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yardım</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/script.js"></script>
+</head>
+
+<body>
+    {{> config}}
+
+    <div class="help-container">
+
+
+        <div class="search-header">
+            <h1 class="display-4 text-center text-muted" style=" font-family: sans-serif,Arial;">Nasıl yardımcı
+                olabiliriz?
+            </h1>
+            <div class="search-box">
+                <input type="text" placeholder="Yardım konularını arayın" id="search-input"
+                    oninput="toggleClearButton()">
+                <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                <span class="clear-btn" onclick="clearSearch()" style="display: none;">&times;</span>
+            </div>
+
+
+
+        </div>
+
+        <div class="grid">
+            <div class="card">Rezervasyonumu yönet</div>
+            <div class="card">İncelemelerinizi ve fotoğraflarınızı yönetme</div>
+            <div class="card">İadeler ve iptaller</div>
+            <div class="card">Güven ve Emniyet</div>
+            <div class="card">Topluluk ve mesajlar</div>
+            <div class="card">Rezervasyon yapma</div>
+            <div class="card">Ödemeler</div>
+            <div class="card">Oturum açma konusunda yardım</div>
+        </div>
+
+
+        <div id="info"></div>
+
+
+
+    </div>
+
+
+
+
+    {{> footer}}
+</body>
+
+<style>
+    .container {
+        width: 80%;
+        margin: auto;
+        padding-top: 20px;
+    }
+
+
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin: 69px 69px;
+        padding: 20px;
+    }
+
+    .card {
+        background-color: #fff;
+        height: 150px;
+        padding: 20px;
+        margin: 10px 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .search-header {
+        background: #BFECF5;
+        height: 250px;
+        padding: 20px 0;
+        color: #333;
+    }
+
+    .search-box {
+        position: relative;
+        width: 50%;
+        margin: 20px auto;
+        display: flex;
+        align-items: center;
+    }
+
+    .search-box input[type="text"] {
+        flex-grow: 1;
+        padding: 10px 30px 10px 30px;
+        /* Space for icons */
+        font-size: 16px;
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-box .clear-btn,
+    .search-box .search-icon {
+        position: absolute;
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .search-box .search-icon {
+        left: 8px;
+        pointer-events: none;
+        /* Makes the icon non-interactive */
+    }
+
+    .search-box .clear-btn {
+        right: 8px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('click', function () {
+                const infoText = 'Burada ' + this.innerText + ' ile ilgili detaylı bilgiler yer alacak.';
+                document.getElementById('info').innerHTML = '<p>' + infoText + '</p>';
+            });
+        });
+    });
+
+    function toggleClearButton() {
+        var input = document.getElementById('search-input');
+        var clearBtn = document.querySelector('.clear-btn');
+        clearBtn.style.display = input.value.length ? 'block' : 'none';
+    }
+
+    function clearSearch() {
+        var input = document.getElementById('search-input');
+        input.value = '';
+        input.focus(); // Keep focus on the input after clearing
+        toggleClearButton(); // Optionally check to hide the button again
+    }
+
+    document.addEventListener('DOMContentLoaded', toggleClearButton); // Call on page load to check initial state of input
+
+
+
+</script>
+
+
+</html>

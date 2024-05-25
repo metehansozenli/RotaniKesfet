@@ -92,6 +92,10 @@ app.get("/commentWrite", (req, res) => {
   res.render("commentWrite")
 })
 
+app.get("/helpPage", (req, res) => {
+  res.render("helpPage")
+})
+
 app.get("/kullanimklavuzu", (req, res) => {
   res.render("kullanimklavuzu")
 })
