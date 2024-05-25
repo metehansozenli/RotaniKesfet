@@ -92,8 +92,12 @@ app.get("/helpPage", (req, res) => {
   res.render("helpPage")
 })
 
-app.get("/kullanimklavuzu", (req, res) => {
-  res.render("kullanimklavuzu")
+app.get("/helpPage", (req, res) => {
+  res.render("helpPage")
+})
+
+app.get("/userGuide", (req, res) => {
+  res.render("userGuide")
 })
 
 app.get("/calendar", (req, res) => {
