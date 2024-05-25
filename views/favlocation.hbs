@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profilim</title>
+    <title>FAVORİ MEKANLAR</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="./js/script.js"></script>
+    
 </head>
+<body>
 {{> config}}
 
 <div class="container mt-5">
@@ -19,11 +21,17 @@
         {{#each userData}}
         <div class="col-md-4">
             <div class="card location-card">
-                <img src={{this.locationImg}} class="card-img-top">
+                <a href="/location?id={{this.locationID}}">
+                    <img src="{{this.locationImg}}" class="card-img-top">
+                </a>
                 <div class="card-body">
-                    <h5 class="card-title">{{this.locationName}}</h5>
+                    <a href="/location?id={{this.locationID}}">
+                        <h5 class="card-title">{{this.locationName}}</h5>
+                    </a>
                     <p class="card-text">{{this.locationCountry}}</p>
-                    <span class="heart-icon">&hearts;</span>
+                    <span class="heart-icon">
+                    <a href="/location?id={{this.locationID}}">    <i class="bi bi-heart"></i></a>
+                    </span>
                 </div>
             </div>
         </div>
@@ -35,3 +43,32 @@
 </div>
 
 {{> footer}}
+</body>
+<style>
+.heart-icon {
+    float: right;
+    font-size: 1.5em;
+    color: black; /* Bu rengi isteğinize göre değiştirebilirsiniz */
+    cursor: pointer;
+    margin-top: -40px; /* İkonu yukarı hizalamak için negatif margin kullanabilirsiniz */
+}
+
+.card-title, .card-text {
+    display: inline-block;
+    width: calc(100% - 2em); /* İkonun kapladığı alana göre genişliği ayarlayın */
+    vertical-align: middle;
+}
+
+.heart-icon.active {
+    color: red; /* Aktif duruma gelince kalp rengini değiştirin */
+}
+</style>
+<script>
+
+
+
+
+
+</script>
+
+</html>

@@ -7,7 +7,7 @@ exports.FavLocations = async (req, res) => {
         try {
             
             const userFavLocation = await veritabani.getUserFavouriteLocations(userSession.userID);
-             console.log("sorguuuu", userFavLocation[0])
+             
           
             if (userFavLocation) {
                

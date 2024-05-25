@@ -142,7 +142,6 @@ app.post('/api/updatefav', async (req, res) => {
 });
 app.post('/api/favorites', async (req, res) => {
   const userID  = req.session.userID;
-  console.log(req.session.userID)
   try {
       const data = await veritabani.getUserFavouriteLocations(userID);
       res.json(data);
