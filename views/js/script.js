@@ -84,16 +84,44 @@ document.addEventListener('customCommentLoadEvent', function () {
         };
     });
 } */
+async function getUserFavourites(userID=7) {
+    try {
+        const response = await fetch('/api/favorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userID })
+        });
+
+        if (!response.ok) {
+            throw new Error('Favori mekanlar alınırken bir hata oluştu');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Favori mekanlar alınırken bir hata oluştu:', error);
+        return [];
+    }
+}
 function getLocationIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
 }
 
-function favControl() {
+async function favControl() {
     let icons = document.querySelectorAll('ion-icon');
     const locationID = getLocationIdFromUrl();
-    
+    console.log(locationID)
+    const favorimekanlar = await getUserFavourites(7)
+    console.log(favorimekanlar)
+    const favorimi = favorimekanlar.some(fav => fav.locationID == locationID);
+    console.log(favorimi)
     icons.forEach(function (icon) {
+        if(favorimi)
+            {
+                icon.classList.add("active");
+            }
         icon.onclick = async function () {
             if (window.userID) {
                 icon.classList.toggle('active');
@@ -121,6 +149,7 @@ function favControl() {
         };
     });
 }
+favControl();
 function locationStatus() {
     var openTimeElement = document.getElementById("openTime");
     var locationStatus = document.querySelector(".location-status");

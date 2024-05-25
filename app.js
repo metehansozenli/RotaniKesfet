@@ -140,7 +140,16 @@ app.post('/api/updatefav', async (req, res) => {
      
   }
 });
-
+app.post('/api/favorites', async (req, res) => {
+  const userID  = 7;
+  try {
+      const data = await veritabani.getUserFavouriteLocations(userID);
+      res.json(data);
+  } catch (error) {
+      console.error('Error fetching favorite locations:', error);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
 
 
 
