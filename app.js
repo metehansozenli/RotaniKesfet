@@ -30,6 +30,9 @@ const cities = require("./routes/get_citiesRoutes");
 const init_routeLocations = require("./routes/init_routeLocationDataRoutes");
 const profile = require("./routes/profileRoutes")
 const favlocation = require("./routes/favLocationRoutes")
+const createtravel = require("./routes/createTravelRoutes")
+
+
 client.connect((err) => {
   if (err) {
     console.error('Veritabanına bağlanırken bir hata oluştu:', err.stack);
@@ -79,6 +82,11 @@ app.use("/", cities)
 app.use("/", init_routeLocations)
 app.use("/", profile )
 app.use("/", favlocation)
+app.use("/", createtravel)
+
+
+
+
 app.get("/mycomment", (req, res) => {
   res.render("mycomment")
 })
@@ -253,41 +261,7 @@ app.post('/getCityIDs', async (req, res) => {
 });
 
 
-app.post('/createTravel', async (req, res) => {
-  try {
-    const {
-      routeCreationDate,
-      routeTitle,
-      routeStartDates,
-      routeFinishDates,
-      userID,
-      routeChoices,
-      cityIDs
-    } = req.body;
-    
-     
-    // routes tablosuna ekleme işlemi
-    const routeInsertQuery =  `
-                              INSERT INTO 
-                                routes ("routeCreationDate", "routeTitle", "userID", "routeCities", "routeStartDates", "routeFinishDates","routeChoices")
-                              VALUES 
-                                ($1, $2, $3, $4, $5, $6, $7)
-                              RETURNING "routeID";
-                              `;
 
-    const routeValues = [routeCreationDate, routeTitle, userID, cityIDs, routeStartDates, routeFinishDates, routeChoices];
-    const result = await client.query(routeInsertQuery, routeValues);
-    const newRouteID = result.rows[0].routeID;
-    
-
-    res.status(200).json({ success: true, newRouteID:newRouteID });
-    
-    
-  } catch (error) {
-    console.error('Error creating travel:', error);
-    res.status(500).json({ success: false, error: 'An error occurred' });
-  }
-});
 
 app.post('/updateTravel', async (req, res) => {
   try {

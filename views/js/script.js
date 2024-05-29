@@ -84,6 +84,7 @@ document.addEventListener('customCommentLoadEvent', function () {
         };
     });
 } */
+
 async function getUserFavourites(userID) {
     try {
         const response = await fetch('/api/favorites', {
@@ -104,6 +105,7 @@ async function getUserFavourites(userID) {
         return [];
     }
 }
+
 function getLocationIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
@@ -146,6 +148,7 @@ async function favControl() {
         };
     });
 }
+
 favControl(); // 1 kere çağırıyorum sayfa yüklenmesinden önce
 function locationStatus() {
     var openTimeElement = document.getElementById("openTime");
