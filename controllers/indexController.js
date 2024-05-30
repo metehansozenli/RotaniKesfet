@@ -368,7 +368,8 @@ const getTypeLocationData = async (locationtype,cityIDArray) => {
   try {
     const locationType = locationtype;
     const cityIDs = cityIDArray;
-    const cityIdString = cityIDs.join(', '); 
+    const cityIdString = cityIDs.join(', ');
+
     const query2 = {
         text: `
             SELECT DISTINCT
@@ -428,6 +429,7 @@ const getActiveTypeLocationData = async (userLocationtype,cityIDArray) => {
 
 const getSelectedLocationData = async (userLocationtype,cityIDArray) => {
   try {
+
     const userChoices = [];
     userLocationtype.forEach((isTrue, index) => {
       if (isTrue) {
@@ -437,7 +439,7 @@ const getSelectedLocationData = async (userLocationtype,cityIDArray) => {
     const userChoicesString = userChoices.map(userChoice => `'${userChoice}'`).join(', ');
     const cityIDs = cityIDArray;
     const cityIdString = cityIDs.join(', '); 
-
+    
     const query2 = {
         text: `
           SELECT 
@@ -453,7 +455,7 @@ const getSelectedLocationData = async (userLocationtype,cityIDArray) => {
     };
     const result = await client.query(query2);
     const selectedLocationsData = result.rows;
-    return selectedLocationsData;
+    return selectedLocationsData
   
 } catch (error) {
     console.error("Error fetching comment data:", error);
@@ -517,15 +519,16 @@ const getRoutesData = async (routeID) => {
     );
     const routeData = {
       routeCreationDate: result.rows[0].routeCreationDate,
-      routeCitiyIDs: result.rows[0].routeCities,
+      routeCityIDs: result.rows[0].routeCities,
       userID: result.rows[0].userID,
       routeTitle: result.rows[0].routeTitle,
       routeStartDates: result.rows[0].routeStartDates,
       routeFinishDates: result.rows[0].routeFinishDates,
       routeChoices: result.rows[0].routeChoices,
       routeLocations: result.rows[0].routeLocations,
-      routeLocationCoordinates: result.rows[0].locationCoordinates
+      routeLocationCoordinates: result.rows[0].locationcoordinates
     }
+    console.log(routeData);
     return routeData; // routes tablosundaki her veriyi döndürür
 
   } catch (error) {
@@ -580,7 +583,7 @@ const controlRouteID = async (userID, routeID) => {
     // Eğer dönen satır varsa, rota bulunmuştur, true döndür
     return result.rows.length;
   } catch (error) {
-    console.error("Rotayı kontrol ederken bir hata oluştu:", error);
+    console.error("Rotayı kontrol ederken bir hata oluştu:", error );
     throw error; // Hatanın dışarıya fırlatılması, çağrıcı tarafından yakalanması için
   }
 };

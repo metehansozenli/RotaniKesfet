@@ -19,10 +19,9 @@ const citylocation_load_data = () => {
 
             if (results.length > 0) {
                 results.forEach(result => {
+                    let html2 = ''; // html2'yi içerde tanımla
                     const request2 = new XMLHttpRequest();
                     request2.open('GET', `/get_typelocationData?locationType=${result.locationType}&routeID=${window.routeID}`);
-                    let html2 = ''; // html2'yi içerde tanımla
-
                     // Asenkron işlemi takip et
                     let promise = new Promise((resolve, reject) => {
                         request2.onload = () => {
@@ -180,8 +179,10 @@ const initMapPins = (locationName) => {
             const locationCoordinatesLat = parseFloat(resultsLocation.locationCoordinatesLat);
             const locationCoordinatesLong = parseFloat(resultsLocation.locationCoordinatesLong);
             marker = new L.marker([locationCoordinatesLat, locationCoordinatesLong]); 
+            var location = L.latLng(locationCoordinatesLat, locationCoordinatesLong);
             markers.push(marker); 
             marker.addTo(map);
+            map.flyTo(location, 13)
             resolve(); // İşlem tamamlandığında Promise'i çöz
             
         };
