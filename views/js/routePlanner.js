@@ -85,9 +85,7 @@ const get_initLocationsData = () => {
         const request = new XMLHttpRequest();
         request.open('GET', `/init_routelocationData?routeID=${window.routeID}`);
         request.onload = () => {
-            responseData = JSON.parse(request.responseText); 
-            const results2 = responseData.locationData;
-            const results3 = responseData.routeData;
+            responseData = JSON.parse(request.responseText);
             console.log(responseData)
             resolve(); // İşlem tamamlandığında Promise'i çöz
         };

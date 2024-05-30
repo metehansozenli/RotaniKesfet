@@ -399,7 +399,7 @@ const getActiveTypeLocationData = async (userLocationtype,cityIDArray) => {
       }
     });
     const userChoicesString = userChoices.map(userChoice => `'${userChoice}'`).join(', ');
-
+    
     const cityIDs = cityIDArray;
     const cityIdString = cityIDs.join(', '); 
 
@@ -421,7 +421,7 @@ const getActiveTypeLocationData = async (userLocationtype,cityIDArray) => {
     return locationNames
   
 } catch (error) {
-    console.error("Error fetching comment data:", error);
+    console.error("Error fetching location data:", error);
     throw error; 
   }
 }
@@ -435,14 +435,13 @@ const getSelectedLocationData = async (userLocationtype,cityIDArray) => {
       }
     });
     const userChoicesString = userChoices.map(userChoice => `'${userChoice}'`).join(', ');
-
     const cityIDs = cityIDArray;
     const cityIdString = cityIDs.join(', '); 
 
     const query2 = {
         text: `
           SELECT 
-            * 
+            locations."locationID" 
           FROM
             locations
           WHERE 
@@ -500,11 +499,19 @@ const getRoutesData = async (routeID) => {
     const result = await client.query(
       `
       SELECT 
-          *
+        routes.*,
+        array_agg(locations."locationCoordinates") AS locationCoordinates
       FROM 
-          routes
+        routes,
+        UNNEST(routes."routeLocations") AS locationID
+      JOIN 
+        locations
+      ON 
+        locationID = locations."locationID"
       WHERE 
-          "routeID" = $1;
+        routes."routeID" = $1
+	    GROUP BY 
+		    routes."routeID";
       `, 
       [routeID]
     );
@@ -514,9 +521,10 @@ const getRoutesData = async (routeID) => {
       userID: result.rows[0].userID,
       routeTitle: result.rows[0].routeTitle,
       routeStartDates: result.rows[0].routeStartDates,
-      ruteFinishDates: result.rows[0].ruteFinishDates,
+      routeFinishDates: result.rows[0].routeFinishDates,
       routeChoices: result.rows[0].routeChoices,
-      routeLocations: result.rows[0].routeLocations
+      routeLocations: result.rows[0].routeLocations,
+      routeLocationCoordinates: result.rows[0].locationCoordinates
     }
     return routeData; // routes tablosundaki her veriyi döndürür
 
