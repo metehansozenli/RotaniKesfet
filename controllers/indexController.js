@@ -501,19 +501,21 @@ const getRoutesData = async (routeID) => {
     const result = await client.query(
       `
       SELECT 
-        routes.*,
-        array_agg(locations."locationCoordinates") AS locationCoordinates
-      FROM 
-        routes,
-        UNNEST(routes."routeLocations") AS locationID
-      JOIN 
-        locations
-      ON 
-        locationID = locations."locationID"
-      WHERE 
-        routes."routeID" = $1
-	    GROUP BY 
-		    routes."routeID";
+      routes.*,
+      array_agg(locations."locationCityID") AS locationCityIDs,
+      array_agg(locations."locationCoordinates") AS locationCoordinates
+  FROM 
+      routes
+  JOIN 
+      LATERAL UNNEST(routes."routeLocations") AS locationID ON TRUE
+  JOIN 
+      locations
+      ON locationID = locations."locationID"
+  WHERE 
+      routes."routeID" = $1
+  GROUP BY 
+      routes."routeID";
+  
       `, 
       [routeID]
     );
@@ -526,9 +528,10 @@ const getRoutesData = async (routeID) => {
       routeFinishDates: result.rows[0].routeFinishDates,
       routeChoices: result.rows[0].routeChoices,
       routeLocations: result.rows[0].routeLocations,
-      routeLocationCoordinates: result.rows[0].locationcoordinates
+      routeLocationCoordinates: result.rows[0].locationcoordinates,
+      locationCityID: result.rows[0].locationcityids
     }
-    console.log(routeData);
+    console.log(routeData)
     return routeData; // routes tablosundaki her veriyi döndürür
 
   } catch (error) {
