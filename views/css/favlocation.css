@@ -1,0 +1,76 @@
+.heart-icon {
+    float: right;
+    font-size: 1.5em;
+    color: black; /* Bu rengi isteğinize göre değiştirebilirsiniz */
+    cursor: pointer;
+    margin-top: -40px; /* İkonu yukarı hizalamak için negatif margin kullanabilirsiniz */
+}
+
+.card.location-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card.location-card img {
+    height: 200px; /* İstediğiniz yüksekliği buraya girebilirsiniz */
+    width: 100%;
+    object-fit: cover;
+}
+
+.card.location-card .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.card-title, .card-text {
+    display: inline-block;
+    width: calc(100% - 2em); /* İkonun kapladığı alana göre genişliği ayarlayın */
+    vertical-align: middle;
+    margin-bottom: 0.5rem;
+}
+
+.heart-icon {
+    position: absolute;
+    top: 55px;
+    right: 20px;
+    font-size: 1.5em;
+    color: black; /* Bu rengi isteğinize göre değiştirebilirsiniz */
+    cursor: pointer;
+}
+
+.heart-icon.active {
+    color: red; /* Aktif duruma gelince kalp rengini değiştirin */
+}
+
+/* buton css leri */
+.btn-primary.btn-load-more {
+    background-color: #36A1C5;
+    border-color: #36A1C5;
+    color: #fff;
+    padding: 10px 20px;
+    margin-bottom: 53px;
+    font-size: 16px;
+    border-radius: 25px;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.btn-primary.btn-load-more:hover {
+    background-color: #0056B3;
+    border-color: #0056B3;
+    color: #e6e6e6;
+}
+
+.btn-primary.btn-load-more:active {
+    background-color: #004085;
+    border-color: #003366;
+    color: #d4d4d4;
+}
+
+.btn-primary.btn-load-more:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
