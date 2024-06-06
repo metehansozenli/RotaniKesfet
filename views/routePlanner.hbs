@@ -13,29 +13,30 @@
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-      <script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <script>
         window.routeID = {{ routeID }};
 
-        window.userID = {{userID}};
+        window.userID = {{ userID }};
 
-          
+
     </script>
-    
+
 </head>
 
 
 
 <body>
 
-  
+
     {{>config}}
 
     <div class="container" style="margin-bottom:180px;">
 
         <section class="routePlanner mt-4  text-center">
-            <h1>İşte Sana Özel Olarak Hazırladığımız 3 Günlük Roma Seyahati Planın!!!</h1>
-            <div class="routePlanner-map" id="map" style="height: 500px; outline-style: none;"
+            <div class="routeTitle"></div>
+            <div class="routePlanner-map1" id="map" style="height: 500px; outline-style: none;"
                 class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom">
                 <script>
                     var map = L.map('map').setView([51.505, -0.09], 13);
@@ -43,6 +44,7 @@
                         maxZoom: 19,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                     }).addTo(map);
+
                 </script>
             </div>
             <p>Rotanı bu aşamada da isteğin gibi özelleştirebilirsin.</p>
@@ -51,108 +53,19 @@
 
             <button type="submit" class="btn-update" id="btn_update">Güncelle</button>
 
-            <div class="route-title text-left">Senin için oluşturduğumuz ... günlük gezi rotası</div>
 
-            <div class="cityRoute">
+            <div class="clusters">
 
-                <div class="cityRoute-content">
-                    <div class="cityRoute-upcontent d-flex">
-                        <h3 class="mb-3">1.GÜN</h3>
-                        
-                        <div class="cityRoute-transports d-flex">
-                            <img src="./images/train.png" alt="train">
-                            <img src="./images/taxi.png" alt="taxi">
-                            <img src="./images/bus.png" alt="bus">
-                            <img src="./images/subway.png" alt="subway">
 
-                        </div>
-                    </div>
-                    <div class="cityRoute-mainContent d-flex">
-                        <img src="./images/ankara.jpg" alt="">
-
-                        <div class="cityRoute-locations">
-                            <ul class="cityRoute-list list-group">
-                                <li class="list-group-item">First item</li>
-                                <li class="list-group-item">Second item</li>
-                                <li class="list-group-item">Third item</li>
-                                <li class="list-group-item">Third item</li>
-                                <li class="list-group-item">Third item</li>
-                                <li class="list-group-item">Third item</li>
-
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
             </div>
-            
-                <div class="cityRoute">
 
-                    <div class="cityRoute-content">
-                        <div class="cityRoute-upcontent d-flex">
-                            <h3 class="mb-3">2.GÜN</h3>
-                            <div class="cityRoute-transports d-flex">
-                                <img src="./images/train.png" alt="train">
-                                <img src="./images/taxi.png" alt="taxi">
-                                <img src="./images/bus.png" alt="bus">
-                                <img src="./images/subway.png" alt="subway">
 
-                            </div>
-                        </div>
-                        <div class="cityRoute-mainContent d-flex">
-                            <img src="./images/londra.webp" alt="">
 
-                            <div class="cityRoute-locations">
-                                <ul class="cityRoute-list list-group">
-                                    <li class="list-group-item">First item</li>
-                                    <li class="list-group-item">Second item</li>
-                                    <li class="list-group-item">Third item</li>
-                                    <li class="list-group-item">Third item</li>
-                                    <li class="list-group-item">Third item</li>
-                                    <li class="list-group-item">Third item</li>
+    </div>
+    {{!-- <button type="submit" class="btn-back">Geri Dön</button>
+    <button type="submit" class="btn-save">Rotayı Kaydet</button> --}}
 
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                    <div class="cityRoute">
-
-                        <div class="cityRoute-content">
-                            <div class="cityRoute-upcontent d-flex">
-                                <h3 class="mb-3">3.GÜN</h3>
-                                <div class="cityRoute-transports d-flex">
-                                    <img src="./images/train.png" alt="train">
-                                    <img src="./images/taxi.png" alt="taxi">
-                                    <img src="./images/bus.png" alt="bus">
-                                    <img src="./images/subway.png" alt="subway">
-
-                                </div>
-                            </div>
-                            <div class="cityRoute-mainContent d-flex">
-                                <img src="./images/ankara.jpg" alt="">
-
-                                <div class="cityRoute-locations">
-                                    <ul class="cityRoute-list list-group">
-                                        <li class="list-group-item">First item</li>
-                                        <li class="list-group-item">Second item</li>
-                                        <li class="list-group-item">Third item</li>
-                                        <li class="list-group-item">Third item</li>
-                                        <li class="list-group-item">Third item</li>
-                                        <li class="list-group-item">Third item</li>
-
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <button type="submit" class="btn-back">Geri Dön</button>
-                    <button type="submit" class="btn-save">Rotayı Kaydet</button>
-
-        </section>
+    </section>
 
     </div>
 </body>
@@ -176,6 +89,14 @@
 </html>
 
 <style>
+    div.leaflet-routing-alternatives-container {
+        display: none !important;
+    }
+
+    .leaflet-routing-container {
+        display: none;
+    }
+
     .routePlanner {
         margin-bottom: 20px;
         padding: 20px;
@@ -189,7 +110,7 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .routePlanner-map {
+    .routePlanner-map1 {
         margin-top: 45px;
         border-radius: 35px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -210,7 +131,7 @@
         color: aliceblue;
     }
 
-    .routePlanner .btn-update{
+    .routePlanner .btn-update {
         border-radius: 8px;
         background-color: #36A1C5;
         width: 300px;
@@ -257,11 +178,14 @@
         align-items: center;
     }
 
-    .cityRoute-mainContent img {
+    .cityRoute-mainContent .routePlanner-map {
         width: 500px;
         height: 350px;
-        
-        object-fit: cover;
+
+
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        outline-style: none;
     }
 
     .cityRoute-list {
@@ -293,16 +217,21 @@
         /* Dikeyde ortalar */
     }
 
-    .route-title{
+    .route-title {
         margin-top: 100px;
-        margin-left:30px;
-        margin-bottom:60px;
-        font-size:42px;
-        font-weight:bold;
+        margin-left: 30px;
+        margin-bottom: 60px;
+        font-size: 42px;
+        font-weight: bold;
     }
-    
+
+    .clusters hr {
+        margin-bottom: 30px;
+
+    }
 </style>
 
 <script src="./js/script.js"></script>
 <script src="./js/routePlanner.js"></script>
 <script src="./js/citylocationDataLoader.js"></script>
+<script src="./js/clusterDataLoader.js"></script>

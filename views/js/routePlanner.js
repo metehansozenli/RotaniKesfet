@@ -146,7 +146,6 @@ get_initLocationsData().then(data => {
 
     // Sonuçları JSON formatında oluşturma
     const output = {
-        routeCreationDate: data.routeCreationDate,
         userID: data.userID,
         routeID: data.routeID,
         clusters: results

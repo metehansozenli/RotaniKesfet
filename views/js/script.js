@@ -433,3 +433,4 @@ async function setFavStatus(userID, locationID) {
         console.error("Sorgu Hatası:", error);
     }
 }
+
