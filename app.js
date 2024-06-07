@@ -152,6 +152,7 @@ app.post('/api/updatefav', async (req, res) => {
      
   }
 });
+
 app.post('/api/favorites', async (req, res) => {
   const userID  = req.session.userID;
   try {

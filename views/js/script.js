@@ -1,7 +1,6 @@
 function menuToggle() {
     const toggleMenu = document.querySelector(".menu");
     toggleMenu.classList.toggle("active");
-    console.log(window.userID);
 }
 
 //Genel yıldızları ayarlama
@@ -58,32 +57,6 @@ document.addEventListener('customCommentLoadEvent', function () {
     });
 });
 
-// BURAYI SİLİCEM ALTTA AYNISI VAR
-/* function favControl() {
-    let icons = document.querySelectorAll('ion-icon');
-
-    icons.forEach(function (icon) {
-        icon.onclick = function () {
-            if (window.userID) {
-                icon.classList.toggle('active');
-                console.log(`${userID} BEĞENDİ`);
-
-            } else {
-                $('#loginAlert').modal('show');
-            }
-
-            // icon.onclick = async function () {
-            //     if (icon.classList.toggle('active')) {
-            //         console.log(c+=1);
-            //         const result = await client.query(`UPDATE users 
-            //                                     SET "userFavLocations" = ARRAY_APPEND("userFavLocations", $1) 
-            //                                     WHERE "userID"=6;`,[2]);
-            //     } else {//Aktiflik kaldırılırsa
-            //         console.log(c-=1);
-            //     }
-        };
-    });
-} */
 
 async function getUserFavourites(userID) {
     try {
@@ -111,45 +84,70 @@ function getLocationIdFromUrl() {
     return params.get('id');
 }
 
+
 async function favControl() {
     let icons = document.querySelectorAll('ion-icon');
-    const locationID = getLocationIdFromUrl();
-    const favorimekanlar = await getUserFavourites(window.userID)
-    const favorimi = favorimekanlar.some(fav => fav.locationID == locationID);
+    
+        const favorimekanlar = await getUserFavourites(window.userID);
+    
+    
+    let clicked = false;
+    
     icons.forEach(function (icon) {
-        if(favorimi)
-            {
-                icon.classList.add("active");
-            }
+        locationID = parseInt(icon.dataset.locationid);
+        const favorimi = favorimekanlar.some(fav => fav.locationID == locationID);
+        if (favorimi) {
+            icon.classList.add("active");
+        }
         icon.onclick = async function () {
-            if (window.userID) {
+
+            
+            if (window.userID && !clicked) {
+
+                clicked = true;
+                locationID = parseInt(icon.dataset.locationid);
                 icon.classList.toggle('active');
-                console.log(`${window.userID} BEĞENDİ`);
                 
+                
+
                 try {
                     const response = await fetch('/api/updatefav', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ userID: window.userID, locationID : locationID })
+                        body: JSON.stringify({ userID: window.userID, locationID: locationID })
+
+                        
                     });
 
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        console.error('Favori güncellenirken bir hata oluştu:', errorData.message);
-                    }
+
+
+                    
+    
                 } catch (error) {
                     console.error('Favori güncellenirken bir hata oluştu:', error);
                 }
-            } else {
+
+               
+            } else if (!window.userID) {
                 $('#loginAlert').modal('show');
             }
+
+
+            setTimeout(() => {
+                clicked = false;
+            }, 500);
         };
+
+
+
+       
     });
 }
 
-favControl(); // 1 kere çağırıyorum sayfa yüklenmesinden önce
+
+
 function locationStatus() {
     var openTimeElement = document.getElementById("openTime");
     var locationStatus = document.querySelector(".location-status");

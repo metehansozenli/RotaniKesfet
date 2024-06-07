@@ -7,17 +7,17 @@ exports.FavLocations = async (req, res) => {
         try {
             
             const userFavLocation = await veritabani.getUserFavouriteLocations(userSession.userID);
-             
-          
-            if (userFavLocation) {
+            const userID = userSession.userID;
+            
+            if (userFavLocation && userID) {
                
                 res.render("favlocation", {
-                    userData : userFavLocation
-
+                    userData : userFavLocation,
+                    userID: userID
                     
                 });
             } else {
-                res.send("Bir hata Oluştu!");
+                res.render("page404");
             }
         } catch (error) {
             console.error("Error fetching user data:", error);

@@ -19,7 +19,10 @@
 
 <body>
     {{> config}}
-
+    <script>
+        window.userID ={{ userID }}
+       
+    </script>
     <div class="container mt-5">
         <h2 class="display-4 text-center text-muted" style="font-family: sans-serif,Arial;">Favori Mekanlarım</h2> <br>
         <div id="location-cards" class="row justify-content-center">
@@ -34,9 +37,7 @@
                             <h5 class="card-title">{{this.locationName}}</h5>
                         </a>
                         <p class="card-text">{{this.locationCountry}}</p>
-                        <span class="heart-icon">
-                            <a href="/location?id={{this.locationID}}"><i class="bi bi-heart"></i></a>
-                        </span>
+                        <ion-icon class="heart-icon" id="heart" name='heart' data-locationid={{this.locationID}}></ion-icon>
                     </div>
                 </div>
             </div>
@@ -50,7 +51,10 @@
     {{> footer}}
 </body>
 
-<script src="./js/fovlocation.js"></script>
+<script src="./js/favlocation.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
 
 
 </html>
+

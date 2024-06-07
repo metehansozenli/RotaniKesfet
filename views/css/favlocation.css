@@ -74,3 +74,14 @@
     outline: none;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
+
+ion-icon {
+    fill: #3eacd1;
+    stroke-width: 0px;
+    cursor: pointer;
+}
+
+    ion-icon.hovered::before {
+    fill: #3eacd1; /* Hover durumunda mavi dolgu rengi */
+    
+}
