@@ -501,20 +501,20 @@ const getRoutesData = async (routeID) => {
     const result = await client.query(
       `
       SELECT 
-      routes.*,
-      array_agg(locations."locationCityID") AS locationCityIDs,
-      array_agg(locations."locationCoordinates") AS locationCoordinates
-  FROM 
-      routes
-  JOIN 
-      LATERAL UNNEST(routes."routeLocations") AS locationID ON TRUE
-  JOIN 
-      locations
-      ON locationID = locations."locationID"
-  WHERE 
-      routes."routeID" = $1
-  GROUP BY 
-      routes."routeID";
+          routes.*,
+          array_agg(locations."locationCoordinates" ORDER BY route_locations_index) AS locationCoordinates,
+          array_agg(locations."locationCityID" ORDER BY route_locations_index) AS locationCityIDs
+      FROM 
+          routes
+      JOIN 
+          LATERAL UNNEST(routes."routeLocations") WITH ORDINALITY AS t(locationID, route_locations_index) ON TRUE
+      JOIN 
+          locations
+          ON locationID = locations."locationID"
+      WHERE 
+          routes."routeID" = $1
+      GROUP BY 
+          routes."routeID";
   
       `, 
       [routeID]
@@ -568,6 +568,45 @@ const getCities = async () => {
     throw error; // Rethrow the error to be caught by the caller
   }
 }
+
+const getLocationName = async (locationIDs) => {
+  try {
+
+    const locationIntegers = locationIDs.map(id => parseInt(id));
+    const locationString = locationIntegers.join(',');
+    
+    const result = await client.query(
+      `
+      SELECT 
+        locations."locationName", locations."locationID", cities."cityName"
+      FROM 
+        locations
+      JOIN
+        cities
+      ON 
+        locations."locationCityID" = cities."cityID" 
+      WHERE 
+        "locationID" IN (${locationString});
+      `
+    );
+
+    if (result.rows.length > 0) {
+      const locationData = result.rows.map(row => ({
+        locationID: row.locationID,
+        locationName: row.locationName,
+        locationCityName: row.cityName
+      }));
+
+      return locationData;
+    } else {
+      return null; 
+    }
+  } catch (error) {
+    console.error("Konum verileri alınırken hata oluştu:", error);
+    throw error;
+  }
+}
+
 
 const controlRouteID = async (userID, routeID) => {
   try {
@@ -693,7 +732,7 @@ async function getUserVotedComments(userID, locationID) {
     getProfileInfo,
     updateUserFavoriteLocations,
     getUserFavouriteLocations,
-    getUserVotedComments
-    
+    getUserVotedComments,
+    getLocationName
     
   };

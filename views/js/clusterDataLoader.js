@@ -1,4 +1,6 @@
+
 var markers = new Array();
+const clusterData = window.clusterData;
 
 document.addEventListener('DOMContentLoaded', function() {
     insertHTMLIntoCluster();
@@ -8,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function organizeLocationsByDay(data) {
     const organizedData = {
-        routeCreationDate: data.routeCreationDate,
         userID: data.userID,
         locations: {}
     };
@@ -32,57 +33,7 @@ function organizeLocationsByDay(data) {
     return organizedData;
 }
 
-const data = {
-    "routeCreationDate": "2024-06-01T21:00:00.000Z",
-    "userID": 47,
-    "clusters": [
-        {
-            "cityID": 1,
-            "clusters": [
-                [
-                    { "locationID": 1, "coordinates": [48.8584, 2.2945] },
-                    { "locationID": 2, "coordinates": [48.8738, 2.295] }
-                ],
-                [
-                    { "locationID": 3, "coordinates": [48.8718, 2.3319] },
-                    { "locationID": 4, "coordinates": [48.8493, 2.3465] },
-                    { "locationID": 5, "coordinates": [48.8722, 2.3257] },
-                    { "locationID": 6, "coordinates": [48.8648, 2.3362] }
-                ]
-            ]
-        },
-        {
-            "cityID": 7,
-            "clusters": [
-                [
-                    { "locationID": 7, "coordinates": [48.1824, 16.3106] }
-                ],
-                [
-                    { "locationID": 8, "coordinates": [48.2059, 16.3726] },
-                    { "locationID": 9, "coordinates": [48.2032, 16.3686] }
-                ]
-            ]
-        },
-        {
-            "cityID": 4,
-            "clusters": [
-                [
-                    { "locationID": 10, "coordinates": [41.4036, 2.1899] },
-                    { "locationID": 11, "coordinates": [41.4011, 2.2019] }
-                ],
-                [
-                    { "locationID": 12, "coordinates": [41.38, 2.1731] },
-                    { "locationID": 13, "coordinates": [41.3817, 2.1721] },
-                    { "locationID": 14, "coordinates": [41.379, 2.168] },
-                    { "locationID": 15, "coordinates": [41.3835, 2.1762] }
-                ]
-            ]
-        }
-    ]
-};
-
-
-const organizedData = organizeLocationsByDay(data);
+const organizedData = organizeLocationsByDay(clusterData);
 
 function insertHTMLIntoCluster() {
     const clusters = document.querySelector('.clusters');

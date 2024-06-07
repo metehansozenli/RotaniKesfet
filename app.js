@@ -31,7 +31,7 @@ const init_routeLocations = require("./routes/init_routeLocationDataRoutes");
 const profile = require("./routes/profileRoutes")
 const favlocation = require("./routes/favLocationRoutes")
 const createtravel = require("./routes/createTravelRoutes")
-
+const locationName = require("./routes/get_locationNameRouter")
 
 client.connect((err) => {
   if (err) {
@@ -83,8 +83,7 @@ app.use("/", init_routeLocations)
 app.use("/", profile )
 app.use("/", favlocation)
 app.use("/", createtravel)
-
-
+app.use("/", locationName)
 
 
 app.get("/mycomment", (req, res) => {
