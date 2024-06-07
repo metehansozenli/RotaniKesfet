@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             };
 
-        icon.addEventListener('mouseout', function() {
+        icon.parentElement.addEventListener('mouseout', function() {
             icon.classList.remove('hovered');
             icon.setAttribute('name', 'heart');
         });

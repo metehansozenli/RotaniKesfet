@@ -87,11 +87,7 @@ function getLocationIdFromUrl() {
 
 async function favControl() {
     let icons = document.querySelectorAll('ion-icon');
-    
-        const favorimekanlar = await getUserFavourites(window.userID);
-    
-    
-    let clicked = false;
+    const favorimekanlar = await getUserFavourites(window.userID);
     
     icons.forEach(function (icon) {
         locationID = parseInt(icon.dataset.locationid);
@@ -99,52 +95,52 @@ async function favControl() {
         if (favorimi) {
             icon.classList.add("active");
         }
-        icon.onclick = async function () {
+        
+        let isFetching = false;
 
-            
-            if (window.userID && !clicked) {
-
-                clicked = true;
-                locationID = parseInt(icon.dataset.locationid);
-                icon.classList.toggle('active');
+        icon.onclick = function () {
+            if (!isFetching && window.userID) {
+                isFetching = true;
                 
-                
-
-                try {
-                    const response = await fetch('/api/updatefav', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ userID: window.userID, locationID: locationID })
-
-                        
-                    });
-
-
-
-                    
+                new Promise(async (resolve, reject) => {
+                    locationID = parseInt(icon.dataset.locationid);
+                    icon.classList.toggle('active');
     
-                } catch (error) {
-                    console.error('Favori güncellenirken bir hata oluştu:', error);
-                }
+                    try {
+                        const response = await fetch('/api/updatefav', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ userID: window.userID, locationID: locationID })
+                        });
 
-               
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            console.error('Favori güncellenirken bir hata oluştu:', errorData.message);
+                            reject('Favori güncellenirken bir hata oluştu');
+                        } else {
+                            resolve('Favori başarıyla güncellendi');
+                        }
+                    } catch (error) {
+                        console.error('Favori güncellenirken bir hata oluştu:', error);
+                        reject('Favori güncellenirken bir hata oluştu');
+                    }
+                }).then(message => {
+                    console.log(message);
+                }).catch(error => {
+                    console.error(error);
+                }).finally(() => {
+                    isFetching = false;
+                });
+
             } else if (!window.userID) {
                 $('#loginAlert').modal('show');
             }
-
-
-            setTimeout(() => {
-                clicked = false;
-            }, 500);
         };
-
-
-
-       
     });
 }
+
 
 
 

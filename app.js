@@ -138,18 +138,18 @@ function gracefulShutdown() {
 }
 
 
-
+var i=0;
 module.exports = app
 // ALLAH RIZASI İÇİN APP.JS'i DAĞITMAYIN
 // veri tabanındaki userfavlocationsu güncelliyor
 app.post('/api/updatefav', async (req, res) => {
   const { userID, locationID } = req.body;
   try {
-      await veritabani.updateUserFavoriteLocations(userID, locationID);
-      
+    await veritabani.updateUserFavoriteLocations(userID, locationID);
+    res.status(200).json({ message: 'Favori başarıyla güncellendi' });
   } catch (error) {
-      console.error('Error updating favorites:', error); 
-     
+    console.error('Error updating favorites:', error);
+    res.status(500).json({ message: 'Favori güncellenirken bir hata oluştu' });
   }
 });
 

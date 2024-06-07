@@ -609,6 +609,7 @@ const getProfileInfo = async(sessionuserId) =>{
     throw error; // Rethrow the error to be caught by the caller
   }
 }
+
 async function updateUserFavoriteLocations(userId, locationId) {
   const query = `UPDATE users 
     SET "userFavLocations" = CASE 
@@ -618,7 +619,8 @@ async function updateUserFavoriteLocations(userId, locationId) {
     WHERE "userID" = $1;`
     
   try {
-    await client.query(query, [userId, locationId]);
+    var result=await client.query(query, [userId, locationId]);
+    return result;
   } catch (error) {
     console.error('Database query error:', error.message);
     throw error;
