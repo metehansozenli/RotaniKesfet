@@ -76,12 +76,13 @@
 }
 
 ion-icon {
-    fill: #3eacd1;
+    fill: #FF0000;
     stroke-width: 0px;
     cursor: pointer;
+    font-size: 31px !important;
 }
 
     ion-icon.hovered::before {
-    fill: #3eacd1; /* Hover durumunda mavi dolgu rengi */
+    fill: #FF0000; /* Hover durumunda mavi dolgu rengi */
     
 }
