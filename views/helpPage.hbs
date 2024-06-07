@@ -6,169 +6,168 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yardım</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/helpPage.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="./js/script.js"></script>
+
 </head>
 
 <body>
     {{> config}}
 
+
     <div class="help-container">
 
-
         <div class="search-header">
-            <h1 class="display-4 text-center text-muted" style=" font-family: sans-serif,Arial;">Nasıl yardımcı
-                olabiliriz?
-            </h1>
+            <h1 class="display-4 text-center text-muted" style="font-family: sans-serif, Arial;">Nasıl yardımcı
+                olabiliriz?</h1>
             <div class="search-box">
+                <span class="search-icon"><i class="fas fa-search"></i></span>
                 <input type="text" placeholder="Yardım konularını arayın" id="search-input"
                     oninput="toggleClearButton()">
-                <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
                 <span class="clear-btn" onclick="clearSearch()" style="display: none;">&times;</span>
             </div>
-
-
-
         </div>
 
         <div class="grid">
-            <div class="card">Rezervasyonumu yönet</div>
-            <div class="card">İncelemelerinizi ve fotoğraflarınızı yönetme</div>
-            <div class="card">İadeler ve iptaller</div>
-            <div class="card">Güven ve Emniyet</div>
-            <div class="card">Topluluk ve mesajlar</div>
-            <div class="card">Rezervasyon yapma</div>
-            <div class="card">Ödemeler</div>
-            <div class="card">Oturum açma konusunda yardım</div>
+            <div class="card" data-info="<h3>Hesap Oluşturma ve Giriş Yapma</h3><br><br>
+            <h4>Giriş Yapma:</h4><br>
+            <ul>
+            <li>Ana sayfada sağ üst köşede bulunan 'Giriş Yap' butonuna tıklayın.</li>
+            <li>Açılan pop-up penceresine e-posta ve şifrenizi girin.</li>
+            <li>Yanlış giriş yaparsanız 'Kullanıcı adı veya şifre hatalı' uyarısı alırsınız. Bu durumda e-posta ve şifrenizi kontrol edip tekrar deneyin.</li>
+            <li>Doğru bilgilerle giriş yaptıktan sonra ana sayfaya yönlendirileceksiniz.</li>
+            </ul>
+            <h4>Hesap Oluşturma:</h4><br>
+            <ul>
+            <li>Sağ üst köşede bulunan 'Kayıt ol' butonuna tıklayın.</li>
+            <li>Açılan formda ad, soyad, e-posta, şifre ve diğer gerekli bilgileri girin.</li>
+            <li>Formu doldurduktan sonra 'Hesap Oluştur' butonuna tıklayarak hesap oluşturma işlemini tamamlayın.</li>
+            <li>Hesap oluşturduktan sonra giriş yapma sayfasına yönlendirileceksiniz.</li>
+            </ul>">
+                <div class="card-content">Hesap Oluşturma ve Giriş Yapma</div>
+            </div>
+            <div class="card" data-info="<h3>Profil ve Favori Mekanlar</h3><br><br>
+            <h4>Profil Bilgileri:</h4><br>
+            <ul>
+            <li>Ana sayfanın sağ üst köşesindeki profil resmine tıklayarak profil bilgilerinizi görüntüleyebilirsiniz.</li>
+            <li>Profil sayfasında adınız, soyadınız, e-posta adresiniz ve diğer kişisel bilgilerinizi güncelleyebilirsiniz.</li>
+            </ul>
+            <h4>Favori Mekanları Yönetme:</h4><br>
+            <ul>
+            <li>Profil sayfanızda favori mekanlarınızı görüntüleyebilir ve yönetebilirsiniz.</li>
+            <li>Yeni favori mekanlar eklemek için lokasyonun kendi sayfasında kalp simgesine tıklayın.</li>
+            <li>Mevcut favorilerinizi listeden çıkarmak için favori mekanlarınızın yanındaki kalp simgesine gidin. Simgenin çarpı işaretine dönüştüğünü göreceksiniz, tıklayarak favori mekanlardan çıkarabilirsiniz.</li>
+            <li>Daha fazla favori mekan görüntülemek için 'Daha Fazla Göster' butonunu kullanabilirsiniz.</li>
+            </ul>">
+                <div class="card-content">Profil ve Favori Mekanlar</div>
+            </div>
+            <div class="card" data-info="<h3>Seyahat Oluşturma ve Planlama</h3><br><br>
+            <h4>Seyahat Oluşturma:</h4><br>
+            <ul>
+            <li>Ana sayfada 'Seyahatinizi Oluşturun' bölümünün altında bulunan 'Başla' butonuna tıklayarak seyahat oluşturma panelini açın.</li>
+            <li>Açılan panelde seyahatinizi özelleştirmek için çeşitli checkbox seçeneklerini kullanabilirsiniz. Örneğin, görmek istediğiniz şehirleri ve aktiviteleri seçebilirsiniz.</li>
+            <li>Seyahatinizi bir cümle ile özetleyin. Örneğin, 'Benim rotam'.</li>
+            </ul>
+            <h4>Seyahat Planlama:</h4><br>
+            <ul>
+            <li>Gitmek istediğiniz en fazla 5 şehri seçin. Hepsini kaldırmak isterseniz 'Hepsini Kaldır' seçeneğini kullanabilirsiniz.</li>
+            <li>Rotanızın her şehri için başlangıç ve bitiş zamanlarını seçin.</li>
+            <li>'Seyahat oluştur' butonuna tıklayarak planınızı oluşturun.</li>
+            <li>'Seyahat Oluştur' butonuna tıkladıktan sonra, seçimlerinize göre seyahat planı ve harita üzerindeki konumlar hazırlanır.</li>
+            <li>Dropdown listeler ile bir önceki aşamada seçtiğiniz kriterlere göre tüm sonuçları görebilirsiniz.</li>
+            <li>Seyahat planınızda beğenmediğiniz, ekleyip silmek istediğiniz noktalar varsa, checkbox'lar sayesinde seyahat planını tekrar düzenleyebilirsiniz.</li>
+            <li>'Güncelle' butonuna tıklayarak yeni harita gösterimi ve seyahat planını görüntüleyebilirsiniz.</li>
+            <li>Gün bazında hangi yerlere gidebileceğinizi ve o yerlerde ne kadar süre harcayacağınızı gösteren bilgiler yer alır ve bu bilgiler rota boyunca tüm günler için doldurulur.</li>
+            <li>Rotayı beğenirseniz ve hesabınıza kaydetmek isterseniz, sayfanın alt kısmında bulunan 'Rotayı Kaydet' butonuna tıklayarak seyahat planını kaydedebilirsiniz. Eğer kaydetmeden devam etmek isterseniz, sayfanın altındaki 'Geri Dön' butonuna tıklayarak geri dönebilirsiniz.</li>
+            </ul>">
+                <div class="card-content">Seyahat Oluşturma ve Planlama</div>
+            </div>
+            <div class="card" data-info="<h3>Yorumlar ve Değerlendirmeler</h3><br><br>
+            <h4>Yorumlarımı Görüntüle:</h4><br>
+            <ul>
+            <li>Profil sayfanızda 'Yorumlarım' kısmına tıklayarak yaptığınız yorumları ve değerlendirmeleri görüntüleyebilirsiniz.</li>
+            <li>Yorumlarım sayfasında ortalama puanlamanızı ve puan istatistiklerinizi görebilirsiniz. Ayrıca yorumlarınızı puan, sıralama ve kategorilere göre filtreleyebilirsiniz.</li>
+            <li>Yorumlarım sayfasında yer alan arama çubuğunu kullanarak yorumlarınızı arayabilirsiniz.</li>
+            </ul>
+            <h4>Yorum Yapma:</h4><br>
+            <ul>
+            <li>Yorum yapmak istediğiniz yerin sayfasına gidin ve 'Yorum Yaz' butonuna tıklayın.</li>
+            <li>'Yorum Yaz' butonuna tıkladığınızda Yorum Yaz sayfasına yönlendirileceksiniz.</li>
+            <li>Yorumunuzu yazarken yıldız puanlaması yapabilir, ziyaret tarihinizi seçebilir ve yer hakkında görüşlerinizi belirtebilirsiniz.</li>
+            <li>'Yorumu gönder' butonuna tıklayarak yorumunuzu kaydedebilirsiniz.</li>
+            </ul>">
+                <div class="card-content">Yorumlar ve Değerlendirmeler</div>
+            </div>
+            <div class="card" data-info="<h3>Popüler Yerler ve Öneriler</h3><br><br>
+            <h4>Popüler Destinasyonlar:</h4><br>
+            <ul>
+            <li>Ana sayfada bulunan öneri kartlarında, popüler destinasyonlar ve restoranlar, konumunuza göre günübirlik gezebileceğiniz yerler gösterilir.</li>
+            </ul>
+            <h4>Popüler Şehirler:</h4><br>
+            <ul>
+            <li>Kullanıcıların oylarıyla belirlenen en popüler şehirler ve bu şehirlerdeki en popüler 5 seyahat noktası listelenir.</li>
+            <li>Her şehir için en popüler 5 seyahat noktası detaylarıyla birlikte gösterilir.</li>
+            </ul>">
+                <div class="card-content">Popüler Yerler ve Öneriler</div>
+            </div>
+            <div class="card" data-info="<h3>Gezilecek Yerlerin Detayları</h3><br><br>
+            <h4>Yer Detayları:</h4><br>
+            <ul>
+            <li>Gezilmek istenen yerin detayları hakkında bilgiler, kullanıcı yorumları ve puanlamalar yer alır.</li>
+            <li>Yorum yazmak için 'Yorum Yaz' butonuna tıklayabilir, favorilere eklemek için kalp simgesine tıklayabilirsiniz.</li>
+            <li>Yer hakkında bilgi almak için yerin adına veya resmine tıklayabilirsiniz.</li>
+            </ul>
+            <h4>Yer Bilgileri:</h4><br>
+            <ul>
+            <li>Lokasyon hakkında kısa açıklamalar, ortalama gezme süreleri ve ziyaret saatleri gibi bilgiler yer alır.</li>
+            <li>Gezilmek istenen yerin adresi, kategorisi ve açık olup olmadığı bilgilerini görüntüleyebilirsiniz.</li>
+            </ul>">
+                <div class="card-content">Gezilecek Yerlerin Detayları</div>
+            </div>
+            <div class="card" data-info="<h3>Harita Üzerinde Konum Görüntüleme</h3><br><br>
+            <h4>Harita Görüntüleme:</h4><br>
+            <ul>
+            <li>Lokasyon sayfasında, gezilmek istenen yerin harita üzerindeki konumunu görüntüleyebilirsiniz.</li>
+            <li>Seyahat planınıza dahil ettiğiniz yerlerin harita üzerinde gösterimini sağlayabilirsiniz.</li>
+            </ul>">
+                <div class="card-content">Harita Üzerinde Konum Görüntüleme</div>
+            </div>
+            <div class="card" data-info="<h3>Seyahatlerinizi Kaydetme ve Yönetme</h3><br><br>
+            <h4>Seyahatlerim:</h4><br>
+            <ul>
+            <li>'Seyahatlerim' sayfasında kaydettiğiniz seyahatleri görüntüleyebilirsiniz.</li>
+            <li>Kaydedilen seyahatlerinizin detaylarına erişebilir ve seyahat planınızı güncelleyebilirsiniz.</li>
+            <li>Seyahat planınızı güncellemek için seyahatinizin üzerine tıklayarak gerekli düzenlemeleri yapabilirsiniz.</li>
+            </ul>">
+                <div class="card-content">Seyahatlerinizi Kaydetme ve Yönetme</div>
+            </div>
         </div>
-
 
         <div id="info"></div>
 
-
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p id="modalText"></p>
+            </div>
+        </div>
 
     </div>
 
 
-
-
     {{> footer}}
+
+
 </body>
 
-<style>
-    .container {
-        width: 80%;
-        margin: auto;
-        padding-top: 20px;
-    }
+<script src="./js/helpPage.js"></script>
 
-
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin: 69px 69px;
-        padding: 20px;
-    }
-
-    .card {
-        background-color: #fff;
-        height: 150px;
-        padding: 20px;
-        margin: 10px 10px;
-        text-align: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-        transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-    }
-
-    .search-header {
-        background: #BFECF5;
-        height: 250px;
-        padding: 20px 0;
-        color: #333;
-    }
-
-    .search-box {
-        position: relative;
-        width: 50%;
-        margin: 20px auto;
-        display: flex;
-        align-items: center;
-    }
-
-    .search-box input[type="text"] {
-        flex-grow: 1;
-        padding: 10px 30px 10px 30px;
-        /* Space for icons */
-        font-size: 16px;
-        border: none;
-        border-radius: 20px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .search-box .clear-btn,
-    .search-box .search-icon {
-        position: absolute;
-        background: none;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-    }
-
-    .search-box .search-icon {
-        left: 8px;
-        pointer-events: none;
-        /* Makes the icon non-interactive */
-    }
-
-    .search-box .clear-btn {
-        right: 8px;
-    }
-
-    .text-center {
-        text-align: center;
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.addEventListener('click', function () {
-                const infoText = 'Burada ' + this.innerText + ' ile ilgili detaylı bilgiler yer alacak.';
-                document.getElementById('info').innerHTML = '<p>' + infoText + '</p>';
-            });
-        });
-    });
-
-    function toggleClearButton() {
-        var input = document.getElementById('search-input');
-        var clearBtn = document.querySelector('.clear-btn');
-        clearBtn.style.display = input.value.length ? 'block' : 'none';
-    }
-
-    function clearSearch() {
-        var input = document.getElementById('search-input');
-        input.value = '';
-        input.focus(); // Keep focus on the input after clearing
-        toggleClearButton(); // Optionally check to hide the button again
-    }
-
-    document.addEventListener('DOMContentLoaded', toggleClearButton); // Call on page load to check initial state of input
-
-
-
-</script>
 
 
 </html>

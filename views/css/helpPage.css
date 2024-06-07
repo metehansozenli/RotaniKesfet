@@ -1,0 +1,139 @@
+
+.help-container .container {
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.help-container .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-inline: 150px 150px;
+    margin-block: 69px 69px;
+    padding: 20px;
+}
+
+.help-container .card {
+    background-color: #fff;
+    height: 200px;
+    padding: 20px;
+    margin: 10px 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.help-container .card:hover {
+    transform: translateY(-5px);
+}
+
+.help-container .search-header {
+    background: #BFECF5;
+    height: 220px;
+    padding: 20px 0;
+    color: #333;
+}
+
+.help-container .search-box {
+    position: relative;
+    width: 60%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    height: 50px;
+}
+
+.help-container .search-box input[type="text"] {
+    flex-grow: 1;
+    border: none;
+    font-size: 16px;
+    border-radius: 30px;
+    padding: 0 40px;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.help-container .search-box .search-icon,
+.help-container .search-box .clear-btn {
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+}
+
+.help-container .search-box .search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.help-container .search-box .clear-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.help-container .text-center {
+    text-align: center;
+}
+
+.help-container input:focus {
+    outline: none;
+}
+
+.help-container .card-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 1.2em;
+    font-family: sans-serif, Arial;
+}
+
+.help-container .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.help-container .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    z-index: 1001;
+    position: relative; /* Bu eklenmiştir */
+}
+
+.help-container .close {
+    color: #aaa;
+    position: absolute; /* Bu eklenmiştir */
+    top: 10px; /* Yukarıdan mesafe ayarlanabilir */
+    right: 10px; /* Sağdan mesafe ayarlanabilir */
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.help-container .close:hover,
+.help-container .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
