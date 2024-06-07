@@ -79,6 +79,28 @@ async function getUserFavourites(userID) {
     }
 }
 
+async function getUserVotedComments(userID, locationID) {
+    try {
+      const response = await fetch('/api/voteComments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userID, locationID }) // JSON body ile verileri gönderiyorum
+      });
+  
+      if (!response.ok) {
+        throw new Error('Voted comments alınırken bir hata oluştu');
+      }
+  
+      return await response.json();
+    } catch (error) {
+      console.error('Voted comments alınırken bir hata oluştu:', error);
+      return [];
+    }
+  }
+  
+
 function getLocationIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
@@ -216,20 +238,39 @@ function validateForm() {
 
 
 
-document.addEventListener('customlikeControlEvent', function () {
+document.addEventListener('customlikeControlEvent',  async function () {
     // Tüm .vote-section öğelerini seç
     const votes = document.querySelectorAll('.vote-section');
-
+    var votedcomments=null;
+    if(window.userID){
+    const locationID = getLocationIdFromUrl();
+    votedcomments = await getUserVotedComments(window.userID, locationID);
+    console.log(votedcomments)
+    }
     // Her bir .vote-section öğesi için işlem yap
-    votes.forEach((voteElement) => {
+    for (const voteElement of votes) {
         // Her bir .vote-section içindeki like ve dislike butonlarını seç
         const likeBtn = voteElement.querySelector('.likeBtn');
         const dislikeBtn = voteElement.querySelector('.dislikeBtn');
         const likeCountSpan = likeBtn.querySelector('span');
         const dislikeCountSpan = dislikeBtn.querySelector('span');
         const commentID = voteElement.dataset.commentid;
-        let isButtonLocked = false; // Buton kilitleme durumu
+        
+        if(window.userID){
+        const userVote = votedcomments.find(vote => vote.commentID == commentID);
 
+        if (userVote) {
+            if (userVote.voteType === 'like') {
+                likeBtn.classList.add('voteActive');
+            } else if (userVote.voteType === 'dislike') {
+                dislikeBtn.classList.add('voteActive');
+            }
+        }
+        }
+
+
+        let isButtonLocked = false; // Buton kilitleme durumu
+        
 
         likeBtn.addEventListener('click', function () {
 
@@ -329,7 +370,7 @@ document.addEventListener('customlikeControlEvent', function () {
         });
 
 
-    });
+    };
 
 });
 

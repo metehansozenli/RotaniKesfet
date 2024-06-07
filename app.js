@@ -164,6 +164,25 @@ app.post('/api/favorites', async (req, res) => {
   }
 });
 
+app.post('/api/voteComments', async (req, res) => {
+  const userID = req.session.userID;
+  const locationID = req.body.locationID;
+
+  if (!userID || !locationID) {
+    return res.status(400).json({ message: 'Invalid userID or locationID' });
+  }
+
+  try {
+    const data = await veritabani.getUserVotedComments(userID, locationID);
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching voted comments:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
 
 
 app.post('/update-like', (req, res) => {

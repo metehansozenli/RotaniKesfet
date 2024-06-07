@@ -653,6 +653,23 @@ if (result.rows.length > 0) {
 }
 }
 
+async function getUserVotedComments(userID, locationID) {
+  const query = `
+  SELECT uvc.*
+  FROM comments c
+  INNER JOIN uservotecomments uvc ON c."commentID" = uvc."commentID" AND c."userID" = uvc."userID"
+  WHERE c."locationID" = $1 AND c."userID" = $2;
+  `;
+
+  var result = await client.query(query, [locationID, userID]);
+
+  if (result.rows.length > 0) {
+    return result.rows;
+  } else {
+    return [];
+  }
+}
+
 
 
 
@@ -676,6 +693,7 @@ if (result.rows.length > 0) {
     getProfileInfo,
     updateUserFavoriteLocations,
     getUserFavouriteLocations,
+    getUserVotedComments
     
     
   };
