@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profilim</title>
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="./js/script.js"></script>
 </head>
+
 <body>
     {{> config}}
 
@@ -19,74 +22,93 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body text-center">
-                        <img src={{userImg}} alt="Profile Resmi" class="img-fluid rounded-circle mb-3">
-                        <h4> Hoşgeldiniz Sn. {{userName}} {{userSurname}}</h4>
+                        <img src="{{userImg}}" alt="Profile Resmi" class="img-fluid rounded-circle mb-3">
+                        <h4 class="display-5 text-center text-muted" style="font-family: sans-serif, Arial;">Hoşgeldiniz
+                            Sn. {{userName}} {{userSurname}}</h4>
                         <ul class="list-group">
                             <li class="list-group-item"><a href="/profile">Profile</a></li>
                             <li class="list-group-item"><a href="/favlocation">Favori Mekanlarım</a></li>
                             <li class="list-group-item"><a href="/helpPage">Yardım</a></li>
-                            
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-9">
-    <div class="card">
-        <div class="card-body">
-            <h3>Formu Güncelleyin</h3>
-            <form action="/update-profile" method="POST">
-                <div class="form-group">
-                    <label for="firstName">İsim</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{userName}}" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Soy isim</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{userSurname}}" required>
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Telefon numarası</label>
-                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="{{userPhoneNo}}" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{userMail}}" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Şifre</label>
-                    <input type="text" class="form-control" id="password" name="password"  value="{{userPass}}">
-                </div>
-               <div class="d-flex justify-content-center">
-                                <button id="submitButton"type="submit"  class="btn btn-success w-50 mr-2">Güncelle</button>
-                                <button id="cancelButton" type="button" href="/"class="btn btn-danger w-50 ml-2">İptal Et</button>
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="display-5 text-center text-muted" style="font-family: sans-serif, Arial;">Formu
+                            Güncelleyin</h1>
+                        <br>
+                        <form action="/update-profile" method="POST">
+                            <div class="form-group">
+                                <label for="firstName">İsim</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName"
+                                    value="{{userName}}" required>
                             </div>
-            </form>
-        </div>
-    </div>
-</div>
-
+                            <div class="form-group">
+                                <label for="lastName">Soy isim</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName"
+                                    value="{{userSurname}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneNumber">Telefon numarası</label>
+                                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
+                                    value="{{userPhoneNo}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{userMail}}"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Şifre</label>
+                                <input type="text" class="form-control" id="password" name="password"
+                                    value="{{userPass}}">
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button id="submitButton" type="submit"
+                                    class="btn btn-success w-50 mr-2">Güncelle</button>
+                                <button id="cancelButton" type="button" class="btn btn-danger w-50 ml-2">İptal
+                                    Et</button> 
+                                   
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
-<style>
-    .mr-2 {
-    margin-right: 0.5rem;
-    justify-content: center;
-}
 
-.ml-2 {
-    margin-left: 0.5rem;
-}
-</style>
-     <script>
-        document.getElementById('cancelButton').addEventListener('click', function() {
+    <style>
+        .mr-2 {
+            margin-right: 0.5rem;
+        }
+
+        .ml-2 {
+            margin-left: 0.5rem;
+        }
+
+        .card {
+            margin-bottom: 53px;
+            /* Alt boşluk */
+        }
+
+        .card-body {
+            margin-bottom: 20px;
+            /* Alt boşluk */
+        }
+    </style>
+
+    <script>
+        document.getElementById('cancelButton').addEventListener('click', function () {
             window.location.href = '/'; // Ana sayfaya yönlendirir
         });
     </script>
 
     {{> footer}}
 </body>
+
 </html>
