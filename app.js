@@ -316,6 +316,20 @@ app.post('/updateTravel', async (req, res) => {
     res.status(500).json({ success: false, error: 'An error occurred' });
   }
 });
+app.post('/update-profile', (req, res) => {
+  const { firstName, lastName, phoneNumber, email, password } = req.body;
+  const userID = req.session.userID; // Oturumdan kullanıcı kimliğini alın
 
+  // Kullanıcı verilerini güncelle
+  const sql = 'UPDATE users SET "userName" = $1, "userSurname" = $2, "userPhoneNo" = $3, "userMail" = $4, "userPass" = $5 WHERE "userID" = $6';
+  const values = [firstName, lastName, phoneNumber, email, password, userID];
 
+  client.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Profil güncellenirken hata oluştu:', err);
+      return res.status(500).json({ success: false, message: 'Profil güncellenirken bir hata oluştu' });
+    }
+    res.json({ success: true, message: 'Profil başarıyla güncellendi' });
+  });
+});
 
