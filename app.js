@@ -34,6 +34,7 @@ const createtravel = require("./routes/createTravelRoutes")
 const locationName = require("./routes/get_locationNameRouter")
 const mycomment = require("./routes/mycommentRoutes")
 const mycommentData = require("./routes/get_mycommentsDataRoutes")
+const commentwrite = require("./routes/commentWriteRoutes")
 
 
 client.connect((err) => {
@@ -89,14 +90,10 @@ app.use("/", createtravel)
 app.use("/", locationName)
 app.use("/", mycomment)
 app.use("/", mycommentData)
+app.use("/", commentwrite)
 
 
 
-
-
-app.get("/commentWrite", (req, res) => {
-  res.render("commentWrite")
-})
 
 app.get("/helpPage", (req, res) => {
   res.render("helpPage")

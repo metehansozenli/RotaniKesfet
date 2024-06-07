@@ -608,6 +608,7 @@ const getLocationName = async (locationIDs) => {
 }
 
 
+
 const controlRouteID = async (userID, routeID) => {
   try {
     const query = `
@@ -794,7 +795,8 @@ async function getRandomLocation() {
     getUserFavouriteLocations,
     getUserVotedComments,
     getUserTotalStarCounts,
-    getRandomLocation
+    getRandomLocation,
+    getLocationName
     
     
   };
