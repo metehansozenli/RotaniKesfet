@@ -22,6 +22,10 @@
 
     {{>config}}
 
+    <script>
+        window.userID = {{ userID }}
+
+    </script>
 
     <div class="container ">
 
@@ -31,8 +35,9 @@
             <div class="container h-100">
                 <div class="d-flex justify-content-center h-100">
                     <div class="search">
-                        <input class="search-input" type="text" name="" placeholder="Burada ara..." >  
-                        <a href="#" class="clear-icon"><i class="fa fa-times clear-btn" onclick="clearText(this)"></i></a> &nbsp; &nbsp;
+                        <input class="search-input" type="text" name="" placeholder="Burada ara...">
+                        <a href="#" class="clear-icon"><i class="fa fa-times clear-btn"
+                                onclick="clearText(this)"></i></a> &nbsp; &nbsp;
                         <a href="./page404" class="search-icon"><i class="fa fa-search"></i></a>
                     </div>
                 </div>
@@ -41,28 +46,33 @@
             &nbsp;
             <div class="images-container">
                 <img src="./images/mycomments1.png" style="height: 370px;">
-                <img src="./images/mycomments2.png"style="height: 370px;">
-                <img src="./images/mycomments3.png"style="height: 370px;">
+                <img src="./images/mycomments2.png" style="height: 370px;">
+                <img src="./images/mycomments3.png" style="height: 370px;">
             </div>
         </section>
+        {{#if totalStarCounts}}
+        <section class="mycomments-S2 ">
 
-        <section class="mycomments-S2">
+            <div class="main-randomlocation">
+                <h1 class="display-5 text-center text-muted" style=" font-family: sans-serif,Arial;">Buraya daha önce
+                    hiç gittiniz mi?</h1> <br>
 
-        <div>
-            <h1 class="display-5 text-center text-muted" style=" font-family: sans-serif,Arial;">Buraya daha önce hiç gittiniz mi?</h1> <br>
-           
-           <div>
-             
-           </div>
+                <a href="/location?id={{randomLocation.locationID}}" class="randomlocation">
+                    <img src="{{randomLocation.locationImg}}" alt="{{randomLocation.locationName}}">
+                    <h3>{{randomLocation.locationName}}</h3>
+                </a>
 
-           <a class="nav-link" href="../commentWrite"> <h3 class="display-5 text-center text-muted" style=" font-family: sans-serif,Arial;">Yorumunuzu Yazın</h3></a>
+                <a class="nav-link" href="/commentWrite?id={{randomLocation.locationID}}">
+                    <h3 class="display-5 text-center text-muted" style=" font-family: sans-serif,Arial;">Yorumunuzu
+                        Yazın</h3>
+                </a>
 
-           
-        </div>
-       
+
+            </div>
+
 
         </section>
-
+        {{/if}}
 
         <section class="mycomments-S3">
 
@@ -71,16 +81,18 @@
                 <div class="my-ratings d-flex flex-column justify-content-center align-items-center">
                     <h3 class="mb-2 text-center text-muted">Ortalama <br>Puanlamam</h3>
                     <div class="rating-box">
-                        <h1 class="pt-4">4.0</h1>
-
+                        {{#if totalStarCounts}}
+                        <h1 class="comment-score pt-4 ">{{totalStarCounts.averageStar}}</h1>
+                    
+                    <div class="comment-stars d-flex" style="margin-top: 50px;">
+                        <span class="fa fa-star mx-1"></span>
+                        <span class="fa fa-star mx-1"></span>
+                        <span class="fa fa-star mx-1"></span>
+                        <span class="fa fa-star mx-1"></span>
+                        <span class="fa fa-star mx-1"></span>
                     </div>
-                    <div class="ratings-stars">
-                        <span class="fa fa-star star-active mx-1"></span>
-                        <span class="fa fa-star star-active mx-1"></span>
-                        <span class="fa fa-star star-active mx-1"></span>
-                        <span class="fa fa-star star-active mx-1"></span>
-                        <span class="fa fa-star star-inactive mx-1"></span>
                     </div>
+                    
                 </div>
                 <div class="justify-content-end">
                     <div class="mycomment-rating-bar0 justify-content-center">
@@ -97,7 +109,7 @@
                                         <div class="bar-5"></div>
                                     </div>
                                 </td>
-                                <td class="text-right">123</td>
+                                <td class="star5 text-right">{{totalStarCounts.totalStar5}}</td>
                             </tr>
                             <tr>
                                 <td class="mycomments-rating-label">4<span class="fa fa-star star-active mx-1"></span>
@@ -107,7 +119,7 @@
                                         <div class="bar-4"></div>
                                     </div>
                                 </td>
-                                <td class="text-right">23</td>
+                                <td class="star4 text-right">{{totalStarCounts.totalStar4}}</td>
                             </tr>
                             <tr>
                                 <td class="mycomments-rating-label">3<span class="fa fa-star star-active mx-1"></span>
@@ -117,7 +129,7 @@
                                         <div class="bar-3"></div>
                                     </div>
                                 </td>
-                                <td class="text-right">10</td>
+                                <td class="star3 text-right">{{totalStarCounts.totalStar3}}</td>
                             </tr>
                             <tr>
                                 <td class="mycomments-rating-label">2<span class="fa fa-star star-active mx-1"></span>
@@ -127,7 +139,7 @@
                                         <div class="bar-2"></div>
                                     </div>
                                 </td>
-                                <td class="text-right">3</td>
+                                <td class="star2 text-right">{{totalStarCounts.totalStar2}}</td>
                             </tr>
                             <tr>
                                 <td class="mycomments-rating-label">1<span class="fa fa-star star-active mx-1"></span>
@@ -137,8 +149,8 @@
                                         <div class="bar-1"></div>
                                     </div>
                                 </td>
-                                <td class="text-right">0</td>
-                            </tr>
+                                <td class="star1 text-right">{{totalStarCounts.totalStar1}}</td>
+                            </tr>{{/if}}
                         </table>
                     </div>
                 </div>
@@ -274,7 +286,7 @@
                             <span class="checkbox">
                                 <i class="fa-solid fa-check check-icon"></i>
                             </span>
-                            <span class="item-text">Tarihi Yap </span>
+                            <span class="item-text">Tarihi Yapı</span>
 
                         </li>
                         <li class="item">
@@ -331,93 +343,13 @@
         </section>
 
 
-        <section class="mycomment-S4">
+        <section class="mycomment-S4" id="mycomments_data">
 
 
-            <div class="comment-card">
-                <div class="row d-flex">
-                    <div class="">
-                        <img class="profile-pic" src="./images/ankara.jpg">
-                    </div>
-                    <div class="mycomment-info d-flex flex-column">
-                        <h3 class="mt-2 mb-0">... Camii</h3>
-                        <div class="text-left d-flex ">
-                            <p class="text-muted">Ankara, Türkiye</p>
-                        </div>
-                        <div class="mycomment-comment-ranking d-flex mb-0">
-                            <p class="point text-left "><span class="text-muted">4.0</span>
-                                <span class="fa fa-star star-active ml-3"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-inactive mr-2"></span>
-                            </p>
-
-                        </div>
-
-                    </div>
-                    <div class="mycomment-date ml-auto">
-                        <p class="text-muted pt-5 pt-sm-3">10 Sept</p>
-                    </div>
-                </div>
-                <div class="row text-left">
-                    <h4 class="blue-text mt-3">"An awesome activity to experience"</h4>
-                    <p class="content">If you really enjoy spending your vacation 'on water' or would like to try
-                        something new and exciting for the first time.</p>
-                </div>
-                <div class="row text-left mt-4">
-                    <div class="like mr-3 vote">
-                        <img src="https://i.imgur.com/mHSQOaX.png"><span class="blue-text pl-2">20</span>
-                    </div>
-                    <div class="unlike vote">
-                        <img src="https://i.imgur.com/bFBO3J7.png"><span class="text-muted pl-2">4</span>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="comment-card">
-                <div class="row d-flex">
-                    <div class="">
-                        <img class="profile-pic" src="./images/ankara.jpg">
-                    </div>
-                    <div class="mycomment-info d-flex flex-column">
-                        <h3 class="mt-2 mb-0">... Camii</h3>
-                        <div class="text-left d-flex ">
-                            <p class="text-muted">Ankara, Türkiye</p>
-                        </div>
-                        <div class="mycomment-comment-ranking d-flex mb-0">
-                            <p class="point text-left "><span class="text-muted">4.0</span>
-                                <span class="fa fa-star star-active ml-3"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-active"></span>
-                                <span class="fa fa-star star-inactive mr-2"></span>
-                            </p>
-
-                        </div>
-
-                    </div>
-                    <div class="mycomment-date ml-auto">
-                        <p class="text-muted pt-5 pt-sm-3">10 Sept</p>
-                    </div>
-                </div>
-                <div class="row text-left">
-                    <h4 class="blue-text mt-3">"An awesome activity to experience"</h4>
-                    <p class="content">If you really enjoy spending your vacation 'on water' or would like to try
-                        something new and exciting for the first time.</p>
-                </div>
-                <div class="row text-left mt-4">
-                    <div class="like mr-3 vote">
-                        <img src="https://i.imgur.com/mHSQOaX.png"><span class="blue-text pl-2">20</span>
-                    </div>
-                    <div class="unlike vote">
-                        <img src="https://i.imgur.com/bFBO3J7.png"><span class="text-muted pl-2">4</span>
-                    </div>
-                </div>
-            </div>
 
 
         </section>
+        <div id="loading_animation" class="loader"></div>
 
     </div>
 
@@ -425,8 +357,9 @@
 
 </body>
 
-<script src="./js/mycomment.js"></script>
 <script src="./js/script.js"></script>
+<script src="./js/mycomment.js"></script>
+<script src="./js/mycommentDataLoader.js"></script>
 
 
 

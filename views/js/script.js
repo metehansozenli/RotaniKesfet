@@ -10,17 +10,22 @@ document.addEventListener('customLoadEvent', function () {
 
     // Her bir .point öğesi için işlem yap
     points.forEach((pointElement) => {
+        
         const point = parseFloat(pointElement.textContent);
         const stars = pointElement.nextElementSibling.querySelectorAll('.ratings i');
         // Yıldızları güncelle
         stars.forEach((star, index) => {
             if (index < Math.floor(point)) { // Puanı aşağıya yuvarlayarak yıldızları dolduruyoruz
+                
                 star.classList.add('rating-color', 'fa', 'fa-star');
             } else if (point - index >= 0.25 && point - index < 0.75) { // 0.25 ile 0.75 arasında ise yarım yıldız ekle
+                
                 star.classList.add('rating-color', 'fa', 'fa-star-half-alt');
             } else if (point - index >= 0.75 && point - index < 1) { // 0.75 ile 1 arasında ise tam yıldız ekle
+               
                 star.classList.add('rating-color', 'fa', 'fa-star');
             } else { // Diğer durumlarda boş yıldız ekle
+                
                 star.classList.add('fa', 'fa-star-o');
             }
         });
@@ -39,13 +44,15 @@ document.addEventListener('customCommentLoadEvent', function () {
 
     // Her bir .point öğesi için işlem yap
     points.forEach((pointElement) => {
+        
         const point = parseFloat(pointElement.textContent);
         const stars = pointElement.parentElement.querySelector('.comment-stars').querySelectorAll('span');
 
         // Yıldızları güncelle
         stars.forEach((star, index) => {
+            
             if (index < Math.floor(point)) { // Puanı aşağıya yuvarlayarak yıldızları dolduruyoruz
-                star.classList.add('active-star', 'fa', 'fa-star');
+                star.classList.add('active-star', 'fa', 'fa-star')
             } else if (point - index >= 0.25 && point - index < 0.75) { // 0.25 ile 0.75 arasında ise yarım yıldız ekle
                 star.classList.add('active-star', 'fa', 'fa-star-half-alt');
             } else if (point - index >= 0.75 && point - index < 1) { // 0.75 ile 1 arasında ise tam yıldız ekle
@@ -243,12 +250,11 @@ document.addEventListener('customlikeControlEvent',  async function () {
     const votes = document.querySelectorAll('.vote-section');
     var votedcomments=null;
     if(window.userID){
-    const locationID = getLocationIdFromUrl();
-    votedcomments = await getUserVotedComments(window.userID, locationID);
-    console.log(votedcomments)
+    var locationID = getLocationIdFromUrl();
     }
     // Her bir .vote-section öğesi için işlem yap
     for (const voteElement of votes) {
+        
         // Her bir .vote-section içindeki like ve dislike butonlarını seç
         const likeBtn = voteElement.querySelector('.likeBtn');
         const dislikeBtn = voteElement.querySelector('.dislikeBtn');
@@ -256,7 +262,13 @@ document.addEventListener('customlikeControlEvent',  async function () {
         const dislikeCountSpan = dislikeBtn.querySelector('span');
         const commentID = voteElement.dataset.commentid;
         
+      
+        if(window.userID && voteElement.dataset.locationid){
+        locationID = voteElement.dataset.locationid;
+        }
+
         if(window.userID){
+        votedcomments = await getUserVotedComments(window.userID, locationID);
         const userVote = votedcomments.find(vote => vote.commentID == commentID);
 
         if (userVote) {
@@ -469,3 +481,71 @@ async function setFavStatus(userID, locationID) {
     }
 }
 
+
+
+
+
+// mycomment dropdowns filters
+var selectedStars = [];
+
+function filterCommentsByStars() {
+    const comments = document.querySelectorAll('.mycomment-S4 .comment-card');
+
+    comments.forEach(comment => {
+        const stars = parseInt(comment.querySelector('.comment-score').textContent);
+
+        if (selectedStars.length === 0) {
+            comment.style.display = 'block';
+        } else if (selectedStars.includes(stars)) {
+            comment.style.display = 'block';
+        } else {
+            comment.style.display = 'none';
+        }
+    });
+}
+
+
+
+var selectedCategories = [];
+
+function filterCommentsByCategory() {
+    const comments = document.querySelectorAll('.mycomment-S4 .comment-card');
+
+    comments.forEach(comment => {
+        const category = comment.dataset.category;
+        console.log(category)
+
+        if (selectedCategories.length === 0) {
+            comment.style.display = 'block';
+        } else if (selectedCategories.includes(category)) {
+            comment.style.display = 'block';
+        } else {
+            comment.style.display = 'none';
+        }
+    });
+
+
+}
+
+
+
+function sortComments() {
+    const comments = document.querySelectorAll('.mycomment-S4 .comment-card');
+    // Sort comments
+    let visibleComments = Array.from(comments).filter(comment => !comment.classList.contains('hidden'));
+    if (selectedSorting === 'Eskiden Yeniye') {
+        visibleComments.sort((a, b) => new Date(a.dataset.date) - new Date(b.dataset.date));
+    } else if (selectedSorting === 'Yeniden Eskiye') {
+        visibleComments.sort((a, b) => new Date(b.dataset.date) - new Date(a.dataset.date));
+    } else if (selectedSorting === 'Puana Göre Azalan') {
+        visibleComments.sort((a, b) => b.querySelector('.comment-score').textContent - a.querySelector('.comment-score').textContent);
+    } else if (selectedSorting === 'Puana Göre Artan') {
+        visibleComments.sort((a, b) => a.querySelector('.comment-score').textContent - b.querySelector('.comment-score').textContent);
+    }
+
+    // Reorder comments in DOM
+    const parent = document.querySelector('.mycomment-S4');
+    visibleComments.forEach(comment => parent.appendChild(comment));
+
+    
+}

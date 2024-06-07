@@ -32,6 +32,9 @@ const profile = require("./routes/profileRoutes")
 const favlocation = require("./routes/favLocationRoutes")
 const createtravel = require("./routes/createTravelRoutes")
 const locationName = require("./routes/get_locationNameRouter")
+const mycomment = require("./routes/mycommentRoutes")
+const mycommentData = require("./routes/get_mycommentsDataRoutes")
+
 
 client.connect((err) => {
   if (err) {
@@ -84,11 +87,11 @@ app.use("/", profile )
 app.use("/", favlocation)
 app.use("/", createtravel)
 app.use("/", locationName)
+app.use("/", mycomment)
+app.use("/", mycommentData)
 
 
-app.get("/mycomment", (req, res) => {
-  res.render("mycomment")
-})
+
 
 
 app.get("/commentWrite", (req, res) => {
@@ -185,7 +188,10 @@ app.post('/api/voteComments', async (req, res) => {
 
 
 app.post('/update-like', (req, res) => {
+  console.log("nnn")
   const { commentID, userID, voteType } = req.body;
+
+  
   
   new Promise(async (resolve, reject) => {
     try {

@@ -37,6 +37,7 @@ window.addEventListener('scroll', () => {
         document.getElementById("loading_animation").style.display = "block";
         setTimeout(1000);
         otherlocation_load_data(locationType);
+        
 
 
     }

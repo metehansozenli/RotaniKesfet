@@ -91,7 +91,51 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+.randomlocation img {
+    display: flex;
+    height: 350px;
+    width: 500px;
+    object-fit: cover;
+}
 
+.randomlocation {
+    position: relative;
+    /* İçeriğin konumlandırılması için ana konteynerin pozisyonu */
+    display: inline-block;
+    /* Blok elemanı içinde inline blok elemanı kullanma */
+    margin-bottom: 20px;
+}
+
+.randomlocation h3 {
+    position: absolute;
+    /* Metni resmin üstünde konumlandırmak için mutlak konumlandırma */
+    top: 80%;
+    /* Resmin yüksekliğinin yarısında dikey olarak ortalamak */
+    left: 50%;
+    /* Resmin genişliğinin yarısında yatay olarak ortalamak */
+    transform: translate(-50%, -50%);
+    /* Metni dikey ve yatay olarak ortalamak için translate kullanma */
+    background-color: rgba(255, 255, 255, 0.7);
+    /* Arka plan rengi (saydamlık ekleyebilirsiniz) */
+    padding: 5px 10px;
+    border-radius: 5px;
+    /* Köşeleri yuvarlamak */
+    color: #333;
+    /* Metin rengi */
+    width: 200px;
+    word-wrap: normal;
+    text-align: center;
+
+}
+
+.main-randomlocation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+
+}
 
 
 
@@ -159,7 +203,7 @@
 
 /* Individual bars */
 .bar-5 {
-    width: 70%;
+    
     height: 13px;
     background-color: #FBC02D;
     border-radius: 20px;
@@ -167,7 +211,7 @@
 }
 
 .bar-4 {
-    width: 30%;
+    
     height: 13px;
     background-color: #FBC02D;
     border-radius: 20px;
@@ -175,7 +219,7 @@
 }
 
 .bar-3 {
-    width: 20%;
+    
     height: 13px;
     background-color: #FBC02D;
     border-radius: 20px;
@@ -183,7 +227,7 @@
 }
 
 .bar-2 {
-    width: 10%;
+    
     height: 13px;
     background-color: #FBC02D;
     border-radius: 20px;
@@ -191,7 +235,7 @@
 }
 
 .bar-1 {
-    width: 0%;
+    
     height: 13px;
     background-color: #FBC02D;
     border-radius: 20px;
@@ -217,6 +261,7 @@
 }
 
 .comments-Listboxs2 {
+    font-size: 16px;
     max-width: 194px;
     width: 100%;
 
@@ -252,7 +297,7 @@
 .comments-Listboxs .select-btn .btn-text,
 .comments-Listboxs2 .select-btn2 .btn-text2,
 .comments-Listboxs3 .select-btn3 .btn-text3 {
-    font-size: 25px;
+    font-size: 18px;
     font-weight: 400;
     color: #fff;
 }
@@ -315,6 +360,8 @@
     font-weight: 400;
     color: #333;
 }
+
+
 
 .comments-Listboxs .item .checkbox,
 .comments-Listboxs2 .item .checkbox,
@@ -388,6 +435,7 @@
     margin-bottom: 10px;
 }
 
+
 .star-active:hover {
     color: #F9A825;
     cursor: pointer;
@@ -439,4 +487,35 @@
 
 .mycomments-rating-card .my-ratings {
     margin-right: 200px;
+}
+
+
+.likeBtn,
+.dislikeBtn {
+    cursor: pointer;
+    outline: 0;
+    color: #AAA;
+    background: none;
+    border: none;
+}
+
+.likeBtn:focus,
+.dislikeBtn:focus {
+    outline: none;
+}
+
+  
+ .voteActive{
+    color: #1b9cfc;
+    transform: scale(1.1);
+  }
+  
+
+
+.active-star{
+    color: #FBC02D !important;
+}
+
+.comment-stars span {
+    color: #cecece;
 }

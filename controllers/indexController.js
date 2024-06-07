@@ -307,7 +307,7 @@ const getUserData = async (sessionuserId) => {
   
   }
 
-  async function getTotalStarCounts(locationID) {
+  async function getTotalStarCounts(userID) {
     try {
         const result = await client.query(`
             SELECT 
@@ -319,8 +319,8 @@ const getUserData = async (sessionuserId) => {
             FROM 
                 comments
             WHERE 
-                "locationID" = $1;
-        `, [locationID]);
+                "userID" = $1;
+        `, [userID]);
 
         // Veritabanından gelen sonuçları al
         const starCounts = {
@@ -709,8 +709,68 @@ async function getUserVotedComments(userID, locationID) {
   }
 }
 
+async function getUserTotalStarCounts(userID) {
+  try {
+      const result = await client.query(`
+          SELECT 
+              COALESCE(SUM(CASE WHEN "commentScore" = 1 THEN 1 ELSE 0 END), 0) AS total_star1,
+              COALESCE(SUM(CASE WHEN "commentScore" = 2 THEN 1 ELSE 0 END), 0) AS total_star2,
+              COALESCE(SUM(CASE WHEN "commentScore" = 3 THEN 1 ELSE 0 END), 0) AS total_star3,
+              COALESCE(SUM(CASE WHEN "commentScore" = 4 THEN 1 ELSE 0 END), 0) AS total_star4,
+              COALESCE(SUM(CASE WHEN "commentScore" = 5 THEN 1 ELSE 0 END), 0) AS total_star5,
+              COALESCE(AVG("commentScore"), 0) AS average_star
+          FROM 
+              comments
+          WHERE 
+              "userID" = $1;
+      `, [userID]);
 
+      // Veritabanından gelen sonuçları al
+      const starCounts = {
+          totalStar1: result.rows[0].total_star1,
+          totalStar2: result.rows[0].total_star2,
+          totalStar3: result.rows[0].total_star3,
+          totalStar4: result.rows[0].total_star4,
+          totalStar5: result.rows[0].total_star5,
+          averageStar: parseFloat(result.rows[0].average_star).toFixed(1)
+      };
 
+      // Sonuçları geri döndür
+      return starCounts;
+
+  } catch (err) {
+      console.error('Hata oluştu:', err);
+      // Hata durumunda null döndür
+      return null;
+  }
+}
+
+async function getRandomLocation() {
+  try {
+      const result = await client.query(`
+          SELECT 
+              "locationID", 
+              "locationName", 
+              "locationImg"
+          FROM 
+              locations
+          ORDER BY 
+              RANDOM()
+          LIMIT 1;
+      `);
+
+      // Veritabanından gelen sonucu al
+      const location = result.rows[0];
+
+      // Sonucu geri döndür
+      return location;
+
+  } catch (err) {
+      console.error('Hata oluştu:', err);
+      // Hata durumunda null döndür
+      return null;
+  }
+}
 
   module.exports = {
     getRandomCitiesData,
@@ -733,6 +793,8 @@ async function getUserVotedComments(userID, locationID) {
     updateUserFavoriteLocations,
     getUserFavouriteLocations,
     getUserVotedComments,
-    getLocationName
+    getUserTotalStarCounts,
+    getRandomLocation
+    
     
   };

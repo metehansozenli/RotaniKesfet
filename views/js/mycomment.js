@@ -1,72 +1,88 @@
-items = document.querySelectorAll(".comments-Listboxs .categoryItems .item");
-  
-var selectBtn = document.getElementById("select-btn");
+
+
+const selectBtn = document.getElementById("select-btn");
+
+const btnText = document.querySelector(".btn-text");
+
 selectBtn.addEventListener("click", () => {
     selectBtn.classList.toggle("open");
 });
 
+const items = document.querySelectorAll(".comments-Listboxs .categoryItems .item");
 
 items.forEach(item => {
     item.addEventListener("click", () => {
         item.classList.toggle("checked");
 
-        let checked = document.querySelectorAll(".comments-Listboxs .checked"),
-            btnText = document.querySelector(".btn-text");
+        const checkedItems = document.querySelectorAll(".comments-Listboxs .checked");
+        selectedStars = [];
 
-        if (checked && checked.length > 0) {
-            btnText.innerText = `${checked.length} Seçildi`;
-        } else {
-            btnText.innerText = "Puan Seç";
-        }
+        checkedItems.forEach(checkedItem => {
+            const stars = checkedItem.querySelectorAll('.fas.fa-star.text-warning').length; // Yıldızların sayısını al
+            selectedStars.push(stars);
+        });
+
+        filterCommentsByStars();
     });
-})
-
-
-items2 = document.querySelectorAll(".comments-Listboxs2 .categoryItems .item");
-
-var selectBtn2 = document.getElementById("select-btn2");
-selectBtn2.addEventListener("click", () => {
-    selectBtn2.classList.toggle("open");
 });
 
-items2.forEach(item => {
-    item.addEventListener("click", () => {
-        item.classList.toggle("checked");
 
-        let checked2 = document.querySelectorAll(".comments-Listboxs2 .checked"),
-            btnText2 = document.querySelector(".btn-text2");
-
-        if (checked2 && checked2.length > 0) {
-            btnText2.innerText = `${checked2.length} Seçildi`;
-        } else {
-            btnText2.innerText = "Sıralama Seç";
-        }
+const selectBtn2 = document.getElementById("select-btn2");
+    selectBtn2.addEventListener("click", () => {
+        selectBtn2.classList.toggle("open");
     });
-})
 
- 
-items3 = document.querySelectorAll(".comments-Listboxs3 .categoryItems .item");
+    const items2 = document.querySelectorAll(".comments-Listboxs2 .categoryItems .item");
+    items2.forEach(item => {
+        item.addEventListener("click", () => {
+            items2.forEach(i => i.classList.remove("checked")); // Only allow one selection at a time
+            item.classList.add("checked");
 
-var selectBtn3 = document.getElementById("select-btn3");
-selectBtn3.addEventListener("click", () => {
-    selectBtn3.classList.toggle("open");
-});
+            let checked2 = document.querySelectorAll(".comments-Listboxs2 .checked"),
+                btnText2 = document.querySelector(".btn-text2");
 
-items3.forEach(item => {
-    item.addEventListener("click", () => {
-        item.classList.toggle("checked");
+            selectedSorting = '';
+            if (checked2 && checked2.length > 0) {
+                selectedSorting = checked2[0].querySelector('.item-text').textContent.trim();
+                btnText2.innerText = selectedSorting;
+            } else {
+                btnText2.innerText = "Sıralama Seç";
+            }
 
-        let checked3 = document.querySelectorAll(".comments-Listboxs3 .checked"),
-            btnText3 = document.querySelector(".btn-text3");
-
-        if (checked3 && checked3.length > 0) {
-            btnText3.innerText = `${checked3.length} Seçildi`;
-        } else {
-            btnText3.innerText = "Kategori Seç";
-        }
+            sortComments();
+        });
     });
-})
 
+    
+
+    const selectBtn3 = document.getElementById("select-btn3");
+
+    selectBtn3.addEventListener("click", () => {
+        selectBtn3.classList.toggle("open");
+    });
+
+    const items3 = document.querySelectorAll(".comments-Listboxs3 .categoryItems .item");
+
+    items3.forEach(item => {
+        item.addEventListener("click", () => {
+            item.classList.toggle("checked");
+
+            let checked3 = document.querySelectorAll(".comments-Listboxs3 .checked"),
+                btnText3 = document.querySelector(".btn-text3");
+
+            selectedCategories = [];
+            checked3.forEach(checkedItem => {
+                const categoryText = checkedItem.querySelector('.item-text').textContent.trim();
+                selectedCategories.push(categoryText);
+            });
+
+           
+            
+            filterCommentsByCategory();
+        });
+    });
+
+    
 
 // search clear
 function clearText() {
