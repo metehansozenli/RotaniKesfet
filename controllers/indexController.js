@@ -384,7 +384,7 @@ const getUserData = async (sessionuserId) => {
             values: [locationType],
         };
         const result = await client.query(query2);
-        
+
         const locationNames = result.rows.map(row => ({
             locationName: row.locationName,
             locationImg: row.locationImg
@@ -398,34 +398,30 @@ const getUserData = async (sessionuserId) => {
 }
 
 
-const getActiveTypeLocationData = async (userLocationtype,cityIDArray) => {
+const getActiveTypeLocationData = async (routeID) => {
   try {
-    const userChoices = [];
-    userLocationtype.forEach((isTrue, index) => {
-      if (isTrue) {
-        userChoices.push(locationTypes[index].locationType);
-      }
-    });
-    const userChoicesString = userChoices.map(userChoice => `'${userChoice}'`).join(', ');
-    
-    const cityIDs = cityIDArray;
-    const cityIdString = cityIDs.join(', '); 
-
     const query2 = {
         text: `
           SELECT DISTINCT
-            locations."locationName"  
+              locations."locationName", locations."locationImg"  
           FROM
-            locations
+              locations
+          JOIN
+              routes
+          ON
+              locations."locationID" = ANY (routes."routeLocations")
           WHERE 
-            "locationType" IN (${userChoicesString}) AND 
-            "locationCityID" IN (${cityIdString})
+              routes."routeID" = ${routeID}
+            
           ORDER BY 
-            locations."locationName" DESC
+              locations."locationName" DESC;
         `,
     };
     const result = await client.query(query2);
-    const locationNames = result.rows;
+    const locationNames = result.rows.map(row => ({
+      locationName: row.locationName,
+      locationImg: row.locationImg
+    }));
     return locationNames
   
 } catch (error) {
