@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seyahatlerim</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/myroutes.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    {{> config}}
+    <script>
+        window.userID = {{ userID }}
+
+    </script>
+    <div class="container mt-5">
+        <h1 class="display-4 text-center text-muted" style=" font-family: sans-serif,Arial;">Seyahatlerim</h1> <br>
+        <div id="routes-cards" class="justify-content-center">
+            {{#each routeData}}
+            <div class="mb-4 location-card-container" style="display: none;">
+                
+                <div class="container">
+                    <a href="/routePlanner?routeID={{routeID}}">
+                        <img src={{cityImg}} alt={{cityName}} class="routeImage"></a>
+                        <div class="text">{{routeTitle}}</div>
+                        <ion-icon class="remove-icon" id="remove" name='close-sharp' onclick=""></ion-icon>
+                    
+                </div>
+               
+            </div>
+             {{/each}}
+
+
+        </div>
+
+        <div class="text-center mt-4">
+            <button id="load-more-btn" class="btn btn-primary btn-load-more">Daha Fazla Göster</button>
+        </div>
+    </div>
+        {{> footer}}
+</body>
+
+<script src="./js/script.js"></script>
+<script src="./js/myroutes.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
+
+
+</html>
+

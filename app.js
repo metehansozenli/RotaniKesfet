@@ -36,6 +36,7 @@ const mycomment = require("./routes/mycommentRoutes")
 const mycommentData = require("./routes/get_mycommentsDataRoutes")
 const commentwrite = require("./routes/commentWriteRoutes")
 const commentInsert = require("./routes/commentInsertRoutes")
+const myroutes = require("./routes/myroutesRoutes")
 
 client.connect((err) => {
   if (err) {
@@ -92,7 +93,7 @@ app.use("/", mycomment)
 app.use("/", mycommentData)
 app.use("/", commentwrite)
 app.use("/", commentInsert)
-
+app.use("/", myroutes)
 
 
 

@@ -1,0 +1,58 @@
+.container {
+    position: relative;
+    margin-bottom: 70px;
+
+}
+
+.routeImage {
+    display: block;
+    max-width: 1200px !important;
+    max-height: 400px;
+    width: 100%;
+    border-radius: 150px;
+    object-fit: cover;
+
+}
+
+.text {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    top:50%;
+    transform: translateX(-50%);
+    color: white;
+    font-weight: bold;
+    font-size: 45px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+
+
+.btn-load-more {
+    height: 50px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+ion-icon {
+    fill: #ffffff;
+    stroke-width: 0px;
+    cursor: pointer;
+    font-size: 41px !important;
+    position: absolute;
+    top: 45px;
+    right: 80px;
+    cursor: pointer;
+    outline: 2px solid transparent; /* Dış çerçeve */
+    transition: outline 0.3s, fill 0.3s; /* Geçiş animasyonu */
+}
+
+ion-icon:hover {
+    
+    fill: #b9b9fb8b; /* Hover durumunda dolgu rengi (mavi) */
+}
+
+/* Hover durumunda renk değiştirme için pseudo-element kullanımı */
+ion-icon.hovered::before {
+    fill: #ffffff;
+}

@@ -794,6 +794,43 @@ async function insertComment(userID,locationID,commentContents,commentDate,comme
 
 }
 
+async function getRoutesAndRandomCityByUserID(userID) {
+  try {
+    const query = `
+      SELECT 
+        routes."routeID",
+        routes."routeTitle",
+        cities."cityName",
+        cities."cityImg"
+       
+      FROM 
+        routes 
+      LEFT JOIN 
+        cities 
+      ON 
+        cities."cityID" = (SELECT "cityID" FROM unnest(routes."routeCities") AS "cityID" LIMIT 1)
+      WHERE 
+        routes."userID" = $1
+      ORDER BY 
+        routes."routeCreationDate" ASC;
+    `;
+    const values = [userID];
+    const result = await client.query(query, values);
+
+    if (result.rows.length > 0) {
+      return result.rows;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.error('Hata oluştu:', err);
+    return null;
+  }
+}
+
+
+
+
   module.exports = {
     getRandomCitiesData,
     getRestaurantData,
@@ -818,6 +855,7 @@ async function insertComment(userID,locationID,commentContents,commentDate,comme
     getUserTotalStarCounts,
     getRandomLocation,
     getLocationName,
-    insertComment    
+    insertComment,
+    getRoutesAndRandomCityByUserID  
     
   };
