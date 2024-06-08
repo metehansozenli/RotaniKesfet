@@ -134,31 +134,31 @@ get_initLocationsData().then(data => {
 
     // KMeans uygulama ve sonuçları JSON formatında oluşturma
     const results = data.routeCityIDs.map((cityID, index) => {
-    const k = calculateDayDifference(data.routeStartDates[index], data.routeFinishDates[index]);
-    if (groupedCoords[cityID]) {
-        const clusters = kMeans(groupedCoords[cityID], k);
-        const cityClusters = [];
-        clusters.forEach(cluster => {
-            const clusterLocations = cluster.map(location => {
-                // Her bir koordinat için, ona karşılık gelen lokasyon ID'sini bul
-                const locationIndex = coordinates.findIndex(coord => coord[0] === location[0] && coord[1] === location[1]);
-                if (locationIndex !== -1) {
-                    return {
-                        locationID: locationIDs[locationIndex],
-                        coordinates: location
-                    };
-                }
-                return null; // Eşleşen lokasyon ID'si bulunamazsa null döndür
-            }).filter(location => location !== null); // Null değerleri filtrele
-            cityClusters.push(clusterLocations);
-        });
-        return {
-            cityID: cityID,
-            clusters: cityClusters
-        };
-    }
-    return null;
-}).filter(result => result !== null);
+        const k = calculateDayDifference(data.routeStartDates[index], data.routeFinishDates[index]);
+        if (groupedCoords[cityID]) {
+            const clusters = kMeans(groupedCoords[cityID], k);
+            const cityClusters = [];
+            clusters.forEach(cluster => {
+                const clusterLocations = cluster.map(location => {
+                    // Her bir koordinat için, ona karşılık gelen lokasyon ID'sini bul
+                    const locationIndex = coordinates.findIndex(coord => coord[0] === location[0] && coord[1] === location[1]);
+                    if (locationIndex !== -1) {
+                        return {
+                            locationID: locationIDs[locationIndex],
+                            coordinates: location
+                        };
+                    }
+                    return null; // Eşleşen lokasyon ID'si bulunamazsa null döndür
+                }).filter(location => location !== null); // Null değerleri filtrele
+                cityClusters.push(clusterLocations);
+            });
+            return {
+                cityID: cityID,
+                clusters: cityClusters
+            };
+        }
+        return null;
+    }).filter(result => result !== null);
 
     // Sonuçları JSON formatında oluşturma
     output = {
@@ -170,7 +170,7 @@ get_initLocationsData().then(data => {
     console.log(JSON.stringify(output, null, 2));
     organizedData = organizeLocationsByDay(output);
     insertHTMLIntoCluster();
-    
+
 }).catch(error => {
     console.error(error);
 });
@@ -209,14 +209,19 @@ async function insertHTMLIntoCluster() {
     const totalDays = getTotalDays(organizedData);
     clusters.innerHTML = ''; // İçeriği temizle
     title.innerHTML += `<h1>İşte Sana Özel Olarak Hazırladığımız ${totalDays} Günlük Seyahat Planın!!!</h1>`;
-    
+
     const cityIDs = Object.keys(organizedData.locations);
 
     const locationNamesData = await load_locationNames(locationIDs);
-    
+
     cityIDs.forEach((cityID, index) => {
         const cityRoutes = organizedData.locations[cityID];
-        
+
+
+
+
+
+        var i = 0;
         cityRoutes.forEach(route => {
             const day = route.day;
             var locationCityName;
@@ -224,43 +229,62 @@ async function insertHTMLIntoCluster() {
                 // locationID'ye göre locationName'i al
                 const locationName = locationNamesData.find(data => data.locationID === location.locationID).locationName;
                 locationCityName = locationNamesData.find(data => data.locationID === location.locationID).locationCityName;
-                return `<li class="list-group-item">${locationName}</li>`;
+                return `<article class="leaderboard__profile">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mark Zuckerberg" class="leaderboard__picture">
+                <span class="leaderboard__name">${locationName}</span>
+                <span class="leaderboard__value">35.7<span>B</span></span>
+            </article>`;
             }).join('');
-           
+
+            if (i == 0) {
+                clusters.innerHTML += ` <div class="cityRoute" > <main class="leaderboard">
+                                        <header>
+                                        <h1 class="leaderboard__title">
+                                        <span class="leaderboard__title--top">${locationCityName}</span>
+                                        </h1>
+                                        </header>`;
+                    }
+
 
             const htmlContent = `
-                <div class="cityRoute">
-                    <div class="cityRoute-content">
-                        <div class="cityRoute-upcontent d-flex">
-                            <h3 class="mb-3">${locationCityName} - ${day}.GÜN</h3>
-                            <div class="cityRoute-transports d-flex">
-                                <img src="./images/train.png" alt="train">
-                                <img src="./images/taxi.png" alt="taxi">
-                                <img src="./images/bus.png" alt="bus">
-                                <img src="./images/subway.png" alt="subway">
-                            </div>
-                        </div>
+                
+
+
+                        <div class="cityRoute-day block">
+                        <header>
+                                        <h1 class="leaderboard__title">
+                                        <span class="leaderboard__title--top">${day}.Gün Planı</span>
+                                        </h1>
+                                        </header>
+                    
+                        
                         <div class="cityRoute-mainContent d-flex">
                             <div class="routePlanner-map" data-city="${cityID}" data-day="${day}"  
                             class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom">
                             </div>
                             <div class="cityRoute-locations">
-                                <ul class="cityRoute-list list-group">
+                                
+                                <div class="leaderboard__profiles">
                                     ${locations}
-                                </ul>
+                                   </div>    
                             </div>
                         </div>
-                    </div>
-                </div>
+                        </div>
+                    
+                    
+                
+                 
             `;
 
             clusters.innerHTML += htmlContent;
-        
+            i++;
+
         });
 
         if (index < cityIDs.length - 1) {
-            clusters.innerHTML += `<hr style="margin-top: 20px; margin-bottom: 20px;">`;
+            clusters.innerHTML += `</main></div>`;
         }
+
     });
 
     initMaps();
@@ -296,10 +320,10 @@ function initMaps() {
         const markers = []; // Separate markers array for each map
 
         route.locations.forEach((location, i) => {
-            
+
             const locationCoordinatesLat = parseFloat(location.coordinates[0]);
             const locationCoordinatesLong = parseFloat(location.coordinates[1]);
-            if(i==0){
+            if (i == 0) {
                 map.setView([locationCoordinatesLat, locationCoordinatesLong], 14);
             }
             const marker = new L.marker([locationCoordinatesLat, locationCoordinatesLong]);
@@ -313,7 +337,7 @@ function initMaps() {
                 serviceUrl: 'https://router.project-osrm.org/route/v1',
                 profile: 'foot' // Yürüme yollarına göre rota oluştur
             }),
-            createMarker: function() { return null; }, // Remove default markers
+            createMarker: function () { return null; }, // Remove default markers
             routeWhileDragging: false,
             addWaypoints: false,
             draggableWaypoints: false,
@@ -329,9 +353,9 @@ const load_locationNames = (locationIds) => {
     return new Promise((resolve, reject) => {
         const request = new XMLHttpRequest();
         request.open('GET', `/get_locationNames?locationID=${locationIds}`);
-        
+
         request.onload = () => {
-            results = JSON.parse(request.responseText);  
+            results = JSON.parse(request.responseText);
 
             if (results.length > 0) {
                 resolve(results); // İşlem tamamlandığında Promise'i çöz

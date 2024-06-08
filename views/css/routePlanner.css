@@ -112,3 +112,126 @@
   margin-left: 0%;
 
 }
+
+.cityRoute-mainContent{
+    margin-bottom: 50px;
+}
+
+.cityRoute{
+    margin-bottom: 50px;
+}
+
+
+
+.leaderboard {
+    max-width: 1040px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 40px -10px rgba(0, 0, 0, .4);
+    background-color: #fff;
+    overflow: hidden;
+    font-family: 'Source Sans Pro', sans-serif;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px !important;
+    margin: 0px 50px ;
+}
+
+.leaderboard header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 230px;
+    max-width: 1000px;
+    width: 100%;
+    background-image: url(https://cdn.tourradar.com/s3/tour/1500x800/275867_662846a214c96.jpg), repeating-radial-gradient(circle at var(--start), transparent 0%, transparent 10%, rgba(54, 89, 219, .33) 10%, rgba(54, 89, 219, .33) 17%), linear-gradient(to right, #5b7cfa, #3659db);
+    background-position-x: center;
+    background-position-y: top;
+    color: #fff;
+    --start: 35%;
+}
+
+.cityRoute-day header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    max-width: 1000px;
+    width: 100%;
+   
+    
+    color: #5eb0d2;
+    margin-bottom: 10px;
+}
+
+.leaderboard__title {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.leaderboard__title--top {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 6.5px;
+}
+
+.leaderboard__title--bottom {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 3.55px;
+    opacity: .65;
+}
+
+.leaderboard__profiles {
+    background-color: #fff;
+    border-radius: 0 0 12px 12px;
+    padding: 15px 15px 20px;
+    display: grid;
+    row-gap: 8px;
+}
+
+.leaderboard__profile {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    align-items: center;
+    padding: 10px 30px 10px 10px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 7px -1px rgba(51, 51, 51, 0.23);
+    cursor: pointer;
+    transition: transform .25s cubic-bezier(.7,.98,.86,.98), box-shadow .25s cubic-bezier(.7,.98,.86,.98);
+    background-color: #fff;
+}
+
+
+.leaderboard__picture {
+    max-width: 100%;
+    width: 60px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #ebeef3, 0 0 0 22px #f3f4f6;
+}
+
+.leaderboard__name {
+    color: #979cb0;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 0.64px;
+    margin-left: 12px;
+}
+
+.leaderboard__value {
+    color: #35d8ac;
+    font-weight: 700;
+    font-size: 34px;
+    text-align: right;
+}
+
+.leaderboard__value > span {
+    opacity: .8;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: 3px;
+}
+
+
+

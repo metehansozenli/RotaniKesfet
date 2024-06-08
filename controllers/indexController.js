@@ -710,7 +710,7 @@ async function getUserVotedComments(userID, locationID) {
   }
 }
 
-async function getUserTotalStarCounts(userID) {
+async function getUserTotalStarCounts(locationID) {
   try {
       const result = await client.query(`
           SELECT 
@@ -723,7 +723,7 @@ async function getUserTotalStarCounts(userID) {
           FROM 
               comments
           WHERE 
-              "userID" = $1;
+              "locationID" = $1;
       `, [userID]);
 
       // Veritabanından gelen sonuçları al
