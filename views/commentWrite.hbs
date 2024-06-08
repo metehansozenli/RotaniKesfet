@@ -78,32 +78,34 @@
             </div>
 
             <div class="title-container">
-                <h3 class="display-5 text-left text-muted" style=" font-family: sans-serif,Arial;">Yorumunuza başlık ekleyin
+                <h3 class="display-5 text-left text-muted" style=" font-family: sans-serif,Arial;">Yorumunuza başlık
+                    ekleyin
                 </h3>
                 <div class="title-box">
-                    <textarea id="title-input" class="title-input"
-                        placeholder="Bize deneyiminizden kısaca bahsedin"></textarea>
-                    <span class="char-counter">0/100</span>
+                    <textarea id="title-input" class="title-input" placeholder="Bize deneyiminizden kısaca bahsedin"
+                        oninput="updateTitleCount()"></textarea>
+                    <span class="title-counter" id="title-counter">0/120</span>
                     <span class="close-icon" onclick="clearTitleComment()">×</span>
                 </div>
 
-            <div class="comment-container">
-                <h3 class="display-5 text-left text-muted" style=" font-family: sans-serif,Arial;">Yorumunuzu yazın
-                </h3>
-                <div class="comment-box">
-                    <textarea id="comment-input" class="comment-input"
-                        placeholder="Manzaralar muhteşemdi. O kadar çok fotoğraf çektik ki!..."></textarea>
-                    <span class="char-counter">0/100</span>
-                    <span class="close-icon" onclick="clearContextComment()">×</span>
-                </div>
-            </div>
 
-            <div class="submit-container">
-                <button id="submit" disabled> Yorumu gönder </button>
-                <div id="submit-section" class="hide">
-                    <p id="submit-message">Geri dönüşünüz için teşekkürler</p>
+                <div class="comment-container">
+                    <h3 class="display-5 text-left text-muted" style=" font-family: sans-serif,Arial;">Yorumunuzu yazın
+                    </h3>
+                    <div class="comment-box">
+                        <textarea id="comment-input" class="comment-input"
+                            placeholder="Manzaralar muhteşemdi. O kadar çok fotoğraf çektik ki!..."></textarea>
+                        <span class="char-counter">0/100</span>
+                        <span class="close-icon" onclick="clearContextComment()">×</span>
+                    </div>
                 </div>
-            </div>
+
+                <div class="submit-container">
+                    <button id="submit" disabled> Yorumu gönder </button>
+                    <div id="submit-section" class="hide">
+                        <p id="submit-message">Geri dönüşünüz için teşekkürler</p>
+                    </div>
+                </div>
 
 
         </section>
@@ -116,7 +118,8 @@
                 bahsedin</h2>
 
             <div class="" style="text-align: center;">
-                <img src={{locationImg}} alt="Keşfet" class="img-fluid my-4" style="display: inline-block; height:350px; width:500px; object-fit: cover">
+                <img src={{locationImg}} alt="Keşfet" class="img-fluid my-4"
+                    style="display: inline-block; height:350px; width:500px; object-fit: cover">
                 <p style="font-weight: bold; font-size:25px;">{{locationName}}</p>
             </div>
 
@@ -131,8 +134,6 @@
 
 
 </body>
-
-
 
 
 </html>

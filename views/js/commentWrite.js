@@ -161,7 +161,52 @@ function clearContextComment() {
     document.querySelector('.char-counter').style.color = '#999';
 }
 
-// Başlık kutusunu temizle
+
+// title fonksiyonlari
+
+document.getElementById('title-input').addEventListener('input', function() {
+    var inputValue = this.value.replace(/ /g, ''); // Boşlukları hariç tut
+    var maxChars = 120;
+    var charCount = inputValue.length;
+
+    var counterElement = document.getElementById('title-counter');
+    if (charCount > maxChars) {
+        this.value = this.value.substring(0, maxChars);
+        counterElement.textContent = 'Üst sınırı aştınız!';
+        counterElement.style.color = 'red';
+    } else {
+        counterElement.textContent = charCount + '/' + maxChars;
+        counterElement.style.color = '#999';
+    }
+});
+
+document.getElementById('title-input').addEventListener('keydown', function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Enter tuşuna basıldığında varsayılan davranışı engelle
+    }
+});
+
+document.getElementById('title-input').addEventListener('input', adjustInputWidth);
+
+function adjustInputWidth() {
+    const input = this;
+    const closeIconWidth = 40; // Kapatma simgesi ve padding için tahmini genişlik
+    const containerWidth = input.parentNode.offsetWidth; // Ana konteynerin genişliği
+    const maxWidth = containerWidth - closeIconWidth; // Maksimum kullanılabilir genişlik
+
+    input.style.width = maxWidth + 'px'; // Metin kutusunun genişliğini ayarla
+}
+
+// Çarpı simgesine basıldığında içeriği temizle ve sayacı sıfırla
+document.querySelector('.close-icon').addEventListener('click', function() {
+    var input = document.getElementById('title-input');
+    var counterElement = document.getElementById('title-counter');
+    input.value = ''; // İçeriği temizle
+    counterElement.textContent = '0/' + 120;
+    counterElement.style.color = '#999';
+});
+
+// title-box temizle
 function clearTitleComment() {
     document.getElementById('title-input').value = '';
     document.querySelector('.char-counter').textContent = '0/100';
@@ -170,16 +215,18 @@ function clearTitleComment() {
 
 
 
-/*Formun geçerliliğini kontrol et: punalama yapmadan, tarih seçmeden veya en az 100 karekterlik yorum yapmada
-birini bile yapmadan hepsini doldurması lazım submit butona tıklayamaz !*/
+/* Formun geçerliliğini kontrol et: Puanlama yapmadan, tarih seçmeden, en az 20 karakterlik yorum yapmadan,
+   veya en az 10 karakterlik başlık koymadan birini bile yapmadan hepsini doldurması lazım submit butona tıklayamaz! */
 
+// Yıldız puanlama konteynerleri için olay dinleyicileri ekle
 starContainers.forEach(container => {
     container.addEventListener('click', checkFormValidity);
 });
 
+// Tarih girişi ve yorum girişleri için olay dinleyicileri
 dateInput.addEventListener('change', checkFormValidity);
-
 commentInput.addEventListener('input', checkFormValidity);
+commentTitleInput.addEventListener('input', checkFormValidity); // Başlık girişi için olay dinleyicisi
 
 var dateSelected;
 var starsSelected;
@@ -191,8 +238,11 @@ function checkFormValidity() {
     starsSelected = Array.from(starContainers).some(container => {
         return container.querySelector('.fa-star.active') !== null;
     });
-    commentText = commentInput.value.trim().length >= 20 && commentInput.value.trim().length <= 400; // Yorumun en az 100 karakter ve en fazla 400 karakter içermesi gerekiyor
-    submitButton.disabled = !(dateSelected && starsSelected && commentText);
+    commentText = commentInput.value.trim().length >= 20 && commentInput.value.trim().length <= 400; // Yorumun en az 20 karakter ve en fazla 400 karakter içermesi gerekiyor
+    commentTitle = commentTitleInput.value.trim().length >= 5; // Başlığın en az 10 karakter olması gerekiyor
+
+    // Tüm koşullar sağlandığında submit butonunu etkinleştir
+    submitButton.disabled = !(dateSelected && starsSelected && commentText && commentTitle);
 }
 
 
@@ -209,11 +259,20 @@ submitButton.addEventListener("click", () => {
     request.onerror = () => {
         reject('İstek başarısız');
     };
+   
+
+
+    // Yorum başarıyla gönderildikten sonra mesajı göster ve yönlendir
+    submitSection.classList.remove("hide");
+    submitSection.classList.add("show");
+   
     request.send();
 
-
-    window.location.href = `/location?id=${locationID}`;
-    //submitSection.style.display = "block"; 
+    // 2 saniye sonra yönlendir
+    setTimeout(() => {
+        
+        window.location.href = `/location?id=${locationID}`;
+    }, 1000);
     
 });
 

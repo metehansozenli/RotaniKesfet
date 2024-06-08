@@ -13,7 +13,7 @@ body .comment-write {
 .left-half {
     position: relative;
     width: 60%;
-    height: 800px;
+    height: 750px;
     margin-bottom: 20px !important;
     margin-top: 40px !important;
     padding: 10px;
@@ -30,6 +30,7 @@ body .comment-write {
 
 
 /* -------experience-rating------*/
+
 
 .wrapper {
     font-size: 1.1em;
@@ -66,6 +67,15 @@ body .comment-write {
     display: block;
     text-align: center;
 }
+
+/* -------starın yanında çıkan mesaj------*/
+#message {
+    margin-left: 40px;
+    font-size: 1.3em;
+    font-family: sans-serif, Arial;
+    color: #F1732B;
+}
+
 
 
 
@@ -189,23 +199,35 @@ body .comment-write {
     border: 2px solid #ddd;
     padding: 10px;
     background-color: #fff;
-    width: 600px;
+    width: 600px; /* Ayarlanabilir genişlik */
 }
 
 .title-input {
     width: 100%;
-    width: calc(100% - 30px);
-    /* Sağdaki simge ve karakter sayacı için genişlik ayarı */
-    height: 30px;
-    /* Yorum alanının istediğiniz yüksekliğini buraya yazın */
+    height: 30px; /* Yükseklik sabitlenmiş */
     border: none;
     outline: none;
     resize: none;
     font-size: 15px;
     font-family: Arial, sans-serif;
     padding: 5px;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
+    overflow-y: hidden; /* Dikey genişlemeyi engeller */
+    white-space: nowrap; /* Yeni satıra geçişi engeller */
+    overflow-x: hidden; /* Yatay kaydırma çubuğunu gizler */
 }
+
+
+
+.title-counter{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 13px;
+    color: #999;
+}
+
+
 
 
 
@@ -246,13 +268,6 @@ body .comment-write {
 
 }
 
-
-#message {
-    margin-left: 40px;
-    font-size: 1.3em;
-    font-family: sans-serif, Arial;
-    color: #F1732B;
-}
 
 
 #submit-section {
