@@ -37,6 +37,7 @@ const mycommentData = require("./routes/get_mycommentsDataRoutes")
 const commentwrite = require("./routes/commentWriteRoutes")
 const commentInsert = require("./routes/commentInsertRoutes")
 const myroutes = require("./routes/myroutesRoutes")
+const deleteRoute = require("./routes/deleteRouteRoutes")
 
 client.connect((err) => {
   if (err) {
@@ -94,8 +95,7 @@ app.use("/", mycommentData)
 app.use("/", commentwrite)
 app.use("/", commentInsert)
 app.use("/", myroutes)
-
-
+app.use("/", deleteRoute)
 
 
 app.get("/helpPage", (req, res) => {

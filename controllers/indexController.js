@@ -798,6 +798,27 @@ async function insertComment(userID,locationID,commentContents,commentDate,comme
 
 }
 
+async function deleteRoute(routeID) {
+  try {
+    const routeInsertQuery =  
+    `
+    DELETE 
+    FROM 
+      routes
+    WHERE 
+      "routeID" = $1;
+      `;
+    const routeValues = [routeID];
+    const result = await client.query(routeInsertQuery, routeValues);
+
+  } catch (err) {      
+      console.error('Hata oluştu:', err);
+      // Hata durumunda null döndür
+      return null;
+  }
+
+}
+
 async function getRoutesAndRandomCityByUserID(userID) {
   try {
     const query = `
@@ -860,6 +881,7 @@ async function getRoutesAndRandomCityByUserID(userID) {
     getRandomLocation,
     getLocationName,
     insertComment,
-    getRoutesAndRandomCityByUserID  
+    getRoutesAndRandomCityByUserID,
+    deleteRoute  
     
   };

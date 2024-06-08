@@ -22,3 +22,22 @@ document.addEventListener("DOMContentLoaded", function() {
     // Sayfa yüklendiğinde ilk kartları göster
     showMoreItems();
 });
+
+async function deletRoute (routeID) {
+    try {
+        // Rotayı silmek için bir istek gönder
+        const response = await fetch('/deleteRoute', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            // Silinecek rota bilgisini gönder
+            body: JSON.stringify({ routeID: routeID })
+        });
+        if (!response.ok) {
+            throw new Error('Rota silinirken bir hata oluştu.');
+        }
+    } catch (error) {
+        console.error('Hata:', error.message);
+    }
+};
