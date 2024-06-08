@@ -594,7 +594,7 @@ const getLocationName = async (locationIDs) => {
       const locationData = result.rows.map(row => ({
         locationID: row.locationID,
         locationName: row.locationName,
-        locationCityName: row.cityName
+        locationCityName: row.cityName,
       }));
 
       return locationData;

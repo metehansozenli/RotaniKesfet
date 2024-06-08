@@ -3,6 +3,7 @@ const submitButton = document.querySelector("#submit");
 const message = document.querySelector("#message");
 const dateInput = document.getElementById('date');
 const commentInput = document.getElementById('comment-input');
+const commentTitleInput = document.getElementById('title-input');
 const submitSection = document.querySelector("#submit-section");
 const locationID = getLocationIdFromUrl();
 
@@ -154,14 +155,14 @@ document.getElementById('comment-input').addEventListener('input', function() {
 
 
 // Yorum kutusunu temizle
-function clearComment() {
+function clearContextComment() {
     document.getElementById('comment-input').value = '';
     document.querySelector('.char-counter').textContent = '0/100';
     document.querySelector('.char-counter').style.color = '#999';
 }
 
 // Başlık kutusunu temizle
-function clearComment() {
+function clearTitleComment() {
     document.getElementById('title-input').value = '';
     document.querySelector('.char-counter').textContent = '0/100';
     document.querySelector('.char-counter').style.color = '#999';
@@ -183,6 +184,7 @@ commentInput.addEventListener('input', checkFormValidity);
 var dateSelected;
 var starsSelected;
 var commentText;
+var commentTitle;
 
 function checkFormValidity() {
     dateSelected = dateInput.value !== '';
@@ -193,14 +195,16 @@ function checkFormValidity() {
     submitButton.disabled = !(dateSelected && starsSelected && commentText);
 }
 
+
 // Submit butonuna tıklandığında submit-message göster
 submitButton.addEventListener("click", () => {
     commentText = commentInput.value
+    commentTitle = commentTitleInput.value;
     dateSelected = dateInput.value
     starsSelected = parseFloat(getActiveRating())
 
     const request = new XMLHttpRequest();
-    request.open('GET', `/commentInsert?locationID=${locationID}&commentContents=${commentText}&commentDate=${dateSelected}&commentTitle${commentText}&commentScore=${starsSelected}`);
+    request.open('GET', `/commentInsert?locationID=${locationID}&commentContents=${commentText}&commentDate=${dateSelected}&commentTitle=${commentTitle}&commentScore=${starsSelected}`);
     request.onload = () => {{}};
     request.onerror = () => {
         reject('İstek başarısız');

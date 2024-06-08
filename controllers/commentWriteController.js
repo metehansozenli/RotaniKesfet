@@ -9,9 +9,12 @@ exports.commentwriteController = async (req, res) => {
     if(!userID){
         res.render("page404");
     }else{
-
+      const locationData = await veritabani.getSpecifiedLocationData(locationID);
       res.render("commentWrite", { 
         userID: userID, // Oturumdan alınan kullanıcı kimliğini şablon verilerine ekleyin
+        locationID: locationID,
+        locationName: locationData.locationName,
+        locationImg: locationData.locationImg
       });
     }
 
