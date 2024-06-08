@@ -24,7 +24,7 @@ exports.get_locationcommentData = async (req, res) => {
                 comments."userID" = users."userID"
               WHERE
               comments."locationID" = $3
-              ORDER BY RANDOM()
+              ORDER BY comments."commentID"
               OFFSET $1
               LIMIT $2;
               `,

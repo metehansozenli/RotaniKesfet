@@ -113,18 +113,6 @@ document.addEventListener('customDropdownEventListener', function () {
             });
         });
     });
-
-    // Dropdown düğmesinin metnini güncelleyen yardımcı fonksiyon
-    function updateButtonText(btn) {
-        let checkedItems = btn.nextElementSibling.querySelectorAll(".checked");
-        let btnText = btn.querySelector(".btn-text");
-
-        // if (checkedItems.length > 0) {
-        //     btnText.innerText = `${checkedItems.length} Seçildi`;
-        // } else {
-        //     btnText.innerText = "Puan Seç";
-        // }
-    }
     
     const updateStatus = (item) => {
         item.classList.toggle("checked");
@@ -213,11 +201,12 @@ const getLocationID = (locationName) => {
 
 }
 
+var routeChoices;
 
 btn_update.addEventListener("click", async () => {
     const selectBtns = document.querySelectorAll(".select-btn");
     const routeLocationsPromises = []; // Tüm getLocationID promise'lerini saklamak için dizi
-    const routeChoices = []; 
+    routeChoices = []; 
 
     selectBtns.forEach((selectBtn, index) => {
         const items = selectBtn.nextElementSibling.querySelectorAll(".item"); // Her dropdown için öğeleri seç
@@ -241,11 +230,12 @@ btn_update.addEventListener("click", async () => {
         } else {
             routeChoices[index] = false;
         }
+        
     });
-   
+
     // Tüm getLocationID promise'lerinin sonuçlarını bekleyin
-    const routeLocations = await Promise.all(routeLocationsPromises);
-    
+    var routeLocations = await Promise.all(routeLocationsPromises);
+    routeLocations = routeLocations.filter(locationID => locationID !== null) // null olmayanları filtrele
     // Sunucuya veri gönder
     const response = await fetch('/updateTravel', {
         method: 'POST',
@@ -253,14 +243,14 @@ btn_update.addEventListener("click", async () => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            routeLocations: routeLocations.filter(locationID => locationID !== null), // null olmayanları filtrele
+            routeLocations,
             routeChoices,
-            routeID: routeID 
+            routeID 
         })
     });
 
 
     await response.json();
     
-    window.location.href = `/`;
+    window.location.href = `/routePlanner?routeID=${routeID}`;
 });

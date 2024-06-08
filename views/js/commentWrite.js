@@ -4,7 +4,7 @@ const message = document.querySelector("#message");
 const dateInput = document.getElementById('date');
 const commentInput = document.getElementById('comment-input');
 const submitSection = document.querySelector("#submit-section");
-
+const locationID = getLocationIdFromUrl();
 
 // Dokunmatik ve fare olayları
 const events = {
@@ -174,21 +174,37 @@ dateInput.addEventListener('change', checkFormValidity);
 
 commentInput.addEventListener('input', checkFormValidity);
 
+var dateSelected;
+var starsSelected;
+var commentText;
 
 function checkFormValidity() {
-    const dateSelected = dateInput.value !== '';
-    const starsSelected = Array.from(starContainers).some(container => {
+    dateSelected = dateInput.value !== '';
+    starsSelected = Array.from(starContainers).some(container => {
         return container.querySelector('.fa-star.active') !== null;
     });
-    const commentText = commentInput.value.trim().length >= 100 && commentInput.value.trim().length <= 400; // Yorumun en az 100 karakter ve en fazla 400 karakter içermesi gerekiyor
+    commentText = commentInput.value.trim().length >= 20 && commentInput.value.trim().length <= 400; // Yorumun en az 100 karakter ve en fazla 400 karakter içermesi gerekiyor
     submitButton.disabled = !(dateSelected && starsSelected && commentText);
 }
 
-
-
 // Submit butonuna tıklandığında submit-message göster
 submitButton.addEventListener("click", () => {
-    submitSection.style.display = "block"; 
+    commentText = commentInput.value
+    dateSelected = dateInput.value
+    starsSelected = parseFloat(getActiveRating())
+
+    const request = new XMLHttpRequest();
+    request.open('GET', `/commentInsert?locationID=${locationID}&commentContents=${commentText}&commentDate=${dateSelected}&commentTitle${commentText}&commentScore=${starsSelected}`);
+    request.onload = () => {{}};
+    request.onerror = () => {
+        reject('İstek başarısız');
+    };
+    request.send();
+
+
+    window.location.href = `/location?id=${locationID}`;
+    //submitSection.style.display = "block"; 
+    
 });
 
 

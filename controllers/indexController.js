@@ -307,7 +307,7 @@ const getUserData = async (sessionuserId) => {
   
   }
 
-  async function getTotalStarCounts(userID) {
+  async function getTotalStarCounts(locationID) {
     try {
         const result = await client.query(`
             SELECT 
@@ -319,8 +319,8 @@ const getUserData = async (sessionuserId) => {
             FROM 
                 comments
             WHERE 
-                "userID" = $1;
-        `, [userID]);
+                "locationID" = $1;
+        `, [locationID]);
 
         // Veritabanından gelen sonuçları al
         const starCounts = {
@@ -773,6 +773,26 @@ async function getRandomLocation() {
   }
 }
 
+async function insertComment(userID,locationID,commentContents,commentDate,commentTitle,commentScore) {
+  try {
+    const routeInsertQuery =  
+    `
+      INSERT INTO 
+        comments ("userID", "locationID", "commentContents", "commentDate", "commentTitle", "commentScore")
+      VALUES 
+        ($1, $2, $3, $4, $5, $6);
+      `;
+    const routeValues = [userID, locationID, commentContents, commentDate, commentTitle, commentScore];
+    const result = await client.query(routeInsertQuery, routeValues);
+
+  } catch (err) {      
+      console.error('Hata oluştu:', err);
+      // Hata durumunda null döndür
+      return null;
+  }
+
+}
+
   module.exports = {
     getRandomCitiesData,
     getRestaurantData,
@@ -796,7 +816,7 @@ async function getRandomLocation() {
     getUserVotedComments,
     getUserTotalStarCounts,
     getRandomLocation,
-    getLocationName
-    
+    getLocationName,
+    insertComment    
     
   };

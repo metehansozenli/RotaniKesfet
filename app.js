@@ -35,7 +35,7 @@ const locationName = require("./routes/get_locationNameRouter")
 const mycomment = require("./routes/mycommentRoutes")
 const mycommentData = require("./routes/get_mycommentsDataRoutes")
 const commentwrite = require("./routes/commentWriteRoutes")
-
+const commentInsert = require("./routes/commentInsertRoutes")
 
 client.connect((err) => {
   if (err) {
@@ -91,6 +91,8 @@ app.use("/", locationName)
 app.use("/", mycomment)
 app.use("/", mycommentData)
 app.use("/", commentwrite)
+app.use("/", commentInsert)
+
 
 
 
@@ -179,9 +181,6 @@ app.post('/api/voteComments', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
-
-
 
 
 app.post('/update-like', (req, res) => {
@@ -294,8 +293,6 @@ app.post('/updateTravel', async (req, res) => {
       routeID
     } = req.body;
 
-    
-    
     // routes tablosuna ekleme işlemi
     const query = {
       text: `

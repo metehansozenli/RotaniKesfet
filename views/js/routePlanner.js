@@ -113,7 +113,7 @@ const parseCoordinates = (coord) => {
 const calculateDayDifference = (startDate, finishDate) => {
     const start = new Date(startDate);
     const finish = new Date(finishDate);
-    const diffTime = Math.abs(finish - start);
+    const diffTime = Math.abs(finish - start) == 0 ? 1: Math.abs(finish - start); // gün farkı 0 ise 1 gün ayarlansın
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     return diffDays;
 };
