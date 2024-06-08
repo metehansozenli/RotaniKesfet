@@ -13,6 +13,8 @@ exports.mycommentController = async (req, res) => {
 
       const totalStarCounts = await veritabani.getUserTotalStarCounts(userID);
       const randomLocation = await veritabani.getRandomLocation();
+
+      console.log(totalStarCounts)
       
       res.render("mycomment", { 
         userID: userID, // Oturumdan alınan kullanıcı kimliğini şablon verilerine ekleyin
