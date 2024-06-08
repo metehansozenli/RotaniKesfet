@@ -1,0 +1,56 @@
+.mr-2 {
+    margin-right: 0.5rem;
+}
+
+.ml-2 {
+    margin-left: 0.5rem;
+}
+
+.card {
+    margin-bottom: 53px;
+}
+
+.card-body {
+    margin-bottom: 20px;
+}
+
+.menu-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.list-group-item {
+    display: flex;
+    align-items: center;
+}
+
+.link-text {
+    margin-left: 10px;
+    color: #494C4E; 
+    font-family: 'Arial', sans-serif; 
+    font-size: 1.0rem;
+}
+
+.form-label {
+    font-size: 1.3rem; 
+    color: #494C4E;
+}
+
+.btn-lg {
+    padding: 10px 20px;
+}
+
+.d-flex.justify-content-between {
+    gap: 10px;
+}
+
+
+.form-group:last-of-type {
+    margin-top: 40px !important;
+}
+
+
+.mt-4 {
+    margin-top: 23px !important; 
+}
