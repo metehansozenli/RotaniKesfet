@@ -735,7 +735,7 @@ async function getUserTotalStarCounts(userID) {
           FROM 
               comments
           WHERE 
-              "locationID" = $1;
+              "userID" = $1;
       `, [userID]);
 
       // Veritabanından gelen sonuçları al
