@@ -384,16 +384,13 @@ const getUserData = async (sessionuserId) => {
             values: [locationType],
         };
         const result = await client.query(query2);
+        
+        const locationNames = result.rows.map(row => ({
+            locationName: row.locationName,
+            locationImg: row.locationImg
+        }));
+        return locationNames;
 
-        if (result.rows.length > 0) {
-            const locationNames = result.rows.map(row => ({
-                locationName: row.locationName,
-                locationImg: row.locationImg
-            }));
-            return locationNames;
-        } else {
-            return null; // Sonuç yoksa null döndür
-        }
     } catch (error) {
         console.error("Error fetching comment data:", error);
         throw error;
