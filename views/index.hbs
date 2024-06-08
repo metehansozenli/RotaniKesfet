@@ -72,10 +72,12 @@
                 <i id="left" class="fa-solid fa-angle-left"></i>
                 <ul class="carouselIndex2">
                     {{#each randomCitiesData2}}
+                    
                     <li class="indexImage-container">
                         <img height="250px" width="250px" src={{this.cityImg}} style="object-fit: cover">
                         <div class="indexImage-text">{{this.cityName}},{{this.cityCountry}}</div>
                     </li>
+                    
                     {{/each}}
                 </ul>
                 <i id="right" class="fa-solid fa-angle-right"></i>
@@ -92,10 +94,12 @@
                 <i id="left" class="fa-solid fa-angle-left"></i>
                 <ul class="carouselIndex3">
                     {{#each restaurantData}}
+                    <a href="/location?id={{this.locationID}}">
                     <li class="indexImage-container">
                         <img height="250px" width="255px" src={{this.locationImg}} style="object-fit: cover">
                         <div class="indexImage-text">{{this.locationName}},{{this.locationCity}}</div>
                     </li>
+                    </a>
                     {{/each}}
                 </ul>
                 <i id="right" class="fa-solid fa-angle-right"></i>

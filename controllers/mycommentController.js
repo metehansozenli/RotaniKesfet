@@ -5,13 +5,15 @@ exports.mycommentController = async (req, res) => {
     // Oturumdan userID'yi al
     const userID = req.session.userID;
 
-    const totalStarCounts = await veritabani.getUserTotalStarCounts(userID);
-    const randomLocation = await veritabani.getRandomLocation();
+    
 
     if(!userID){
         res.render("page404");
     }else{
 
+      const totalStarCounts = await veritabani.getUserTotalStarCounts(userID);
+      const randomLocation = await veritabani.getRandomLocation();
+      
       res.render("mycomment", { 
         userID: userID, // Oturumdan alınan kullanıcı kimliğini şablon verilerine ekleyin
         totalStarCounts: totalStarCounts,

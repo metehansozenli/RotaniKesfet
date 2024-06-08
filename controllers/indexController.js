@@ -174,7 +174,8 @@ const getUserData = async (sessionuserId) => {
       const restaurantData = result.rows.map(row => ({
         locationCity: row.locationCity,
         locationName: row.locationName,
-        locationImg: row.locationImg
+        locationImg: row.locationImg,
+        locationID: row.locationID
       }));
 
       return restaurantData;
@@ -233,7 +234,7 @@ const getUserData = async (sessionuserId) => {
     try {
       if(commentType == "restaurant"){
         var queryCustom = `
-                          SELECT comments.*, locations."locationName", users."userNickname"
+                          SELECT comments.*, locations."locationName", users."userNickname",users."userImg"
                           FROM comments 
                           JOIN locations 
                           ON locations."locationID" = comments."locationID" 
@@ -245,7 +246,7 @@ const getUserData = async (sessionuserId) => {
                           `;
       }else if(commentType == "hotel"){
         var queryCustom = `
-                          SELECT comments.*, locations."locationName", users."userNickname"
+                          SELECT comments.*, locations."locationName", users."userNickname",users."userImg"
                           FROM comments 
                           JOIN locations 
                           ON locations."locationID" = comments."locationID" 
@@ -258,7 +259,7 @@ const getUserData = async (sessionuserId) => {
       
       }else if(commentType == "popdest"){
         var queryCustom = `
-                          SELECT comments.*, locations."locationName", users."userNickname"
+                          SELECT comments.*, locations."locationName", users."userNickname",users."userImg"
                           FROM comments 
                           JOIN locations 
                           ON locations."locationID" = comments."locationID" 
@@ -289,7 +290,7 @@ const getUserData = async (sessionuserId) => {
             commentDate: `${month} ${year}`, // Ay ve yıl bilgisini kullanarak tarihi oluşturuluyor.
             commentScore: row.commentScore,
             commentTitle: row.commentTitle,
-            userProfilePic: "./images/avatar.jpeg",
+            userProfilePic: row.userImg,
             locationName: row.locationName,
             locationLink: "/location?id=" + row.locationID,
           };
@@ -710,7 +711,7 @@ async function getUserVotedComments(userID, locationID) {
   }
 }
 
-async function getUserTotalStarCounts(locationID) {
+async function getUserTotalStarCounts(userID) {
   try {
       const result = await client.query(`
           SELECT 

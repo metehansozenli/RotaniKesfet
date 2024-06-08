@@ -201,7 +201,7 @@ submitButton.addEventListener("click", () => {
     commentText = commentInput.value
     commentTitle = commentTitleInput.value;
     dateSelected = dateInput.value
-    starsSelected = parseFloat(getActiveRating())
+    starsSelected = parseFloat(getActiveRating()).toFixed(1)
 
     const request = new XMLHttpRequest();
     request.open('GET', `/commentInsert?locationID=${locationID}&commentContents=${commentText}&commentDate=${dateSelected}&commentTitle=${commentTitle}&commentScore=${starsSelected}`);
