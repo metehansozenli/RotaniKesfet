@@ -218,7 +218,9 @@ function locationStatus() {
 };
 
 // Formu kontrol etme fonksiyonu
-function validateForm() {
+function registerValidateForm() {
+
+    
     var email = document.forms["kayitFormu"]["email"].value;
     var ad = document.forms["kayitFormu"]["ad"].value;
     var soyad = document.forms["kayitFormu"]["soyad"].value;
@@ -230,9 +232,15 @@ function validateForm() {
 
     if (email == "" || ad == "" || soyad == "" || nickname == "" || sehir == "" || ulke == "" || telefonNumarasi == "" || sifre == "") {
         alert("Lütfen tüm alanları doldurun");
-        return false;
+        return false; 
     }
 
+    // Ad ve soyad doğrulaması
+    var adSoyadRegex = /^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$/; // Sadece harf içermeli
+    if (!adSoyadRegex.test(ad) || !adSoyadRegex.test(soyad)) {
+        alert("Ad ve soyad sadece harflerden oluşmalıdır");
+        return false;
+}
     // E-posta doğrulaması
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -240,7 +248,17 @@ function validateForm() {
         return false;
     }
 
+    if (sifre.length < 8) {
+        alert("Şifreniz en az 8 karakter olmalıdır");
+        return false;
+    }
 
+    /*document.body.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; height: 100vh;"><h1>Bilgileriniz güncelleniyor...</h1></div>';
+            
+            // Ana sayfaya yönlendirme (2 saniye sonra)
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1000);*/
     return true;
 }
 
@@ -550,3 +568,6 @@ function sortComments() {
 
     
 }
+
+
+

@@ -5,6 +5,7 @@ const client = require("./database.js");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const session = require("express-session")
+const crypto = require('crypto');
 dotenv.config();
 const app = express();
 app.use(bodyParser.json());
@@ -69,7 +70,6 @@ app.use(session({
 app.get("/kesfet", (req, res) => {
   res.render("kesfet")
 })
-
 
 
 app.use("/", popdest)
@@ -315,9 +315,11 @@ app.post('/updateTravel', async (req, res) => {
   }
 });
 app.post('/update-profile', (req, res) => {
-  const { firstName, lastName, phoneNumber, email, password } = req.body;
+  let { firstName, lastName, phoneNumber, email, password } = req.body;
   const userID = req.session.userID; // Oturumdan kullanıcı kimliğini alın
 
+  const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
+  password = hashedPassword;
   // Kullanıcı verilerini güncelle
   const sql = 'UPDATE users SET "userName" = $1, "userSurname" = $2, "userPhoneNo" = $3, "userMail" = $4, "userPass" = $5 WHERE "userID" = $6';
   const values = [firstName, lastName, phoneNumber, email, password, userID];

@@ -2,20 +2,26 @@ const veritabani = require("./indexController")
 
 const client = require("../database.js");
 
+const crypto = require('crypto');
+
 exports.postRegister = async (req, res) => {
-    const formData = {
+    let formData = {
         userNickname: req.body.nickname,
         userName: req.body.ad,
         userSurname: req.body.soyad,
         userCity: req.body.sehir,
         userCountry: req.body.ulke,
-        userNickname: req.body.nickname,
         userMail: req.body.email,
         userPhoneNo: req.body.telefonNumarasi,
         userPass: req.body.sifre,
     };
   
     try {
+
+        const hashedPassword = crypto.createHash('sha256').update(formData.userPass).digest('hex');
+        formData.userPass = hashedPassword;
+
+        
         // Veritabanına kayıt ekle
         await client.query('INSERT INTO users ("userNickname", "userMail", "userName", "userSurname", "userCity" , "userCountry", "userPhoneNo", "userPass") VALUES ($1, $2, $3, $4, $5, $6, $7, $8 )', [formData.userNickname, formData.userMail, formData.userName, formData.userSurname, formData.userCity, formData.userCountry, formData.userPhoneNo, formData.userPass]);
 
@@ -30,12 +36,19 @@ exports.postRegister = async (req, res) => {
   }
 
 exports.postLogin =  async (req, res) => {
-    const formData = {
+    let formData = {
         userMail: req.body.email,
         userPass: req.body.password,
     };
   
     try {
+        
+        const hashedPassword = crypto.createHash('sha256').update(formData.userPass).digest('hex');
+        formData.userPass = hashedPassword;
+
+
+
+        
         // Veritabanı
         const result = await client.query('SELECT * FROM users WHERE "userMail" = $1 AND "userPass" = $2', [formData.userMail, formData.userPass]);
   

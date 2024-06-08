@@ -57,4 +57,4 @@ document.querySelectorAll('#updateForm input').forEach(input => {
         const allFieldsFilled = Array.from(formData.values()).every(value => value.trim() !== '');
         document.getElementById('submitButton').disabled = !allFieldsFilled;
     });
-});
+}); 
