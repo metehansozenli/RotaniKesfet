@@ -20,8 +20,6 @@ exports.changeProfile = async (req, res) => {
                     userPhoneNo: userPhoneNo,
                     userPass : userPass,
                     userImg: userImg,
-
-                    
                 });
             } else {
                 res.send("Bir hata Oluştu!");
