@@ -13,6 +13,7 @@ body .comment-write {
 .left-half {
     position: relative;
     width: 60%;
+    height: 800px;
     margin-bottom: 20px !important;
     margin-top: 40px !important;
     padding: 10px;
@@ -118,7 +119,7 @@ body .comment-write {
 .comment-container {
 
     position: absolute;
-    margin-top: 220px;
+    margin-top: 375px;
 
 }
 
@@ -164,12 +165,46 @@ body .comment-write {
     color: #333;
 }
 
-.char-counter {
+.char-counter{
     position: absolute;
     bottom: 5px;
     right: 10px;
     font-size: 13px;
     color: #999;
+}
+
+.title-container {
+
+    position: absolute;
+    margin-top: 220px;
+
+}
+
+.title-box {
+    margin-left: 10px;
+    margin-top: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    padding: 10px;
+    background-color: #fff;
+    width: 600px;
+}
+
+.title-input {
+    width: 100%;
+    width: calc(100% - 30px);
+    /* Sağdaki simge ve karakter sayacı için genişlik ayarı */
+    height: 30px;
+    /* Yorum alanının istediğiniz yüksekliğini buraya yazın */
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    padding: 5px;
+    margin-bottom: 25px;
 }
 
 
@@ -185,7 +220,7 @@ body .comment-write {
     position: relative;
     background: #36A1C5;
     border: none;
-    margin: 465px auto 0;
+    margin: 280px auto 0;
     padding: 0.8em 2em;
     color: #fff;
     font-size: 1.2em;

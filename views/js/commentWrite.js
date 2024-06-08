@@ -160,6 +160,12 @@ function clearComment() {
     document.querySelector('.char-counter').style.color = '#999';
 }
 
+// Başlık kutusunu temizle
+function clearComment() {
+    document.getElementById('title-input').value = '';
+    document.querySelector('.char-counter').textContent = '0/100';
+    document.querySelector('.char-counter').style.color = '#999';
+}
 
 
 
