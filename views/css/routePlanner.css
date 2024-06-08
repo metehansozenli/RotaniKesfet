@@ -144,7 +144,7 @@
     height: 230px;
     max-width: 1000px;
     width: 100%;
-    background-image: url(https://cdn.tourradar.com/s3/tour/1500x800/275867_662846a214c96.jpg), repeating-radial-gradient(circle at var(--start), transparent 0%, transparent 10%, rgba(54, 89, 219, .33) 10%, rgba(54, 89, 219, .33) 17%), linear-gradient(to right, #5b7cfa, #3659db);
+    /*background-image: repeating-radial-gradient(circle at var(--start), transparent 0%, transparent 10%, rgba(54, 89, 219, .33) 10%, rgba(54, 89, 219, .33) 17%), linear-gradient(to right, #5b7cfa, #3659db);*/
     background-position-x: center;
     background-position-y: top;
     color: #fff;
@@ -160,7 +160,7 @@
     width: 100%;
    
     
-    color: #5eb0d2;
+    color: #36A1C5;
     margin-bottom: 10px;
 }
 
@@ -205,11 +205,13 @@
 
 
 .leaderboard__picture {
-    max-width: 100%;
-    width: 60px;
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
     border-radius: 50%;
     box-shadow: 0 0 0 10px #ebeef3, 0 0 0 22px #f3f4f6;
 }
+
 
 .leaderboard__name {
     color: #979cb0;
@@ -220,7 +222,7 @@
 }
 
 .leaderboard__value {
-    color: #35d8ac;
+    color: #36A1C5;
     font-weight: 700;
     font-size: 34px;
     text-align: right;

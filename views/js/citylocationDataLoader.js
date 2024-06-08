@@ -34,7 +34,7 @@ const citylocation_load_data = () => {
                             
                                 if (locationNames.includes(result2.locationName)) {
                                     isChecked = true;
-                                    initMapPins(result2.locationName);
+                                    initMapPins(result2.locationName,result2.locationImg);
                                 }
 
                                 html2 +=  
@@ -156,7 +156,7 @@ document.addEventListener('customDropdownEventListener', function () {
 
 });
 
-const initMapPins = (locationName) => {
+const initMapPins = (locationName,locationImg) => {
     return new Promise((resolve, reject) => {
         const request = new XMLHttpRequest();
         request.open('GET', `/get_locationCoordinates?locationName=${locationName}`);
@@ -168,6 +168,15 @@ const initMapPins = (locationName) => {
             const locationCoordinatesLong = parseFloat(resultsLocation.locationCoordinatesLong);
             marker = new L.marker([locationCoordinatesLat, locationCoordinatesLong]); 
             var location = L.latLng(locationCoordinatesLat, locationCoordinatesLong);
+
+            // Pop-up içeriğini oluştur
+            const popupContent = `
+                <div>
+                    <h3>${locationName}</h3>
+                    <img src="${locationImg}" alt="${locationName}" style="width:100%;height:auto;"/>
+                </div>
+                `;
+            marker.bindPopup(popupContent);
             markers.push(marker); 
             marker.addTo(map);
             map.flyTo(location, 13)

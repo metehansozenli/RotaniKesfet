@@ -167,7 +167,7 @@ get_initLocationsData().then(data => {
         clusters: results
     };
 
-    console.log(JSON.stringify(output, null, 2));
+    //console.log(JSON.stringify(output, null, 2));
     organizedData = organizeLocationsByDay(output);
     insertHTMLIntoCluster();
 
@@ -201,7 +201,7 @@ function organizeLocationsByDay(data) {
     return organizedData;
 }
 
-
+var locationNamesData;
 
 async function insertHTMLIntoCluster() {
     const clusters = document.querySelector('.clusters');
@@ -212,33 +212,37 @@ async function insertHTMLIntoCluster() {
 
     const cityIDs = Object.keys(organizedData.locations);
 
-    const locationNamesData = await load_locationNames(locationIDs);
+    locationNamesData = await load_locationNames(locationIDs);
 
     cityIDs.forEach((cityID, index) => {
         const cityRoutes = organizedData.locations[cityID];
-
-
-
 
 
         var i = 0;
         cityRoutes.forEach(route => {
             const day = route.day;
             var locationCityName;
+            var locationImg;
+            var locationScore;
+            var cityImg;
+
             const locations = route.locations.map(location => {
                 // locationID'ye göre locationName'i al
                 const locationName = locationNamesData.find(data => data.locationID === location.locationID).locationName;
                 locationCityName = locationNamesData.find(data => data.locationID === location.locationID).locationCityName;
+                locationImg = locationNamesData.find(data => data.locationID === location.locationID).locationImg;
+                locationScore = locationNamesData.find(data => data.locationID === location.locationID).locationScore;
+                cityImg = locationNamesData.find(data => data.locationID === location.locationID).cityImg;
                 return `<article class="leaderboard__profile">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mark Zuckerberg" class="leaderboard__picture">
+                <img src=${locationImg} alt="img" class="leaderboard__picture">
                 <span class="leaderboard__name">${locationName}</span>
-                <span class="leaderboard__value">35.7<span>B</span></span>
+                <span class="leaderboard__value">${locationScore}</span>
             </article>`;
             }).join('');
 
             if (i == 0) {
                 clusters.innerHTML += ` <div class="cityRoute" > <main class="leaderboard">
-                                        <header>
+                                        <header style="background-image:url(${cityImg})">
                                         <h1 class="leaderboard__title">
                                         <span class="leaderboard__title--top">${locationCityName}</span>
                                         </h1>
@@ -320,14 +324,24 @@ function initMaps() {
         const markers = []; // Separate markers array for each map
 
         route.locations.forEach((location, i) => {
-
+            const locationData = locationNamesData.find(data => data.locationID === location.locationID);
             const locationCoordinatesLat = parseFloat(location.coordinates[0]);
             const locationCoordinatesLong = parseFloat(location.coordinates[1]);
             if (i == 0) {
                 map.setView([locationCoordinatesLat, locationCoordinatesLong], 14);
             }
-            const marker = new L.marker([locationCoordinatesLat, locationCoordinatesLong]);
+            const marker = L.marker([locationCoordinatesLat, locationCoordinatesLong]);
             markers.push(L.latLng(locationCoordinatesLat, locationCoordinatesLong));
+
+            // Pop-up içeriğini oluştur
+            const popupContent = `
+                <div>
+                    <h3>${locationData.locationName}</h3>
+                    <img src="${locationData.locationImg}" alt="${locationData.locationName}" style="width:100%;height:auto;"/>
+                </div>
+            `;
+            marker.bindPopup(popupContent);
+
             marker.addTo(map);
         });
 

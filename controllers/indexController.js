@@ -365,32 +365,41 @@ const getUserData = async (sessionuserId) => {
     }
   }
 
-const getTypeLocationData = async (locationtype,cityIDArray) => {
-  try {
-    const locationType = locationtype;
-    const cityIDs = cityIDArray;
-    const cityIdString = cityIDs.join(', ');
+  const getTypeLocationData = async (locationtype, cityIDArray) => {
+    try {
+        const locationType = locationtype;
+        const cityIDs = cityIDArray;
+        const cityIdString = cityIDs.join(', ');
 
-    const query2 = {
-        text: `
-            SELECT DISTINCT
-              locations."locationName"  
-            FROM
-                locations
-            WHERE "locationType" = $1 AND "locationCityID" IN (${cityIdString})
-            ORDER BY 
-              locations."locationName" DESC
-        `,
-        values: [locationType],
-    };
-    const result = await client.query(query2);
-    const locationNames = result.rows;
-    return locationNames
-} catch (error) {
-    console.error("Error fetching comment data:", error);
-    throw error; 
-  }
+        const query2 = {
+            text: `
+                SELECT DISTINCT
+                  locations."locationName",locations."locationImg"
+                FROM
+                    locations
+                WHERE "locationType" = $1 AND "locationCityID" IN (${cityIdString})
+                ORDER BY 
+                  locations."locationName" DESC
+            `,
+            values: [locationType],
+        };
+        const result = await client.query(query2);
+
+        if (result.rows.length > 0) {
+            const locationNames = result.rows.map(row => ({
+                locationName: row.locationName,
+                locationImg: row.locationImg
+            }));
+            return locationNames;
+        } else {
+            return null; // Sonuç yoksa null döndür
+        }
+    } catch (error) {
+        console.error("Error fetching comment data:", error);
+        throw error;
+    }
 }
+
 
 const getActiveTypeLocationData = async (userLocationtype,cityIDArray) => {
   try {
@@ -532,7 +541,6 @@ const getRoutesData = async (routeID) => {
       routeLocationCoordinates: result.rows[0].locationcoordinates,
       locationCityID: result.rows[0].locationcityids
     }
-    console.log(routeData)
     return routeData; // routes tablosundaki her veriyi döndürür
 
   } catch (error) {
@@ -579,7 +587,7 @@ const getLocationName = async (locationIDs) => {
     const result = await client.query(
       `
       SELECT 
-        locations."locationName", locations."locationID", cities."cityName"
+        locations."locationName", locations."locationID", cities."cityName",cities."cityImg",locations."locationImg",locations."locationScore"
       FROM 
         locations
       JOIN
@@ -596,6 +604,9 @@ const getLocationName = async (locationIDs) => {
         locationID: row.locationID,
         locationName: row.locationName,
         locationCityName: row.cityName,
+        locationImg: row.locationImg,
+        locationScore: row.locationScore,
+        cityImg: row.cityImg
       }));
 
       return locationData;
