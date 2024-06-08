@@ -2,10 +2,57 @@ var j = 1;
 var i = 1;
 var markers = new Array();
 var routeID = window.routeID;
+var locationData = [];
+var map=null;
 document.addEventListener('DOMContentLoaded', function () {
-    citylocation_load_data();
+        
+        loadDataAndInitPins();
     
 });
+
+
+// citylocation_load_data fonksiyonunun asenkron olarak çalıştığını varsayıyoruz
+async function loadDataAndInitPins() {
+    try {
+        // citylocation_load_data fonksiyonunu bekleyin
+        
+        await citylocation_load_data();
+
+        const map1 = document.querySelector('.routePlanner-map1');
+        map = L.map(map1).setView([51.505, -0.09], 13);
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map);
+
+
+        let counter = 0;
+        const totalLocations = locationData.length;
+        // locationData dizisindeki her bir öğe için döngü
+        for (const location of locationData) {
+            counter++;
+            console.log(location.locationName);
+
+            if(counter==locationData.length){
+                
+            initMapPins(location.locationName, location.locationImg, true);
+        
+            continue;
+            }
+            // initMapPins fonksiyonunu çağır ve konum adı ve resmi ile birlikte çağır
+            initMapPins(location.locationName, location.locationImg, false);
+        }
+
+        var routePlannerScript = document.createElement('script');
+                routePlannerScript.src = './js/routePlanner.js';
+                document.body.appendChild(routePlannerScript);
+
+
+    } catch (error) {
+        console.error('Veri yükleme sırasında bir hata oluştu:', error);
+    }
+}
+
 
 const citylocation_load_data = () => {
     
@@ -33,8 +80,13 @@ const citylocation_load_data = () => {
                                 let isChecked = false; // Öğe varsayılan olarak işaretlenmemiş olsun
                             
                                 if (locationNames.includes(result2.locationName)) {
+                                    // Eğer locationNames içinde bu konum varsa, bir nesne oluştur ve diziye ekle
+                                   
                                     isChecked = true;
-                                    initMapPins(result2.locationName,result2.locationImg);
+                                    locationData.push({
+                                        locationName: result2.locationName,
+                                        locationImg: result2.locationImg
+                                    });
                                 }
 
                                 html2 +=  
@@ -53,7 +105,7 @@ const citylocation_load_data = () => {
                                 <div class="dropdowns-container">
                                     <div class="calendar-category-container">
                                         <div class="select-btn" id="select-btn">
-                                            <span class="btn-text">${result.locationType}</span>
+                                            <p class="btn-text" >${result.locationType}</p>
                                             <span class="arrow-dwn">
                                                 <i class="fa-solid fa-chevron-down"></i>
                                             </span>
@@ -156,7 +208,7 @@ document.addEventListener('customDropdownEventListener', function () {
 
 });
 
-const initMapPins = (locationName,locationImg) => {
+const initMapPins = (locationName,locationImg, fly) => {
     return new Promise((resolve, reject) => {
         const request = new XMLHttpRequest();
         request.open('GET', `/get_locationCoordinates?locationName=${locationName}`);
@@ -179,7 +231,13 @@ const initMapPins = (locationName,locationImg) => {
             marker.bindPopup(popupContent);
             markers.push(marker); 
             marker.addTo(map);
-            map.flyTo(location, 13)
+            if(fly){
+                document.getElementById("content").style.display = "block";
+                document.getElementById("loading-screen").style.display = "none";
+                map.invalidateSize();
+                map.flyTo(location, 13);
+            }
+            
             resolve(); // İşlem tamamlandığında Promise'i çöz
             
         };

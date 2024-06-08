@@ -234,7 +234,7 @@ async function insertHTMLIntoCluster() {
                 locationScore = locationNamesData.find(data => data.locationID === location.locationID).locationScore;
                 cityImg = locationNamesData.find(data => data.locationID === location.locationID).cityImg;
                 return `<article class="leaderboard__profile">
-                <img src=${locationImg} alt="img" class="leaderboard__picture">
+                <img src=${locationImg} alt="img" class="picture">
                 <span class="leaderboard__name">${locationName}</span>
                 <span class="leaderboard__value">${locationScore}</span>
             </article>`;
