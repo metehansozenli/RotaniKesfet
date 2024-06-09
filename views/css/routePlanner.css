@@ -347,3 +347,181 @@ body.loaded #content {
         transform: translateX(0);
     }
 }
+
+
+
+ /*--------------------------------Pop-up-------------------------------------*/
+ .leaflet-popup-content-wrapper {
+    max-width: 250px;
+
+    padding: 10px;
+}
+
+.leaflet-popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.leaflet-popup-content img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.leaflet-popup-content h3 {
+    margin: 5px 0;
+}
+
+
+div.leaflet-routing-alternatives-container {
+    display: none !important;
+}
+
+.leaflet-routing-container {
+    display: none;
+}
+
+.routePlanner {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.routePlanner.mt-4 {
+    margin-bottom: 20px;
+    padding: 70px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.routePlanner-map1 {
+    margin-top: 45px;
+    border-radius: 35px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.routePlanner p {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.routePlanner .btn-save,
+.routePlanner .btn-back {
+    width: 140px;
+    margin-right: 10px;
+    border-radius: 8px;
+    background-color: #36A1C5;
+    color: aliceblue;
+}
+
+.routePlanner .btn-update {
+    border-radius: 8px;
+    background-color: #36A1C5;
+    width: 300px;
+    height: 50px;
+    margin-bottom: 50px;
+}
+
+
+.cityRoute {
+    margin-bottom: 80px;
+}
+
+.cityRoute-locations {
+    width: 580px;
+    max-height: 340px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0px;
+}
+
+
+.cityRoute-upcontent {
+    align-items: center !important;
+    justify-content: space-between;
+}
+
+.cityRoute-upcontent h3 {
+    margin-left: 60px;
+    font-size: 36px;
+}
+
+.cityRoute-upcontent img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+}
+
+
+.cityRoute-transports {
+    margin-right: 60px;
+}
+
+.cityRoute-mainContent {
+    justify-content: center;
+    align-items: center;
+}
+
+.cityRoute-mainContent .routePlanner-map {
+    width: 500px;
+    height: 350px;
+
+
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    outline-style: none;
+}
+
+.cityRoute-list {
+    list-style-type: none;
+    margin-left: 50px;
+    padding: 0px;
+    width: 100%;
+}
+
+.cityRoute-list li {
+    padding: 14px;
+    border-radius: 10px;
+    /* İstediğiniz yuvarlama miktarını ayarlayın */
+    background-color: #f0f0f0;
+    /* İçeriğin arka plan rengi */
+    margin-bottom: 10px;
+    width: 500px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.cityRoute-content {
+    display: flex;
+    flex-direction: column;
+    /* Dikey yönde sıralar */
+    /* Yatayda ortalar */
+    justify-content: center;
+    /* Dikeyde ortalar */
+}
+
+.route-title {
+    margin-top: 100px;
+    margin-left: 30px;
+    margin-bottom: 60px;
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.clusters hr {
+    margin-bottom: 30px;
+
+}
+
+
+.btn-text {
+    display: flex !important;
+    justify-content: center !important;
+    text-align: center !important;
+    vertical-align: middle;
+
+}

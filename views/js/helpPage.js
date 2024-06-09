@@ -3,12 +3,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById("myModal");
     const modalText = document.getElementById("modalText");
     const span = document.getElementsByClassName("close")[0];
+    const closeButtons = document.querySelectorAll(".close");
 
     cards.forEach(card => {
         card.addEventListener('click', function () {
             const infoText = this.getAttribute('data-info');
             modalText.innerHTML = infoText;
             modal.style.display = "block";
+            hiddenMainScroll();
         });
     });
 
@@ -21,6 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
             modal.style.display = "none";
         }
     }
+
+    closeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            displayMainScroll();
+        });
+    });
 });
 
 function toggleClearButton() {
@@ -37,3 +45,12 @@ function clearSearch() {
 }
 
 document.addEventListener('DOMContentLoaded', toggleClearButton);
+
+function hiddenMainScroll() {
+    document.body.style.overflow = 'hidden';
+}
+
+// Modal kapatıldığında
+function displayMainScroll() {
+    document.body.style.overflow = 'auto';
+}
