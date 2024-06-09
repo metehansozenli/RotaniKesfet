@@ -19,7 +19,7 @@ async function loadDataAndInitPins() {
         await citylocation_load_data();
 
         const map1 = document.querySelector('.routePlanner-map1');
-        map = L.map(map1).setView([51.505, -0.09], 13);
+        map = L.map(map1).setView([40.898, 29.309], 13);
                     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'

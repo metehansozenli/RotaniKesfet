@@ -2,6 +2,7 @@ document.getElementById('submitButton').addEventListener('click', function () {
     const form = document.getElementById('updateForm');
     const formData = new FormData(form);
 
+
     const data = {};
     formData.forEach((value, key) => {
         data[key] = value;
@@ -58,3 +59,8 @@ document.querySelectorAll('#updateForm input').forEach(input => {
         document.getElementById('submitButton').disabled = !allFieldsFilled;
     });
 }); 
+
+document.addEventListener('DOMContentLoaded', function() {
+    // DOM yüklendiğinde çalışacak kodlar buraya gelecek
+    document.getElementById('submitButton').disabled = true;
+});
