@@ -28,7 +28,7 @@
 
 
 <body>
-<div id="loading-screen">
+    <div id="loading-screen">
         <div class="loaderContainer">
             <div class="pageloader">
                 <div class="loader--dot"></div>
@@ -43,40 +43,43 @@
     </div>
 
 
-<div id="content">
-    {{>config}}
+    <div id="content">
+        {{>config}}
 
-    <div class="container" style="margin-bottom:180px;">
+        <div class="container" style="margin-bottom:180px;">
 
-        <section class="routePlanner mt-4  text-center">
-            <div class="routeTitle"></div>
-            <div class="routePlanner-map1" id="map" style="height: 500px; outline-style: none;"
-                class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom">
-               
-            </div>
-            <p>Rotanı bu aşamada da isteğin gibi özelleştirebilirsin.</p>
-            <div class="dropdownsContainer" id="dropdownsContainer">
-            </div>
+            <section class="routePlanner mt-4  text-center">
+                <div class="routeTitle  text-muted" style="font-family: sans-serif, Arial;"></div>
+                <div class="routePlanner-map1" id="map" style="height: 500px; outline-style: none;"
+                    class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom">
 
-            <button type="submit" class="btn-update" id="btn_update">Güncelle</button>
+                </div>
+                <br /><br />
+                <h2 class="display-7 text-center text-muted" style=" font-family: sans-serif,Arial;">Rotanı bu aşamada
+                    da isteğin gibi özelleştirebilirsin.</h2>
+                <br /><br />
+                <div class="dropdownsContainer" id="dropdownsContainer">
+                </div>
 
-
-            <div class="clusters">
-
-
-            </div>
-
-        <button type="submit" class="btn-back">Rotayı Sil</button>
-        <button type="submit" class="btn-save">Rotayı Kaydet</button>
-
-    
+                <button type="submit" class="btn-update" id="btn_update">Güncelle</button>
 
 
+                <div class="clusters">
 
-    </section>
 
-    </div>
-    {{>footer}}
+                </div>
+
+                <button type="submit" class="btn-back">Rotayı Sil</button>
+                <button type="submit" class="btn-save">Rotayı Kaydet</button>
+
+
+
+
+
+            </section>
+
+        </div>
+        {{>footer}}
     </div>
 
 
@@ -101,28 +104,28 @@
 </html>
 
 <style>
-
-  /*--------------------------------Pop-up-------------------------------------*/
+    /*--------------------------------Pop-up-------------------------------------*/
     .leaflet-popup-content-wrapper {
-    max-width: 250px;
-     
-    padding: 10px; 
+        max-width: 250px;
+
+        padding: 10px;
     }
-    
+
     .leaflet-popup-content {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+
     .leaflet-popup-content img {
-        width: 100%; 
+        width: 100%;
         height: auto;
-        object-fit: cover; 
-        border-radius: 5px; 
+        object-fit: cover;
+        border-radius: 5px;
     }
 
     .leaflet-popup-content h3 {
-        margin: 5px 0; 
+        margin: 5px 0;
     }
 
 
@@ -269,12 +272,12 @@
     }
 
 
-    .btn-text{
+    .btn-text {
         display: flex !important;
         justify-content: center !important;
         text-align: center !important;
         vertical-align: middle;
-        
+
     }
 </style>
 

@@ -28,10 +28,28 @@
 
 
 
-.btn-load-more {
-    height: 50px;
-    border-radius: 10px;
-    margin-bottom: 30px;
+.btn-primary.btn-load-more {
+    background-color: #36A1C5;
+    border-color: #36A1C5;
+    color: #fff;
+    padding: 10px 20px;
+    margin-bottom: 53px;
+    font-size: 16px;
+    border-radius: 25px;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+
+.btn:disabled {
+    cursor: not-allowed;
+    background-color: #36A1C5 !important;
+}
+
+.btn:not(:disabled):hover {
+    cursor: pointer;
+    /* Butona tıklandıktan sonra imleci 'pointer' olarak değiştirir */
+    background-color: #0056B3;
+
 }
 
 ion-icon {
