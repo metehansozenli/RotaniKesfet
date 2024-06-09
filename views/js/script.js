@@ -402,7 +402,6 @@ document.addEventListener('customlikeControlEvent',  async function () {
 
 
     };
-
 });
 
 
@@ -511,14 +510,18 @@ function filterCommentsByStars() {
     const comments = document.querySelectorAll('.mycomment-S4 .comment-card');
 
     comments.forEach(comment => {
-        const stars = parseInt(comment.querySelector('.comment-score').textContent);
+        const stars = parseInt(comment.dataset.commentscore);
 
+        comment.style.display = 'none';
+       
         if (selectedStars.length === 0) {
             comment.style.display = 'block';
         } else if (selectedStars.includes(stars)) {
             comment.style.display = 'block';
+           
         } else {
             comment.style.display = 'none';
+            
         }
     });
 }
@@ -529,10 +532,10 @@ var selectedCategories = [];
 
 function filterCommentsByCategory() {
     const comments = document.querySelectorAll('.mycomment-S4 .comment-card');
-
     comments.forEach(comment => {
         const category = comment.dataset.category;
-        console.log(category)
+       
+        comment.style.display = 'none';
 
         if (selectedCategories.length === 0) {
             comment.style.display = 'block';
@@ -546,7 +549,7 @@ function filterCommentsByCategory() {
 
 }
 
-
+selectedSorting = '';
 
 function sortComments() {
     const comments = document.querySelectorAll('.mycomment-S4 .comment-card');

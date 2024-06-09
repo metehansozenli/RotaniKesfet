@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', async() => {
 
 
     if (window.innerHeight + window.scrollY + 6 >= document.body.offsetHeight && state && !finish) {
@@ -51,7 +51,7 @@ const mycomments_load_data = (userID) => {
                     commentDate = months[month] + " " + year;
 
                     html += `
-                                <div class="comment-card" data-category="${result.locationType}" data-date="${result.commentDate}">
+                                <div class="comment-card" data-category="${result.locationType}" data-date="${result.commentDate}" data-commentscore="${result.commentScore}">
                                     <div class="row d-flex">
                                         <div class="">
                                             <img class="profile-pic" src="${result.locationImg}">
@@ -109,6 +109,7 @@ const mycomments_load_data = (userID) => {
                 filterCommentsByStars();
                 filterCommentsByCategory();
                 sortComments();
+                filterCommentsByStars();
                 window.scrollBy(0, -100);
                 resolve(); // İşlem tamamlandığında Promise'i çöz
             } else {
@@ -117,6 +118,7 @@ const mycomments_load_data = (userID) => {
                 filterCommentsByStars();
                 filterCommentsByCategory();
                 sortComments();
+                filterCommentsByStars();
                 window.scrollBy(0, -80);
 
                 resolve(); // İşlem tamamlandığında Promise'i çöz

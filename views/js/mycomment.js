@@ -41,7 +41,7 @@ const selectBtn2 = document.getElementById("select-btn2");
             let checked2 = document.querySelectorAll(".comments-Listboxs2 .checked"),
                 btnText2 = document.querySelector(".btn-text2");
 
-            selectedSorting = '';
+            
             if (checked2 && checked2.length > 0) {
                 selectedSorting = checked2[0].querySelector('.item-text').textContent.trim();
                 btnText2.innerText = selectedSorting;
