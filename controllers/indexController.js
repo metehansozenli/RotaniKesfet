@@ -882,6 +882,6 @@ async function getRoutesAndRandomCityByUserID(userID) {
     getLocationName,
     insertComment,
     getRoutesAndRandomCityByUserID,
-    deleteRoute  
-    
+    deleteRoute
+   
   };

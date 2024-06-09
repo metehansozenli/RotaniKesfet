@@ -98,13 +98,11 @@ app.use("/", myroutes)
 app.use("/", deleteRoute)
 
 
-app.get("/helpPage", (req, res) => {
-  res.render("helpPage")
-})
 
 app.get("/helpPage", (req, res) => {
   res.render("helpPage")
 })
+
 
 app.get("/userGuide", (req, res) => {
   res.render("userGuide")
@@ -314,6 +312,7 @@ app.post('/updateTravel', async (req, res) => {
     res.status(500).json({ success: false, error: 'An error occurred' });
   }
 });
+
 app.post('/update-profile', (req, res) => {
   let { firstName, lastName, phoneNumber, email, password } = req.body;
   const userID = req.session.userID; // Oturumdan kullanıcı kimliğini alın
@@ -333,3 +332,29 @@ app.post('/update-profile', (req, res) => {
   });
 });
 
+
+
+app.post('/get_locationTypeCount', async (req, res) => {
+  try {
+    const result = await client.query(`
+      SELECT c."cityName", l."locationType", COUNT(*) AS typeCount
+      FROM locations l
+      JOIN cities c ON l."locationCityID" = c."cityID"
+      GROUP BY c."cityName", l."locationType";
+    `);
+
+    // Veritabanından gelen sonuçları uygun bir veri yapısına dönüştür
+    const locationTypeCounts = result.rows.map(row => ({
+      cityName: row.cityName,
+      locationType: row.locationType,
+      count: row.typecount
+    }));
+
+    // Sonuçları JSON olarak gönder
+    res.json({ locationTypeCData: locationTypeCounts });
+  } catch (err) {
+    console.error('Hata oluştu:', err);
+    // Hata durumunda 500 Internal Server Error gönder
+    res.status(500).send("Internal Server Error");
+  }
+});

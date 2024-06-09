@@ -2,7 +2,36 @@ var startBtn = document.getElementById("travelStartBtn");
 var selectBtn = document.getElementById("select-btn");
 var createTravelBtn = document.getElementById("createTravelBtn");
 var city_names = ["Kopenhag", "Cenevre", "Moskova", "Sevilla", "Frankfurt", "Münih", "Kiev", "Valencia", "Bilbao", "Madrid", "Marsilya", "Milano", "Napoli", "Nice", "Palermo", "Amsterdam", "Berlin", "Brüksel", "Budapeşte", "Helsinki", "Venedik", "Vilnius", "Hamburg", "Floransa", "Londra", "Oslo", "Riga", "Viyana", "Zürih", "Dublin", "Barselona", "Stockholm", "St. Petersburg", "Paris", "Roma", "Krakow", "Tallinn", "Prag", "Lizbon"];
+var locationTypeCounts;
+var selectedLocationCount = 0;
+var spesificLocationCount = {};
 
+async function getLocationTypeCount() {
+    try {
+        const response = await fetch('/get_locationTypeCount', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        // Burada veriyi kullanabilirsiniz
+        return data; // Veriyi döndür
+    } catch (error) {
+        console.error('Veri çekme hatası:', error);
+        return null; // Hata durumunda null döndür
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    if (window.userID) {
+        const data = await getLocationTypeCount();
+        locationTypeCounts = data.locationTypeCData;
+    }
+});
 
 
 function travelStartBtn() {
@@ -40,18 +69,115 @@ selectBtn.addEventListener("click", () => {
 
 items.forEach(item => {
     item.addEventListener("click", () => {
+
+        const destinationCities = [];
+        const categoryName = item.textContent.trim();
+
+        var destinasyon = document.querySelectorAll(".destinasyon-list li");
+        if (destinasyon.length === 0) {
+            alert("Lütfen en az bir Destinasyon girin.");
+            return false;
+        }
+
+        const isChecked = item.classList.contains("checked");
+
+        destinasyon.forEach(li => {
+            destinationCities.push(li.textContent.trim());
+        });
+
+        // locationTypeCounts içerisinde locationName özelliğini ara
+        const foundLocations = locationTypeCounts.filter(location => destinationCities.includes(location.cityName));
+
+        // Eğer bulunan bir lokasyon varsa yapılacak işlemleri gerçekleştir
+        if (foundLocations.length > 0) {
+            // Bulunan lokasyonların adını konsola yazdır
+            foundLocations.forEach(foundLocation => {
+                if (foundLocation.locationType == categoryName) {
+
+                    if (!spesificLocationCount[foundLocation.cityName]) {
+                        spesificLocationCount[foundLocation.cityName] = 0;
+                    }
+
+                    if (!isChecked) {
+                        selectedLocationCount += parseInt(foundLocation.count);
+                        spesificLocationCount[foundLocation.cityName] += parseInt(foundLocation.count);
+
+                    } else {
+                        selectedLocationCount -= parseInt(foundLocation.count);
+                        spesificLocationCount[foundLocation.cityName] -= parseInt(foundLocation.count);
+
+
+                    }
+                    var locationCountID = document.getElementById(foundLocation.cityName);
+                    locationCountID.innerHTML = `<img src="../images/location.png">&nbsp&nbsp${foundLocation.cityName}: ${spesificLocationCount[foundLocation.cityName]}`;
+
+                }
+            });
+        } else {
+            console.log("Destinasyonda bulunan herhangi bir lokasyon bulunamadı.");
+        }
+
         item.classList.toggle("checked");
 
         let checked = document.querySelectorAll(".checked"),
             btnText = document.querySelector(".btn-text");
 
         if (checked && checked.length > 0) {
-            btnText.innerText = `${checked.length} Seçildi`;
+            btnText.innerText = `${selectedLocationCount} Lokasyon Seçildi`;
         } else {
             btnText.innerText = "Kategori Seç";
         }
     });
 })
+
+
+
+
+function computeLocationCounts(cityName, add, all) {
+    const checkedItems = document.querySelectorAll(".checked");
+    const foundLocations = locationTypeCounts.filter(location => location.cityName.includes(cityName));
+
+    checkedItems.forEach(item => {
+        const categoryName = item.textContent.trim();
+        if (foundLocations.length > 0) {
+            // Bulunan lokasyonların adını konsola yazdır
+            foundLocations.forEach(foundLocation => {
+
+                if (!spesificLocationCount[cityName]) {
+                    spesificLocationCount[cityName] = 0;
+                }
+
+                if (foundLocation.locationType == categoryName) {
+                    if (add) {
+
+                        selectedLocationCount += parseInt(foundLocation.count);
+                        spesificLocationCount[cityName] += parseInt(foundLocation.count);
+
+                    } else {
+                        selectedLocationCount -= parseInt(foundLocation.count);
+                        spesificLocationCount[cityName] -= parseInt(foundLocation.count);
+
+
+                    }
+
+                }
+            });
+        } else {
+            console.log("Destinasyonda bulunan herhangi bir lokasyon bulunamadı.");
+        }
+
+        btnText = document.querySelector(".btn-text");
+        if (tags.length === 0 && !add && !all) {
+            item.classList.toggle("checked");
+            btnText.innerText = "Kategori Seç";
+        }
+
+
+        btnText.innerText = `${selectedLocationCount} Lokasyon Seçildi`;
+    });
+
+}
+
 
 
 const ul = document.querySelector(".seyahatAdiSec ul");
@@ -79,7 +205,7 @@ function createTag() {
     if (tags.length >= 1) {
         addDatePicker();
     }
-    
+
     input.placeholder = tags.length > 0 ? "" : "Şehir Ekle";
 }
 
@@ -92,12 +218,12 @@ function addDatePicker() {
     var i = tags.length;
     var html =
         `<div class="input-group input-daterange d-flex" id="calendar${i}">
-            <div>
+            <div class="travel-date">
                 <span class="fa fa-calendar" id="fa-1"></span>
                 <input type="text" id="start${i}" class="form-control text-right mr-2">
             </div>
 
-            <div class="d-block">
+            <div class="travel-date d-block">
                 <span class="fa fa-calendar" id="fa-2"></span>
                 <input type="text" id="end${i}" class="form-control text-right">
             </div>
@@ -129,6 +255,17 @@ function remove(element, tag) {
     }
 
 
+    var locationCounts = document.getElementById("locationCounts");
+    var pElement = locationCounts.querySelector("#" + tag); // locationCounts içindeki tag ID'sine sahip p elementini seçer
+    var pElements2 = locationCounts.getElementsByTagName("h5");
+    if (pElement) {
+        pElement.parentNode.removeChild(pElement); // Seçilen p elementini kaldırır
+    }
+    
+    locationCounts.removeChild(pElements2[0]);
+    locationCounts.style.display = "none"; 
+
+
     var i = index + 1;
     var calendarId = `#calendar${i}`;
 
@@ -143,7 +280,13 @@ function remove(element, tag) {
         var updatedEndId = `#end${j}`;
         $(updatedStartId).attr("id", `start${j - 1}`);
         $(updatedEndId).attr("id", `end${j - 1}`);
+
     }
+
+    countTags();
+    computeLocationCounts(tag, false, false);
+    delete spesificLocationCount[tag];
+
 }
 
 function addTag(e) {
@@ -158,6 +301,31 @@ function addTag(e) {
             }
         }
         e.target.value = "";
+
+        var locationCountsID = document.getElementById("locationCounts")
+
+
+        if (tags.length > 0) {
+            computeLocationCounts(tag, true, false)
+        }
+        if(tags.length==1){
+            locationCounts.style.display = "block"; 
+            locationCountsID.innerHTML += `<h5 id="lokasyonTitle">Lokasyon Sayıları</h6>`;
+        }
+
+    
+
+        
+
+        if(spesificLocationCount[tag]){
+            locationCountsID.innerHTML += `<p id="${tag}"><img src="../images/location.png">&nbsp&nbsp${tag}: ${spesificLocationCount[tag]}</p>`;
+        }else{
+            locationCountsID.innerHTML += `<p id="${tag}"><img src="../images/location.png">&nbsp&nbsp${tag}: 0</p>`;
+        }
+        
+
+
+
     }
 }
 
@@ -166,17 +334,44 @@ input.addEventListener("keyup", addTag);
 // Butonun class'ını doğru şekilde değiştirdim
 const removeBtn = document.querySelector(".sehirSecDetaylari button");
 removeBtn.addEventListener("click", () => {
-    
+    const checkedItems = document.querySelectorAll(".checked");
     ul.querySelectorAll("li").forEach(li => li.remove());
-    for (var j = 1; j <= tags.length ; j++) {
+    for (var j = 1; j <= tags.length; j++) {
         var calendarId = `#calendar${j}`;
         $(calendarId).remove();
+        computeLocationCounts(tags[j - 1], false, true);
     }
+
+    for (let key in spesificLocationCount) {
+        delete spesificLocationCount[key];
+    }
+
+    checkedItems.forEach(item => {
+        item.classList.toggle("checked");
+    });
+
+    var locationCounts = document.getElementById("locationCounts");
+    var pElements = locationCounts.getElementsByTagName("p");
+    var pElements2 = locationCounts.getElementsByTagName("h5");
+
+    
+    locationCounts.removeChild(pElements2[0]);
+    locationCounts.style.display = "none"; 
+    // Dizi gibi davranarak tüm p elementlerini sil
+    while (pElements[0]) {
+        locationCounts.removeChild(pElements[0]);
+    }
+
+    
 
     document.getElementById("labelstart").classList.remove("visible");
     document.getElementById("labelend").classList.remove("visible");
-    
+
     tags.length = 0;
+
+    btnText = document.querySelector(".btn-text");
+    btnText.innerText = "Kategori Seç";
+
     createTag();
 });
 
@@ -190,6 +385,8 @@ createTravelBtn.addEventListener("click", async () => {
     const routeStartDates = [];
     const routeFinishDates = []
     const userID = window.userID
+
+    if (!validateForm()) return;
 
     // Her bir tag için tarih eklemek için döngü kullanma
     for (let i = 1; i <= tags.length; i++) {
@@ -223,12 +420,87 @@ createTravelBtn.addEventListener("click", async () => {
     });
 
     // Sunucudan gelen yanıtı al
-    result=await response.json();
-    routeID=result.newRouteID;
+    result = await response.json();
+    routeID = result.newRouteID;
     window.location.href = `/routePlanner?routeID=${routeID}`;
 
 });
 
+
+
+function validateForm() {
+    var seyahatAdi = document.getElementById("seyahatAdi").value;
+    var destinasyon = document.querySelectorAll(".destinasyon-list li").length;
+    let checked = document.querySelectorAll(".checked").length;
+    var travelDates = document.querySelectorAll('.travel-date input');
+
+    console.log(spesificLocationCount)
+    if (seyahatAdi === "") {
+        alert("Lütfen Seyahat Adını girin.");
+        return false;
+    }
+    if (destinasyon === 0) {
+        alert("Lütfen en az bir Destinasyon girin.");
+        return false;
+    }
+    if (checked < 2) {
+        alert("Lütfen en az iki tane kategori seçiniz.");
+        return false;
+    }
+    for (var input of travelDates) {
+        if (input.value === "") {
+            alert("Lütfen tüm tarih alanlarını doldurun.");
+            return false;
+        }
+    }
+    var previousEndDate = null;
+    for (var i = 0; i < travelDates.length; i += 2) {
+        var startDate = travelDates[i].value;
+        var endDate = travelDates[i + 1].value;
+
+        if (startDate === "" || endDate === "") {
+            alert("Lütfen tüm tarih alanlarını doldurun.");
+            return false;
+        }
+
+        if (previousEndDate) {
+            var start = new Date(startDate.split('-').reverse().join('-'));
+            var end = new Date(previousEndDate.split('-').reverse().join('-'));
+            if (start <= end) {
+                alert("Tarihleri kontrol edin: Yeni seyahatin başlangıcı, önceki seyahatin bitişinden sonra olmalı.");
+                return false;
+            }
+        }
+        previousEndDate = endDate;
+    }
+
+    if (selectedLocationCount==0) {
+        alert("Seçili lokasyon sayısı 0. Lütfen başka kategorileri seçiniz.");
+                return false;
+    }
+
+    for (var i = 0, j = 0; i < travelDates.length; i += 2, j++) {
+        var startDate = new Date(travelDates[i].value.split('-').reverse().join('-'));
+        var endDate = new Date(travelDates[i + 1].value.split('-').reverse().join('-'));
+        const values = Object.values(spesificLocationCount);
+        const cityLocationCount = values
+        console.log(cityLocationCount)
+
+        var diffTime = Math.abs(endDate - startDate);
+        var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        const count = cityLocationCount[j];
+        if (count < diffDays) {
+            console.log(diffDays)
+            console.log(count)
+            alert("Lokasyon sayısı, seyahat tarihleri arasındaki gün sayısından az olamaz.");
+            return false;
+        }
+
+    }
+
+    return true;
+}
 
 
 
@@ -307,76 +579,76 @@ function addRouteChoices(items) {
 // }
 // Kullanımı
 
-  function autocomplete(inp, arr) {
+function autocomplete(inp, arr) {
     var currentFocus;
-    inp.addEventListener("input", function(e) {
-      var a, b, i, val = this.value;
-      closeAllLists();
-      if (!val) { return false;}
-      currentFocus = -1;
-      a = document.createElement("DIV");
-      a.setAttribute("id", this.id + "autocomplete-list");
-      a.setAttribute("class", "autocomplete-list");
-      this.parentNode.appendChild(a);
-      for (i = 0; i < arr.length; i++) {
-        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-          b = document.createElement("DIV");
-          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-          b.innerHTML += arr[i].substr(val.length);
-          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-          b.addEventListener("click", function(e) {
-            inp.value = this.getElementsByTagName("input")[0].value;
-            closeAllLists();
-          });
-          a.appendChild(b);
+    inp.addEventListener("input", function (e) {
+        var a, b, i, val = this.value;
+        closeAllLists();
+        if (!val) { return false; }
+        currentFocus = -1;
+        a = document.createElement("DIV");
+        a.setAttribute("id", this.id + "autocomplete-list");
+        a.setAttribute("class", "autocomplete-list");
+        this.parentNode.appendChild(a);
+        for (i = 0; i < arr.length; i++) {
+            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                b = document.createElement("DIV");
+                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML += arr[i].substr(val.length);
+                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                b.addEventListener("click", function (e) {
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                    closeAllLists();
+                });
+                a.appendChild(b);
+            }
         }
-      }
     });
 
-    inp.addEventListener("keydown", function(e) {
-      var x = document.getElementById(this.id + "autocomplete-list");
-      if (x) x = x.getElementsByTagName("div");
-      if (e.keyCode == 40) {
-        currentFocus++;
-        addActive(x);
-      } else if (e.keyCode == 38) {
-        currentFocus--;
-        addActive(x);
-      } else if (e.keyCode == 13) {
-        e.preventDefault();
-        if (currentFocus > -1) {
-          if (x) x[currentFocus].click();
+    inp.addEventListener("keydown", function (e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+            currentFocus++;
+            addActive(x);
+        } else if (e.keyCode == 38) {
+            currentFocus--;
+            addActive(x);
+        } else if (e.keyCode == 13) {
+            e.preventDefault();
+            if (currentFocus > -1) {
+                if (x) x[currentFocus].click();
+            }
         }
-      }
     });
 
     function addActive(x) {
-      if (!x) return false;
-      removeActive(x);
-      if (currentFocus >= x.length) currentFocus = 0;
-      if (currentFocus < 0) currentFocus = (x.length - 1);
-      x[currentFocus].classList.add("autocomplete-active");
+        if (!x) return false;
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        x[currentFocus].classList.add("autocomplete-active");
     }
 
     function removeActive(x) {
-      for (var i = 0; i < x.length; i++) {
-        x[i].classList.remove("autocomplete-active");
-      }
+        for (var i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+        }
     }
 
     function closeAllLists(elmnt) {
-      var x = document.getElementsByClassName("autocomplete-list");
-      for (var i = 0; i < x.length; i++) {
-        if (elmnt != x[i] && elmnt != inp) {
-          x[i].parentNode.removeChild(x[i]);
+        var x = document.getElementsByClassName("autocomplete-list");
+        for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);
+            }
         }
-      }
     }
 
     document.addEventListener("click", function (e) {
-      closeAllLists(e.target);
+        closeAllLists(e.target);
     });
-  }
+}
 
-  
-  autocomplete(document.getElementById("destinasyon-tag"), city_names);
+
+autocomplete(document.getElementById("destinasyon-tag"), city_names);
