@@ -19,7 +19,7 @@ async function loadDataAndInitPins() {
         await citylocation_load_data();
 
         const map1 = document.querySelector('.routePlanner-map1');
-        map = L.map(map1).setView([40.898, 29.309], 13);
+        map = L.map(map1).setView([41.2597, 28.7430], 13);
                     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -271,6 +271,10 @@ const getLocationID = (locationName) => {
 var routeChoices;
 
 btn_update.addEventListener("click", async () => {
+    
+    document.getElementById("content").style.display = "none";
+    document.getElementById("loading-screen").style.display = "block";
+
     const selectBtns = document.querySelectorAll(".select-btn");
     const routeLocationsPromises = []; // Tüm getLocationID promise'lerini saklamak için dizi
     routeChoices = []; 
