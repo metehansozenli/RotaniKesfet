@@ -307,7 +307,7 @@ function addTag(e) {
         var locationCountsID = document.getElementById("locationCounts")
 
 
-        if(e.target.value != ""){
+        if(e.target.value != "" && tags.length>0){
         if(tags.length==1){
             locationCounts.style.display = "block"; 
             locationCountsID.innerHTML += `<h5 id="lokasyonTitle">Lokasyon Sayıları</h5>`;
