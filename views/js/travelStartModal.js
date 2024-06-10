@@ -262,9 +262,11 @@ function remove(element, tag) {
         pElement.parentNode.removeChild(pElement); // Seçilen p elementini kaldırır
     }
     
-    locationCounts.removeChild(pElements2[0]);
-    locationCounts.style.display = "none"; 
-
+   
+    if(tags.length==0){
+        locationCounts.removeChild(pElements2[0]);
+        locationCounts.style.display = "none"; 
+    }
 
     var i = index + 1;
     var calendarId = `#calendar${i}`;
@@ -300,28 +302,37 @@ function addTag(e) {
                 });
             }
         }
-        e.target.value = "";
+        
 
         var locationCountsID = document.getElementById("locationCounts")
 
 
-        if (tags.length > 0) {
-            computeLocationCounts(tag, true, false)
-        }
+        if(e.target.value != ""){
         if(tags.length==1){
             locationCounts.style.display = "block"; 
-            locationCountsID.innerHTML += `<h5 id="lokasyonTitle">Lokasyon Sayıları</h6>`;
+            locationCountsID.innerHTML += `<h5 id="lokasyonTitle">Lokasyon Sayıları</h5>`;
         }
 
+        if (tags.length > 0) {
+            computeLocationCounts(tag, true, false)
+
+      
+        }
     
-
-        
-
         if(spesificLocationCount[tag]){
             locationCountsID.innerHTML += `<p id="${tag}"><img src="../images/location.png">&nbsp&nbsp${tag}: ${spesificLocationCount[tag]}</p>`;
         }else{
             locationCountsID.innerHTML += `<p id="${tag}"><img src="../images/location.png">&nbsp&nbsp${tag}: 0</p>`;
         }
+    
+    
+    
+    }
+        e.target.value = "";
+
+        
+
+       
         
 
 

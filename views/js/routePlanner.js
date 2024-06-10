@@ -248,12 +248,9 @@ async function insertHTMLIntoCluster() {
                                         </h1>
                                         </header>`;
                     }
-
-
-            const htmlContent = `
-                
-
-
+                    var htmlContent="";
+            if(locations.length!=0){
+            htmlContent = `
                         <div class="cityRoute-day block">
                         <header>
                                         <h1 class="leaderboard__title">
@@ -261,7 +258,6 @@ async function insertHTMLIntoCluster() {
                                         </h1>
                                         </header>
                     
-                        
                         <div class="cityRoute-mainContent d-flex">
                             <div class="routePlanner-map" data-city="${cityID}" data-day="${day}"  
                             class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom">
@@ -279,7 +275,26 @@ async function insertHTMLIntoCluster() {
                 
                  
             `;
+        }else{
+            htmlContent = `
+                        <div class="cityRoute-day block">
+                        <header>
+                                        <h1 class="leaderboard__title">
+                                        <span class="leaderboard__title--top">${day}.Gün Planı</span>
+                                        </h1>
+                                        </header>
+                    
+                        <div class="cityRoute-mainContent d-flex">
+                           
+                           <p style="text-align:center;">Bugüne özel sizin için oluşturduğumuz bir rota yok.</p>
+                        </div>
+                        </div>
+                 
+            `;
+            
 
+
+        }
             clusters.innerHTML += htmlContent;
             i++;
 
