@@ -16,16 +16,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     span.onclick = function () {
         modal.style.display = "none";
+        displayMainScroll(); // Modal kapatıldığında scroll'u geri getir
     }
 
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            displayMainScroll(); // Modal kapatıldığında scroll'u geri getir
         }
     }
 
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
+            modal.style.display = "none"; // Modal kapatıldığında scroll'u geri getir
             displayMainScroll();
         });
     });

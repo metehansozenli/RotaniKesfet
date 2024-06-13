@@ -9,7 +9,7 @@ document.getElementById('submitButton').addEventListener('click', function () {
     });
 
     // Form alanlarının kontrolü
-    const formFields = ['firstName', 'lastName', 'phoneNumber', 'email', 'password'];
+    const formFields = ['firstName', 'lastName', 'nickName', 'phoneNumber', 'email', 'password'];
     for (let field of formFields) {
         if (!data[field]) {
             alert('Lütfen tüm alanları doldurun.');

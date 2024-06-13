@@ -317,14 +317,16 @@ app.post('/updateTravel', async (req, res) => {
 });
 
 app.post('/update-profile', (req, res) => {
-  let { firstName, lastName, phoneNumber, email, password } = req.body;
+  let { firstName, lastName, phoneNumber, email, password, nickName } = req.body;
   const userID = req.session.userID; // Oturumdan kullanıcı kimliğini alın
 
+  // Şifreyi hashle
   const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
   password = hashedPassword;
+
   // Kullanıcı verilerini güncelle
-  const sql = 'UPDATE users SET "userName" = $1, "userSurname" = $2, "userPhoneNo" = $3, "userMail" = $4, "userPass" = $5 WHERE "userID" = $6';
-  const values = [firstName, lastName, phoneNumber, email, password, userID];
+  const sql = 'UPDATE users SET "userName" = $1, "userSurname" = $2, "userPhoneNo" = $3, "userMail" = $4, "userPass" = $5, "userNickname" = $6 WHERE "userID" = $7';
+  const values = [firstName, lastName, phoneNumber, email, password, nickName, userID];
 
   client.query(sql, values, (err, result) => {
     if (err) {
@@ -334,6 +336,7 @@ app.post('/update-profile', (req, res) => {
     res.json({ success: true, message: 'Profil başarıyla güncellendi' });
   });
 });
+
 
 
 

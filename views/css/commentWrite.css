@@ -68,7 +68,7 @@ body .comment-write {
     text-align: center;
 }
 
-/* -------starın yanında çıkan mesaj------*/
+/* -------star'ın yanında çıkan mesaj------*/
 #message {
     margin-left: 40px;
     font-size: 1.3em;
@@ -147,7 +147,7 @@ body .comment-write {
 
 .comment-input {
     width: 100%;
-    width: calc(100% - 30px);
+    width: calc(100% - 20px);
     /* Sağdaki simge ve karakter sayacı için genişlik ayarı */
     height: 115px;
     /* Yorum alanının istediğiniz yüksekliğini buraya yazın */
@@ -158,6 +158,28 @@ body .comment-write {
     font-family: Arial, sans-serif;
     padding: 5px;
     margin-bottom: 25px;
+    overflow-y: auto; /* Dikey scroll bar */
+    box-sizing: border-box;
+}
+
+
+.comment-input::-webkit-scrollbar {
+    width: 8px;
+}
+
+.comment-input::-webkit-scrollbar-track {
+    background: #ddd;
+    border-radius: 5px; /* Track radius */
+}
+
+.comment-input::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px; /* Thumb radius */
+    border: 2px solid #ddd;
+}
+
+.comment-input::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
 }
 
 
@@ -204,6 +226,7 @@ body .comment-write {
 
 .title-input {
     width: 100%;
+    width: calc(100% - 20px);
     height: 30px; /* Yükseklik sabitlenmiş */
     border: none;
     outline: none;

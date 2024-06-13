@@ -135,7 +135,7 @@ const getActiveRating = () => {
 document.getElementById('comment-input').addEventListener('input', function() {
     var inputValue = this.value.trim(); // Başta ve sonda boşlukları sil
     var charCount = inputValue.replace(/\s/g, '').length; // Tüm boşlukları silerek karakter sayısını al
-    var minChars = 100; // Alt sınırı 
+    var minChars = 20; // Alt sınırı 
     var maxChars = 400; // Üst sınırı 
     var remainingChars = maxChars - charCount;
     var counterElement = this.parentElement.querySelector('.char-counter');
@@ -157,7 +157,7 @@ document.getElementById('comment-input').addEventListener('input', function() {
 // Yorum kutusunu temizle
 function clearContextComment() {
     document.getElementById('comment-input').value = '';
-    document.querySelector('.char-counter').textContent = '0/100';
+    document.querySelector('.char-counter').textContent = '0/20';
     document.querySelector('.char-counter').style.color = '#999';
 }
 
@@ -186,16 +186,6 @@ document.getElementById('title-input').addEventListener('keydown', function(even
     }
 });
 
-document.getElementById('title-input').addEventListener('input', adjustInputWidth);
-
-function adjustInputWidth() {
-    const input = this;
-    const closeIconWidth = 40; // Kapatma simgesi ve padding için tahmini genişlik
-    const containerWidth = input.parentNode.offsetWidth; // Ana konteynerin genişliği
-    const maxWidth = containerWidth - closeIconWidth; // Maksimum kullanılabilir genişlik
-
-    input.style.width = maxWidth + 'px'; // Metin kutusunun genişliğini ayarla
-}
 
 // Çarpı simgesine basıldığında içeriği temizle ve sayacı sıfırla
 document.querySelector('.close-icon').addEventListener('click', function() {
@@ -205,13 +195,6 @@ document.querySelector('.close-icon').addEventListener('click', function() {
     counterElement.textContent = '0/' + 120;
     counterElement.style.color = '#999';
 });
-
-// title-box temizle
-function clearTitleComment() {
-    document.getElementById('title-input').value = '';
-    document.querySelector('.char-counter').textContent = '0/100';
-    document.querySelector('.char-counter').style.color = '#999';
-}
 
 
 
@@ -239,7 +222,7 @@ function checkFormValidity() {
         return container.querySelector('.fa-star.active') !== null;
     });
     commentText = commentInput.value.trim().length >= 20 && commentInput.value.trim().length <= 400; // Yorumun en az 20 karakter ve en fazla 400 karakter içermesi gerekiyor
-    commentTitle = commentTitleInput.value.trim().length >= 5; // Başlığın en az 10 karakter olması gerekiyor
+    commentTitle = commentTitleInput.value.trim().length >= 2; // Başlığın en az 2 karakter olması gerekiyor
 
     // Tüm koşullar sağlandığında submit butonunu etkinleştir
     submitButton.disabled = !(dateSelected && starsSelected && commentText && commentTitle);
@@ -275,5 +258,6 @@ submitButton.addEventListener("click", () => {
     }, 1000);
     
 });
+
 
 

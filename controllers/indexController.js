@@ -635,9 +635,9 @@ const controlRouteID = async (userID, routeID) => {
     throw error; // Hatanın dışarıya fırlatılması, çağrıcı tarafından yakalanması için
   }
 };
-const getProfileInfo = async(sessionuserId) =>{
+const getProfileInfo = async (sessionuserId) => {
   try {
-    const result2 = await client.query('SELECT "userName", "userSurname","userPhoneNo","userMail", "userImg" FROM users WHERE "userID" = $1', [sessionuserId]);
+    const result2 = await client.query('SELECT "userName", "userSurname", "userPhoneNo", "userMail", "userPass", "userImg", "userNickname" FROM users WHERE "userID" = $1', [sessionuserId]);
     if (result2.rows.length > 0) {
       const userName = result2.rows[0].userName;
       const userSurname = result2.rows[0].userSurname;
@@ -645,7 +645,8 @@ const getProfileInfo = async(sessionuserId) =>{
       const userMail = result2.rows[0].userMail;
       const userPass = result2.rows[0].userPass;
       const userImg = result2.rows[0].userImg;
-      return [userName, userSurname,userPhoneNo,userMail, userPass, userImg];
+      const userNickname = result2.rows[0].userNickname; // userNickname eklendi
+      return [userName, userSurname, userPhoneNo, userMail, userPass, userImg, userNickname]; // userNickname eklendi
     } else {
       return null; // Return null if no data found
     }
@@ -654,6 +655,7 @@ const getProfileInfo = async(sessionuserId) =>{
     throw error; // Rethrow the error to be caught by the caller
   }
 }
+
 
 async function updateUserFavoriteLocations(userId, locationId) {
   const query = `UPDATE users 
