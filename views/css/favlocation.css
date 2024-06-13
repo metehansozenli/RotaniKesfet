@@ -10,12 +10,14 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    border-radius: 20px;
 }
 
 .card.location-card img {
     height: 200px; /* İstediğiniz yüksekliği buraya girebilirsiniz */
     width: 100%;
     object-fit: cover;
+    border-radius: 20px;
 }
 
 .card.location-card .card-body {
@@ -65,15 +67,21 @@
 }
 
 .btn-primary.btn-load-more:active {
-    background-color: #004085;
-    border-color: #003366;
-    color: #d4d4d4;
+    background-color: #36A1C5; /* Tıklama sonrası eski renge dön */
+    border-color: #36A1C5;
+    color: #fff;
+    outline: none;
+    box-shadow: none; /* Border gölgesini kaldır */
 }
 
 .btn-primary.btn-load-more:focus {
+    background-color: #36A1C5; /* Focus durumunda eski renge geri dön */
+    border-color: #36A1C5;
+    color: #fff;
     outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    box-shadow: none; /* Border gölgesini kaldır */
 }
+
 
 ion-icon {
     fill: #FF0000;

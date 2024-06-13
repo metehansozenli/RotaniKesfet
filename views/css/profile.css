@@ -1,4 +1,3 @@
-
 /* profile */
 
 .mr-2 {
@@ -10,22 +9,39 @@
 }
 
 .card {
-    margin-bottom: 53px;
+    margin-bottom: 100px;
+    background-color: #fff !important;
+    border-radius: 20px !important;
+    border: 1px solid #494C4E !important; 
 }
 
 .card-body {
     margin-bottom: 20px;
+   
 }
 
-.menu-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
+
+.list-group {
+    border-radius: 15px !important; 
+    border: 1px solid #494C4E !important; 
 }
 
 .list-group-item {
     display: flex;
     align-items: center;
+    justify-content: flex-start; 
+    background-color: #ffffff; 
+    color: #494C4E; 
+    padding: 20px; 
+    
+    
+}
+
+.menu-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px !important;
+  
 }
 
 .link-text {
@@ -33,12 +49,68 @@
     color: #494C4E; 
     font-family: 'Arial', sans-serif; 
     font-size: 1.0rem;
+    white-space: nowrap; /* Metnin taşmasını engeller ve tek satırda kalmasını sağlar */
 }
 
 .form-label {
     font-size: 1.3rem; 
     color: #494C4E;
 }
+
+.card .form-control {
+    border-radius: 5px; 
+    background-color: #ffffff; 
+    border: 1px solid #494C4E !important;
+}
+
+.card .form-control:focus {
+    border: 2px solid #494C4E !important;
+    box-shadow: 0 0 5px #494C4E !important; 
+    outline: none;
+}
+
+/* Otomatik tamamlama önerilerinin arka plan rengini değiştirme */
+input[type="text"]::placeholder {
+    color: #494C4E; /* Placeholder metin rengi */
+    opacity: 1; /* Opaklık */
+}
+
+input[type="text"]:focus::placeholder {
+    color: transparent; /* Odaklandığında placeholder metin rengi */
+}
+
+input[type="text"]:-webkit-autofill,
+input[type="text"]:-webkit-autofill:hover,
+input[type="text"]:-webkit-autofill:focus,
+input[type="text"]:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #f0f0f0 inset !important; /* Uyumlu gri arka plan rengi */
+    -webkit-text-fill-color: #494C4E !important; /* Metin rengi */
+}
+
+input[type="text"]::selection {
+    background: #f0f0f0; /* Uyumlu gri arka plan rengi */
+    color: #494C4E; /* Seçili metin rengi */
+}
+
+.form-group {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 57px;
+    right: 20px; 
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #494C4E; 
+    font-size: 1.4rem; 
+}
+
+.form-control {
+    padding-right: 40px; 
+}
+
+
 
 .btn-lg {
     padding: 10px 20px;
@@ -48,12 +120,6 @@
     gap: 10px;
 }
 
-
 .form-group:last-of-type {
-    margin-top: 40px !important;
-}
-
-
-.mt-4 {
-    margin-top: 23px !important; 
+    margin-top: 50px !important;
 }

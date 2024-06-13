@@ -236,22 +236,30 @@ label {
     margin-bottom: 5px;
 }
 
+/* Giris ve kayit ol icin radius. */
+
+.modal-content {
+    border-radius: 20px !important;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 5px;
     margin-bottom: 15px;
 }
 
 button[type="submit"] {
-    background-color: #67d4f9;
+    background-color: #36A1C5;
     color: #fff;
     padding: 10px 20px;
+    margin-top: 15px ;
+    margin-bottom: 10px;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
     width: 100%;
 }
@@ -408,11 +416,10 @@ a {
 .phone-number .alanKodu {
     margin-right: 5px;
     height: 45px;
-    border-radius: 3px;
+    border-radius: 10px;
     cursor: pointer;
     background-color: #fff;
-    max-width: 15%;
-    
+    max-width: 14%;  
     border: 1px solid #ccc;
 
 }
