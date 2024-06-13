@@ -1,25 +1,22 @@
 const veritabani = require("./indexController")
 
-
 exports.changeProfile = async (req, res) => {
-    
     const userSession = req.session;
     if (!userSession.userMail) { // Oturum yoksa
         res.redirect("/")
-    }
-    else{
+    } else {
         try {
-
             const userData = await veritabani.getProfileInfo(userSession.userID);
             if (userData) {
-                const [userName, userSurname, userPhoneNo,userMail,userPass,userImg ] = userData;
+                const [userName, userSurname, userPhoneNo, userMail, userPass, userImg, userNickname] = userData;
                 res.render("profile", {
                     userName: userName,
                     userSurname: userSurname,
-                    userMail : userMail,
+                    userMail: userMail,
                     userPhoneNo: userPhoneNo,
-                    userPass : userPass,
+                    userPass: userPass,
                     userImg: userImg,
+                    userNickname: userNickname
                 });
             } else {
                 res.send("Bir hata Oluştu!");
@@ -28,7 +25,8 @@ exports.changeProfile = async (req, res) => {
             console.error("Error fetching user data:", error);
             res.render("page404");
         }
-    }  
+    }
 }
+
    
   
