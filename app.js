@@ -39,6 +39,7 @@ const commentwrite = require("./routes/commentWriteRoutes")
 const commentInsert = require("./routes/commentInsertRoutes")
 const myroutes = require("./routes/myroutesRoutes")
 const deleteRoute = require("./routes/deleteRouteRoutes")
+const AI = require("./routes/routePlannerAIRoutes")
 
 client.connect((err) => {
   if (err) {
@@ -96,6 +97,8 @@ app.use("/", commentwrite)
 app.use("/", commentInsert)
 app.use("/", myroutes)
 app.use("/", deleteRoute)
+app.use("/", AI)
+
 
 
 
@@ -358,3 +361,7 @@ app.post('/get_locationTypeCount', async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+
+
+

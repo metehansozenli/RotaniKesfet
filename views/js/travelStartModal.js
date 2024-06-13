@@ -445,7 +445,7 @@ function validateForm() {
     let checked = document.querySelectorAll(".checked").length;
     var travelDates = document.querySelectorAll('.travel-date input');
 
-    console.log(spesificLocationCount)
+
     if (seyahatAdi === "") {
         alert("Lütfen Seyahat Adını girin.");
         return false;
@@ -464,7 +464,10 @@ function validateForm() {
             return false;
         }
     }
+
     var previousEndDate = null;
+    var currentDate = new Date(); // Current date
+
     for (var i = 0; i < travelDates.length; i += 2) {
         var startDate = travelDates[i].value;
         var endDate = travelDates[i + 1].value;
@@ -474,10 +477,17 @@ function validateForm() {
             return false;
         }
 
+        var start = new Date(startDate.split('-').reverse().join('-'));
+        var end = new Date(endDate.split('-').reverse().join('-'));
+
+        if (start < currentDate || end < currentDate) {
+            alert("Seyahat tarihleri geçmiş bir tarih olamaz.");
+            return false;
+        }
+
         if (previousEndDate) {
-            var start = new Date(startDate.split('-').reverse().join('-'));
-            var end = new Date(previousEndDate.split('-').reverse().join('-'));
-            if (start <= end) {
+            var prevEnd = new Date(previousEndDate.split('-').reverse().join('-'));
+            if (start <= prevEnd) {
                 alert("Tarihleri kontrol edin: Yeni seyahatin başlangıcı, önceki seyahatin bitişinden sonra olmalı.");
                 return false;
             }
@@ -485,29 +495,26 @@ function validateForm() {
         previousEndDate = endDate;
     }
 
-    if (selectedLocationCount==0) {
+    if (selectedLocationCount == 0) {
+        alert(selectedLocationCount)
         alert("Seçili lokasyon sayısı 0. Lütfen başka kategorileri seçiniz.");
-                return false;
+        return false;
     }
 
     for (var i = 0, j = 0; i < travelDates.length; i += 2, j++) {
         var startDate = new Date(travelDates[i].value.split('-').reverse().join('-'));
         var endDate = new Date(travelDates[i + 1].value.split('-').reverse().join('-'));
         const values = Object.values(spesificLocationCount);
-        const cityLocationCount = values
-        console.log(cityLocationCount)
+        const cityLocationCount = values;
 
         var diffTime = Math.abs(endDate - startDate);
         var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
         const count = cityLocationCount[j];
         if (count < diffDays) {
-            console.log(diffDays)
-            console.log(count)
             alert("Lokasyon sayısı, seyahat tarihleri arasındaki gün sayısından az olamaz.");
             return false;
         }
-
     }
 
     return true;
