@@ -263,6 +263,26 @@ function registerValidateForm() {
 }
 
 
+// Formu kontrol etme fonksiyonu
+function loginValidateForm() {
+
+    var email = document.forms["loginFormu"]["email"].value;
+    var sifre = document.forms["loginFormu"]["password"].value;
+
+    if (email == ""  || sifre == "") {
+        alert("Lütfen tüm alanları doldurun!");
+        return false; 
+    }
+
+    
+    
+
+    return true;
+}
+
+
+
+
 
 document.addEventListener('customlikeControlEvent',  async function () {
     // Tüm .vote-section öğelerini seç
