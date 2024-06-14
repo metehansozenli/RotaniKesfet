@@ -1,7 +1,9 @@
 document.getElementById('chatbot-icon').addEventListener('click', function() {
   $('#chatbot-modal').modal('show');
+  setInputState(false); //mesaj yazma aktif ediliyor
   getAnswer("", 1).then(botResponse => {
     addMultiLineMessage(botResponse, 'bot');
+    setInputState(true); //mesaj yazma aktif ediliyor
   }).catch(error => {
     console.error('Hata:', error);
   });
@@ -21,15 +23,18 @@ function sendMessage() {
     addMessage(userInput, 'user');
     document.getElementById('user-input').value = '';
     
-    // Show typing indicator
+    setInputState(false); //mesaj yazma de-aktif ediliyor
+
     addTypingIndicator();
 
     getAnswer(userInput, 0).then(botResponse => {
       removeTypingIndicator();
       addMultiLineMessage(botResponse, 'bot');
+      setInputState(true); //mesaj yazma aktif ediliyor
     }).catch(error => {
       removeTypingIndicator();
       console.error('Hata:', error);
+      setInputState(true); //mesaj yazma aktif ediliyor
     });
   }
 }
@@ -76,6 +81,11 @@ function removeTypingIndicator() {
   if (typingIndicator) {
     typingIndicator.remove();
   }
+}
+
+function setInputState(enabled) {
+  document.getElementById('user-input').disabled = !enabled;
+  document.getElementById('send-btn').disabled = !enabled;
 }
 
 function getAnswer(question, flag) {
