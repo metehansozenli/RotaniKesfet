@@ -14,7 +14,7 @@ const sessions = {};
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 var months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
-var locationTypes;
+var locationTypes ;
 const getUserData = async (sessionuserId) => {
     try {
       const result2 = await client.query('SELECT "userNickname", "userName", "userSurname", "userImg" FROM users WHERE "userID" = $1', [sessionuserId]);
@@ -434,6 +434,8 @@ const getSelectedLocationData = async (userLocationtype,cityIDArray) => {
   try {
 
     const userChoices = [];
+
+    
     userLocationtype.forEach((isTrue, index) => {
       if (isTrue) {
         userChoices.push(locationTypes[index].locationType);
@@ -548,7 +550,7 @@ const getCities = async () => {
   try {
     const query = `
                   SELECT 
-                    "cityName"
+                    "cityName", "cityID", "cityCoordinates"
                     FROM 
                     cities 
                 `;
@@ -557,7 +559,9 @@ const getCities = async () => {
 
   if (result.rows.length > 0) {
     const cities = result.rows.map(row => ({
-      cityName : row.cityName
+      cityName : row.cityName,
+      cityID : row.cityID,
+      cityCoordinates : row.cityCoordinates
     }));
 
     return cities;
@@ -856,7 +860,46 @@ async function getRoutesAndRandomCityByUserID(userID) {
 }
 
 
+const getSelectedAILocationData = async (userLocationtype,cityIDArray) => {
+  try {
 
+    const userChoices = [];
+    await getLocationType();
+   
+    userLocationtype.forEach((isTrue, index) => {
+      if (isTrue) {
+        userChoices.push(locationTypes[index].locationType);
+      }
+    });
+    const userChoicesString = userChoices.map(userChoice => `'${userChoice}'`).join(', ');
+    const cityIDs = cityIDArray;
+    const cityIdString = cityIDs.join(', '); 
+    
+    const query2 = {
+        text: `
+          SELECT 
+            locations.*, cities."cityName", cities."cityID", cities."cityCoordinates"  
+          FROM
+            locations
+          JOIN
+            cities
+            on locations."locationCityID" = cities."cityID"
+          WHERE 
+            "locationType" IN (${userChoicesString}) AND 
+            "locationCityID" IN (${cityIdString})
+          ORDER BY 
+            locations."locationName" DESC
+        `,
+    };
+    const result = await client.query(query2);
+    const selectedLocationsData = result.rows;
+    return selectedLocationsData
+  
+} catch (error) {
+    console.error("Error fetching comment data:", error);
+    throw error; 
+  }
+}
 
   module.exports = {
     getRandomCitiesData,
@@ -884,6 +927,7 @@ async function getRoutesAndRandomCityByUserID(userID) {
     getLocationName,
     insertComment,
     getRoutesAndRandomCityByUserID,
-    deleteRoute
+    deleteRoute,
+    getSelectedAILocationData
    
   };

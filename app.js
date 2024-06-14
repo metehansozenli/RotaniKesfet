@@ -368,3 +368,246 @@ app.post('/get_locationTypeCount', async (req, res) => {
 
 
 
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+// Access your API key as an environment variable (see "Set up your API key" above)
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+async function run() {
+  
+    // Şehirler ve rotaları veritabanından al
+    const cities = await veritabani.getCities();
+    const routeData = await veritabani.getRoutesData(869);
+
+    // Rota seçeneklerini ve şehir ID'lerini al
+    const routeChoices = routeData.routeChoices;
+    const cityIDs = cities.map(city => city.cityID);
+
+    // Seçilen AI lokasyon verilerini al
+    const locations = await veritabani.getSelectedAILocationData(routeChoices, cityIDs);
+    
+    // Lokasyon ve şehir verilerini birlikte al
+    const combinedData = locations.map((location, index) => {
+      const city = cities.find(city => city.cityID === location.cityID);
+      return `Locatiın ID: ${location.locationID}, Location Name: ${location.locationName}, City ID: ${city.cityID}, City Name: ${city.cityName}, Location Coordinates: ${location.locationCoordinates}, Location Time: ${location.locationTime}`;
+    }).join(' | ');
+
+    const uniqueCities = new Set();
+    const cityDataArray = [];
+    
+    locations.forEach((location) => {
+      if (!uniqueCities.has(location.cityName)) {
+        const [latStr, lonStr] = location.cityCoordinates.split(',');
+        const lat = parseFloat(latStr);
+        const lon = parseFloat(lonStr.replace('° N', '').replace('° E', '').replace('° W', '').replace('° S', '').trim()) * 
+          (location.cityCoordinates.includes('W') || location.cityCoordinates.includes('S') ? -1 : 1);
+        cityDataArray.push({
+          name: location.cityName,
+          lat: lat,
+          lon: lon
+        });
+        uniqueCities.add(location.cityName);
+      }
+    });
+
+    
+    function getRandomCity(cities) {
+      const randomIndex = Math.floor(Math.random() * cities.length);
+      return cities[randomIndex];
+    }
+    
+    // Step 3: Calculate distance between two cities using Haversine formula
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Earth's radius in kilometers
+      const dLat = (lat2 - lat1) * (Math.PI / 180);
+      const dLon = (lon2 - lon1) * (Math.PI / 180);
+      const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * 
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const distance = R * c;
+      return distance;
+    }
+    
+    // Step 4: Get nearby cities based on distance
+    function getNearbyCities(selectedCity, cities, count) {
+      const nearbyCities = cities
+        .filter(city => city.name !== selectedCity.name)
+        .map(city => ({
+          ...city,
+          distance: calculateDistance(selectedCity.lat, selectedCity.lon, city.lat, city.lon)
+        }))
+        .sort((a, b) => a.distance - b.distance)
+        .slice(0, count);
+      return nearbyCities;
+    }
+    
+    const cityCount = 3;
+    const travelDuration = 5;
+    const userID = 6;
+    
+    const selectedCity = getRandomCity(cityDataArray);
+    const nearbyCities = getNearbyCities(selectedCity, cityDataArray, cityCount - 1);
+    const selectedCities = [selectedCity, ...nearbyCities];
+    
+    const cityNamesString = selectedCities.map(city => city.name).join(', ');
+    
+    console.log(cityNamesString);
+
+    // Prompt metnini oluştururken verileri kullan
+    const jsonString = `{
+      "userID": 2,
+      "clusters": [
+        {
+          "cityID": 3,
+          "clusters": [
+            [
+              {
+                "locationID": 56,
+                "coordinates": [
+                  51.5008,
+                  -0.1779
+                ]
+              },
+              {
+                "locationID": 52,
+                "coordinates": [
+                  51.5154,
+                  -0.1412
+                ]
+              },
+              {
+                "locationID": 45,
+                "coordinates": [
+                  51.5073,
+                  -0.1657
+                ]
+              }
+            ],
+            [
+              {
+                "locationID": 44,
+                "coordinates": [
+                  51.5055,
+                  -0.0754
+                ]
+              },
+              {
+                "locationID": 59,
+                "coordinates": [
+                  51.5045,
+                  -0.0865
+                ]
+              },
+              {
+                "locationID": 54,
+                "coordinates": [
+                  51.5081,
+                  -0.0976
+                ]
+              }
+            ]
+          ]
+        },
+        {
+          "cityID": 8,
+          "clusters": [
+            [
+              {
+                "locationID": 159,
+                "coordinates": [
+                  52.5146,
+                  13.3506
+                ]
+              },
+              {
+                "locationID": 150,
+                "coordinates": [
+                  52.5031,
+                  13.3357
+                ]
+              },
+              {
+                "locationID": 141,
+                "coordinates": [
+                  52.5054,
+                  13.3325
+                ]
+              },
+              {
+                "locationID": 151,
+                "coordinates": [
+                  52.503,
+                  13.3354
+                ]
+              },
+              {
+                "locationID": 152,
+                "coordinates": [
+                  52.5146,
+                  13.3925
+                ]
+              },
+              {
+                "locationID": 153,
+                "coordinates": [
+                  52.504,
+                  13.3927
+                ]
+              },
+              {
+                "locationID": 147,
+                "coordinates": [
+                  52.506,
+                  13.3325
+                ]
+              },
+              {
+                "locationID": 149,
+                "coordinates": [
+                  52.5096,
+                  13.3686
+                ]
+              }
+            ]
+          ]
+        }
+      ]   
+    }`;   
+
+    
+    const prompt = `
+userID: ${userID}
+Veriler:
+${combinedData}
+
+Lütfen ${cityNamesString} şehirlerini kullanarak toplam ${travelDuration} günlük bir seyahat kümesi oluşturun. Seyahat günlerini ve şehirleri aşağıdaki formatta gösterin:
+Örnek Çıktı Formatı:
+${jsonString}
+
+Not: Yanıtınızı her zaman yukarıdaki formatta sunun ve ekstra bir şey eklemeyin.
+
+`;
+
+
+    // Metin oluşturma işlemini gerçekleştir
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    var text = response.text();
+    text = text.replace(/```json|```/g, '').trim();
+
+    const jsonObject = JSON.parse(text);
+    
+    console.log(JSON.stringify(jsonObject, null, 2));
+
+
+
+}
+
+//run();
+
+
+

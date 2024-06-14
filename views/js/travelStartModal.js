@@ -668,5 +668,6 @@ function autocomplete(inp, arr) {
     });
 }
 
-
 autocomplete(document.getElementById("destinasyon-tag"), city_names);
+
+
