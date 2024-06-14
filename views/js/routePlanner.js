@@ -2,7 +2,10 @@ var organizedData;
 var locationIDs;
 var markers = new Array();
 
-function kMeans(data, k) {
+function balancedKMeans(data, k) {
+    // Veri setini k eşit parçaya bölmek için gerekli büyüklüğü hesaplar
+    const targetClusterSize = Math.ceil(data.length / k);
+
     // Başlangıçta k küme oluşturulur ve rastgele başlangıç merkezleri atanır
     let centroids = [];
     for (let i = 0; i < k; i++) {
@@ -13,8 +16,8 @@ function kMeans(data, k) {
     let prevClusters = null;
     let iteration = 0;
 
-    // Kümeleme işlemi, merkezler değişene kadar devam eder
-    while (!arraysEqual(prevClusters, clusters)) {
+    // Kümeleme işlemi, merkezler değişene kadar veya maksimum iterasyon sayısına ulaşılana kadar devam eder
+    while (!arraysEqual(prevClusters, clusters) && iteration < 100) {
         prevClusters = clusters.map(arr => [...arr]);
         clusters = Array.from({ length: k }, () => []);
 
@@ -25,7 +28,7 @@ function kMeans(data, k) {
             for (let i = 0; i < k; i++) {
                 if (centroids[i] !== null) {
                     let dist = distance(point, centroids[i]);
-                    if (dist < minDist) {
+                    if (dist < minDist && clusters[i].length < targetClusterSize) {
                         minDist = dist;
                         closestCentroid = i;
                     }
@@ -88,7 +91,6 @@ const get_initLocationsData = () => {
         request.open('GET', `/init_routelocationData?routeID=${window.routeID}`);
         request.onload = () => {
             const responseData = JSON.parse(request.responseText);
-            //console.log(responseData);
             resolve(responseData); // İşlem tamamlandığında Promise'i çöz
         };
 
@@ -132,11 +134,11 @@ get_initLocationsData().then(data => {
         groupedCoords[cityID].push(coordinates[index]);
     });
 
-    // KMeans uygulama ve sonuçları JSON formatında oluşturma
+    // Balanced KMeans uygulama ve sonuçları JSON formatında oluşturma
     const results = data.routeCityIDs.map((cityID, index) => {
         const k = calculateDayDifference(data.routeStartDates[index], data.routeFinishDates[index]);
         if (groupedCoords[cityID]) {
-            const clusters = kMeans(groupedCoords[cityID], k);
+            const clusters = balancedKMeans(groupedCoords[cityID], k);
             const cityClusters = [];
             clusters.forEach(cluster => {
                 const clusterLocations = cluster.map(location => {
